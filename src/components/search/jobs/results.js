@@ -7,24 +7,26 @@ export default function JobsResults(props) {
   return (
     <>
       <Container fluid>
-        <Row sm={10}>
-          <Col>Title</Col>
-          <Col>Company</Col>
-          <Col>location</Col>
-          <Col>Type</Col>
-          <Col></Col>
+        <Row className='flexRow'>
+          <Col sm={4}>Title</Col>
+          <Col sm={2}>Company</Col>
+          <Col sm={2}>location</Col>
+          <Col sm={2}>Type</Col>
+          <Col sm={2}></Col>
         </Row>
 
         {results.map((item) => {
           return (
-            <Row sm={10}>
-              <Col>{item.title}</Col>
-              <Col>{item.company_name}</Col>
-              <Col>{item.location}</Col>
-              <Col>{item.type}</Col>
-              <Button onClick={console.log(item.email)} variant='praimary'>
-                Apply
-              </Button>
+            <Row className='flexRow' sm={8}>
+              <Col sm={4}>{item.title}</Col>
+              <Col sm={2}>{item.company_name}</Col>
+              <Col sm={2}>{item.location}</Col>
+              <Col sm={2}>{item.type}</Col>
+              <Col sm={2}>
+                <Button onClick={console.log(item.email)} variant='praimary'>
+                  Apply
+                </Button>
+              </Col>
             </Row>
           );
         })}
