@@ -1,11 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import Routes from './routes'
+import AuthProvider from './context/auth'
+import SocketProvider from './context/socket'
+import Header from './components/header/'
+import Footer from './components/footer/'
 
 function App() {
   return (
-    <div className='App'>
-      <h1>This is our App page</h1>
-    </div>
+    <AuthProvider>
+      <SocketProvider>
+        <Header />
+        <Routes />
+        <Footer />
+      </SocketProvider>
+    </AuthProvider>
   );
 }
 
