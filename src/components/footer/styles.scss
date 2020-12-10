@@ -34,4 +34,34 @@
   width: 100%;
   margin-top: 100px;
   color: #504edf;
+  .footer-text-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+.footer-text {
+  font-size: 10px;
+  font-family: 'Montserrat', sans-serif;
+  color: #504edf !important;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+    margin: 2px 8px;
+    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: #504edf !important;
+  }
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

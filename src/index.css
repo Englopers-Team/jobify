@@ -1,15 +1,14 @@
 * {
   margin: 0;
-  
 }
 
 body,
 html {
-    height: 100%;
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-    background-color: #E1E3E8;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  background-color: #e1e3e8;
 }
 
 body {
@@ -30,15 +29,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.flexCol{
-  display:flex;
+.flexCol {
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-.flexRow{
-  display:flex;
+.flexRow {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;

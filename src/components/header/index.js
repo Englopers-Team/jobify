@@ -20,7 +20,7 @@ export default function Header() {
               </NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
-              <NavLink to='/search/jobs'>Jobs</NavLink>
+              <NavLink to='/search/employees'>Jobs</NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
               <NavLink to='/community'>community</NavLink>
