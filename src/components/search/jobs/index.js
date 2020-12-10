@@ -3,6 +3,7 @@ import '../styles.scss';
 import superagent from 'superagent';
 import Form from 'react-bootstrap/Form';
 import { Container, Row, Col } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from './results';
 import * as Icon from 'react-bootstrap-icons';
@@ -12,8 +13,13 @@ export default function SearchJobs() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [results, setResults] = useState([]);
+  const [visable, setVisable] = useState(false);
+  const [loader, setLoader] = useState(false);
+
   const jobList = async (e) => {
     e.preventDefault();
+    setLoader(true);
+    setVisable(true);
 
     await superagent
       .get(jobsApi)
@@ -21,6 +27,7 @@ export default function SearchJobs() {
 
       .then((data) => {
         setResults([...data.body.resultDB, ...data.body.resultAPI]);
+        setLoader(false);
       });
   };
   console.log(results);
@@ -49,9 +56,13 @@ export default function SearchJobs() {
           </Col>
         </Row>
         <Row>
-          <Results results={results} />
+          <Results results={results} visable={visable} loader={loader} />
         </Row>
       </Form>
+
+      <Row className='image-container' style={{ justifyContent: 'center' }}>
+        <Image className='image' style={{ width: '600px' }} src='../../assets/search.png' rounded />
+      </Row>
     </Container>
   );
 }
