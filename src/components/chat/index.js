@@ -22,7 +22,7 @@ export default function Chat() {
   const [targerIndex, setTargerIndex] = useState();
   const [specificName, setSpecificName] = useState('')
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsImlhdCI6MTYwNzU5MTg0NCwiZXhwIjozNjE2MDc1OTE4NDR9.YBAwMYCx-_2OPcSs8H7w5FoHW_179Zaset_uWv6YqgQ';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjA2ODQyLCJleHAiOjM2MTYwNzYwNjg0Mn0.ZBf0SDIjCv3JQK42nNhmGgdhWbJHY2FQNz1fI2WwXkQ';
   useEffect(() => {
     context.socketMessg.emit('join', token);
     context.socketMessg.on('message', (payload) => {
@@ -65,11 +65,19 @@ export default function Chat() {
     })
 
     return arr[0][specificName].map((mesg, index) => {
-      return (
-        <ListGroup.Item id='messg' key={index}>
-          {mesg.body}
-        </ListGroup.Item>
-      )
+      if(mesg.sender === secondPartyChar){
+        return (
+          <ListGroup.Item id='messg' className='otherMessg' key={index}>
+            {mesg.body}
+          </ListGroup.Item>
+        )
+      }else{
+        return (
+          <ListGroup.Item id='messg' className='myMessg' key={index}>
+            {mesg.body}
+          </ListGroup.Item>
+        )
+      }
     })
   }
 
@@ -115,7 +123,7 @@ export default function Chat() {
                 <Icon.ArrowUpSquareFill id='clickSend' onClick={() => {
                   context.socketMessg.emit('message', { body: message, receiver: secondPartyIId, token: token, type: secondPartyChar })
                   context.socketMessg.emit('checkMsg', { token })
-                }}/>
+                }} />
               </Container>
             </Container>
 

@@ -1,5 +1,4 @@
 #chat {
-  
   width: 300px;
   max-height: 300px;
   min-height: 300px;
@@ -35,14 +34,14 @@
   bottom: 43px;
 }
 
-#headChat{
+#headChat {
   position: fixed;
   width: 300px;
   right: 38px;
   top: 235px;
 }
 
-#formChat{
+#formChat {
   padding: 0px;
   margin: 0px;
   display: flex;
@@ -53,21 +52,29 @@
   bottom: 85px;
 }
 
-#inputSend{
+#inputSend {
   padding: 0px;
   margin: 0px;
   height: 30px;
 }
 
-#clickSend{
+#clickSend {
   padding: 0px;
   margin: 0px;
   width: 30px;
   height: 30px;
 }
 
-#messg{
+#messg {
   font-size: 14px;
   padding: 4px;
   margin-bottom: 9px;
+}
+
+.myMessg {
+  color: red;
+}
+
+.otherMessg{
+  color: blue;
 }
