@@ -10,6 +10,11 @@ export default function AdminDashboard() {
   const [data, setData] = useState();
   const [avgAge, setAvgAge] = useState();
   const [errHand, setErrHand] = useState(true)
+
+  const [topCountryPerson, setTopCountryPerson] = useState([]);
+  const [topCountryComapny, setTopCountryComapny] = useState([]);
+
+
   const color = [
     '#504EDF',
     '#232B4E',
@@ -99,6 +104,9 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (data && !errHand) {
       setAvgAge(data.avgAge);
+      setTopCountryPerson(data.numberPersonEachCountry);
+      setTopCountryComapny(data.numberCompanyEachCountry);
+
       let appUser = document.getElementById('appUser').getContext('2d');
       let appReports = document.getElementById('appReports').getContext('2d');
       let appReportsOpenClose = document.getElementById('appReportsOpenClose').getContext('2d');
@@ -108,9 +116,12 @@ export default function AdminDashboard() {
       let offerJob = document.getElementById('offerJob').getContext('2d');
       let appOfferJob = document.getElementById('appOfferJob').getContext('2d');
       let dbApiRatio = document.getElementById('dbApiRatio').getContext('2d');
+      let topComponiesSendApp = document.getElementById('topComponiesSendApp').getContext('2d');
+      let topComponiesSendOffer = document.getElementById('topComponiesSendOffer').getContext('2d');
+      let topJobTitle = document.getElementById('topJobTitle').getContext('2d');
 
 
-      let appUsernew = new Chart(appUser, chartBarHandler(`Total user ${data.totalUser}`, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
+      let appUsernew = new Chart(appUser, chartBarHandler(`Total Users ${data.totalUser}`, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
       let appReportsnew = new Chart(appReports, chartBarHandler(`Total Reports ${data.numOfReports}`, [data.numOfReportsEach[0].number_of_reports, data.numOfReportsEach[1].number_of_reports], [data.numOfReportsEach[0].account_type === 'c' ? 'Company' : 'Applicant', data.numOfReportsEach[1].account_type === 'c' ? 'Company' : 'Applicant']));
       let appReportsOpenClosenew = new Chart(appReportsOpenClose, chartDoughnutHandler('Open/Close Reports', [data.numOfReportsOpen, data.numOfReportsCloesd], ['Open Report', 'Close Report']));
       let dataJob = [];
@@ -155,13 +166,69 @@ export default function AdminDashboard() {
       let appOfferJobnew = new Chart(appOfferJob, chartBarHandler(`Number Of Application|Offers|Jobs`, [data.numOfTotalApp, data.numOfOffers, data.numOfJobs], ['Application', 'Offers', 'Jobs']));
 
       let dbApiRationew = new Chart(dbApiRatio, chartDoughnutHandler('Job Status', [data.numOfDbApp, data.numOfApiApp], ['DataBase', 'Third Party Provider']));
+
+      let compantAppNum = [];
+      let labelsCompantAppNum = [];
+      data.numOfCompanyAppEach.forEach((company, index) => {
+        if (index < 5) {
+          compantAppNum.push(company.number_of_each_companyapp)
+          labelsCompantAppNum.push(company.company_name)
+        }
+      })
+
+      let topComponiesSendAppnew = new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Send Offers`, compantAppNum, labelsCompantAppNum));
+
+      let compantOfferNum = [];
+      let labelsCompantOfferNum = [];
+      data.numOfCompanyOffersEach.forEach((company, index) => {
+        if (index < 5) {
+          compantOfferNum.push(company.number_of_each_companyoffers)
+          labelsCompantOfferNum.push(company.company_name)
+        }
+      })
+
+      let topComponiesSendOffernew = new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Received Application`, compantOfferNum, labelsCompantOfferNum));
+
+      let applicpintNumJobTitle = [];
+      let labelsapplicpintNumJobTitle = [];
+      data.numberPersonEachJobTitle.forEach((company, index) => {
+        if (index < 8) {
+          applicpintNumJobTitle.push(company.number_person_ofeach_jobtilte)
+          labelsapplicpintNumJobTitle.push(company.job_title)
+        }
+      })
+
+      let topJobTitlenew = new Chart(topJobTitle, chartBarHandler(`Most Applicant Job Title`, applicpintNumJobTitle, labelsapplicpintNumJobTitle));
+
+
     } else {
-      if (errHand) {
-        getData()
-        setErrHand(false)
-      }
+      getData()
+      setErrHand(false)
     }
   }, [data]);
+
+
+  function People() {
+    return topCountryPerson.map(item => {
+      return (
+        <Row>
+          <Col>{item.number_person_ofeach_country}</Col>
+          <Col>{item.country}</Col>
+        </Row>
+      )
+    })
+  }
+
+  function Company() {
+    return topCountryComapny.map(item => {
+      return (
+        <Row>
+          <Col>{item.number_company_ofeach_country}</Col>
+          <Col>{item.country}</Col>
+        </Row>
+      )
+    })
+  }
 
   return (
     <Container>
@@ -214,6 +281,37 @@ export default function AdminDashboard() {
       <Row >
         <canvas className='myChart' id="dbApiRatio" width="200" height="100" ></canvas>
       </Row>
+
+      <Row style={{
+        height: '150px',
+      }}>
+
+      </Row>
+
+      <Row >
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="topComponiesSendApp" width="400" height="200" ></canvas>
+        </Col>
+        <Col style={{ width: '400px', height: '200px', margin: '50px', fontSize: '50px', fontFamily: 'Fantasy', textAlign: 'center' }}>
+          <canvas className='myChart' id="topComponiesSendOffer" width="400" height="200" ></canvas>
+        </Col>
+      </Row>
+
+      <Col>
+        <People />
+      </Col>
+
+      <Col>
+        <Company />
+      </Col>
+
+
+
+
+      <Row >
+        <canvas className='myChart' id="topJobTitle" width="400" height="100" ></canvas>
+      </Row>
+
     </Container>
   )
 }
