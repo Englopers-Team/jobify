@@ -1,8 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
-import { Image, ListGroup, Form, Button } from 'react-bootstrap';
+import { Badge, ListGroup, Form, Button, Container } from 'react-bootstrap';
+
+import * as Icon from 'react-bootstrap-icons';
 
 import { If, Then } from 'react-if';
 import { SocketContext } from '../../context/socket';
+import './styles.scss';
 
 export default function Chat() {
   const context = useContext(SocketContext);
@@ -63,7 +66,7 @@ export default function Chat() {
 
     return arr[0][specificName].map((mesg, index) => {
       return (
-        <ListGroup.Item key={index}>
+        <ListGroup.Item id='messg' key={index}>
           {mesg.body}
         </ListGroup.Item>
       )
@@ -79,34 +82,52 @@ export default function Chat() {
 
   return (
     <>
-      <Image onClick={() => { setVisibleL(true) }} src="holder.js/171x180" rounded />
-      <If condition={visibleL}>
-        <Then>
-          <Button onClick={() => { setVisibleL(false) }}>X</Button>
-          <ListGroup>
-            <ChatListView />
-          </ListGroup>
-        </Then>
-      </If>
-      <If condition={visibleC}>
-        <Then>
-          <Button onClick={() => {
-            setVisibleL(true)
-            setVisibleC(false)
-          }}>Xt</Button>
-          <ListGroup>
-            <ChatView />
-          </ListGroup>
-        </Then>
-      </If>
+      <Icon.ChatDotsFill id='chatButton' onClick={() => {
+        setVisibleL(true)
+        setVisibleC(false);
+      }}
+      />
 
-      <Form.Group >
-        <Form.Control required name="text" onChange={(e) => { setMessage(e.target.value) }} type="text" />
-      </Form.Group>
-      <Button onClick={() => {
-        context.socketMessg.emit('message', { body: message, receiver: secondPartyIId, token: token, type: secondPartyChar })
-        context.socketMessg.emit('checkMsg', { token })
-      }}>Send</Button>
+      <Container >
+        <If condition={visibleL}>
+          <Then>
+            <Container id='chat' >
+              <Badge id='headChat'>Your connection</Badge>
+              <ListGroup>
+                <ChatListView />
+              </ListGroup>
+            </Container>
+
+            <Icon.XCircle id='closeButton' onClick={() => { setVisibleL(false) }} />
+          </Then>
+        </If>
+        <If condition={visibleC}>
+          <Then>
+            <Container id='chat' >
+              <Badge id='headChat'>{specificName}</Badge>
+              <ListGroup >
+                <ChatView />
+              </ListGroup>
+              <Container id='formChat'>
+                <Form.Group >
+                  <Form.Control id='inputSend' required name="text" onChange={(e) => { setMessage(e.target.value) }} type="text" />
+                </Form.Group>
+                <Icon.ArrowUpSquareFill id='clickSend' onClick={() => {
+                  context.socketMessg.emit('message', { body: message, receiver: secondPartyIId, token: token, type: secondPartyChar })
+                  context.socketMessg.emit('checkMsg', { token })
+                }}/>
+              </Container>
+            </Container>
+
+            <Icon.ArrowRightSquare id='closeButton' onClick={() => {
+              setVisibleL(true)
+              setVisibleC(false)
+            }} />
+          </Then>
+        </If>
+      </Container>
     </>
   )
 }
+
+
