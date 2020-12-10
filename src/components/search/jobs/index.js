@@ -36,7 +36,7 @@ export default function SearchJobs() {
     <Container>
       <Form onSubmit={jobList}>
         <br></br>
-        <Row sm={8} className='search-container'>
+        <Row sm={8} className='search-container' style={{ width: '80%' }}>
           <Col sm={4} className='input-filed'>
             <Icon.EnvelopeFill className='icon' />
 
