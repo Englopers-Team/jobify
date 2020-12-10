@@ -27,7 +27,7 @@ export default function SearchCompany() {
 
       .then((data) => {
         console.log('fffffff', data.body);
-        setResults([data.body]);
+        setResults(data.body);
         setLoader(false);
       });
   };

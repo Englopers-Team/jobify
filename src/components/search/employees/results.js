@@ -45,10 +45,10 @@ export default function CompanyResults(props) {
                     {item.job_title}
                   </Col>
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-                    {item.location}
+                    {item.country}
                   </Col>
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-                    {item.phone}
+                    <Image style={{ width: '50px' }} src={item.avatar} roundedCircle />
                   </Col>
                 </Row>
               );
