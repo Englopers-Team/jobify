@@ -1,18 +1,23 @@
 import { useEffect } from 'react'
 import superagent from 'superagent'
-import { Container, Row, Col, Card, Image, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Image, Form } from 'react-bootstrap';
 import './styles.scss'
 
 export default function Signin() {
 
-  // useEffect(() => {
-  //   const test = async () =>{
-  //     superagent.get('http://jobify-app-v2.herokuapp.com/user/app').set('Cookie', [`token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsImlhdCI6MTYwNzU0Mzk0NCwiZXhwIjozNjE2MDc1NDM5NDR9.jfGxd9I-cnT6j43bKehV_Ao5d5Ygbfgt-N1srMRvtAE`]).then((data)=>{
-  //       console.log(data.body)
-  //     })
-  //   }
-  //   test()
-  // }, [])
+  useEffect(() => {
+    const test = async () => {
+      // axois({
+      //   method: 'GET',
+      //   url: 'http://localhost:4000/user/app',
+      // }).then(data => console.log(data.data))
+      superagent.get('http://localhost:4000/user/app').withCredentials().then((data) => {
+        console.log(data.body)
+      })
+    }
+    test()
+  }, [])
+
   return (
     <Container>
       <Row className='flexRow'>
