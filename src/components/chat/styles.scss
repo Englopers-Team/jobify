@@ -1,0 +1,80 @@
+#chat {
+  width: 300px;
+  max-height: 300px;
+  min-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  right: 38px;
+  bottom: 100px;
+  border: 1px solid black;
+}
+#chatButton {
+  // background-color: #504edf;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+
+  display: flex;
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+}
+
+#chat::-webkit-scrollbar {
+  display: none;
+}
+
+#closeButton {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  position: absolute;
+  right: 100px;
+  bottom: 43px;
+}
+
+#headChat {
+  position: fixed;
+  width: 300px;
+  right: 38px;
+  top: 235px;
+}
+
+#formChat {
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  width: 300px;
+  right: 0px;
+  bottom: 85px;
+}
+
+#inputSend {
+  padding: 0px;
+  margin: 0px;
+  height: 30px;
+}
+
+#clickSend {
+  padding: 0px;
+  margin: 0px;
+  width: 30px;
+  height: 30px;
+}
+
+#messg {
+  font-size: 14px;
+  padding: 4px;
+  margin-bottom: 9px;
+}
+
+.myMessg {
+  color: red;
+}
+
+.otherMessg{
+  color: blue;
+}
