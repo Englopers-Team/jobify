@@ -8,6 +8,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 export default function AdminDashboard() {
   const [data, setData] = useState();
+  const [avgAge, setAvgAge] = useState();
   const [errHand, setErrHand] = useState(true)
   const color = [
     '#504EDF',
@@ -97,7 +98,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (data && !errHand) {
-
+      setAvgAge(data.avgAge);
       let appUser = document.getElementById('appUser').getContext('2d');
       let appReports = document.getElementById('appReports').getContext('2d');
       let appReportsOpenClose = document.getElementById('appReportsOpenClose').getContext('2d');
@@ -106,7 +107,7 @@ export default function AdminDashboard() {
       let statusOffer = document.getElementById('statusOffer').getContext('2d');
       let offerJob = document.getElementById('offerJob').getContext('2d');
       let appOfferJob = document.getElementById('appOfferJob').getContext('2d');
-
+      let dbApiRatio = document.getElementById('dbApiRatio').getContext('2d');
 
 
       let appUsernew = new Chart(appUser, chartBarHandler(`Total user ${data.totalUser}`, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
@@ -153,6 +154,7 @@ export default function AdminDashboard() {
 
       let appOfferJobnew = new Chart(appOfferJob, chartBarHandler(`Number Of Application|Offers|Jobs`, [data.numOfTotalApp, data.numOfOffers, data.numOfJobs], ['Application', 'Offers', 'Jobs']));
 
+      let dbApiRationew = new Chart(dbApiRatio, chartDoughnutHandler('Job Status', [data.numOfDbApp, data.numOfApiApp], ['DataBase', 'Third Party Provider']));
     } else {
       if (errHand) {
         getData()
@@ -193,12 +195,24 @@ export default function AdminDashboard() {
         <canvas className='myChart' id="offerJob" width="200" height="50" ></canvas>
       </Row>
 
+      <Row style={{
+        height: '150px',
+      }}>
+
+      </Row>
+
       <Row >
         <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
           <canvas className='myChart' id="appOfferJob" width="400" height="200" ></canvas>
         </Col>
-        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+        <Col style={{ width: '400px', height: '200px', margin: '50px', fontSize: '50px', fontFamily: 'Fantasy', textAlign: 'center' }}>
+          Average age
+           <br />
+          {avgAge} Years
         </Col>
+      </Row>
+      <Row >
+        <canvas className='myChart' id="dbApiRatio" width="200" height="100" ></canvas>
       </Row>
     </Container>
   )
