@@ -66,9 +66,9 @@ export default function Routes() {
       <Route exact path='/reports/submit' component={ReportDetails} />
       <Route exact path='/reports/:id' component={SubmitReport} />
 
-      <Route exact path='/search/jobs' component={SearchCompany} />
-      <Route exact path='/search/company' component={SearchEmployees} />
-      <Route exact path='/search/employees' component={SearchJobs} />
+      <Route exact path='/search/jobs' component={SearchJobs} />
+      <Route exact path='/search/company' component={SearchCompany} />
+      <Route exact path='/search/employees' component={SearchEmployees} />
 
       <Route exact path='/applicant/edit-profile' component={ApplicantEdit} />
       <Route exact path='/applicant/applications' component={ApplicantApplications} />
