@@ -104,6 +104,8 @@ export default function AdminDashboard() {
       let jobs = document.getElementById('jobs').getContext('2d');
       let statusApps = document.getElementById('statusApps').getContext('2d');
       let statusOffer = document.getElementById('statusOffer').getContext('2d');
+      let offerJob = document.getElementById('offerJob').getContext('2d');
+      let appOfferJob = document.getElementById('appOfferJob').getContext('2d');
 
 
 
@@ -137,6 +139,20 @@ export default function AdminDashboard() {
         labelaOfeer.push(`${app.status} Offer`)
       })
       let statusOffersnew = new Chart(statusOffer, chartDoughnutHandler('Job Status', dataOffer, labelaOfeer));
+
+      let offerJobTitle = [];
+      let labelsOfferJobTitle = [];
+      data.numOfOfferEach.forEach((jobTitle, index) => {
+        if (index <= 8) {
+          offerJobTitle.push(jobTitle.number_of_each_offertitle)
+          labelsOfferJobTitle.push(jobTitle.title)
+        }
+      })
+      let offerJobnew = new Chart(offerJob, chartBarHandler(`Most In Demand Job Offer`, offerJobTitle, labelsOfferJobTitle));
+
+
+      let appOfferJobnew = new Chart(appOfferJob, chartBarHandler(`Number Of Application|Offers|Jobs`, [data.numOfTotalApp, data.numOfOffers, data.numOfJobs], ['Application', 'Offers', 'Jobs']));
+
     } else {
       if (errHand) {
         getData()
@@ -154,7 +170,6 @@ export default function AdminDashboard() {
         <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
           <canvas className='myChart' id="appReportsOpenClose" width="400" height="200" ></canvas>
         </Col>
-
       </Row>
 
       <Row >
@@ -175,8 +190,12 @@ export default function AdminDashboard() {
       </Row>
 
       <Row >
+        <canvas className='myChart' id="offerJob" width="200" height="50" ></canvas>
+      </Row>
+
+      <Row >
         <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
-          <canvas className='myChart' id="statusApps" width="400" height="200" ></canvas>
+          <canvas className='myChart' id="appOfferJob" width="400" height="200" ></canvas>
         </Col>
         <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
         </Col>
