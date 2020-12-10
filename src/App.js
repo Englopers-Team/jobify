@@ -3,6 +3,7 @@ import AuthProvider from './context/auth'
 import SocketProvider from './context/socket'
 import Header from './components/header/'
 import Footer from './components/footer/'
+import {Link} from 'react-router-dom'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <SocketProvider>
         <Header />
         <Routes />
+        <Link to={{ pathname: '/login'}}>test</Link>
         <Footer />
       </SocketProvider>
     </AuthProvider>
