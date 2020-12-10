@@ -3,45 +3,83 @@ import Chart from 'chart.js';
 import superagent from 'superagent';
 import { If, Then } from 'react-if';
 
+import './styles.scss';
+import { Container, Row, Col } from 'react-bootstrap';
+
 export default function AdminDashboard() {
   const [data, setData] = useState();
-
+  const [errHand, setErrHand] = useState(true)
   const color = [
-    'rgba(255, 99, 132, 0.85)',
-    'rgba(54, 162, 235, 0.85)',
-    'rgba(255, 206, 86, 0.85)',
-    'rgba(75, 192, 192, 0.85)',
-    'rgba(153, 102, 255, 0.85)',
-    'rgba(255, 159, 64, 0.85)'
+    '#504EDF',
+    '#232B4E',
+    '#006666',
+    '#0000b3',
+    '#8080ff',
+    '#5c5c8a',
+    '#6600ff'
   ]
   const borderColor = [
-    'rgba(255, 99, 132, 1)',
-    'rgba(54, 162, 235, 1)',
-    'rgba(255, 206, 86, 1)',
-    'rgba(75, 192, 192, 1)',
-    'rgba(153, 102, 255, 1)',
-    'rgba(255, 159, 64, 1)'
+    '#504EDF',
+    '#232B4E',
+    '#006666',
+    '#0000b3',
+    '#8080ff',
+    '#5c5c8a',
+    '#6600ff'
   ]
 
-  function chartHandler(title, data, labels) {
+  function chartBarHandler(title, data, labels) {
     return {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [{
-          label: `Total user ${title}`,
+          label: title,
           data: data,
           backgroundColor: color,
           borderColor: borderColor,
-          borderWidth: 2,
+          borderWidth: 3,
         }]
       },
       options: {
+        legend: {
+          labels: {
+            boxWidth: 0,
+          }
+        },
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              lineHeight: 10,
+              lineHeight: 2,
+              display: false
+            }
+          }]
+        }
+      }
+    }
+  }
+
+  function chartDoughnutHandler(title, data, labels) {
+    return {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: title,
+          data: data,
+          backgroundColor: color,
+          borderColor: borderColor,
+          borderWidth: 3,
+        }]
+      },
+      options: {
+        rotation: (0.5 * Math.PI) - (25 / 180 * Math.PI),
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              lineHeight: 2,
               display: false
             }
           }]
@@ -55,22 +93,97 @@ export default function AdminDashboard() {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NjEzOTUwLCJleHAiOjM2MTYwNzYxMzk1MH0.cV-8lRQZKQbI_-4V8TujDoE5n0oMrXixx223HCyRIH4';
     const response = await superagent.get(`${API}/admin`).set('authorization', `Basic ${token}`);
     setData(response.body);
-    console.log(response.body)
   }
 
   useEffect(() => {
-    let appUser = document.getElementById('appUser').getContext('2d');
-    if (data) {
-      new Chart(appUser, chartHandler(data.totalUser, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
+    if (data && !errHand) {
+
+      let appUser = document.getElementById('appUser').getContext('2d');
+      let appReports = document.getElementById('appReports').getContext('2d');
+      let appReportsOpenClose = document.getElementById('appReportsOpenClose').getContext('2d');
+      let jobs = document.getElementById('jobs').getContext('2d');
+      let statusApps = document.getElementById('statusApps').getContext('2d');
+      let statusOffer = document.getElementById('statusOffer').getContext('2d');
+
+
+
+      let appUsernew = new Chart(appUser, chartBarHandler(`Total user ${data.totalUser}`, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
+      let appReportsnew = new Chart(appReports, chartBarHandler(`Total Reports ${data.numOfReports}`, [data.numOfReportsEach[0].number_of_reports, data.numOfReportsEach[1].number_of_reports], [data.numOfReportsEach[0].account_type === 'c' ? 'Company' : 'Applicant', data.numOfReportsEach[1].account_type === 'c' ? 'Company' : 'Applicant']));
+      let appReportsOpenClosenew = new Chart(appReportsOpenClose, chartDoughnutHandler('Open/Close Reports', [data.numOfReportsOpen, data.numOfReportsCloesd], ['Open Report', 'Close Report']));
+      let dataJob = [];
+      let labelsJob = [];
+      data.numOfJobsEach.forEach((job, index) => {
+        if (index < 5) {
+          dataJob.push(job.number_of_each_jobstitle)
+          labelsJob.push(job.title)
+        }
+      })
+      let jobsnew = new Chart(jobs, chartBarHandler(`Total Jobs ${data.numOfJobs}`, dataJob, labelsJob));
+      let dataApp = [];
+      let labelsApp = [];
+      let totalApplication = 0;
+      data.statusApps.forEach(app => {
+        totalApplication += Number(app.number_of_accepted_apps);
+        dataApp.push(app.number_of_accepted_apps)
+        labelsApp.push(`${app.status} Application`)
+      })
+      let statusAppsnew = new Chart(statusApps, chartDoughnutHandler('Job Status', dataApp, labelsApp));
+
+      let dataOffer = [];
+      let labelaOfeer = [];
+      data.offersStatus.forEach(app => {
+        totalApplication += Number(app.number_of_accepted_apps);
+        dataOffer.push(app.number_of_offers)
+        labelaOfeer.push(`${app.status} Offer`)
+      })
+      let statusOffersnew = new Chart(statusOffer, chartDoughnutHandler('Job Status', dataOffer, labelaOfeer));
     } else {
-      getData()
+      if (errHand) {
+        getData()
+        setErrHand(false)
+      }
     }
   }, [data]);
 
   return (
-    <>
-      <canvas id="appUser" width="200" height="200"></canvas>
-      {console.log('1')}
-    </>
+    <Container>
+      <Row >
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="appUser" width="400" height="200"></canvas>
+        </Col>
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="appReportsOpenClose" width="400" height="200" ></canvas>
+        </Col>
+
+      </Row>
+
+      <Row >
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="jobs" width="400" height="200"></canvas>
+        </Col>
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="appReports" width="400" height="200" ></canvas>
+        </Col>
+      </Row>
+      <Row >
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="statusApps" width="400" height="200" ></canvas>
+        </Col>
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="statusOffer" width="400" height="200" ></canvas>
+        </Col>
+      </Row>
+
+      <Row >
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+          <canvas className='myChart' id="statusApps" width="400" height="200" ></canvas>
+        </Col>
+        <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
+        </Col>
+      </Row>
+    </Container>
   )
 }
+
+
+
