@@ -1,0 +1,110 @@
+.image-container{
+
+width:90%;
+margin-top: 60px;
+ 
+}
+.search-container{
+    background-color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    border-radius: 8px 8px;
+.input-filed{
+  
+        display:flex;
+        flex-direction: row;
+        align-self: center;
+        padding-left: 5px !important;
+    
+     .input{
+         position: relative;
+         height: 50px;
+         padding-left: 40px;
+         border-radius: 8px 8px;
+         background-color: #EBECF1;
+     }
+     .icon{
+      position: absolute;
+      z-index: 2;
+      vertical-align: middle;
+      top: 15px;
+      margin-left: 10px;
+      color: #ababab;
+      font-size: 20px;
+       
+    }
+    
+}
+.button {
+    background-color:  #232B4E;
+    color: whitesmoke;
+   line-height: 30px;
+    padding: 10px 20px;
+    padding-right: 20px;
+    border-radius: 8px 8px;
+    border-width: 0;
+    &:hover { 
+      background-color:#504EDF;
+    }
+    &:not(:disabled):not(.disabled):focus,
+    :not(:disabled):not(.disabled).focus {
+      background-color: #232B4E;
+      border-width: 0;
+      box-shadow: 0;
+    }
+  }
+}
+
+.list-container{
+    margin: 50px auto;
+    box-shadow: rgb(216, 211, 211) 0 0 15px ;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px 8px;
+    .list-header{
+        background-color: #E1E3E8;
+        padding: 25px 16px;
+        justify-content: center;
+        border-radius: 8px 8px;
+        .col-title{
+          text-align: left !important;
+        }
+        
+    }
+    .list-body{
+        
+        padding: 8px 16px;
+        
+        
+        .button-col{
+            text-align: center;
+            .button {
+                background-color:#504EDF ;
+                color: whitesmoke;
+               line-height: 30px;
+             
+                padding-right: 15px;
+                border-radius: 8px 8px;
+                border-width: 0;
+                &:hover { 
+                  background-color: #232B4E;
+                }
+                &:not(:disabled):not(.disabled):focus,
+                :not(:disabled):not(.disabled).focus {
+                  background-color: #232B4E;
+                  border-width: 0;
+                  box-shadow: 0;
+                }
+              }
+        }
+        
+        
+        
+    }
+    .list-body:after {
+        content: ""; 
+        display: block; 
+        margin: 0 auto; 
+        width: 98%; 
+        padding-top: 20px; 
+        border-bottom: 1px solid #E1E3E8; 
+    }
+}
