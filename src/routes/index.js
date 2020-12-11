@@ -1,5 +1,4 @@
 import { Switch, Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
 import NotFound from '../components/not-found';
 import Home from '../components/home';
 import AdminDashboard from '../components/admin/dashboard';
@@ -35,50 +34,48 @@ import ApplicantSavedJobs from '../components/user/saved-jobs';
 
 export default function Routes() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={Home} />
+    <Switch>
+      <Route exact path='/' component={Home} />
 
-        <Route exact path='/admin' component={AdminDashboard} />
-        <Route exact path='/admin/block' component={Block} />
-        <Route exact path='/admin/reports' component={AdminReports} />
-        <Route exact path='/admin/reports/:id' component={AdminReportsDetails} />
-        <Route exact path='/admin/posts' component={Posts} />
-        <Route exact path='/admin/posts/:id' component={PostsDetails} />
+      <Route exact path='/admin' component={AdminDashboard} />
+      <Route exact path='/admin/block' component={Block} />
+      <Route exact path='/admin/reports' component={AdminReports} />
+      <Route exact path='/admin/reports/:id' component={AdminReportsDetails} />
+      <Route exact path='/admin/posts' component={Posts} />
+      <Route exact path='/admin/posts/:id' component={PostsDetails} />
 
-        <Route exact path='/api' component={API} />
+      <Route exact path='/api' component={API} />
 
-        <Route exact path='/signin' component={Signin} />
-        <Route exact path='/signup' component={Signup} />
-        <Route exact path='/verify' component={Verify} />
+      <Route exact path='/signin' component={Signin} />
+      <Route exact path='/signup' component={Signup} />
+      <Route exact path='/verify' component={Verify} />
 
-        <Route exact path='/community' component={Community} />
-        <Route exact path='/community/submit' component={SubmitPost} />
-        <Route exact path='/community/posts/:id' component={PostDetails} />
-        <Route exact path='/community/edit/:id' component={EditPost} />
+      <Route exact path='/community' component={Community} />
+      <Route exact path='/community/submit' component={SubmitPost} />
+      <Route exact path='/community/posts/:id' component={PostDetails} />
+      <Route exact path='/community/edit/:id' component={EditPost} />
 
-        <Route exact path='/company/submitted-jobs' component={SubmitedJobs} />
-        <Route exact path='/company/submitted-jobs/:id' component={EditJob} />
-        <Route exact path='/company/applications' component={CompanyApplications} />
-        <Route exact path='/company/edit-profile' component={CompanyEdit} />
-        <Route exact path='/company/submit-job' component={SubmitJob} />
-        <Route exact path='/company/offers' component={CompanyOffers} />
+      <Route exact path='/company/submitted-jobs' component={SubmitedJobs} />
+      <Route exact path='/company/submitted-jobs/:id' component={EditJob} />
+      <Route exact path='/company/applications' component={CompanyApplications} />
+      <Route exact path='/company/edit-profile' component={CompanyEdit} />
+      <Route exact path='/company/submit-job' component={SubmitJob} />
+      <Route exact path='/company/offers' component={CompanyOffers} />
 
-        <Route exact path='/reports/' component={Reports} />
-        <Route exact path='/reports/submit' component={ReportDetails} />
-        <Route exact path='/reports/:id' component={SubmitReport} />
+      <Route exact path='/reports/' component={Reports} />
+      <Route exact path='/reports/submit' component={ReportDetails} />
+      <Route exact path='/reports/:id' component={SubmitReport} />
 
-        <Route exact path='/search/jobs' component={SearchJobs} />
-        <Route exact path='/search/company' component={SearchEmployees} />
-        <Route exact path='/search/employees' component={SearchCompany} />
+      <Route exact path='/search/jobs' component={SearchJobs} />
+      <Route exact path='/search/company' component={SearchCompany} />
+      <Route exact path='/search/employees' component={SearchEmployees} />
 
-        <Route exact path='/applicant/edit-profile' component={ApplicantEdit} />
-        <Route exact path='/applicant/applications' component={ApplicantApplications} />
-        <Route exact path='/applicant/offers' component={ApplicantOffers} />
-        <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
+      <Route exact path='/applicant/edit-profile' component={ApplicantEdit} />
+      <Route exact path='/applicant/applications' component={ApplicantApplications} />
+      <Route exact path='/applicant/offers' component={ApplicantOffers} />
+      <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
-        <Route component={NotFound} />
-      </Switch>
-    </BrowserRouter>
+      <Route component={NotFound} />
+    </Switch>
   );
 }

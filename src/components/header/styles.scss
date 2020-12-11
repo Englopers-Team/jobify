@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+.logo {
+  width: 140px;
+}
+
+.button {
+  background-color: #504edf;
+  margin: 2px 10px;
+  padding: 5px 8px;
+  font-size: 15px;
+  min-width: 50px;
+  width: 90%;
+  font-family: 'Montserrat', sans-serif;
+  color: whitesmoke;
+  border-width: 0;
+  &:hover {
+    background-color: #232b4e;
+    color: whitesmoke;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+    border-width: 0;
+    box-shadow: 0;
+  }
+}
+
+.button-login {
+  background-color: #232b4e;
+  margin: 2px 10px;
+  padding: 5px 12px;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  color: whitesmoke;
+  border-width: 0;
+  width: 90%;
+
+  &:hover {
+    background-color: #504edf;
+    color: whitesmoke;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+    border-width: 0;
+    box-shadow: 0;
+  }
+}
+
+.navbar {
+  width: 85%;
+  margin: 0 auto;
+  // margin-bottom: 30px;
+}
+.bg-custom {
+  background-color: transparent;
+}
+
+.link {
+  margin: 2px 8px;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  color: 'black';
+  width: 100%;
+  a {
+    text-decoration: none;
+    color: #717171;
+    transform: scaleX(1);
+    transition: all 0.3s ease-in-out 0s;
+
+    &.active,
+    &:hover {
+      margin-top: 20px;
+      border-bottom: 1.5px solid #504edf;
+      border-radius: 1px;
+      visibility: visible;
+      transform: scaleX(1);
+      transition: all 0.1s ease-in-out 0s;
+      color: #232b4e;
+      font-weight: 600;
+    }
+  }
+}

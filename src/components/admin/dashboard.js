@@ -213,7 +213,7 @@ export default function AdminDashboard() {
     return topCountryPerson.map(item => {
 
       return (
-        <Row className="country">
+        <Row  style={{margin : '5px' , fontSize:'19px' , fontFamily : 'Fantasy', textAlign : 'center' }} className="country">
           <Col>{item.country}</Col>
           <Col>{item.number_person_ofeach_country}</Col>
         </Row>
@@ -224,14 +224,13 @@ export default function AdminDashboard() {
   function Company() {
     return topCountryComapny.map(item => {
       return (
-        <Row className="country">
+        <Row style={{margin : '5px' , fontSize:'19px' , fontFamily : 'Fantasy', textAlign : 'center' }} className="country">
           <Col>{item.country}</Col>
           <Col>{item.number_company_ofeach_country}</Col>
         </Row>
       )
     })
   }
-
   const ScrollBarPage = () => {
     const scrollContainerStyle = { width: "200px", maxHeight: "200px", overflowY: 'scroll', overflowX: 'hidden' };
     return (
