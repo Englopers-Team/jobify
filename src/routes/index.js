@@ -32,6 +32,9 @@ import ApplicantApplications from '../components/user/my-applications';
 import ApplicantOffers from '../components/user/offers';
 import ApplicantSavedJobs from '../components/user/saved-jobs';
 
+// for testing osama
+import dash from '../components/user/dashboard';
+
 export default function Routes() {
   return (
     <Switch>
@@ -75,6 +78,8 @@ export default function Routes() {
       <Route exact path='/applicant/offers' component={ApplicantOffers} />
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
+      {/* tset */}
+      <Route path='/userhome' component={dash} />
       <Route component={NotFound} />
     </Switch>
   );
