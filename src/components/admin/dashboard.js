@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js';
 import superagent from 'superagent';
-import { If, Then } from 'react-if';
 import { MDBContainer } from "mdbreact";
-import ReactCountryFlag from "react-country-flag"
-
 
 import './styles.scss';
 import { Container, Row, Col } from 'react-bootstrap';
+
 
 export default function AdminDashboard() {
   const [data, setData] = useState();
@@ -124,9 +122,9 @@ export default function AdminDashboard() {
       let topJobTitle = document.getElementById('topJobTitle').getContext('2d');
 
 
-      let appUsernew = new Chart(appUser, chartBarHandler(`Total Users ${data.totalUser}`, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
-      let appReportsnew = new Chart(appReports, chartBarHandler(`Total Reports ${data.numOfReports}`, [data.numOfReportsEach[0].number_of_reports, data.numOfReportsEach[1].number_of_reports], [data.numOfReportsEach[0].account_type === 'c' ? 'Company' : 'Applicant', data.numOfReportsEach[1].account_type === 'c' ? 'Company' : 'Applicant']));
-      let appReportsOpenClosenew = new Chart(appReportsOpenClose, chartDoughnutHandler('Open/Close Reports', [data.numOfReportsOpen, data.numOfReportsCloesd], ['Open Report', 'Close Report']));
+      new Chart(appUser, chartBarHandler(`Total Users ${data.totalUser}`, [data.numCompany, data.numPerson], ['Companies', 'Applicant']));
+      new Chart(appReports, chartBarHandler(`Total Reports ${data.numOfReports}`, [data.numOfReportsEach[0].number_of_reports, data.numOfReportsEach[1].number_of_reports], [data.numOfReportsEach[0].account_type === 'c' ? 'Company' : 'Applicant', data.numOfReportsEach[1].account_type === 'c' ? 'Company' : 'Applicant']));
+      new Chart(appReportsOpenClose, chartDoughnutHandler('Open/Close Reports', [data.numOfReportsOpen, data.numOfReportsCloesd], ['Open Report', 'Close Report']));
       let dataJob = [];
       let labelsJob = [];
       data.numOfJobsEach.forEach((job, index) => {
@@ -135,7 +133,7 @@ export default function AdminDashboard() {
           labelsJob.push(job.title)
         }
       })
-      let jobsnew = new Chart(jobs, chartBarHandler(`Total Jobs ${data.numOfJobs}`, dataJob, labelsJob));
+      new Chart(jobs, chartBarHandler(`Total Jobs ${data.numOfJobs}`, dataJob, labelsJob));
       let dataApp = [];
       let labelsApp = [];
       let totalApplication = 0;
@@ -144,16 +142,15 @@ export default function AdminDashboard() {
         dataApp.push(app.number_of_accepted_apps)
         labelsApp.push(`${app.status} Application`)
       })
-      let statusAppsnew = new Chart(statusApps, chartDoughnutHandler('Job Status', dataApp, labelsApp));
+      new Chart(statusApps, chartDoughnutHandler('Job Status', dataApp, labelsApp));
 
       let dataOffer = [];
       let labelaOfeer = [];
       data.offersStatus.forEach(app => {
-        totalApplication += Number(app.number_of_accepted_apps);
         dataOffer.push(app.number_of_offers)
         labelaOfeer.push(`${app.status} Offer`)
       })
-      let statusOffersnew = new Chart(statusOffer, chartDoughnutHandler('Job Status', dataOffer, labelaOfeer));
+      new Chart(statusOffer, chartDoughnutHandler('Job Status', dataOffer, labelaOfeer));
 
       let offerJobTitle = [];
       let labelsOfferJobTitle = [];
@@ -163,12 +160,12 @@ export default function AdminDashboard() {
           labelsOfferJobTitle.push(jobTitle.title)
         }
       })
-      let offerJobnew = new Chart(offerJob, chartBarHandler(`Most In Demand Job Offer`, offerJobTitle, labelsOfferJobTitle));
+      new Chart(offerJob, chartBarHandler(`Most In Demand Job Offer`, offerJobTitle, labelsOfferJobTitle));
 
 
-      let appOfferJobnew = new Chart(appOfferJob, chartBarHandler(`Number Of Application|Offers|Jobs`, [data.numOfTotalApp, data.numOfOffers, data.numOfJobs], ['Application', 'Offers', 'Jobs']));
+      new Chart(appOfferJob, chartBarHandler(`Number Of Application|Offers|Jobs`, [data.numOfTotalApp, data.numOfOffers, data.numOfJobs], ['Application', 'Offers', 'Jobs']));
 
-      let dbApiRationew = new Chart(dbApiRatio, chartDoughnutHandler('Job Status', [data.numOfDbApp, data.numOfApiApp], ['DataBase', 'Third Party Provider']));
+      new Chart(dbApiRatio, chartDoughnutHandler('Job Status', [data.numOfDbApp, data.numOfApiApp], ['DataBase', 'Third Party Provider']));
 
       let compantAppNum = [];
       let labelsCompantAppNum = [];
@@ -179,7 +176,7 @@ export default function AdminDashboard() {
         }
       })
 
-      let topComponiesSendAppnew = new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Send Offers`, compantAppNum, labelsCompantAppNum));
+      new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Send Offers`, compantAppNum, labelsCompantAppNum));
 
       let compantOfferNum = [];
       let labelsCompantOfferNum = [];
@@ -190,7 +187,7 @@ export default function AdminDashboard() {
         }
       })
 
-      let topComponiesSendOffernew = new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Received Application`, compantOfferNum, labelsCompantOfferNum));
+      new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Received Application`, compantOfferNum, labelsCompantOfferNum));
 
       let applicpintNumJobTitle = [];
       let labelsapplicpintNumJobTitle = [];
@@ -201,7 +198,7 @@ export default function AdminDashboard() {
         }
       })
 
-      let topJobTitlenew = new Chart(topJobTitle, chartBarHandler(`Most Applicant Job Title`, applicpintNumJobTitle, labelsapplicpintNumJobTitle));
+      new Chart(topJobTitle, chartBarHandler(`Most Applicant Job Title`, applicpintNumJobTitle, labelsapplicpintNumJobTitle));
 
 
     } else {
@@ -236,7 +233,7 @@ export default function AdminDashboard() {
   }
 
   const ScrollBarPage = () => {
-    const scrollContainerStyle = { width: "200px", maxHeight: "200px", overflowY: 'scroll', overflowX: 'hidden'  };
+    const scrollContainerStyle = { width: "200px", maxHeight: "200px", overflowY: 'scroll', overflowX: 'hidden' };
     return (
       <Row>
         <Col className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
@@ -303,7 +300,7 @@ export default function AdminDashboard() {
         </Col>
       </Row>
       <Row >
-        <canvas className='myChart' id="dbApiRatio" width="200" height="100" ></canvas>
+        <canvas className='myChart' id="dbApiRatio" width="150" height="60" ></canvas>
       </Row>
 
 
@@ -334,8 +331,6 @@ export default function AdminDashboard() {
       <Row >
         <canvas className='myChart' id="topJobTitle" width="400" height="100" ></canvas>
       </Row>
-
-
     </Container>
   )
 }
