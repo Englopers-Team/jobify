@@ -3,6 +3,7 @@ import { Container, Row, Col, Dropdown, FormControl } from 'react-bootstrap';
 import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
 import { Link } from 'react-router-dom';
+import * as Icon from 'react-bootstrap-icons';
 
 import '../../search/styles.scss'
 import './styles.scss'
@@ -11,7 +12,7 @@ import './styles.scss'
 import Button from 'react-bootstrap/Button';
 export default function Reports() {
   let [data, setData] = useState([]);
-  let [sort, setSort] = useState('Sort');
+  let [sort, setSort] = useState('All Reports');
   let [type, setType] = useState(false);
   let [sortId, setSortId] = useState('');
   const scrollContainerStyle = { width: "auto", maxHeight: "400px", height: '400px', overflowY: 'scroll', overflowX: 'hidden' };
@@ -43,7 +44,7 @@ export default function Reports() {
               {item.response === null ? 'Open' : 'Closed'}
             </Col>
             <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
-              <Link style={{ textDecoration: 'none' }} className='button' variant='praimary' id='link' to={{ pathname: '/admin/reports/:id', query: { id: item.id } }}>Details</Link>
+              <Link style={{ textDecoration: 'none' }} className='button' variant='praimary' id='link' to={{ pathname: `/admin/reports/${item.id}` }}>Details</Link>
             </Col>
           </Row>
         );
@@ -51,22 +52,31 @@ export default function Reports() {
     })
   }
 
- 
+
   return (
     <>
-      <Row style={{ justfiyContent: 'center' , alignItem : 'center' }}>
-        <FormControl onChange={(e) => { setSortId(e.target.value) }} aria-label="Small" aria-describedby="inputGroup-sizing-sm" style={{ width: '10%' }} />
-        <Dropdown>
-          <Dropdown.Toggle variant="Info" id="dropdown-basic">
-            {sort}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => { setType(false); setSort('All Reports') }}>All Reports</Dropdown.Item>
-            <Dropdown.Item onClick={() => { setType(null); setSort('Open Reports') }}>Open Reports</Dropdown.Item>
-            <Dropdown.Item onClick={() => { setType(true); setSort('Close Reports') }}>Close Reports</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Row>
+      <Container style={{ marginLeft: 'auto', marginRight: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItem: 'center' }}>
+        <Row sm={8} style={{ justifyContent: 'center', alignItem: 'center', textAlign: 'center' }}  >
+          <Col sm={1} style={{marginTop : '5px' }}>
+            <Icon.Search size='25' />
+          </Col>
+          <Col sm={8}>
+            <FormControl placeholder='Search By Report Number' className='input' style={{}} onChange={(e) => { setSortId(e.target.value) }} />
+          </Col>
+          <Col sm={3}>
+            <Dropdown>
+              <Dropdown.Toggle variant="Info" id="dropdown-basic">
+                {sort}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => { setType(false); setSort('All Reports') }}>All Reports</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setType(null); setSort('Open Reports') }}>Open Reports</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setType(true); setSort('Close Reports') }}>Close Reports</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+        </Row>
+      </Container>
 
       <Container className='list-container' style={{ width: '80%' }}>
         <Row sm={8} className='flexRow list-header' style={{ textAlign: 'center' }}>
