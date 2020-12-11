@@ -37,10 +37,10 @@ export default function Signup() {
   }
 
   return (
-    <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+    <Container className='cont' style={{ marginTop: '50px', marginBottom: '50px' }}>
       <meta name="google-signin-client_id"
         content="60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com" />
-      <Row>
+      <Row >
         <Col sm={7}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
             <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>Sign up</Card.Title>
@@ -93,7 +93,7 @@ export default function Signup() {
                         <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fjobify-app-v2.herokuapp.com%2Foauth-google&response_type=code&scope=profile%20email&fetch_basic_profile=true"><Image style={{ width: '42px' }} src="https://www.flaticon.com/svg/static/icons/svg/281/281764.svg" roundedCircle /></a>
                         <a href='https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77ja8aiam3pogu&redirect_uri=https%3A%2F%2Fjobify-app-v2.herokuapp.com%2Foauth-linkedin&scope=r_liteprofile%20r_emailaddress'> <Image style={{ width: '42px' }} src="https://www.flaticon.com/svg/static/icons/svg/145/145807.svg" roundedCircle /></a>
                       </Form.Group>
-                      <Button variant='outline-dark' size="lg" className='button' block type="submit" style={{marginBottom:'50px'}}>
+                      <Button variant='outline-dark' size="lg" className='button' block type="submit" style={{marginBottom:'50px',height:'40px',fontSize:'24px',fontWeight:'500'}}>
                         Sign up
                       </Button>
                     </Form>
@@ -126,7 +126,7 @@ export default function Signup() {
                           <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>Wrong email or password!</p>
                         </Alert>
                       </If>
-                      <Button variant='outline-dark' size="lg" className='button' block type="submit" style={{marginBottom:'50px',marginTop:'122px'}}>
+                      <Button variant='outline-dark' size="lg" className='button' block type="submit" style={{marginBottom:'50px',marginTop:'122px',height:'40px',fontSize:'24px',fontWeight:'500'}}>
                         Sign up
                       </Button>
                     </Form>
@@ -137,7 +137,7 @@ export default function Signup() {
 
           </Card>
         </Col>
-        <Col sm={3}>
+        <Col sm={5}>
           <Row style={{ height: '40%' }}>
 
           </Row>
