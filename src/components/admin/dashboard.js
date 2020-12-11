@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js';
 import superagent from 'superagent';
 import { If, Then } from 'react-if';
+import { MDBContainer } from "mdbreact";
+import ReactCountryFlag from "react-country-flag"
+
 
 import './styles.scss';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -208,12 +211,14 @@ export default function AdminDashboard() {
   }, [data]);
 
 
+
   function People() {
     return topCountryPerson.map(item => {
+
       return (
-        <Row>
-          <Col>{item.number_person_ofeach_country}</Col>
+        <Row className="country">
           <Col>{item.country}</Col>
+          <Col>{item.number_person_ofeach_country}</Col>
         </Row>
       )
     })
@@ -222,13 +227,32 @@ export default function AdminDashboard() {
   function Company() {
     return topCountryComapny.map(item => {
       return (
-        <Row>
-          <Col>{item.number_company_ofeach_country}</Col>
+        <Row className="country">
           <Col>{item.country}</Col>
+          <Col>{item.number_company_ofeach_country}</Col>
         </Row>
       )
     })
   }
+
+  const ScrollBarPage = () => {
+    const scrollContainerStyle = { width: "200px", maxHeight: "200px", overflowY: 'scroll', overflowX: 'hidden'  };
+    return (
+      <Row>
+        <Col className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+          <MDBContainer>
+            <People />
+          </MDBContainer>
+        </Col>
+        <Col className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+          <MDBContainer>
+            <Company />
+          </MDBContainer>
+        </Col>
+      </Row >
+    );
+  }
+
 
   return (
     <Container>
@@ -282,11 +306,20 @@ export default function AdminDashboard() {
         <canvas className='myChart' id="dbApiRatio" width="200" height="100" ></canvas>
       </Row>
 
+
+
       <Row style={{
         height: '150px',
       }}>
 
       </Row>
+      <Row className="countryHeader">
+        <Col>Location</Col>
+        <Col>Total Applicant</Col>
+        <Col>Location</Col>
+        <Col>Total Companies</Col>
+      </Row>
+      <ScrollBarPage />
 
       <Row >
         <Col style={{ width: '400px', height: '200px', margin: '50px' }}>
@@ -297,20 +330,11 @@ export default function AdminDashboard() {
         </Col>
       </Row>
 
-      <Col>
-        <People />
-      </Col>
-
-      <Col>
-        <Company />
-      </Col>
-
-
-
 
       <Row >
         <canvas className='myChart' id="topJobTitle" width="400" height="100" ></canvas>
       </Row>
+
 
     </Container>
   )
