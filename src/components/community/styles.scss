@@ -1,6 +1,6 @@
 .buttonTopic {
   background-color: #504edf;
-  color: red;
+  color: whitesmoke;
   border-width: 0;
   &:hover {
     background-color: #232b4e;
@@ -11,4 +11,8 @@
     border-width: 0;
     box-shadow: 0;
   }
+}
+
+.imgShadow{
+  // box-shadow: 0 0 5px rgba(83, 83, 83, 0.15);;
 }
