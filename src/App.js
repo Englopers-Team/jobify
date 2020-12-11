@@ -8,15 +8,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <AuthProvider>
-      <SocketProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <SocketProvider>
           <Header />
           <Routes />
           <Footer />
-        </BrowserRouter>
-      </SocketProvider>
-    </AuthProvider>
+        </SocketProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

@@ -3,11 +3,11 @@ import cookie from 'react-cookies';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
+import { useHistory } from "react-router-dom";
 
 dotenv.config();
-const API = process.env.API_SERVER || 'http://localhost:4000';
+const API = process.env.API_SERVER || 'http://localhost:4000'
 const SECRET = process.env.JWT_SECRET || 'z1337z';
-
 
 export const AuthContext = React.createContext();
 
@@ -17,12 +17,23 @@ function AuthProvider(props) {
   const [token, setToken] = useState('')
   const [error, setError] = useState(false)
 
+  let history = useHistory();
   useEffect(() => {
     const token = cookie.load('token');
     validateToken(token);
     setError(false)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+
+  const checkUser = async (tk) => {
+    await superagent.get(`${API}/verify/0`).set({ 'Authorization': `Basic ${tk}` }).then((data) => {
+      if (data.body === 'blocked') {
+        history.push("/banned")
+      }
+    })
+  }
 
   const validateToken = (token) => {
     try {
@@ -63,6 +74,7 @@ function AuthProvider(props) {
       if (type === 'p') {
         console.log('1')
         const { firstName, lastName, email, phone, jobTitle, country, password } = payload;
+        console.log(API)
         const response = await superagent
           .post(`${API}/signup`)
           .send({ first_name: firstName, last_name: lastName, email, phone, job_title: jobTitle, country, password, account_type: 'p' });
@@ -72,7 +84,7 @@ function AuthProvider(props) {
         const { companyName, email, phone, logo, url, country, password } = payload;
         const response = await superagent
           .post(`${API}/signup`)
-          .send({ company_name: companyName, email, phone, logo, company_url:url, country, password, account_type: 'c' });
+          .send({ company_name: companyName, email, phone, logo, company_url: url, country, password, account_type: 'c' });
         validateToken(response.body.token);
         return true
       }
@@ -86,7 +98,7 @@ function AuthProvider(props) {
     setLoginState(false, null, {});
   };
 
-  const state = { login, logout, signup, loggedIn, user, error, setError, token, setToken };
+  const state = { login, logout, signup, loggedIn, user, error, setError, token, setToken, checkUser };
 
 
   return (

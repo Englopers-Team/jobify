@@ -1,4 +1,4 @@
-import { BrowserRouter,Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import NotFound from '../components/not-found';
 import Home from '../components/home';
 import AdminDashboard from '../components/admin/dashboard';
