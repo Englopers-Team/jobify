@@ -51,7 +51,7 @@ export default function Reports() {
     })
   }
 
-
+ 
   return (
     <>
       <Row style={{ justfiyContent: 'center' , alignItem : 'center' }}>
