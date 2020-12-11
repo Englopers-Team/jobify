@@ -33,7 +33,7 @@ export default function SearchJobs() {
   console.log(results);
 
   return (
-    <Container>
+    <Container style={{ textAlign: 'center' }}>
       <Form onSubmit={jobList}>
         <br></br>
         <Row sm={8} className='search-container' style={{ width: '80%' }}>
