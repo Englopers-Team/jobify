@@ -8,9 +8,10 @@ import './app.scss';
 
 function App() {
   return (
+            <BrowserRouter>
+
     <AuthProvider>
       <SocketProvider>
-        <BrowserRouter>
           <div className='page-container'>
             <div className='content-wrap'>
               <Header />
@@ -18,9 +19,10 @@ function App() {
             </div>
             <Footer />
           </div>
-        </BrowserRouter>
       </SocketProvider>
     </AuthProvider>
+        </BrowserRouter>
+
   );
 }
 

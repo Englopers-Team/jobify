@@ -5,7 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 export default function Header() {
   return (
-    <>
+
       <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1' }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
@@ -30,20 +30,19 @@ export default function Header() {
             </Nav.Link>
           </Nav>
 
-          <Nav>
-            <Link exact to='/signup'>
-              <Button className='button' variant='outline-light'>
-                SignUp
+        <Nav>
+          <Link exact to='/signup'>
+            <Button className='button' variant='outline-light'>
+              SignUp
               </Button>
-            </Link>
-            <Link exact to='/signin'>
-              <Button className='button-login' variant='outline-light'>
-                Login
+          </Link>
+          <Link exact to='/signin'>
+            <Button className='button-login' variant='outline-light'>
+              Login
               </Button>
-            </Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    </>
+          </Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
