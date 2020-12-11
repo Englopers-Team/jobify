@@ -14,15 +14,10 @@ export default function UserEdit() {
   const [data, setData] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [jobTitle, setJobTitle] = useState('');
-  const [country, setCountry] = useState('');
-  const [password, setPassword] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [logo, setLogo] = useState('');
-  const [url, setURL] = useState('');
-  const [error, setError] = useState(false);
+  const [cv, setCv] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
     getData();
@@ -39,38 +34,34 @@ export default function UserEdit() {
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>Sign up</Card.Title>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>{data.first_name} Profile </Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
 
-            <Row style={{ justifyContent: 'center', marginTop: '30px', display: 'flex', flexDirection: 'row' }}>
+            <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
               <Form style={{ width: '80%' }}>
-                <Row style={{ margin: '20px' }}>
-                  <Form.Group style={{ marginBottom: '15px' }}>
-                    <Form.Control required className='input' type='text' placeholder='First name' />
-                  </Form.Group>
-                  <Form.Group style={{ marginBottom: '15px' }}>
-                    <Form.Control required value={data.last_name} className='input' type='text' placeholder='Last name' />
-                  </Form.Group>
-                  <Form.Group style={{ marginBottom: '15px' }} controlId='formBasicEmail'>
-                    <Form.Control required value={data.phone} className='input' type='email' placeholder='Email' />
-                  </Form.Group>
-                </Row>
-                <Row style={{ margin: '20px' }}>
-                  <Form.Group style={{ marginBottom: '15px' }}>
-                    <Form.Control required value={data.avatar} className='input' type='number' placeholder='Phone number' />
-                  </Form.Group>
-                  <Form.Group style={{ marginBottom: '15px' }}>
-                    <Form.Control required value={data.cv} className='input' type='text' placeholder='Job title' />
-                  </Form.Group>
-                  <Form.Group style={{ marginBottom: '15px' }}>
-                    <Form.Control required value={data.job_title} className='input' type='text' placeholder='Country' />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
-                    Sign up
-                  </Button>
-                </Row>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Control required onChange={(e) => setFirstName(e.target.value)} className='input' type='text' value={data.first_name} />
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Control required onChange={(e) => setLastName(e.target.value)} className='input' type='text' value={data.last_name} />
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }} controlId='formBasicEmail'>
+                  <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='email' value={data.phone} />
+                </Form.Group>
+
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Control required onChange={(e) => setJobTitle(e.target.value)} className='input' type='number' value={data.job_title} />
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Control required onChange={(e) => setCv(e.target.value)} className='input' type='text' value={data.cv} />
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Control required onChange={(e) => setAvatar(e.target.value)} className='input' type='text' value={data.avatar} />
+                </Form.Group>
+
+                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
+                  Save
+                </Button>
               </Form>
             </Row>
           </Card>
