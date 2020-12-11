@@ -45,7 +45,12 @@ export default function JobsResults(props) {
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
                     {item.type}
                   </Col>
-                  <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
+                  <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
+                    <Button className='button' onClick={console.log(item.email)} variant='praimary'>
+                      Save
+                    </Button>
+                  </Col>
+                  <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
                     <Button className='button' onClick={console.log(item.email)} variant='praimary'>
                       Apply
                     </Button>

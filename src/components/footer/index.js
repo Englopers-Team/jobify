@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 export default function Footer() {
   return (
     <>
-      <Container>
+      {/* <Container>
         <Row className='footer-container' sm={10}>
           <Navbar fixed='bottom' className='footer'>
             <Col className='footer-links'>
@@ -25,7 +25,26 @@ export default function Footer() {
             </Col>
           </Navbar>
         </Row>
-      </Container>
+      </Container> */}
+
+      <Navbar expand='sm' variant='light' bg='bg-transparent' className='footer'>
+        <Container className='footer-container'>
+          <Row>
+            <Nav.Link>
+              <NavLink to='/search/employees'>Jobs</NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink to='/community'>community</NavLink>
+            </Nav.Link>
+            <Nav.Link to='/about'>
+              <NavLink to='/about'>About</NavLink>
+            </Nav.Link>
+          </Row>
+          <Row>
+            <Navbar.Text className='footer-text'>© Jobify | 2020 All rights reserved.</Navbar.Text>
+          </Row>
+        </Container>
+      </Navbar>
     </>
   );
 }
