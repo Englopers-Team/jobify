@@ -5,29 +5,30 @@ import { NavLink, Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 export default function Header() {
   return (
-    <Navbar style={{marginBottom:'100px'}} collapseOnSelect expand='sm' bg='bg-transparent' variant='light' sticky='top'>
-      <NavLink exact to='/'>
-        <Image className='logo' src='../../assets/jobify.png' />
-      </NavLink>
-      <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-      <Navbar.Collapse id='responsive-navbar-nav'>
-        <Nav className='mr-auto'></Nav>
-        <Nav>
-          <Nav.Link className='link' to='/'>
-            <NavLink exact to='/'>
-              Home
+
+      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1' }}>
+        <NavLink exact to='/'>
+          <Image className='logo' src='../../assets/jobify.png' />
+        </NavLink>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav className='mr-auto'></Nav>
+          <Nav>
+            <Nav.Link className='link' to='/'>
+              <NavLink exact to='/'>
+                Home
               </NavLink>
-          </Nav.Link>
-          <Nav.Link className='link'>
-            <NavLink to='/search/jobs'>Jobs</NavLink>
-          </Nav.Link>
-          <Nav.Link className='link'>
-            <NavLink to='/community'>community</NavLink>
-          </Nav.Link>
-          <Nav.Link className='link' to='/about'>
-            <NavLink to='/about'>About</NavLink>
-          </Nav.Link>
-        </Nav>
+            </Nav.Link>
+            <Nav.Link className='link'>
+              <NavLink to='/search/employees'>Jobs</NavLink>
+            </Nav.Link>
+            <Nav.Link className='link'>
+              <NavLink to='/community'>community</NavLink>
+            </Nav.Link>
+            <Nav.Link className='link' to='/about'>
+              <NavLink to='/about'>About</NavLink>
+            </Nav.Link>
+          </Nav>
 
         <Nav>
           <Link exact to='/signup'>

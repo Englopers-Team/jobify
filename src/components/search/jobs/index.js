@@ -61,7 +61,7 @@ export default function SearchJobs() {
       </Form>
 
       <Row className='image-container' style={{ justifyContent: 'center' }}>
-        <Image className='image' style={{ width: '600px' }} src='../../assets/search.png' rounded />
+        <Image className='image' style={{ width: '90%' }} src='../../assets/search.png' rounded />
       </Row>
     </Container>
   );
