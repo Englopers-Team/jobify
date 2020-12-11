@@ -14,11 +14,6 @@ export default function Signin() {
 
   const context = useContext(AuthContext)
 
-  useEffect(() => {
-    if(context.token){
-      context.checkUser(context.token)
-    }
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
