@@ -1,0 +1,14 @@
+.buttonTopic {
+  background-color: #504edf;
+  color: red;
+  border-width: 0;
+  &:hover {
+    background-color: #232b4e;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+    border-width: 0;
+    box-shadow: 0;
+  }
+}

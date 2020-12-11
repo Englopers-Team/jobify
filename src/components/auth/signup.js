@@ -26,14 +26,14 @@ export default function Signup() {
     e.preventDefault()
     const payload = { firstName, lastName, email, phone, jobTitle, country, password }
     const check = await context.signup(payload, 'p')
-    check ? history.push("/") : setError(true);
+    check ? history.push("/verify") : setError(true);
   }
 
   const handleSubmitCompany = async (e) => {
     e.preventDefault()
     const payload = { companyName, email, phone, logo, url, country, password }
     const check = await context.signup(payload, 'c')
-    check ? history.push("/") : setError(true);
+    check ? history.push("/verify") : setError(true);
   }
 
   return (
