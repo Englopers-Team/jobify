@@ -25,7 +25,6 @@ function App() {
         </SocketProvider>
       </AuthProvider>
     </BrowserRouter>
-
   );
 }
 
