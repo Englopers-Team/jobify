@@ -8,9 +8,10 @@ import { AuthContext } from '../../context/auth';
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';
 import { If } from 'react-if';
 import './styles.scss';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function UserEdit() {
+  let history = useHistory();
   const [data, setData] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -28,7 +29,7 @@ export default function UserEdit() {
     const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${token}`);
     setData(response.body);
     setFirstName(response.body.first_name);
-    setLastName(response.body.lastName);
+    setLastName(response.body.last_name);
     setPhone(response.body.phone);
     setJobTitle(response.body.job_title);
     setCv(response.body.cv);
@@ -39,6 +40,7 @@ export default function UserEdit() {
     const API = 'https://jobify-app-v2.herokuapp.com/user/edit';
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjkzMzMxLCJleHAiOjM2MTYwNzY5MzMzMX0.UjxBO5cHePzHJaJcuZgQb-zZ1B_-XAFJYxfsKuUB_ig';
     await superagent.put(`${API}`).set('authorization', `Basic ${token}`).send({ first_name: firstName, last_name: lastName, phone: phone, job_title: jobTitle, country: data.country, age: data.age, avatar: avatar, experince: data.experince, cv: cv });
+    history.push('/userhome');
   }
 
   return (
