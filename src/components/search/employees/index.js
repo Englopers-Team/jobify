@@ -38,7 +38,7 @@ export default function SearchEmployees() {
     <Container style={{ justifyContent: 'center' }}>
       <Form onSubmit={jobList}>
         <br></br>
-        <Row className='search-container' style={{ width: '75%', textAlign: 'center' }}>
+        <Row sm={10} className='search-container' style={{ width: '75%', textAlign: 'center' }}>
           <Col sm={5} className='input-filed'>
             <Icon.EnvelopeFill className='icon' />
 
@@ -55,13 +55,13 @@ export default function SearchEmployees() {
             </Button>
           </Col>
         </Row>
-        <Row>
-          <Results results={results} visable={visable} loader={loader} />
-        </Row>
       </Form>
+      <Row style={{ justifyContent: 'center' }}>
+        <Results results={results} visable={visable} loader={loader} />
+      </Row>
 
       <Row className='image-container' style={{ justifyContent: 'center' }}>
-        <Image className='image' style={{ width: '90%' }} src='../../assets/search.png' rounded />
+        <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
       </Row>
     </Container>
   );
