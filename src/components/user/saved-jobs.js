@@ -46,7 +46,7 @@ export default function SavedJobs() {
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header'>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} className='col-title' sm={2}></Col>
+            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title' sm={2}></Col>
             <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} className='col-title' sm={2}>
               Job Title
             </Col>
@@ -57,7 +57,7 @@ export default function SavedJobs() {
               Job Type
             </Col>
             <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-              Application Status
+              Phone
             </Col>
             <Col sm={1}>
               <If condition={loader}>
@@ -74,7 +74,7 @@ export default function SavedJobs() {
                 <Col style={{ fontWeight: 650 }} sm={2}>
                   <Image style={{ width: '50px' }} src={item.logo} roundedCircle />
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'left', color: '#9393A1' }} sm={2}>
                   {item.title}
                 </Col>
                 <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={3}>
@@ -84,12 +84,12 @@ export default function SavedJobs() {
                   {item.type}
                 </Col>
                 <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
-                  {item.status}
+                  {item.phone}
                 </Col>
                 <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
                   <Button
                     className='button'
-                    style={{ paddingRight: '60px', backgroundColor: '#E85D67' }}
+                    style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
                     onClick={() => {
                       <If condition={item.job_id}>
                         <Then>
