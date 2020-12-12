@@ -37,24 +37,6 @@
       font-size: 20px;
     }
   }
-  .button {
-    background-color: #232b4e;
-    color: whitesmoke;
-    line-height: 30px;
-    padding: 10px 20px;
-    padding-right: 20px;
-    border-radius: 8px 8px;
-    border-width: 0;
-    &:hover {
-      background-color: #504edf;
-    }
-    &:not(:disabled):not(.disabled):focus,
-    :not(:disabled):not(.disabled).focus {
-      background-color: #232b4e;
-      border-width: 0;
-      box-shadow: 0 0;
-    }
-  }
 }
 
 .list-container {
@@ -74,40 +56,59 @@
   }
   .list-body {
     padding: 8px 16px;
-
-    .buttons {
-      background-color: #504edf;
-      color: whitesmoke;
-      // line-height: 30px;
-      border-radius: 6px 6px;
-      border-width: 0;
-      &:hover {
-        background-color: #232b4e;
-        box-shadow: 0;
-      }
-      &:not(:disabled):not(.disabled):focus,
-      :not(:disabled):not(.disabled).focus {
-        background-color: #232b4e;
-        border-width: 0;
-        box-shadow: 0 0;
-      }
-    }
-    .button-col {
-      text-align: center;
-    }
-  }
-  .list-body:after {
-    content: '';
-    display: block;
-    margin: 0 auto;
-    width: 98%;
-    padding-top: 20px;
-    border-bottom: 1px solid #e1e3e8;
   }
 }
+
+.buttongg {
+  background-color: #232b4e;
+  // margin: 2px 10px;
+  // padding: 5px 12px;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  color: whitesmoke;
+  border-width: 0;
+  // width: 100%;
+
+  &:hover {
+    background-color: #504edf;
+    color: whitesmoke;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+    border-width: 0;
+    box-shadow: 0;
+  }
+}
+
+// .buttong {
+//   background-color: #232b4e;
+//   color: whitesmoke;
+//   line-height: 30px;
+//   padding: 10px 20px;
+//   padding-right: 20px;
+//   border-radius: 8px 8px;
+//   border-width: 0;
+//   &:hover {
+//     background-color: #504edf;
+//   }
+//   &:not(:disabled):not(.disabled):focus,
+//   :not(:disabled):not(.disabled).focus {
+//     background-color: #232b4e;
+//     border-width: 0;
+//     box-shadow: 0 0;
+//   }
+// }
 
 .btn-success {
   color: #fff;
   background-color: #28a745;
   border-color: #28a745;
+}
+
+.modal-body {
+  text-align: center;
+}
+.modal-content {
+  top: 60px;
 }

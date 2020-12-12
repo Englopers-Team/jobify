@@ -10,12 +10,16 @@ import Image from 'react-bootstrap/Image';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import * as Icon from 'react-bootstrap-icons';
+import Modal from 'react-bootstrap/Modal';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/jobs';
 export default function MyJobs(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(true);
   let history = useHistory();
+  const [show, setShow] = useState(false);
+  const [id, setId] = useState(0);
+
   // const context = useContext(AuthContext);
 
   const jobList = async (e) => {
@@ -31,6 +35,20 @@ export default function MyJobs(props) {
 
   const checkSize = () => {
     setScreenSize(window.screen.width);
+  };
+
+  const deleteJob = (id) => {
+    setLoader(true);
+    superagent
+      .delete(`${jobsApi}/${id}`)
+      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+
+      .then((data) => {
+        console.log(data.text);
+        jobList();
+        setLoader(false);
+        setShow(false);
+      });
   };
 
   useEffect(() => {
@@ -77,38 +95,59 @@ export default function MyJobs(props) {
                 </If>
               </Col>
             </Row>
+            <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+              <Modal.Header closeButton>
+                <Modal.Title id='example-custom-modal-styling-title'>Delete Job</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Are you sure that you want to DELETE this job?</p>
+                <Button className='button' onClick={() => deleteJob(id)} variant='outline-light' style={{ backgroundColor: '#E85D67' }}>
+                  Delete
+                </Button>
+              </Modal.Body>
+            </Modal>
 
             {results.map((item) => {
               return (
-                <Row className='flexRow list-body' sm={12}>
-                  <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
-                    {item.title}
-                  </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
-                    {item.type}
-                  </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
-                    {item.location}
-                  </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-                    {item.description}
-                  </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
-                    {item.applicants_num}
-                  </Col>
-                  <Row sm={2.5}>
-                    <Col style={{ textAlign: 'center' }} sm={1.25}>
-                      <Button className='button' onClick={() => history.push(`submitted-jobs/${item.id}`)} variant='outline-light' style={{ backgroundColor: '#363B59' }}>
-                        Update
-                      </Button>
+                <>
+                  <Row className='flexRow list-body' sm={12}>
+                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
+                      {item.title}
                     </Col>
-                    <Col style={{ textAlign: 'center' }} sm={1.25}>
-                      <Button className='button' onClick={() => console.log('Hi2')} variant='outline-light' style={{ backgroundColor: '#E85D67' }}>
-                        Delete
-                      </Button>
+                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
+                      {item.type}
                     </Col>
+                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
+                      {item.location}
+                    </Col>
+                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                      {item.description}
+                    </Col>
+                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
+                      {item.applicants_num}
+                    </Col>
+                    <Row sm={2.5}>
+                      <Col style={{ textAlign: 'center' }} sm={1.25}>
+                        <Button className='button' onClick={() => history.push(`submitted-jobs/${item.id}`)} variant='outline-light' style={{ backgroundColor: '#363B59' }}>
+                          Update
+                        </Button>
+                      </Col>
+                      <Col style={{ textAlign: 'center' }} sm={1.25}>
+                        <Button
+                          className='button'
+                          onClick={() => {
+                            setShow(true);
+                            setId(item.id);
+                          }}
+                          variant='outline-light'
+                          style={{ backgroundColor: '#E85D67' }}
+                        >
+                          Delete
+                        </Button>
+                      </Col>
+                    </Row>
                   </Row>
-                </Row>
+                </>
               );
             })}
           </Container>

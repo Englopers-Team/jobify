@@ -74,41 +74,41 @@ export default function CompanyApplications(props) {
         </Row>
         <Row>
           <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-            <Row sm={10} className='flexRow list-header2' style={{ justifyContent: 'center' }}>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={2} lg={1}>
-                Pic
+            <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={1}>
+                <p>Image</p>
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} lg={2}>
-                Name
+              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3} lg={2}>
+                <p>Name</p>
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} lg={2}>
-                Title
+              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={2}>
+                <p>Title</p>
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-                Experience
+              {/* <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1} lg={1}>
+                <p style={{ fontSize: 10 }}>Experience</p>
+              </Col> */}
+              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={1}>
+                <p>Country</p>
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
-                Country
-              </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-                Status
+              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
+                <p>Status</p>
               </Col>
               <Col sm={3.5}>
-                {/* <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                </Col> */}
                 <Row>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  <Col style={{ textAlign: 'center', paddingRight: '15px' }} sm={1.5}>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
+                  <Col style={{ textAlign: 'center', paddingRight: '15px' }} sm={1.5}>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </Col>
+                  <Col style={{ textAlign: 'center', paddingRight: '10px' }} sm={1.5}>
                     <If condition={loader}>
-                      <Spinner animation='border' variant='primary' />
-                      <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
+                      <Spinner animation='border' variant='primary' style={{ display: 'relative' }} />
+                      <Button className='buttons' variant='outline-light' style={{ display: 'hidden' }}>
+                        cv
+                      </Button>
+                      <Else>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</Else>
                     </If>
-                  </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                   </Col>
                 </Row>
               </Col>
@@ -120,19 +120,19 @@ export default function CompanyApplications(props) {
                   <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2} lg={1}>
                     <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3} lg={2}>
                     {item.first_name}&nbsp;{item.last_name}
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={1.5}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={2}>
                     {item.job_title}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
+                  {/* <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1} lg={1}>
                     {item.experince}
-                  </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
+                  </Col> */}
+                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={1}>
                     {item.country}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
                     {item.status === 'Pending' ? 'Pending' : item.status}
                   </Col>
                   <Col sm={3.5}>
@@ -147,13 +147,13 @@ export default function CompanyApplications(props) {
                           Reject
                         </Button>
                       </Col>
-                      <a href={item.cv} target='_blank'>
-                        <Col style={{ textAlign: 'center', paddingRight: '10px' }} sm={1.5}>
-                          <Button className='buttons' variant='outline-light'>
+                      <Col style={{ textAlign: 'center', paddingRight: '10px' }} sm={1.5}>
+                        <a href={item.cv} target='_blank'>
+                          <Button className='buttons' variant='outline-light' style={{ backgroundColor: '#232B4E', fontSize: 15 }}>
                             CV
                           </Button>
-                        </Col>
-                      </a>
+                        </a>
+                      </Col>
                     </Row>
                   </Col>
                 </Row>
