@@ -37,6 +37,7 @@ export default function UserOffers() {
       .then((data) => {
         console.log(data);
         getData();
+        setLoader(false);
       });
   };
 
@@ -62,8 +63,11 @@ export default function UserOffers() {
             <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
               Job Type
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
               Country
+            </Col>
+            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
+              Status
             </Col>
             <Col sm={2}>
               <If condition={loader}>
@@ -80,7 +84,7 @@ export default function UserOffers() {
                 <Col style={{ fontWeight: 650 }} sm={2}>
                   <Image style={{ width: '50px' }} src={item.logo} roundedCircle />
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'left', color: '#9393A1' }} sm={2}>
                   {item.title}
                 </Col>
                 <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
@@ -89,14 +93,17 @@ export default function UserOffers() {
                 <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
                   {item.type}
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
+                <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
                   {item.country}
                 </Col>
+                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
+                  {item.status}
+                </Col>
                 <Col style={{ textAlign: 'center', display: 'flex', flexDirection: 'row' }} className='button-col' sm={2}>
-                  <Button className='button' onClick={() => rejectApp(item.id, 'Accepted')} variant='outline-light' style={{ backgroundColor: '#E85D67', paddingRight: '60px' }}>
+                  <Button className='button' onClick={() => rejectApp(item.id, 'Accepted')} variant='outline-light' style={{ backgroundColor: '#504edf', paddingRight: '60px' }}>
                     Accept
                   </Button>
-                  <Button className='button' onClick={() => rejectApp(item.id, 'Rejected')} variant='outline-light' style={{ backgroundColor: '#E85D67', paddingRight: '60px' }}>
+                  <Button className='button' onClick={() => rejectApp(item.id, 'Rejected')} variant='outline-light' style={{ backgroundColor: '#504edf', paddingRight: '60px' }}>
                     Reject
                   </Button>
                 </Col>
