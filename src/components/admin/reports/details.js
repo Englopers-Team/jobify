@@ -1,18 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import superagent from 'superagent';
 import { If, Then } from 'react-if';
-import { Container, Image, Row, Col, Card } from 'react-bootstrap';
+import { Container, Image, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBContainer } from "mdbreact";
-import '../../search/styles.scss'
+import { Editor } from '@tinymce/tinymce-react';
+import { useHistory, useParams } from "react-router-dom";
 
 
-import { useParams } from "react-router-dom";
+import './styles.scss'
 
 export default function ReportDetails() {
   let { id } = useParams();
-  const [data, setData] = useState({});
-  const scrollContainerStyle = {  width: "auto", maxHeight: "200px", height: '200px', overflowY: 'scroll', overflowX: 'hidden' };
+  let history = useHistory();
 
+  const [data, setData] = useState({});
+  const [body, setBody] = useState('');
+  const API = 'https://jobify-app-v2.herokuapp.com';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NzA4MDY2LCJleHAiOjM2MTYwNzcwODA2Nn0.uErZAP_4ZCFUp-WLXIhXlV7SZu40itfj0C6m1Ppwm_c';
+
+
+  const scrollContainerStyle = { width: "auto", maxHeight: "200px", height: '200px', overflowY: 'scroll', overflowX: 'hidden' };
+
+  const handleEditorChange = (content, editor) => {
+    setBody(content)
+  }
+
+
+  async function handleSubmit() {
+    await superagent.patch(`${API}/admin/report/${id}`).set('authorization', `Basic ${token}`).send({ response: body });
+    getData();
+  }
+
+  async function handleDelete() {
+    await superagent.delete(`${API}/admin/report/${id}`).set('authorization', `Basic ${token}`);
+    history.push('/admin/reports')
+  }
 
   useEffect(() => {
     getData();
@@ -20,13 +42,17 @@ export default function ReportDetails() {
 
 
   async function getData() {
-    const API = 'https://jobify-app-v2.herokuapp.com';
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NzA4MDY2LCJleHAiOjM2MTYwNzcwODA2Nn0.uErZAP_4ZCFUp-WLXIhXlV7SZu40itfj0C6m1Ppwm_c';
     const response = await superagent.get(`${API}/admin/report/${id}`).set('authorization', `Basic ${token}`);
     console.log(response.body.report.description)
     setData(response.body);
-    console.log(data)
+    if (response.body.report.response === null) {
+      setBody(' ')
+    } else {
+      setBody(response.body.report.response)
+    }
   }
+
+
 
   function Report() {
     let state = 'Open';
@@ -121,10 +147,39 @@ export default function ReportDetails() {
             <Card style={{ minHeight: '300px', height: '300px', backgroundColor: '#E1E3E8' }}>
               <Report />
             </Card>
+            <If condition={body.length >= 0 }>
+              <Editor style={{ minHeight: '200px', height: '200px', backgroundColor: '#E1E3E8' }}
+                apiKey="vbaon8jny71c8uc0ebn1nn45htchbunbi6b9wp9v3e072trm"
+                initialValue={body}
+                init={{
+                  height: 200,
+                  menubar: false,
+                  plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                  ],
+                  toolbar:
+                    // eslint-disable-next-line no-multi-str
+                    'undo redo | \
+                  bullist numlist outdent indent | help'
+                }}
+                onEditorChange={handleEditorChange}
+              />
+            </If>
+            <Button onClick={() => {
+              handleSubmit()
+            }}>Send</Button>
+            <Button onClick={() => {
+              handleDelete()
+            }}>Delete</Button>
           </Col>
         </Row>
-
       </If>
     </Container>
   )
 }
+
+
+
+

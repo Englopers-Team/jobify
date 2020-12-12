@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 
 import '../../search/styles.scss'
-import './styles.scss'
+import '../styles.scss'
 
 export default function Reports() {
   let [data, setData] = useState([]);
@@ -91,7 +91,7 @@ export default function Reports() {
           </Col>
         </Row>
 
-        <MDBContainer className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+        <MDBContainer className="scrollbar scrollbar-white  mt-5 mx-auto" style={scrollContainerStyle}>
           <Result />
         </MDBContainer>
       </Container>
