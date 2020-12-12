@@ -6,7 +6,7 @@ import superagent from 'superagent';
 import { useHistory } from "react-router-dom";
 
 dotenv.config();
-const API = process.env.API_SERVER || 'http://localhost:4000'
+const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com'
 const SECRET = process.env.JWT_SECRET || 'z1337z';
 
 export const AuthContext = React.createContext();
