@@ -35,10 +35,12 @@ export default function Reports() {
             <Col style={{ fontWeight: 650, textAlign: 'center' }} sm={2}>
               {item.id}
             </Col>
-            <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={6}>
-              {item.description}
+            <Col style={{ textAlign: 'center', color: '#9393A1', maxHeight: '20px' }} sm={6}>
+              <p style={{ wordWrap: 'break-word' }}>
+                {item.description.slice(0, 45)}{item.description.length > 45 ? '...' : ''}
+              </p>
             </Col>
-            <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+            <Col style={{ textAlign: 'center', color: item.response === null ? 'green' : 'red' }} sm={2}>
               {item.response === null ? 'Open' : 'Closed'}
             </Col>
             <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
@@ -55,7 +57,7 @@ export default function Reports() {
     <>
       <Container style={{ marginLeft: 'auto', marginRight: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItem: 'center' }}>
         <Row sm={8} style={{ justifyContent: 'center', alignItem: 'center', textAlign: 'center' }}  >
-          <Col sm={1} style={{marginTop : '5px' }}>
+          <Col sm={1} style={{ marginTop: '5px' }}>
             <Icon.Search size='25' />
           </Col>
           <Col sm={8}>

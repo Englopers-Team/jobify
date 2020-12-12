@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import superagent from 'superagent';
-import { If, Then } from 'react-if';
+import { If } from 'react-if';
 import { Container, Image, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBContainer } from "mdbreact";
 import { Editor } from '@tinymce/tinymce-react';
@@ -65,7 +65,7 @@ export default function ReportDetails() {
       <>
         <Row >
           <Col style={{ fontSize: '14px', marginTop: '6px', marginLeft: '13px', fontWeight: 'bold' }} >
-            Report Number : {data.report.id}
+            Report Number : {id}
           </Col>
           <Col style={{ color: color, textAlign: 'end', marginTop: '6px', fontSize: '16px', marginRight: '13px', fontWeight: 'bold' }}>
             {state}
@@ -147,7 +147,7 @@ export default function ReportDetails() {
             <Card style={{ minHeight: '300px', height: '300px', backgroundColor: '#E1E3E8' }}>
               <Report />
             </Card>
-            <If condition={body.length >= 0 }>
+            <If condition={body.length >= 0}>
               <Editor style={{ minHeight: '200px', height: '200px', backgroundColor: '#E1E3E8' }}
                 apiKey="vbaon8jny71c8uc0ebn1nn45htchbunbi6b9wp9v3e072trm"
                 initialValue={body}
@@ -167,12 +167,16 @@ export default function ReportDetails() {
                 onEditorChange={handleEditorChange}
               />
             </If>
-            <Button onClick={() => {
-              handleSubmit()
-            }}>Send</Button>
-            <Button onClick={() => {
-              handleDelete()
-            }}>Delete</Button>
+            <Row >
+              <Col className='flexRow' style={{ alignItems: 'flex-start', justifyContent: 'flex-end' }}>
+                <Button style={{ marginLeft: '5px', marginTop: '5px' }} onClick={() => {
+                  handleSubmit()
+                }}>Send</Button>
+                <Button style={{ marginLeft: '5px', marginTop: '5px', backgroundColor: 'red' }} onClick={() => {
+                  handleDelete()
+                }}>Delete</Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </If>
