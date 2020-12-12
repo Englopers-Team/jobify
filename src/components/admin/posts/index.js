@@ -8,6 +8,8 @@ import { If, Then, Else } from 'react-if'
 import { PlusCircle, ChatSquareTextFill, HeartFill, BookmarkStarFill, Search } from 'react-bootstrap-icons';
 
 import { MDBContainer } from "mdbreact";
+
+import './styles.scss';
 dotenv.config();
 
 
@@ -16,7 +18,9 @@ export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [sortSearch, setSortSearch] = useState('');
   const [sortSearchType, setSortSearchType] = useState('Post ID');
-  const [date, setDate] = useState('');
+  const [dateSearch, setDateSearch] = useState('');
+  const [sortInteractiveLike, setSortInteractiveLike] = useState(false);
+  const [sortInteractiveComment, setSortInteractiveComment] = useState(false);
 
   const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com'
   const context = useContext(AuthContext)
@@ -37,16 +41,22 @@ export default function Posts() {
 
 
   function PostsList() {
-
-
-    return posts.map((item, index) => {
+    let tempPosts = [...posts]
+    if (sortInteractiveLike) {
+      tempPosts.sort((a, b) => b.likes.length - a.likes.length);
+    }
+    if (sortInteractiveComment) {
+      tempPosts.sort((a, b) => b.comments.length - a.comments.length);
+    }
+    console.log(tempPosts)
+    return tempPosts.map((item, index) => {
       let date = new Date(item.date)
-      date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()
+      date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear()
 
-      if (sortSearch === '' || sortSearchType === 'Post ID' && sortSearch == index || sortSearchType === 'Username' && item.profile.name.toLowerCase().includes(sortSearch.toLowerCase())) {
+      if (sortSearch === '' && dateSearch === '' || sortSearchType === 'Post ID' && sortSearch == 0 || sortSearchType === 'Post ID' && sortSearch == index || sortSearchType === 'Username' && item.profile.name.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'Post Title' && item.title.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'date' && date.split('-').reverse()[0] === dateSearch.split('-')[0] && date.split('-').reverse()[1] === dateSearch.split('-')[1] && date.split('-').reverse()[2] === dateSearch.split('-')[2]) {
         return (
-          <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
-            <Row className='flexRow list-body' sm={8}>
+          <Link  style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
+            <Row id='postInfoLink' className='flexRow list-body' sm={8}>
               <Col style={{ fontWeight: 650, textAlign: 'start', color: '#9393A1' }} sm={1}>
                 {index}
               </Col>
@@ -63,8 +73,8 @@ export default function Posts() {
               </Col>
               <Col style={{ textAlign: 'start', color: '#9393A1', flexDirection: 'column' }} sm={5}>
                 <p>{item.title}</p>
-                <HeartFill style={{ marginRight: '6px' }} size={18} /><span style={{ marginRight: '6px' }}>{item.comments.length}</span>
-                <ChatSquareTextFill style={{ marginLeft: '6px' }} size={18} />  <span style={{ marginLeft: '6px' }}>{item.likes.length}</span>
+                <HeartFill style={{ marginRight: '6px' }} size={18} /><span style={{ marginRight: '6px' }}>{item.likes.length}</span>
+                <ChatSquareTextFill style={{ marginLeft: '6px' }} size={18} />  <span style={{ marginLeft: '6px' }}>{item.comments.length}</span>
               </Col>
               <Col style={{ color: '#9393A1' }} sm={2}>
                 {date}
@@ -90,19 +100,15 @@ export default function Posts() {
 
       <Col sm={2} >
         <Row   >
-          <Row>
-            <Col>
-              <FormCheck type="switch" id="custom-switch" label="Sort By Most Interactive" />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <FormLabel>Select Date</FormLabel>
-              <FormControl type="date" name="dob" placeholder="Date of Birth" />
-            </Col>
-          </Row>
           <Col>
-            <FormControl placeholder='Search' onChange={(e) => { setSortSearch(e.target.value) }} />
+            <If condition={sortSearchType !== 'date'}>
+              <Then>
+                <FormControl placeholder='Search' onChange={(e) => { setSortSearch(e.target.value) }} />
+              </Then>
+              <Else>
+                <FormControl type="date" name="dob" placeholder="date" onChange={(e) => { setDateSearch(e.target.value); }} />
+              </Else>
+            </If>
           </Col>
           <Col >
             <Dropdown>
@@ -113,9 +119,23 @@ export default function Posts() {
                 <Dropdown.Item onClick={() => { setSortSearchType('Post ID') }}>Post ID</Dropdown.Item>
                 <Dropdown.Item onClick={() => { setSortSearchType('Username') }}>Username</Dropdown.Item>
                 <Dropdown.Item onClick={() => { setSortSearchType('Post Title') }}>Post Title</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setSortSearchType('date') }}>Date</Dropdown.Item>
+
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown >
           </Col>
+          <Row>
+            <Col >
+              <FormCheck type="switch" id="custom-switch" label="Most Like" onChange={(e) => { setSortInteractiveLike(sortInteractiveLike ? false : true) }} />
+            </Col>
+            <Col>
+              <FormCheck type="switch" id="switch" label="Most Comment" onChange={(e) => { setSortInteractiveComment(sortInteractiveComment ? false : true) }} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+            </Col>
+          </Row>
         </Row>
       </Col>
     </Container>
