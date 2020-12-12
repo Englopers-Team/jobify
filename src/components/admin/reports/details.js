@@ -3,6 +3,7 @@ import superagent from 'superagent';
 import { If, Then } from 'react-if';
 import { Container, Image, Row, Col, Card } from 'react-bootstrap';
 import { MDBContainer } from "mdbreact";
+import '../../search/styles.scss'
 
 
 import { useParams } from "react-router-dom";
@@ -10,7 +11,7 @@ import { useParams } from "react-router-dom";
 export default function ReportDetails() {
   let { id } = useParams();
   const [data, setData] = useState({});
-  console.log(id)
+  const scrollContainerStyle = {  width: "auto", maxHeight: "200px", height: '200px', overflowY: 'scroll', overflowX: 'hidden' };
 
 
   useEffect(() => {
@@ -36,18 +37,18 @@ export default function ReportDetails() {
     }
     return (
       <>
-        <Row>
-          <Col >
+        <Row >
+          <Col style={{ fontSize: '14px', marginTop: '6px', marginLeft: '13px', fontWeight: 'bold' }} >
             Report Number : {data.report.id}
           </Col>
-          <Col style={{ color: color }}>
+          <Col style={{ color: color, textAlign: 'end', marginTop: '6px', fontSize: '16px', marginRight: '13px', fontWeight: 'bold' }}>
             {state}
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <MDBContainer>
-              {data.report.description}
+        <Row >
+          <Col >
+            <MDBContainer className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+              {data.report.description}Text messages are used for personal, family, business and social purposes. Governmental and non-governmental organizations use text messaging for communication between colleagues. In the 2010s, the sending of short informal messages became an accepted part of many cultures, as happened earlier with emailing.[1] This makes texting a quick and easy way to communicate with friends, family and colleagues, including in contexts where a call would be impolite or inappropriate (e.g., calling very late at night or when one knows the other person is busy with family or work activities). Like e-mail and voicemail and unlike calls (in which the caller hopes to speak directly with the recipient), texting does not require the caller and recipient to both be free at the same moment; this permits communication even between busy individuals. Text messages can also be used to interact with automated systems, for example, to order products or services from e-commerce websites, or to participate in online contests. Advertisers and service providers use direct text marketing to send messages to mobile users about promotions, payment due dates, and other notifications instead of using postal mail, email, or voicemail.
             </MDBContainer>
           </Col>
         </Row>
@@ -69,14 +70,39 @@ export default function ReportDetails() {
     }
     return (
       <>
-        <Col >
-          <Image src={`${data.sender.avatar}`} roundedCircle style={{ width: '50px', height: '50px' }} />
-          {name}
-        </Col>
-        <p>{data.report.email}</p>
-        <p>{account}</p>
-        <p>{data.sender.phone}</p>
-        <p>{data.sender.country}</p>
+        <Row style={{ marginTop: '60px', height: '30%', textAlign: 'center' }} >
+          <Col >
+            <Image src={`${data.sender.avatar}`} roundedCircle style={{ width: '150px', height: '150px' }} />
+          </Col>
+        </Row>
+        <Row style={{ height: '20%', textAlign: 'center', fontSize: '22px', fontWeight: 'bold', marginTop: '3px' }} >
+          <Col >
+            {name}
+          </Col>
+        </Row>
+
+        <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
+          <Col >
+            Acccount Type : {account}
+          </Col>
+        </Row>
+        <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
+          <Col >
+            Country : {data.sender.country}
+          </Col>
+        </Row>
+        <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
+          <Col >
+            Phone : {data.sender.phone}
+          </Col>
+        </Row>
+        <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
+          <Col >
+            Email : {data.report.email}
+          </Col>
+        </Row>
+
+
       </>
     )
 
@@ -86,12 +112,12 @@ export default function ReportDetails() {
     <Container>
       <If condition={data.report}>
         <Row sm={8}>
-          <Col sm={4}>
+          <Col sm={3}>
             <Card style={{ minHeight: '500px', height: '500px', backgroundColor: '#E1E3E8' }}>
               <Profile />
             </Card>
           </Col>
-          <Col sm={8}>
+          <Col sm={9}>
             <Card style={{ minHeight: '300px', height: '300px', backgroundColor: '#E1E3E8' }}>
               <Report />
             </Card>

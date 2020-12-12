@@ -8,8 +8,6 @@ import * as Icon from 'react-bootstrap-icons';
 import '../../search/styles.scss'
 import './styles.scss'
 
-
-import Button from 'react-bootstrap/Button';
 export default function Reports() {
   let [data, setData] = useState([]);
   let [sort, setSort] = useState('All Reports');
