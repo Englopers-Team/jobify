@@ -13,7 +13,6 @@ import { NavLink, Link } from 'react-router-dom';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/app';
 export default function CompanyApplications(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const [appStatus, setAppStatus] = useState('Hi');
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(true);
   // let history = useHistory();
