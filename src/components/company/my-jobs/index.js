@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth';
 import '../styles.scss';
 import superagent from 'superagent';
+import { NavLink, Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { If, Then } from 'react-if';
 import Image from 'react-bootstrap/Image';
@@ -14,7 +15,7 @@ export default function MyJobs(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(true);
-  // let history = useHistory();
+  let history = useHistory();
   // const context = useContext(AuthContext);
 
   const jobList = async (e) => {
@@ -23,7 +24,6 @@ export default function MyJobs(props) {
       .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
 
       .then((data) => {
-        console.log('fffffff', data.body);
         setResults(data.body);
         setLoader(false);
       });
@@ -98,7 +98,7 @@ export default function MyJobs(props) {
                   </Col>
                   <Row sm={2.5}>
                     <Col style={{ textAlign: 'center' }} sm={1.25}>
-                      <Button className='button' onClick={() => console.log('Hi2')} variant='outline-light' style={{ backgroundColor: '#363B59' }}>
+                      <Button className='button' onClick={() => history.push(`submitted-jobs/${item.id}`)} variant='outline-light' style={{ backgroundColor: '#363B59' }}>
                         Update
                       </Button>
                     </Col>

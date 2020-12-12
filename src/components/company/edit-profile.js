@@ -9,7 +9,7 @@ import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 
 import { If, Else } from 'react-if';
 import './styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function CompanyEdit() {
   const [data, setData] = useState({});
@@ -18,7 +18,8 @@ export default function CompanyEdit() {
   const [logo, setLogo] = useState('');
   const [country, setCountry] = useState('');
   const [companyUrl, setCompanyUrl] = useState('');
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
+  let history = useHistory();
 
   useEffect(() => {
     getData();
@@ -40,6 +41,7 @@ export default function CompanyEdit() {
     e.preventDefault();
     await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
     setLoader(false);
+    history.push('/');
   }
 
   return (
@@ -69,15 +71,15 @@ export default function CompanyEdit() {
                   <Form.Control required onChange={(e) => setCompanyUrl(e.target.value)} className='input' type='text' value={companyUrl} />
                 </Form.Group>
 
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500' }}>
-                  Save
-                </Button>
-                <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
+                <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center', height: 50 }} sm={1.5}>
                   <If condition={loader}>
                     <Spinner animation='border' variant='primary' />
                     <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
                   </If>
                 </Col>
+                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500' }}>
+                  Save
+                </Button>
               </Form>
             </Row>
           </Card>
