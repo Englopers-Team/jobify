@@ -1,0 +1,39 @@
+.input {
+  border-width: 0;
+  border-bottom: 1px solid #a7a7a7;
+  border-radius: 0;
+  &:focus {
+    border-color: #504edf;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #504edf;
+    outline: 0 none;
+  }
+}
+
+.button {
+  background-color: #504edf;
+  color: whitesmoke;
+  border-width: 0;
+  &:hover {
+    background-color: #232b4e;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+    border-width: 0;
+    box-shadow: 0;
+  }
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: #232b4e;
+  color: whitesmoke;
+}
+
+a{
+  color:#504edf;
+  font-weight: 500;
+}
+
+// .btn-primary:not(:disabled):not(.disabled):focus{
+//   background-color: red;
+// }
