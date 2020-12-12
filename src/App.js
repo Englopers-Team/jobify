@@ -3,6 +3,7 @@ import AuthProvider from './context/auth';
 import SocketProvider from './context/socket';
 import Header from './components/header/';
 import Footer from './components/footer/';
+import ScrollTop from './components/helpers/scroll-top'
 import { BrowserRouter } from 'react-router-dom';
 import './app.scss';
 
@@ -11,6 +12,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <SocketProvider>
+          <ScrollTop />
           <div className='page-container'>
             <div className='content-wrap'>
               <Header />

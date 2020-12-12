@@ -20,7 +20,6 @@ export default function SubmitPost() {
   }
 
   const handleSubmit = () => {
-    console.log(context.user)
     const payload = {
       title,
       body
@@ -72,7 +71,6 @@ export default function SubmitPost() {
           Submit
           </Button>
       </Row>
-      {/* <Render /> */}
     </Container>
   )
 }

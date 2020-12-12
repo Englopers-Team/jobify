@@ -6,7 +6,7 @@ import './styles.scss'
 import { PlusCircle, ChatSquareTextFill, HeartFill, BookmarkStarFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom'
 import dotenv from 'dotenv';
-import { If } from 'react-if'
+import { If, Then, Else } from 'react-if'
 dotenv.config();
 
 export default function Community() {
@@ -15,17 +15,24 @@ export default function Community() {
   const context = useContext(AuthContext)
 
   useEffect(() => {
-    const getPosts = () => {
-      superagent.get(`${API}/community`).set({ 'Authorization': `Basic ${context.token}` }).then(async (data) => {
-        setPosts([...data.body.pinned, ...data.body.personPost, ...data.body.communityPosts])
-      })
-    }
     if (context.token) {
       getPosts()
     }
     // console.log(context.token)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token])
+
+  const getPosts = () => {
+    superagent.get(`${API}/community`).set({ 'Authorization': `Basic ${context.token}` }).then(async (data) => {
+      setPosts([...data.body.pinned, ...data.body.personPost, ...data.body.communityPosts])
+    })
+  }
+
+  const handleLike = (id) => {
+    superagent.patch(`${API}/community/like/${id}`).set({ 'Authorization': `Basic ${context.token}` }).then(() => {
+      getPosts()
+    })
+  }
 
   const PostsList = () => {
     return posts.map((post) => {
@@ -56,17 +63,20 @@ export default function Community() {
               <Row style={{ marginLeft: '5px', marginTop: '8px' }}>
                 <p style={{ marginBottom: 0 }}>
                   <If condition={post.pinned === 'true'}>
-                    <BookmarkStarFill style={{ marginRight: '11px' }} size={18} />
+                    <BookmarkStarFill color='#232B4E' style={{ marginRight: '11px' }} size={18} />
                   </If>
-                  <ChatSquareTextFill  size={18} />  {post.comments.length}  <HeartFill style={{ marginLeft: '5px' }} size={18} />  {post.likes.length}</p>
+                  <If condition={post.likes.includes(context.user.id)}>
+                    <Then>
+                      <ChatSquareTextFill color='#232B4E' size={18} />  {post.comments.length}  <HeartFill onClick={() => handleLike(post._id)} color='red' style={{ marginLeft: '5px' }} size={18} />  {post.likes.length}
+                    </Then>
+                    <Else>
+                      <ChatSquareTextFill color='#232B4E' size={18} />  {post.comments.length}  <HeartFill onClick={() => handleLike(post._id)} color='#232B4E' style={{ marginLeft: '5px' }} size={18} />  {post.likes.length}
+
+                    </Else>
+                  </If>
+                </p>
               </Row>
             </Col>
-            {/* <Col style={{textAlign:'right',marginTop: '15px'}}>
-            Comments: {post.comments.length}
-            </Col>
-            <Col style={{textAlign:'right',marginTop: '15px'}}>
-            Likes: {post.likes.length}
-            </Col> */}
           </Row>
           <hr />
         </Container >
