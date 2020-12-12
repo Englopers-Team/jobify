@@ -5,6 +5,7 @@ export default function Home() {
       test
       <Link to={{ pathname: '/signin' }}>test</Link>
       <Link to={{ pathname: '/company/submitted-jobs' }}>company submitted jobs</Link>
+      <Link to={{ pathname: '/company/applications' }}>company applications</Link>
     </>
   );
 }

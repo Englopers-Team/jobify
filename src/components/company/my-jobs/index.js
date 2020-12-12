@@ -12,17 +12,12 @@ import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/jobs';
 export default function MyJobs(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-  // const [location, setLocation] = useState('');
   const [results, setResults] = useState([]);
-  // const [visable, setVisable] = useState(false);
   const [loader, setLoader] = useState(true);
   // let history = useHistory();
   // const context = useContext(AuthContext);
 
   const jobList = async (e) => {
-    // setLoader(true);
-    // setVisable(true);
-
     superagent
       .get(jobsApi)
       .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
@@ -51,27 +46,30 @@ export default function MyJobs(props) {
   }, [screenSize]);
   return (
     <>
-      <Container style={{ justifyContent: 'center' }}>
+      <Container style={{ justifyContent: 'center', width: '85%' }}>
+        <Row sm={8}>
+          <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Jobs</Col>
+        </Row>
         <Row>
-          <Container className='list-container' fluid>
+          <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
             <Row sm={8} className='flexRow list-header2'>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={2}>
                 Title
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
                 Type
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
                 Location
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={3}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
                 Description
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-                Num Of Applications
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
+                Num Of App
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
                 <If condition={loader}>
@@ -82,20 +80,20 @@ export default function MyJobs(props) {
 
             {results.map((item) => {
               return (
-                <Row className='flexRow list-body' sm={8}>
+                <Row className='flexRow list-body' sm={12}>
                   <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
                     {item.title}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
                     {item.type}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
                     {item.location}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={3}>
+                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
                     {item.description}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
                     {item.applicants_num}
                   </Col>
                   <Row sm={2.5}>

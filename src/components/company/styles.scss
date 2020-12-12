@@ -75,25 +75,25 @@
   .list-body {
     padding: 8px 16px;
 
+    .buttons {
+      background-color: #504edf;
+      color: whitesmoke;
+      // line-height: 30px;
+      border-radius: 6px 6px;
+      border-width: 0;
+      &:hover {
+        background-color: #232b4e;
+        box-shadow: 0;
+      }
+      &:not(:disabled):not(.disabled):focus,
+      :not(:disabled):not(.disabled).focus {
+        background-color: #232b4e;
+        border-width: 0;
+        box-shadow: 0 0;
+      }
+    }
     .button-col {
       text-align: center;
-      .button {
-        background-color: #504edf;
-        color: whitesmoke;
-        line-height: 30px;
-        border-radius: 6px 6px;
-        border-width: 0;
-        &:hover {
-          background-color: #232b4e;
-          box-shadow: 0;
-        }
-        &:not(:disabled):not(.disabled):focus,
-        :not(:disabled):not(.disabled).focus {
-          background-color: #232b4e;
-          border-width: 0;
-          box-shadow: 0 0;
-        }
-      }
     }
   }
   .list-body:after {
@@ -104,4 +104,10 @@
     padding-top: 20px;
     border-bottom: 1px solid #e1e3e8;
   }
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
 }
