@@ -98,7 +98,7 @@ export default function ReportDetails() {
       <>
         <Row style={{ marginTop: '60px', height: '30%', textAlign: 'center' }} >
           <Col >
-            <Image src={`${data.sender.avatar}`} roundedCircle style={{ width: '150px', height: '150px' }} />
+            <Image src={`${data.sender.avatar}`} roundedCircle style={{ width: '150px' , height : '150px' ,  objectFit: 'cover'}} />
           </Col>
         </Row>
         <Row style={{ height: '20%', textAlign: 'center', fontSize: '22px', fontWeight: 'bold', marginTop: '3px' }} >
