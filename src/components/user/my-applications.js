@@ -38,7 +38,7 @@ export default function UserApplications() {
 
   return (
     <>
-      <Container style={{ marginTop: '50px' }}>
+      <Container style={{ marginTop: '150px' }}>
         <Container style={{ textAlign: 'center' }}>
           <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: '#504edf' }}>My Applications</h2>
         </Container>
@@ -97,7 +97,7 @@ export default function UserApplications() {
                 <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
                   <Button
                     className='button'
-                    style={{ paddingRight: '60px', backgroundColor: '#E85D67' }}
+                    style={{ paddingRight: '60px', backgroundColor: '#504edf' }}
                     onClick={() => {
                       setShow(true);
                       setId(item.id);

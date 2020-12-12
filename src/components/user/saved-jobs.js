@@ -40,23 +40,23 @@ export default function SavedJobs() {
 
   return (
     <>
-      <Container style={{ marginTop: '50px' }}>
+      <Container style={{ marginTop: '150px' }}>
         <Container style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: '#504edf' }}>My Applications</h2>
+          <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: '#504edf' }}>Saved Jobs</h2>
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header'>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title' sm={2}></Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} className='col-title' sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'left' }} className='col-title' sm={2}></Col>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} className='col-title' sm={2}>
               Job Title
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={3}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} sm={3}>
               Company Name
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} sm={2}>
               Job Type
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} sm={2}>
               Phone
             </Col>
             <Col sm={1}>
@@ -83,7 +83,7 @@ export default function SavedJobs() {
                 <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
                   {item.type}
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
+                <Col style={{ textAlign: 'center', color: '#9393A1' }} className='button-col' sm={2}>
                   {item.phone}
                 </Col>
                 <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
