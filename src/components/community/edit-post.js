@@ -55,7 +55,7 @@ export default function EditPost() {
         </Col>
       </Row>
       <Row className='flexCol' style={{ marginTop: '40px', justifyContent: 'center' }}>
-        <If condition={body.length > 0}>
+        <If condition={body.length>=0}>
           <Editor
             apiKey="vbaon8jny71c8uc0ebn1nn45htchbunbi6b9wp9v3e072trm"
             initialValue={body}
