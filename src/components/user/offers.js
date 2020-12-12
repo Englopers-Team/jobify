@@ -100,10 +100,10 @@ export default function UserOffers() {
                   {item.status}
                 </Col>
                 <Col style={{ textAlign: 'center', display: 'flex', flexDirection: 'row' }} className='button-col' sm={2}>
-                  <Button className='button' onClick={() => rejectApp(item.id, 'Accepted')} variant='outline-light' style={{ backgroundColor: '#504edf', paddingRight: '60px' }}>
+                  <Button className='button' onClick={() => rejectApp(item.id, 'Accepted')} variant='outline-light' style={{ backgroundColor: '#28A745', paddingRight: '60px' }}>
                     Accept
                   </Button>
-                  <Button className='button' onClick={() => rejectApp(item.id, 'Rejected')} variant='outline-light' style={{ backgroundColor: '#504edf', paddingRight: '60px' }}>
+                  <Button className='button' onClick={() => rejectApp(item.id, 'Rejected')} variant='outline-light' style={{ backgroundColor: '#E85D67', paddingRight: '60px' }}>
                     Reject
                   </Button>
                 </Col>
