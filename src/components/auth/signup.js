@@ -37,11 +37,11 @@ export default function Signup() {
   }
 
   return (
-    <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+    <Container style={{ marginTop: '100px', marginBottom: '50px' }}>
       <meta name="google-signin-client_id"
         content="60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com" />
       <Row >
-        <Col sm={7}>
+        <Col sm={6}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
             <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>Sign up</Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
@@ -137,13 +137,13 @@ export default function Signup() {
 
           </Card>
         </Col>
-        <Col sm={5}>
+        <Col sm={6}>
           <Row style={{ height: '40%' }}>
 
           </Row>
-          <Row style={{justifyContent:'center'}}>
+          <Row style={{justifyContent:'center',marginBottom:'70px'}}>
 
-            <Image style={{ width: '70%' }} src="../../assets/signup.png" rounded />
+            <Image  style={{ width:'600px',maxWidth:'100%' }} src="../../assets/signup.png" rounded />
           </Row>
         </Col>
       </Row>

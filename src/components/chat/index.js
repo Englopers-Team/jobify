@@ -1,14 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
-import { Badge, ListGroup, Form, Col, Container, Row, Image } from 'react-bootstrap';
+import { Badge, ListGroup, Form, Col, Container, Row, Image, Button } from 'react-bootstrap';
 
 import * as Icon from 'react-bootstrap-icons';
 
 import { If, Then, Else } from 'react-if';
 import { SocketContext } from '../../context/socket';
+import { AuthContext } from '../../context/auth';
 import './styles.scss';
 
 export default function Chat() {
   const context = useContext(SocketContext);
+  const authContext = useContext(AuthContext);
 
   const [message, setMessage] = useState();
   const [secondParty, setSecondParty] = useState();
@@ -21,6 +23,8 @@ export default function Chat() {
   const [visibleC, setVisibleC] = useState(false);
   const [targerIndex, setTargerIndex] = useState();
   const [specificName, setSpecificName] = useState('')
+  const [myAvatar, setMyAvatar] = useState('');
+  const [otherAvatar, setOtherAvatar] = useState('');
 
   const [comp, setComp] = useState('list')
 
@@ -88,17 +92,34 @@ export default function Chat() {
     return arr[0][specificName].map((mesg, index) => {
       if (mesg.sender === secondPartyChar) {
         return (
-          <Row id='messg' className='otherMessg'>
-            { mesg.body}
+          <Row className='otherMessg' key={index}>
+            {/* <Col sm={1}></Col> */}
+            <Col style={{ padding: '2px' }} sm={11}>
+              <p id='messg' style={{ float: 'right', marginRight: '10px' }}>
+                {mesg.body}
+              </p>
+            </Col>
+            <Col style={{ alignSelf: 'center', padding: 0, textAlign: 'right' }} sm={1}>
+              <Image style={{ width: '28px' }} src={authContext.user.profile.avatar} roundedCircle />
+            </Col>
           </Row>
           // <ListGroup.Item id='messg' className='otherMessg' key={index}>
           // </ListGroup.Item>
         )
       } else {
         return (
-          <ListGroup.Item id='messg' className='myMessg' key={index}>
-            {mesg.body}
-          </ListGroup.Item>
+          <Row className='myMessg' key={index}>
+            <Col style={{ alignSelf: 'center', padding: 0, textAlign: 'left', marginRight: '10px' }} sm={1}>
+              <Image style={{ width: '28px' }} src={arr[0].profile.logo} roundedCircle />
+            </Col>
+            <Col style={{ padding: '2px' }} sm={10}>
+              <p id='messg' style={{ float: 'left' }}>
+                {console.log(arr[0])}
+                {mesg.body}
+              </p>
+            </Col>
+            {/* <Col sm={1}></Col> */}
+          </Row>
         )
       }
     })
@@ -134,56 +155,98 @@ export default function Chat() {
       }}><p style={{ margin: 0, alignSelf: "center" }}> <Icon.ChatRightDotsFill color='whitesmoke' size='32' /></p>
       </Container>
 
-      <Container >
 
-        <Container id='chat' className='hideChat' >
-          <Row className='flexRow' style={{ backgroundColor: '#504edf', color: 'whitesmoke', paddingBottom: '10px' }}>
-            <Col sm={2}>
-              <If condition={secondPartyIId}>
-                <Icon.ArrowLeftCircleFill onClick={() => {
-                  const compList = document.getElementById('compList')
-                  const compChat = document.getElementById('compChat')
-                  compChat.classList.add('opout')
-                  setTimeout(() => {
-                    compChat.classList.remove('opout')
-                    compChat.classList.add('compdel')
-                    compList.classList.add('opin')
-                    compList.classList.remove('compdel')
-                    setSecondPartyIId()
-                  }, 500)
-                }} size='22' color='#DEDEE3' style={{ cursor: 'pointer' }} />
-              </If>
-            </Col>
-            <Col sm={7}>
-              <h4 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>Messages</h4>
-            </Col>
-            <Col style={{ textAlign: 'center' }} sm={2}>
-              <Icon.XCircleFill onClick={() => {
-                const chatBox = document.getElementById('chat')
-                const sideBtn = document.getElementById('chatButton')
-                chatBox.classList.remove('slideinChat')
-                chatBox.classList.add('slideoutChat')
+      <Container id='chat' className='hideChat' >
+        <Row className='flexRow' style={{ backgroundColor: '#504edf', color: 'whitesmoke', width: '100%', margin: 0, borderTopLeftRadius: '10px' }}>
+          <Col sm={2}>
+            <If condition={secondPartyIId}>
+              <Icon.ArrowLeftCircleFill onClick={() => {
+                const compList = document.getElementById('compList')
+                const compChat = document.getElementById('compChat')
+                compChat.classList.add('opout')
                 setTimeout(() => {
-                  chatBox.classList.add('hideChat')
-                  chatBox.classList.remove('slideoutChat')
-                  sideBtn.classList.remove('hide')
-                  sideBtn.classList.add('slideinBtn')
-                }, 600)
+                  compChat.classList.remove('opout')
+                  compChat.classList.add('compdel')
+                  compList.classList.add('opin')
+                  compList.classList.remove('compdel')
+                  setSecondPartyIId()
+                }, 500)
               }} size='22' color='#DEDEE3' style={{ cursor: 'pointer' }} />
+            </If>
+          </Col>
+          <Col sm={7}>
+            <If condition={secondPartyIId}>
+              <Then>
+                <h5 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>
+                  {specificName}
+                </h5>
+              </Then>
+              <Else>
+                <h4 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>
+                  Messages
+                  </h4>
+              </Else>
+            </If>
 
-            </Col>
-          </Row>
-          <Row className='flexCol' >
-            <Container id='compList' style={{ width: '80%' }}>
-              <ChatListView />
-            </Container>
-            <Container id='compChat' className='compdel' style={{ width: '80%' }}>
-              <If condition={secondPartyIId}>
+          </Col>
+          <Col className='xPhone' style={{ textAlign: 'center' }} sm={2}>
+            <Icon.XCircleFill onClick={() => {
+              const chatBox = document.getElementById('chat')
+              const sideBtn = document.getElementById('chatButton')
+              const input = document.getElementById('compInput')
+              const btn = document.getElementById('compSend')
+              chatBox.classList.remove('slideinChat')
+              chatBox.classList.add('slideoutChat')
+              
+              const compList = document.getElementById('compList')
+                const compChat = document.getElementById('compChat')
+                compChat.classList.add('opout')
+                setTimeout(() => {
+                  compChat.classList.remove('opout')
+                  compChat.classList.add('compdel')
+                  compList.classList.add('opin')
+                  compList.classList.remove('compdel')
+                  setSecondPartyIId()
+                }, 500)
+
+              setTimeout(() => {
+                chatBox.classList.add('hideChat')
+                chatBox.classList.remove('slideoutChat')
+                sideBtn.classList.remove('hide')
+                sideBtn.classList.add('slideinBtn')
+              }, 600)
+            }} size='22' color='#DEDEE3' style={{ cursor: 'pointer' }} />
+
+          </Col>
+        </Row>
+        <Row className='flexCol' >
+          <Container id='compList' style={{ width: '80%' }}>
+            <ChatListView />
+          </Container>
+          <Container id='compChat' className='compdel' style={{ width: '85%' }}>
+            <If condition={secondPartyIId}>
+              <Then>
                 <ChatView />
-              </If>
-            </Container>
-          </Row>
-        </Container>
+                <Container id='compInput' style={{ width: '100%', padding: 0 }}>
+                  <Form.Control id='inputSend' value={message} required name="text" onChange={(e) => { setMessage(e.target.value) }} type="text" />
+                </Container>
+                <Container id='compSend' style={{ width: '100%', padding: 0 }}>
+                  <Button className='buttonSend' onClick={() => {
+                    context.socketMessg.emit('message', { body: message, receiver: secondPartyIId, token: token, type: secondPartyChar })
+                    context.socketMessg.emit('checkMsg', { token })
+                    setMessage('')
+                    setTimeout(() => {
+                      var objDiv = document.getElementById("compChat");
+                      objDiv.scrollTop = objDiv.scrollHeight;
+
+                    }, 300)
+                    // console.log(objDiv.scrollHeight)
+                  }}>Send</Button>
+                </Container>
+              </Then>
+            </If>
+          </Container>
+        </Row>
       </Container>
     </>
   )
