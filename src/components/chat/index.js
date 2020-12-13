@@ -28,7 +28,6 @@ export default function Chat() {
     if (authContext.token) {
       context.socketMessg.emit('join', authContext.token);
       context.socketMessg.on('message', (payload) => {
-        console.log('here99999101', payload)
 
         if (typeof payload == 'string') {
           // setMessages([...messages,payload[0]]);
@@ -251,7 +250,6 @@ export default function Chat() {
                       objDiv.scrollTop = objDiv.scrollHeight;
 
                     }, 300)
-                    // console.log(objDiv.scrollHeight)
                   }}>Send</Button>
                 </Container>
               </Then>

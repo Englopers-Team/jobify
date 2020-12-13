@@ -1,20 +1,24 @@
 import './styles.scss';
 import Button from 'react-bootstrap/Button';
 import { Nav, Navbar } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
+
 export default function Header() {
+  const history = useHistory()
   return (
-    <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px'}}>
-      <NavLink exact to='/'>
-        <Image className='logo' src='../../assets/jobify.png' />
-      </NavLink>
+    <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px' }}>
+      {/* <NavLink exact to='/'> */}
+        <Image className='logo' src='../../assets/jobify.png' onClick={()=>{
+          history.push('/')
+        }} />
+      {/* </NavLink> */}
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto'></Nav>
         <Nav>
-          <Nav.Link className='link' to='/'>
-            <NavLink exact to='/'>
+          <Nav.Link className='link' >
+            <NavLink  className='link' exact to='/'>
               Home
             </NavLink>
           </Nav.Link>

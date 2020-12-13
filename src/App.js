@@ -19,7 +19,7 @@ function App() {
           <Chat />
           <div className='page-container' style={{ animation: `fadeIn 2s` }}>
             <div className='content-wrap'>
-              {/* <Header /> */}
+              <Header />
               <Routes />
             </div>
             {/* <Footer /> */}
