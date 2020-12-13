@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import superagent from 'superagent';
 import { Container, Row, Col, Form, Button, Image, Card } from 'react-bootstrap';
-import { PencilFill, XCircleFill } from 'react-bootstrap-icons';
-import { If } from 'react-if'
+import { PencilFill, XCircleFill, BookmarkStarFill } from 'react-bootstrap-icons';
+import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
 
 import { useHistory, useParams } from "react-router-dom";
@@ -22,6 +22,7 @@ export default function PostDetails() {
   const [jobTitle, setJobTitle] = useState('')
   const [name, setName] = useState('')
   const [writer, setWriter] = useState(0)
+  const [pin, setPin] = useState(false)
   let myComment = ''
 
 
@@ -47,10 +48,21 @@ export default function PostDetails() {
       setAvatar(data.body.profile.avatar)
       setJobTitle(data.body.profile.job_title)
       setWriter(data.body.auth_id)
+      setPin(data.body.pinned)
       let formatedDate = new Date(data.body.date)
       formatedDate = ((formatedDate.getMonth() > 8) ? (formatedDate.getMonth() + 1) : ('0' + (formatedDate.getMonth() + 1))) + '/' + ((formatedDate.getDate() > 9) ? formatedDate.getDate() : ('0' + formatedDate.getDate())) + '/' + formatedDate.getFullYear()
       setDate(formatedDate)
     })
+  }
+
+  const handlePind = async () => {
+    await superagent.patch(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${token}` })
+    getPost();
+  }
+
+  const handleDelete = async () => {
+    await superagent.delete(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${token}` })
+    history.push('/admin/posts')
   }
 
   const Render = () => {
@@ -91,8 +103,26 @@ export default function PostDetails() {
           <Col sm={7}>
             <Row  >
               <Col sm={12} >
-                <h2 style={{ marginBottom: 0, marginRight: '10px' }} >{title}
-                </h2>
+                <Col style={{ flexDirection: 'row' }}>
+
+                  <h2 style={{ marginBottom: 0, marginRight: '10px' }} >
+                    <If condition={pin !== 'false'}>
+                      <BookmarkStarFill color='#232B4E' style={{ marginRight: '6px' }} size={22} />
+                    </If>
+                    {title}
+                  </h2>
+                  <Row style={{ justifyContent: 'flex-end', marginTop: '10px' }}>
+                    <If condition={pin === 'false'}>
+                      <Then>
+                        <Button style={{width : '70px' , maxWidth : '70px' , marginRight : '3px'}} onClick={() => { handlePind() }}>pin</Button>
+                      </Then>
+                      <Else>
+                        <Button style={{width : '70px' , maxWidth : '70px'  ,  marginRight : '3px'}} onClick={() => { handlePind() }}>Unpin</Button>
+                      </Else>
+                    </If>
+                    <Button style={{width : '70px' , maxWidth : '70px' , backgroundColor : 'red' }} onClick={() => { handleDelete() }}>Delete</Button>
+                  </Row>
+                </Col>
 
                 <Col sm={12} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '30px' }}>
                   <Col style={{ padding: 0 }} sm={3} lg={2}>
