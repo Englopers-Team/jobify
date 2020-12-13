@@ -28,7 +28,7 @@ export default function JobsResults(props) {
     const API = 'https://jobify-app-v2.herokuapp.com/user/save';
     setLoader(true);
     superagent
-      .post(`${API}/${payload.job_id}`)
+      .post(`${API}`)
       .set('authorization', `Basic ${token}`)
       .send(payload)
       .then((data) => {
@@ -79,19 +79,27 @@ export default function JobsResults(props) {
                     {item.type}
                   </Col>
                   <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
-                    <Button
-                      className='button'
-                      style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
-                      onClick={() => {
-                        <If condition={item.job_id}>
-                          <Then>
-                            {save({
+                    <If condition={item.job_id}>
+                      <Then>
+                        <Button
+                          className='button'
+                          style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                          onClick={() => {
+                            save({
                               job_id: item.job_id,
                               company_id: item.company_id,
-                            })}
-                          </Then>
-                          <Else>
-                            {save({
+                            });
+                          }}
+                        >
+                          Save
+                        </Button>
+                      </Then>
+                      <Else>
+                        <Button
+                          className='button'
+                          style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                          onClick={() => {
+                            save({
                               title: item.title,
                               location: item.location,
                               type: item.type,
@@ -103,14 +111,14 @@ export default function JobsResults(props) {
                               country: item.country,
                               job_id: 0,
                               api: true,
-                            })}
-                          </Else>
-                        </If>;
-                      }}
-                      variant='praimary'
-                    >
-                      Save
-                    </Button>
+                            });
+                          }}
+                          variant='praimary'
+                        >
+                          Save
+                        </Button>
+                      </Else>
+                    </If>
                   </Col>
                   <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
                     <Button
