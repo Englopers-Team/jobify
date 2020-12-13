@@ -29,7 +29,7 @@ export default function Reports() {
   function Result() {
 
     return data.map((item) => {
-      if (item.response === type || type === false && (Number(sortId) === item.id || sortId === '')) {
+      if (typeof (item.response) == type || type === false && (Number(sortId) === item.id || sortId === '')) {
         return (
           <Row className='flexRow list-body' sm={8}>
             <Col style={{ fontWeight: 650, textAlign: 'center' }} sm={2}>
@@ -65,13 +65,13 @@ export default function Reports() {
           </Col>
           <Col sm={3}>
             <Dropdown>
-              <Dropdown.Toggle variant="Info" id="dropdown-basic">
+              <Dropdown.Toggle style={{ maxWidth: '160px', width: '160px' }} variant="Info" id="dropdown-basic">
                 {sort}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={() => { setType(false); setSort('All Reports') }}>All Reports</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setType(null); setSort('Open Reports') }}>Open Reports</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setType(true); setSort('Close Reports') }}>Close Reports</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setType('object'); setSort('Open Reports') }}>Open Reports</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setType('string'); setSort('Close Reports') }}>Close Reports</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Col>

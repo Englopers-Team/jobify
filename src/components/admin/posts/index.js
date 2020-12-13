@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../../context/auth'
 import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel } from 'react-bootstrap';
@@ -51,13 +52,14 @@ export default function Posts() {
       tempPosts.sort((a, b) => b.comments.length - a.comments.length);
     }
     let count = 0;
-    let num = 0
+    let num = -1
     setCountSearch(count)
     return tempPosts.map((item, index) => {
       num++;
       let date = new Date(item.date)
       date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear()
 
+      // eslint-disable-next-line no-mixed-operators
       if (sortSearch === '' && dateSearch === '' || sortSearchType === 'Post ID' && sortSearch == 0 || sortSearchType === 'Post ID' && sortSearch == index || sortSearchType === 'Username' && item.profile.name.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'Post Title' && item.title.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'date' && date.split('-').reverse()[0] === dateSearch.split('-')[0] && date.split('-').reverse()[1] === dateSearch.split('-')[1] && date.split('-').reverse()[2] === dateSearch.split('-')[2]) {
         if (item.pinned === pinned || pinned === '*') {
           count += 1;
