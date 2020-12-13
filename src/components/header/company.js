@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './styles.scss';
 import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
@@ -18,6 +19,8 @@ export default function CompanyHeader() {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [notifiIcon, setNotifiIcon] = useState('');
   const [seen, setSeen] = useState('');
+  const [flag, setFlag] = useState('');
+
   const checkSize = () => {
     setScreenSize(window.screen.width);
   };
@@ -43,6 +46,8 @@ export default function CompanyHeader() {
   const API = 'https://jobify-app-v2.herokuapp.com';
 
   async function getData() {
+    const flagData = await superagent.get(`${API}/flag`);
+    setFlag(flagData.body);
     const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${context.token}`);
     setCompanyName(response.body.company_name);
     setLogo(response.body.logo);
@@ -81,6 +86,7 @@ export default function CompanyHeader() {
           </Nav>
 
           <Nav className='one'>
+            <img style={{ width: 30, height: 30, objectFit: 'cover', marginRight: 20, marginLeft: 7 }} src={flag} alt='bell' border='0' />
             <NavDropdown data-toggle='dropdown' eventKey={1} title={notifiIcon ? seen ? <Icon.Bell color='#232b4e' size={22} /> : <img style={{ width: 22, height: 22, objectFit: 'cover' }} src='https://i.ibb.co/5Tqh4jH/bell.png' alt='bell' border='0' /> : <p style={{ fontSize: 17 }}>&nbsp;Notification</p>} id='basic-nav-dropdown'>
               <If condition={!notification[0]}>
                 <Then>
