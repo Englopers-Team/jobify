@@ -59,7 +59,7 @@ export default function Posts() {
         count += 1;
         setCountSearch(count)
         return (
-          <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
+          <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item._id}` }}>
             <Row id='postInfoLink' className='flexRow list-body' sm={8}>
               <Col style={{ fontWeight: 650, textAlign: 'start', color: '#9393A1' }} sm={1}>
                 {index}
@@ -97,13 +97,13 @@ export default function Posts() {
   return (
     <Container style={{ display: 'flex', flexDirection: 'row' }}>
       <Col sm={9} className='list-container' style={{ width: '100%' }}>
-        <MDBContainer className="scrollbar scrollbar-white  mt-5 mx-auto" style={scrollContainerStyle}>
+        <MDBContainer className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
           <PostsList />
         </MDBContainer>
       </Col>
 
       <Col className='list-container' style={{ textAlign: 'center', backgroundColor: '#232B4E', color: '#E1E3E8', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} sm={3} >
-        <Row style={{ height: '15%', fontWeight: 'bold' , marginTop : '10px' }}>
+        <Row style={{ height: '15%', fontWeight: 'bold', marginTop: '10px' }}>
           <Col style={{ fontSize: '20px' }}>
             Total Result : {countSeacr}
           </Col>
@@ -115,10 +115,10 @@ export default function Posts() {
                 Search By {sortSearchType}
               </Dropdown.Toggle>
               <Dropdown.Menu  >
-                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px' , width : '172px' }} onClick={() => { setSortSearchType('Post ID') }}>Post ID</Dropdown.Item>
-                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px' }} onClick={() => { setSortSearchType('Username') }}>Username</Dropdown.Item>
-                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px'}} onClick={() => { setSortSearchType('Post Title') }}>Post Title</Dropdown.Item>
-                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px'}} onClick={() => { setSortSearchType('date') }}>Date</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8', marginBottom: '2px', width: '172px' }} onClick={() => { setSortSearchType('Post ID') }}>Post ID</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8', marginBottom: '2px' }} onClick={() => { setSortSearchType('Username') }}>Username</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8', marginBottom: '2px' }} onClick={() => { setSortSearchType('Post Title') }}>Post Title</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8', marginBottom: '2px' }} onClick={() => { setSortSearchType('date') }}>Date</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown >
           </Col>
@@ -137,7 +137,7 @@ export default function Posts() {
         </Row >
         <Row  >
           <Col style={{ textAlign: 'start' }}>
-            <FormCheck type="radio" name="formHorizontalRadios"  id="custom-switch" label="Most Like"  onChange={(e) => { setSortInteractiveLike(sortInteractiveLike ? false : true) }} />
+            <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Most Like" onChange={(e) => { setSortInteractiveLike(sortInteractiveLike ? false : true) }} />
           </Col>
         </Row>
         <Row style={{ height: '10%', textAlign: 'start' }}>
