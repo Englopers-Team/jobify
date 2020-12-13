@@ -21,6 +21,7 @@ export default function Posts() {
   const [dateSearch, setDateSearch] = useState('');
   const [sortInteractiveLike, setSortInteractiveLike] = useState(false);
   const [sortInteractiveComment, setSortInteractiveComment] = useState(false);
+  const [countSeacr, setCountSearch] = useState(0)
 
   const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com'
   const context = useContext(AuthContext)
@@ -48,14 +49,17 @@ export default function Posts() {
     if (sortInteractiveComment) {
       tempPosts.sort((a, b) => b.comments.length - a.comments.length);
     }
-    console.log(tempPosts)
+    let count = 0;
+    setCountSearch(count)
     return tempPosts.map((item, index) => {
       let date = new Date(item.date)
       date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear()
 
       if (sortSearch === '' && dateSearch === '' || sortSearchType === 'Post ID' && sortSearch == 0 || sortSearchType === 'Post ID' && sortSearch == index || sortSearchType === 'Username' && item.profile.name.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'Post Title' && item.title.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'date' && date.split('-').reverse()[0] === dateSearch.split('-')[0] && date.split('-').reverse()[1] === dateSearch.split('-')[1] && date.split('-').reverse()[2] === dateSearch.split('-')[2]) {
+        count += 1;
+        setCountSearch(count)
         return (
-          <Link  style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
+          <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
             <Row id='postInfoLink' className='flexRow list-body' sm={8}>
               <Col style={{ fontWeight: 650, textAlign: 'start', color: '#9393A1' }} sm={1}>
                 {index}
@@ -92,50 +96,56 @@ export default function Posts() {
 
   return (
     <Container style={{ display: 'flex', flexDirection: 'row' }}>
-      <Col sm={10} className='list-container' style={{ width: '100%' }}>
+      <Col sm={9} className='list-container' style={{ width: '100%' }}>
         <MDBContainer className="scrollbar scrollbar-white  mt-5 mx-auto" style={scrollContainerStyle}>
           <PostsList />
         </MDBContainer>
       </Col>
 
-      <Col sm={2} >
-        <Row   >
-          <Col>
-            <If condition={sortSearchType !== 'date'}>
-              <Then>
-                <FormControl placeholder='Search' onChange={(e) => { setSortSearch(e.target.value) }} />
-              </Then>
-              <Else>
-                <FormControl type="date" name="dob" placeholder="date" onChange={(e) => { setDateSearch(e.target.value); }} />
-              </Else>
-            </If>
+      <Col className='list-container' style={{ textAlign: 'center', backgroundColor: '#232B4E', color: '#E1E3E8', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} sm={3} >
+        <Row style={{ height: '15%', fontWeight: 'bold' , marginTop : '10px' }}>
+          <Col style={{ fontSize: '20px' }}>
+            Total Result : {countSeacr}
           </Col>
-          <Col >
-            <Dropdown>
-              <Dropdown.Toggle variant="Info" id="dropdown-basic">
+        </Row>
+        <Row style={{ height: '38%' }} >
+          <Col>
+            <Dropdown  >
+              <Dropdown.Toggle style={{ backgroundColor: '#E1E3E8' }} variant="Info" id="dropdown-basic">
                 Search By {sortSearchType}
               </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => { setSortSearchType('Post ID') }}>Post ID</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setSortSearchType('Username') }}>Username</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setSortSearchType('Post Title') }}>Post Title</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setSortSearchType('date') }}>Date</Dropdown.Item>
-
+              <Dropdown.Menu  >
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px' , width : '172px' }} onClick={() => { setSortSearchType('Post ID') }}>Post ID</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px' }} onClick={() => { setSortSearchType('Username') }}>Username</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px'}} onClick={() => { setSortSearchType('Post Title') }}>Post Title</Dropdown.Item>
+                <Dropdown.Item style={{ backgroundColor: '#E1E3E8' , marginBottom : '2px'}} onClick={() => { setSortSearchType('date') }}>Date</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown >
           </Col>
-          <Row>
-            <Col >
-              <FormCheck type="switch" id="custom-switch" label="Most Like" onChange={(e) => { setSortInteractiveLike(sortInteractiveLike ? false : true) }} />
-            </Col>
-            <Col>
-              <FormCheck type="switch" id="switch" label="Most Comment" onChange={(e) => { setSortInteractiveComment(sortInteractiveComment ? false : true) }} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-            </Col>
-          </Row>
+        </Row>
+        <Row style={{ height: '10%' }}>
+          <Col>
+            <If condition={sortSearchType !== 'date'}>
+              <Then>
+                <FormControl style={{ backgroundColor: '#E1E3E8' }} placeholder={`Search By ${sortSearchType}`} onChange={(e) => { setSortSearch(e.target.value) }} />
+              </Then>
+              <Else>
+                <FormControl style={{ backgroundColor: '#E1E3E8' }} type="date" name="dob" placeholder={`Search By ${sortSearchType}`} onChange={(e) => { setDateSearch(e.target.value); }} />
+              </Else>
+            </If>
+          </Col>
+        </Row >
+        <Row  >
+          <Col style={{ textAlign: 'start' }}>
+            <FormCheck type="radio" name="formHorizontalRadios"  id="custom-switch" label="Most Like"  onChange={(e) => { setSortInteractiveLike(sortInteractiveLike ? false : true) }} />
+          </Col>
+        </Row>
+        <Row style={{ height: '10%', textAlign: 'start' }}>
+          <Col>
+            <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Most Comment" onChange={(e) => { setSortInteractiveComment(sortInteractiveComment ? false : true) }} />
+          </Col>
+        </Row>
+        <Row style={{ height: '27%' }}>
         </Row>
       </Col>
     </Container>
