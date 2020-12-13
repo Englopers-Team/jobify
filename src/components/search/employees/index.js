@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../../context/auth';
 import Results from './results';
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/employee';
