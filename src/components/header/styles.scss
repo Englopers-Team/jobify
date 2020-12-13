@@ -121,7 +121,7 @@
   }
 }
 
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 768px) {
   .one {
     align-items: center;
     .nav .dropdown {
@@ -149,4 +149,15 @@
 .mt-5,
 .my-5 {
   margin-top: 0 !important;
+}
+
+.header-cont {
+  background-color: #eaecf1;
+  width: 85%;
+}
+
+@media only screen and (min-width: 576px) {
+  #guest-nav {
+    align-items: center;
+  }
 }

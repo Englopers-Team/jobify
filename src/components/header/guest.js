@@ -48,7 +48,7 @@ export default function GuestHeader() {
             </Nav.Link>
           </Nav>
 
-          <Nav style={{ alignItems: 'center' }}>
+          <Nav id='guest-nav'>
             <img style={{ width: 30, height: 30, objectFit: 'cover', marginRight: 20, marginLeft: 7 }} src={flag} alt='bell' border='0' />
             <Link exact to='/signup'>
               <Button className='button' variant='outline-light'>
