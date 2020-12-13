@@ -77,8 +77,7 @@ export default function Routes() {
       <Route exact path='/applicant/applications' component={ApplicantApplications} />
       <Route exact path='/applicant/offers' component={ApplicantOffers} />
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
-
-      {/* tset */}
+      
       <Route path='/userhome' component={dash} />
       <Route component={NotFound} />
     </Switch>
