@@ -8,8 +8,8 @@ export default function Footer() {
 
       <Container className='footer-container' fluid>
         <Container style={{ width: '85%', alignItems: 'baseline', backgroundcolor: '#e1e3e8' }}>
-          <Row style={{ alignItems: 'baseline' }}>
-            <Col xs={12} md={6}>
+          <Row style={{ alignItems: 'baseline', justifyContent: 'center' }}>
+            <Col xs={12} sm={12} md={6}>
               <Row className='first-row'>
                 <Nav.Link>
                   <NavLink to='/search/employees'>Jobs</NavLink>

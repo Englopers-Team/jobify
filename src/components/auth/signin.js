@@ -22,11 +22,11 @@ export default function Signin() {
   }
 
   return (
-    <Container>
+    <Container style={{marginTop:'150px'}}>
       <meta name="google-signin-client_id"
         content="60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com" />
       <Row className='flexRow'>
-        <Col sm={6}>
+        <Col sm={5}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
             <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>Sign in</Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
@@ -55,11 +55,9 @@ export default function Signin() {
           </Card>
         </Col>
         <Col sm={6}>
-
-          <Row style={{justifyContent:'center'}}>
-
-            <Image style={{ width: '70%' }} src="../../assets/signup.png" rounded />
-          </Row>
+          {/* <Row style={{ justifyContent: 'center' }}> */}
+          <Image style={{ width:'600px',maxWidth:'100%' }} src="../../assets/signup.png" rounded />
+          {/* </Row> */}
         </Col>
       </Row>
     </Container>

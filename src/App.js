@@ -6,6 +6,7 @@ import Footer from './components/footer/';
 import ScrollTop from './components/helpers/scroll-top'
 import { BrowserRouter } from 'react-router-dom';
 import Chat from './components/chat'
+import Notification from './components/notification'
 import './app.scss';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <AuthProvider>
         <SocketProvider>
           <ScrollTop />
+          <Notification />
           <Chat />
           <div className='page-container' style={{ animation: `fadeIn 2s` }}>
             <div className='content-wrap'>
