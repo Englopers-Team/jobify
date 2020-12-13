@@ -96,9 +96,9 @@ export default function Chat() {
         )
       } else {
         return (
-          <ListGroup.Item id='messg' className='myMessg' key={index}>
+          <Row id='messg' className='myMessg' key={index}>
             {mesg.body}
-          </ListGroup.Item>
+          </Row>
         )
       }
     })
@@ -155,7 +155,19 @@ export default function Chat() {
               </If>
             </Col>
             <Col sm={7}>
-              <h4 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>Messages</h4>
+              <If condition={secondPartyIId}>
+                <Then>
+                  <h5 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>
+                    {specificName}
+                  </h5>
+                </Then>
+                <Else>
+                  <h4 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>
+                    Messages
+                  </h4>
+                </Else>
+              </If>
+
             </Col>
             <Col style={{ textAlign: 'center' }} sm={2}>
               <Icon.XCircleFill onClick={() => {
