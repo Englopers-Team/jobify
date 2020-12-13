@@ -1,23 +1,21 @@
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav, Modal, Spinner } from 'react-bootstrap';
 import { useContext, useState, useEffect } from 'react';
 import { If, Then, Else } from 'react-if';
+import { AuthContext } from '../../context/auth';
 import superagent from 'superagent';
 import './styles.scss';
-
 import { useHistory } from 'react-router-dom';
 
 export default function SavedJobs() {
   let history = useHistory();
+  const context = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
-
   const [loader, setLoader] = useState(false);
-
   const API = 'https://jobify-app-v2.herokuapp.com/user/saved';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjkzMzMxLCJleHAiOjM2MTYwNzY5MzMzMX0.UjxBO5cHePzHJaJcuZgQb-zZ1B_-XAFJYxfsKuUB_ig';
+
   async function getData() {
-    const response = await superagent.get(`${API}`).set('authorization', `Basic ${token}`);
-    console.log('osama', response.body);
+    const response = await superagent.get(`${API}`).set('authorization', `Basic ${context.token}`);
     setData([...response.body.data_Api, ...response.body.data_DB]);
   }
   const Apply = (payload) => {
@@ -25,18 +23,18 @@ export default function SavedJobs() {
     setLoader(true);
     superagent
       .post(`${API}/${payload.job_id}`)
-      .set('authorization', `Basic ${token}`)
+      .set('authorization', `Basic ${context.token}`)
       .send(payload)
       .then((data) => {
-        console.log(data.text);
-
         setLoader(false);
         setShow(false);
       });
   };
   useEffect(() => {
-    getData();
-  }, []);
+    if (context.token) {
+      getData();
+    }
+  }, [context.token]);
 
   return (
     <>

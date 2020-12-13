@@ -69,13 +69,11 @@ function AuthProvider(props) {
   };
 
   const login = async (email, password) => {
-    console.log('here')
     try {
       const response = await superagent
         .post(`${API}/signin`)
         .send({ email, password })
 
-      console.log('cry', response.body)
       validateToken(response.body.token);
       return true
     } catch (e) {
@@ -88,9 +86,7 @@ function AuthProvider(props) {
   const signup = async (payload, type) => {
     try {
       if (type === 'p') {
-        console.log('1')
         const { firstName, lastName, email, phone, jobTitle, country, password } = payload;
-        console.log(API)
         const response = await superagent
           .post(`${API}/signup`)
           .send({ first_name: firstName, last_name: lastName, email, phone, job_title: jobTitle, country, password, account_type: 'p' });

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../styles.scss';
 import superagent from 'superagent';
 import Form from 'react-bootstrap/Form';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import { AuthContext } from '../../context/auth';
 import Results from './results';
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/employee';
 
 export default function SearchEmployees() {
+  const context = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [results, setResults] = useState([]);
@@ -20,19 +22,15 @@ export default function SearchEmployees() {
     e.preventDefault();
     setLoader(true);
     setVisable(true);
-
     await superagent
       .get(jobsApi)
-      .set({ Authorization: 'Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2Mzc2MDYsImV4cCI6MzYxNjA3NjM3NjA2fQ.lCGfnwvcdkHNOC4R530VVC99YlENts_h9FSND3B67dY' })
+      .set({ Authorization: `Basic ${context.token}` })
       .query({ job_title: title, country: location })
-
       .then((data) => {
-        console.log('fffffff', data.body);
         setResults(data.body);
         setLoader(false);
       });
   };
-  console.log(results);
 
   return (
     <Container style={{ justifyContent: 'center' }}>
