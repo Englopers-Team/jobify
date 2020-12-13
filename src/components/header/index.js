@@ -5,7 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 export default function Header() {
   return (
-    <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px' }}>
+    <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px'}}>
       <NavLink exact to='/'>
         <Image className='logo' src='../../assets/jobify.png' />
       </NavLink>

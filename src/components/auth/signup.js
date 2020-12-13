@@ -37,7 +37,7 @@ export default function Signup() {
   }
 
   return (
-    <Container className='cont' style={{ marginTop: '50px', marginBottom: '50px' }}>
+    <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
       <meta name="google-signin-client_id"
         content="60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com" />
       <Row >
@@ -141,9 +141,9 @@ export default function Signup() {
           <Row style={{ height: '40%' }}>
 
           </Row>
-          <Row>
+          <Row style={{justifyContent:'center'}}>
 
-            <Image style={{ width: '600px' }} src="../../assets/signup.png" rounded />
+            <Image style={{ width: '70%' }} src="../../assets/signup.png" rounded />
           </Row>
         </Col>
       </Row>

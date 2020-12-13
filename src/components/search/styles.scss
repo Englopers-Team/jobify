@@ -104,3 +104,31 @@
     border-bottom: 1px solid #e1e3e8;
   }
 }
+
+.tabley {
+  border-collapse: collapse;
+  thead {
+    background-color: #e1e3e8;
+    padding: 25px 16px;
+    justify-content: center;
+    border-radius: 8px 8px 0px 0px;
+    tr {
+      th {
+        word-wrap: break-word;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        word-wrap: normal;
+
+        background-color: #efefef;
+        text-align: left;
+        width: 5px;
+        white-space: inherit;
+        background-color: red;
+      }
+    }
+  }
+}

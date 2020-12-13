@@ -13,13 +13,12 @@ export default function SearchEmployees() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [results, setResults] = useState([]);
-  const [visable, setVisable] = useState(false);
+  const [visable, setVisable] = useState('false');
   const [loader, setLoader] = useState(false);
 
   const jobList = async (e) => {
     e.preventDefault();
     setLoader(true);
-    setVisable(true);
 
     await superagent
       .get(jobsApi)
@@ -27,8 +26,8 @@ export default function SearchEmployees() {
       .query({ job_title: title, country: location })
 
       .then((data) => {
-        console.log('fffffff', data.body);
         setResults(data.body);
+        data.body[0] ? setVisable('true') : setVisable('noData');
         setLoader(false);
       });
   };
