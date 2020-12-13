@@ -24,6 +24,20 @@ export default function JobsResults(props) {
         setShow(false);
       });
   };
+  const save = (payload) => {
+    const API = 'https://jobify-app-v2.herokuapp.com/user/save';
+    setLoader(true);
+    superagent
+      .post(`${API}/${payload.job_id}`)
+      .set('authorization', `Basic ${token}`)
+      .send(payload)
+      .then((data) => {
+        console.log(data.text);
+
+        setLoader(false);
+        setShow(false);
+      });
+  };
   return (
     <>
       <If condition={props.visable}>
@@ -65,7 +79,36 @@ export default function JobsResults(props) {
                     {item.type}
                   </Col>
                   <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
-                    <Button className='button' onClick={console.log(item.email)} variant='praimary'>
+                    <Button
+                      className='button'
+                      style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                      onClick={() => {
+                        <If condition={item.job_id}>
+                          <Then>
+                            {save({
+                              job_id: item.job_id,
+                              company_id: item.company_id,
+                            })}
+                          </Then>
+                          <Else>
+                            {save({
+                              title: item.title,
+                              location: item.location,
+                              type: item.type,
+                              description: item.description,
+                              company_name: item.company_name,
+                              phone: item.phone,
+                              company_url: item.company_url,
+                              logo: item.logo,
+                              country: item.country,
+                              job_id: 0,
+                              api: true,
+                            })}
+                          </Else>
+                        </If>;
+                      }}
+                      variant='praimary'
+                    >
                       Save
                     </Button>
                   </Col>
