@@ -19,15 +19,19 @@ export default function CompanyEdit() {
   const [country, setCountry] = useState('');
   const [companyUrl, setCompanyUrl] = useState('');
   const [loader, setLoader] = useState(false);
-  let history = useHistory();
+  const history = useHistory();
+  const context = useContext(AuthContext);
+
+  const API = 'https://jobify-app-v2.herokuapp.com';
 
   useEffect(() => {
+    if (context.token) {
+    }
     getData();
-  }, []);
-  const API = 'https://jobify-app-v2.herokuapp.com';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc3MzMwNjIsImV4cCI6MzYxNjA3NzMzMDYyfQ.4m57l6B3uXRcUpylAEzUAdfNx0E3xTuh9SukCEtZuX8';
+  }, [context.token]);
+
   async function getData() {
-    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${context.token}`);
     console.log(response.body);
     setData(response.body);
     setCompanyName(response.body.company_name);
@@ -39,7 +43,7 @@ export default function CompanyEdit() {
   async function handleSubmit(e) {
     setLoader(true);
     e.preventDefault();
-    await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
+    await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${context.token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
     setLoader(false);
     history.push('/');
   }

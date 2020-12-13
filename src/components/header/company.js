@@ -1,13 +1,11 @@
 import './styles.scss';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-
-import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import './styles.scss';
 import superagent from 'superagent';
-import Button from 'react-bootstrap/Button';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import * as Icon from 'react-bootstrap-icons';
@@ -28,14 +26,14 @@ export default function CompanyHeader() {
   const history = useHistory();
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    getData();
+    if (context.token) {
+      getData();
+    }
 
     return () => {
       window.removeEventListener('resize', checkSize);
     };
   }, [screenSize]);
-
-  // const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     if (context.token) {
@@ -61,7 +59,7 @@ export default function CompanyHeader() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px' }}>
+      <Navbar className='nav' collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px' }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
         </NavLink>
@@ -75,7 +73,7 @@ export default function CompanyHeader() {
               </NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
-              <NavLink to='/search/jobs'>Employees</NavLink>
+              <NavLink to='/search/employees'>Employees</NavLink>
             </Nav.Link>
             <Nav.Link className='link' to='/about'>
               <NavLink to='/about'>About</NavLink>
@@ -93,7 +91,6 @@ export default function CompanyHeader() {
                   <Then>
                     {notification.map((item) => {
                       return <Container className='notification-item'>{item.description}</Container>;
-                      // <NavDropdown.Item style={{ maxWidth: '50px', width: 'fit-content' }}>{item.description}</NavDropdown.Item>;
                     })}
                   </Then>
                 </Else>
@@ -110,12 +107,41 @@ export default function CompanyHeader() {
             }
             id='basic-nav-dropdown'
           >
-            <NavDropdown.Item href='#action/3.3'>Dashboard</NavDropdown.Item>
-            <NavDropdown.Item href='#action/3.1'>My Jobs</NavDropdown.Item>
-            <NavDropdown.Item href='#action/3.2'>My Offers</NavDropdown.Item>
-            <NavDropdown.Item href='#action/3.3'>Submit Job</NavDropdown.Item>
-            <NavDropdown.Item href='#action/3.3'>Applications</NavDropdown.Item>
-            <NavDropdown.Item href='#action/3.3'>Edit Profile</NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/'>
+                Dashboard
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/company/submitted-jobs'>
+                My Jobs
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/company/offers'>
+                My Offers
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/company/submit-job'>
+                Submit Job
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/company/applications'>
+                Applications
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/reports'>
+                Reports
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/company/edit-profile'>
+                Edit Profile
+              </NavLink>
+            </NavDropdown.Item>
 
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>

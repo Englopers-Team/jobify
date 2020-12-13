@@ -20,12 +20,12 @@ export default function MyJobs(props) {
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
 
-  // const context = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
   const jobList = async (e) => {
     superagent
       .get(jobsApi)
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+      .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
         setResults(data.body);
@@ -41,7 +41,7 @@ export default function MyJobs(props) {
     setLoader(true);
     superagent
       .delete(`${jobsApi}/${id}`)
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+      .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
         console.log(data.text);

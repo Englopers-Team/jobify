@@ -17,19 +17,18 @@ export default function EditJob(props) {
   const [description, setDescription] = useState('');
   const [loader, setLoader] = useState(false);
   const id = props.match.params.id;
-  let history = useHistory();
-  console.log('====================================');
-  console.log(history);
-  console.log('====================================');
+  const context = useContext(AuthContext);
+  const history = useHistory();
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (context.token) {
+      getData();
+    }
+  }, [context.token]);
 
   const API = 'https://jobify-app-v2.herokuapp.com/company/jobs';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc3MzMwNjIsImV4cCI6MzYxNjA3NzMzMDYyfQ.4m57l6B3uXRcUpylAEzUAdfNx0E3xTuh9SukCEtZuX8';
   async function getData() {
-    const response = await superagent.get(`${API}/${id}`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/${id}`).set('authorization', `Basic ${context.token}`);
     console.log(response.body);
     setData(response.body);
     setTitle(response.body.title);
@@ -40,7 +39,7 @@ export default function EditJob(props) {
   async function handleSubmit(e) {
     setLoader(true);
     e.preventDefault();
-    await superagent.put(`${API}/${id}`).set('authorization', `Basic ${token}`).send({ title: title, location: location, type: type, description: description });
+    await superagent.put(`${API}/${id}`).set('authorization', `Basic ${context.token}`).send({ title: title, location: location, type: type, description: description });
     setLoader(false);
     history.goBack();
   }
