@@ -32,11 +32,12 @@ export default function Block() {
 
 
   const List = () => {
+    console.log(searchTypeQuery)
     if (searchType === 'c') {
-      return company.map(item => {
-        if (item.company_name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username') {
+      return company.map((item, index) => {
+        if (item.company_name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username' || query == item.auth_id && searchTypeQuery === 'Id' || query === '') {
           return (
-            <Row onClick={() => { setId(item.auth_id) }}>
+            <Row key={index} onClick={() => { setId(item.auth_id) }}>
               <Col>{item.auth_id}</Col>
               <Col>
                 <Image src={`${item.avatar}`} roundedCircle style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
@@ -47,12 +48,11 @@ export default function Block() {
         }
       })
     } else if (searchType === 'p') {
-      return person.map(item => {
-
+      return person.map((item, index) => {
         let name = `${item.first_name} ${item.last_name}`
-        if (name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username') {
+        if (name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username' || query == item.auth_id && searchTypeQuery === 'Id' || query === '') {
           return (
-            <Row onClick={() => { setId(item.auth_id) }}>
+            <Row key={index} onClick={() => { setId(item.auth_id) }}>
               <Col>{item.auth_id}</Col>
               <Col>
                 <Image src={`${item.avatar}`} roundedCircle style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
@@ -108,7 +108,7 @@ export default function Block() {
           <Row>
             <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
             <FormControl placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
-            <FormCheck checked type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
+            <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
             <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
           </Row>
           <Row>
@@ -122,3 +122,6 @@ export default function Block() {
     </Container>
   )
 }
+
+
+
