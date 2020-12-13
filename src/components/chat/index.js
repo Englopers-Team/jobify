@@ -92,7 +92,7 @@ export default function Chat() {
     return arr[0][specificName].map((mesg, index) => {
       if (mesg.sender === secondPartyChar) {
         return (
-          <Row className='otherMessg'>
+          <Row className='otherMessg' key={index}>
             {/* <Col sm={1}></Col> */}
             <Col style={{ padding: '2px' }} sm={11}>
               <p id='messg' style={{ float: 'right', marginRight: '10px' }}>
@@ -193,8 +193,22 @@ export default function Chat() {
             <Icon.XCircleFill onClick={() => {
               const chatBox = document.getElementById('chat')
               const sideBtn = document.getElementById('chatButton')
+              const input = document.getElementById('compInput')
+              const btn = document.getElementById('compSend')
               chatBox.classList.remove('slideinChat')
               chatBox.classList.add('slideoutChat')
+              
+              const compList = document.getElementById('compList')
+                const compChat = document.getElementById('compChat')
+                compChat.classList.add('opout')
+                setTimeout(() => {
+                  compChat.classList.remove('opout')
+                  compChat.classList.add('compdel')
+                  compList.classList.add('opin')
+                  compList.classList.remove('compdel')
+                  setSecondPartyIId()
+                }, 500)
+
               setTimeout(() => {
                 chatBox.classList.add('hideChat')
                 chatBox.classList.remove('slideoutChat')

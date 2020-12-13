@@ -7,6 +7,7 @@ export default function Notification() {
 
   useEffect(() => {
     if (context.token) {
+      console.log('here 1')
       context.socketNotif.emit('join', context.token);
       context.socketNotif.on('notification', (payload) => {
         console.log(payload.auth_id, payload.title, payload.description);
@@ -14,9 +15,9 @@ export default function Notification() {
       context.socketNotif.emit('checkNotif', { token: context.token })
     }
 
-    return () => {
-      context.socketNotif.off('notification');
-    };
+    // return () => {
+    //   context.socketNotif.off('notification');
+    // };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
   return (
