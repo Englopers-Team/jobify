@@ -22,7 +22,7 @@ export default function Signin() {
   }
 
   return (
-    <Container className='cont'>
+    <Container>
       <meta name="google-signin-client_id"
         content="60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com" />
       <Row className='flexRow'>
@@ -56,9 +56,9 @@ export default function Signin() {
         </Col>
         <Col sm={6}>
 
-          <Row>
+          <Row style={{justifyContent:'center'}}>
 
-            <Image style={{ width: '500px' }} src="../../assets/signup.png" rounded />
+            <Image style={{ width: '70%' }} src="../../assets/signup.png" rounded />
           </Row>
         </Col>
       </Row>
