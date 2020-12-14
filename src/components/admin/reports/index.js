@@ -40,7 +40,7 @@ export default function Reports() {
                 {item.description.slice(0, 45)}{item.description.length > 45 ? '...' : ''}
               </p>
             </Col>
-            <Col style={{ textAlign: 'center', color: item.response === null ? 'green' : 'red' }} sm={2}>
+            <Col style={{ textAlign: 'center', color: item.response === null ? 'green' : '#B72525' }} sm={2}>
               {item.response === null ? 'Open' : 'Closed'}
             </Col>
             <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>

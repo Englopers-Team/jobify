@@ -67,10 +67,10 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  background-color: #504edf;
+  background-color: #232b4e;
   color: whitesmoke;
   &:hover {
-    background-color: #232b4e;
+    background-color: #504edf;
   }
   &:not(:disabled):not(.disabled):focus,
   :not(:disabled):not(.disabled).focus {

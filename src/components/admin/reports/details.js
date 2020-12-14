@@ -56,7 +56,7 @@ export default function ReportDetails() {
 
   function Report() {
     let state = 'Open';
-    let color = '#69D95B'
+    let color = 'green'
     if (data.report.response !== null) {
       state = 'Close';
       color = '#B72525'
