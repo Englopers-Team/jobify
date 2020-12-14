@@ -10,7 +10,7 @@ export default function Verify() {
   const [code, setCode] = useState('')
   const [error, setError] = useState(false)
   let history = useHistory();
-  const API = process.env.API_SERVER || 'http://localhost:4000'
+  const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com'
 
   const context = useContext(AuthContext)
 
@@ -30,7 +30,7 @@ export default function Verify() {
             <Card.Text>
               Please verify your email address to get access to thousands of exclusive job listings.
             </Card.Text>
-            <Form onSubmit={handleSubmit}>
+            <Form >
               <Form.Group style={{ marginBottom: '15px' }} controlId="formBasicEmail">
                 <Form.Control required onChange={(e) => setCode(e.target.value)} className='input' type="text" placeholder="Code" />
               </Form.Group>
@@ -39,7 +39,7 @@ export default function Verify() {
                   <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>Wrong code!</p>
                 </Alert>
               </If>
-              <Button variant='outline-dark' size="lg" className='button' block type="submit" style={{ marginTop: '20px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
+              <Button onClick={(e) => handleSubmit(e)} variant='outline-dark' size="lg" className='button' block type="submit" style={{ marginTop: '20px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
                 Verify
               </Button>
             </Form>
