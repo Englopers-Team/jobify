@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  , useContext} from 'react';
 import { Container, Row, Col, Dropdown, FormControl } from 'react-bootstrap';
 import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
@@ -7,6 +7,8 @@ import * as Icon from 'react-bootstrap-icons';
 
 import '../../search/styles.scss'
 import '../styles.scss'
+import { AuthContext } from '../../../context/auth'
+
 
 export default function Reports() {
   let [data, setData] = useState([]);
@@ -14,15 +16,18 @@ export default function Reports() {
   let [type, setType] = useState(false);
   let [sortId, setSortId] = useState('');
   const scrollContainerStyle = { width: "auto", maxHeight: "400px", height: '400px', overflowY: 'scroll', overflowX: 'hidden' };
+  const context = useContext(AuthContext)
 
   useEffect(() => {
-    getData();
-  }, []);
+
+    if(context.token){
+      getData();
+    }
+  }, [context.token]);
 
   async function getData() {
     const API = 'https://jobify-app-v2.herokuapp.com';
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NzA4MDY2LCJleHAiOjM2MTYwNzcwODA2Nn0.uErZAP_4ZCFUp-WLXIhXlV7SZu40itfj0C6m1Ppwm_c';
-    const response = await superagent.get(`${API}/admin/report`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/admin/report`).set('authorization', `Basic ${context.token}`);
     setData(response.body);
   }
 
