@@ -1,5 +1,6 @@
 .scrollbar {
   overflow: scroll;
+  border-radius: 10px;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -17,11 +18,11 @@
   background-color: #f5f5f5;
 }
 .scrollbar-primary {
-  scrollbar-color: #232B4E #f5f5f5;
+  scrollbar-color: #232b4e #f5f5f5;
 }
 .scrollbar-primary::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #232B4E;
+  background-color: #232b4e;
 }
 
 .country {
@@ -36,4 +37,16 @@
   font-size: 25px;
   font-family: Fantasy;
   text-align: center;
+}
+
+.profile {
+  cursor: pointer;
+  margin-bottom: 15px;
+  border-bottom: #9393a19c 1px solid;
+  margin :10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.profile:hover {
+  background-color: #e1e3e883;
 }
