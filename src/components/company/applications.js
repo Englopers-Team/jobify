@@ -16,12 +16,12 @@ export default function CompanyApplications(props) {
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(true);
   // let history = useHistory();
-  // const context = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
   const jobList = async (e) => {
     superagent
       .get(jobsApi)
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+      .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
         setResults(data.body);
@@ -34,19 +34,12 @@ export default function CompanyApplications(props) {
     let status1 = '';
     payload === 'Rejected' ? (status1 = 'Rejected') : (status1 = 'Accepted');
     setLoader(true);
-    console.log('Heerr', id);
     superagent
       .put(`${jobsApi}/${id}`)
       .send({ status: status1 })
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+      .set({ Authorization: `Basic ${context.token}` })
       .then((data) => {
-        superagent
-          .get(`${jobsApi}`)
-          .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
-          .then((data) => {
-            setResults(data.body);
-            setLoader(false);
-          });
+        jobList();
       });
   };
 
@@ -55,8 +48,10 @@ export default function CompanyApplications(props) {
   };
 
   useEffect(() => {
-    jobList();
-  }, []);
+    if (context.token) {
+      jobList();
+    }
+  }, [context.token]);
 
   useEffect(() => {
     window.addEventListener('resize', checkSize);

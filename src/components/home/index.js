@@ -9,6 +9,7 @@ export default function Home() {
         <Link to={{ pathname: '/company/edit-profile' }}>company edit profile</Link>
         <Link to={{ pathname: '/company/submit-job' }}>Submit job</Link>
         <Link to={{ pathname: '/company/offers' }}>company offers</Link>
+        <Link to={{ pathname: '/search/employees' }}>Search employees</Link>
       </div>
     </>
   );

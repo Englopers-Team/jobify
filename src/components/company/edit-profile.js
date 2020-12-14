@@ -1,8 +1,4 @@
 import superagent from 'superagent';
-
-import Results from '../search/jobs/results';
-
-import * as Icon from 'react-bootstrap-icons';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';
@@ -19,15 +15,19 @@ export default function CompanyEdit() {
   const [country, setCountry] = useState('');
   const [companyUrl, setCompanyUrl] = useState('');
   const [loader, setLoader] = useState(false);
-  let history = useHistory();
+  const history = useHistory();
+  const context = useContext(AuthContext);
+
+  const API = 'https://jobify-app-v2.herokuapp.com';
 
   useEffect(() => {
+    if (context.token) {
+    }
     getData();
-  }, []);
-  const API = 'https://jobify-app-v2.herokuapp.com';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc3MzMwNjIsImV4cCI6MzYxNjA3NzMzMDYyfQ.4m57l6B3uXRcUpylAEzUAdfNx0E3xTuh9SukCEtZuX8';
+  }, [context.token]);
+
   async function getData() {
-    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${context.token}`);
     console.log(response.body);
     setData(response.body);
     setCompanyName(response.body.company_name);
@@ -39,7 +39,7 @@ export default function CompanyEdit() {
   async function handleSubmit(e) {
     setLoader(true);
     e.preventDefault();
-    await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
+    await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${context.token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
     setLoader(false);
     history.push('/');
   }
@@ -55,19 +55,23 @@ export default function CompanyEdit() {
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
               <Form onSubmit={(e) => handleSubmit(e)} style={{ width: '80%' }}>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Company Name</Form.Label>
                   <Form.Control required onChange={(e) => setCompanyName(e.target.value)} className='input' type='text' value={companyName} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Phone Number</Form.Label>
                   <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='text' value={phone} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Logo</Form.Label>
                   <Form.Control required onChange={(e) => setLogo(e.target.value)} className='input' type='text' value={logo} />
                 </Form.Group>
-
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Location</Form.Label>
                   <Form.Control required onChange={(e) => setCountry(e.target.value)} className='input' type='text' value={country} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Website</Form.Label>
                   <Form.Control required onChange={(e) => setCompanyUrl(e.target.value)} className='input' type='text' value={companyUrl} />
                 </Form.Group>
 
@@ -77,7 +81,7 @@ export default function CompanyEdit() {
                     <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
                   </If>
                 </Col>
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500' }}>
+                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
                   Save
                 </Button>
               </Form>

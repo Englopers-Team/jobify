@@ -4,24 +4,58 @@ import { NavLink, Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <>
-      <Navbar expand='sm' variant='light' bg='bg-transparent' className='footer'>
-        <Container className='footer-container'>
-          <Row>
-            <Nav.Link>
-              <NavLink to='/search/employees'>Jobs</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink to='/community'>community</NavLink>
-            </Nav.Link>
-            <Nav.Link to='/about'>
-              <NavLink to='/about'>About</NavLink>
-            </Nav.Link>
-          </Row>
-          <Row>
-            <Navbar.Text className='footer-text'>© Jobify | 2020 All rights reserved.</Navbar.Text>
+      {/* <Navbar expand='sm' variant='light' bg='bg-transparent' className='footer'> */}
+
+      <Container className='footer-container' fluid>
+        <Container style={{ width: '85%', alignItems: 'baseline', backgroundcolor: '#e1e3e8' }}>
+          <Row style={{ alignItems: 'baseline', justifyContent: 'center' }}>
+            <Col xs={12} sm={12} md={6}>
+              <Row className='first-row'>
+                <Nav.Link>
+                  <NavLink to='/search/employees'>Jobs</NavLink>
+                </Nav.Link>
+                <Nav.Link>
+                  <NavLink to='/community'>community</NavLink>
+                </Nav.Link>
+                <Nav.Link to='/about'>
+                  <NavLink to='/about'>About</NavLink>
+                </Nav.Link>
+              </Row>
+            </Col>
+            <Col xs={12} md={6} className='sec-row'>
+              <Navbar.Text className='footer-text'>© Jobify | 2020 All rights reserved.</Navbar.Text>
+            </Col>
           </Row>
         </Container>
-      </Navbar>
+      </Container>
+      {/* </Navbar> */}
     </>
   );
 }
+
+// {
+//   /* <Container className='footer-container'>
+//       <Row style={{ justifyContent: 'space-between' }}>
+//         <Col sm='auto'>
+//           <Row>
+//             <Nav.Link>
+//               <NavLink to='/search/employees'>Jobs</NavLink>
+//             </Nav.Link>
+//             <Nav.Link>
+//               <NavLink to='/community'>community</NavLink>
+//             </Nav.Link>
+//             <Nav.Link to='/about'>
+//               <NavLink to='/about'>About</NavLink>
+//             </Nav.Link>
+//           </Row>
+//         </Col>
+//         <Col sm='auto'>
+//           <Navbar.Text className='footer-text'>© Jobify | 2020 All rights reserved.</Navbar.Text>
+//         </Col>
+//       </Row>
+//     </Container> */
+// }
+
+// {
+//   /* Stack the columns on mobile by making one full-width and the other half-width */
+// }
