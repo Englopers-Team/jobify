@@ -1,6 +1,4 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-mixed-operators */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  , useContext} from 'react';
 import { Container, Row, Col, Dropdown, FormControl } from 'react-bootstrap';
 import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
@@ -9,6 +7,8 @@ import * as Icon from 'react-bootstrap-icons';
 
 import '../../search/styles.scss'
 import '../styles.scss'
+import { AuthContext } from '../../../context/auth'
+
 
 export default function Reports() {
   let [data, setData] = useState([]);
@@ -16,22 +16,25 @@ export default function Reports() {
   let [type, setType] = useState(false);
   let [sortId, setSortId] = useState('');
   const scrollContainerStyle = { width: "auto", maxHeight: "400px", height: '400px', overflowY: 'scroll', overflowX: 'hidden' };
+  const context = useContext(AuthContext)
 
   useEffect(() => {
-    getData();
-  }, []);
+
+    if(context.token){
+      getData();
+    }
+  }, [context.token]);
 
   async function getData() {
     const API = 'https://jobify-app-v2.herokuapp.com';
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NzA4MDY2LCJleHAiOjM2MTYwNzcwODA2Nn0.uErZAP_4ZCFUp-WLXIhXlV7SZu40itfj0C6m1Ppwm_c';
-    const response = await superagent.get(`${API}/admin/report`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/admin/report`).set('authorization', `Basic ${context.token}`);
     setData(response.body);
   }
 
   function Result() {
 
     return data.map((item) => {
-      if (item.response === type || type === false && (Number(sortId) === item.id || sortId === '')) {
+      if (typeof (item.response) == type || type === false && (Number(sortId) === item.id || sortId === '')) {
         return (
           <Row className='flexRow list-body' sm={8}>
             <Col style={{ fontWeight: 650, textAlign: 'center' }} sm={2}>
@@ -42,7 +45,7 @@ export default function Reports() {
                 {item.description.slice(0, 45)}{item.description.length > 45 ? '...' : ''}
               </p>
             </Col>
-            <Col style={{ textAlign: 'center', color: item.response === null ? 'green' : 'red' }} sm={2}>
+            <Col style={{ textAlign: 'center', color: item.response === null ? 'green' : '#B72525' }} sm={2}>
               {item.response === null ? 'Open' : 'Closed'}
             </Col>
             <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
@@ -67,13 +70,13 @@ export default function Reports() {
           </Col>
           <Col sm={3}>
             <Dropdown>
-              <Dropdown.Toggle variant="Info" id="dropdown-basic">
+              <Dropdown.Toggle style={{ maxWidth: '160px', width: '160px' }} variant="Info" id="dropdown-basic">
                 {sort}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={() => { setType(false); setSort('All Reports') }}>All Reports</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setType(null); setSort('Open Reports') }}>Open Reports</Dropdown.Item>
-                <Dropdown.Item onClick={() => { setType(true); setSort('Close Reports') }}>Close Reports</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setType('object'); setSort('Open Reports') }}>Open Reports</Dropdown.Item>
+                <Dropdown.Item onClick={() => { setType('string'); setSort('Close Reports') }}>Close Reports</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Col>
