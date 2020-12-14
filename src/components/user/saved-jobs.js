@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function SavedJobs() {
   let history = useHistory();
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
   const context = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
@@ -32,11 +33,20 @@ export default function SavedJobs() {
         setShow(false);
       });
   };
+
+  const checkSize = () => {
+    setScreenSize(window.screen.width);
+  };
   useEffect(() => {
+    window.addEventListener('resize', checkSize);
     if (context.token) {
       getData();
     }
-  }, [context.token]);
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenSize, context.token]);
 
   return (
     <>
@@ -45,21 +55,21 @@ export default function SavedJobs() {
           <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: '#504edf' }}>Saved Jobs</h2>
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-          <Row sm={8} className='flexRow list-header'>
-            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'left' }} className='col-title' sm={2}></Col>
-            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} className='col-title' sm={2}>
+          <Row sm={8} className='flexRow list-header' style={{ height: screenSize > 575 ? '80px' : '130px' }}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title' sm={1}></Col>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title' sm={2}>
               Job Title
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} sm={3}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} sm={3}>
               Company Name
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
               Job Type
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
               Phone
             </Col>
-            <Col sm={1}>
+            <Col sm={2}>
               <If condition={loader}>
                 <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
                   <Spinner animation='border' variant='primary' />
@@ -71,25 +81,25 @@ export default function SavedJobs() {
           {data.map((item) => {
             return (
               <Row className='flexRow list-body' sm={8}>
-                <Col style={{ fontWeight: 650 }} sm={2}>
-                  <Image style={{ width: '50px' }} src={item.logo} roundedCircle />
+                <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={1}>
+                  <Image style={{ width: '50px', height: '50px', objectFit: 'cover' }} src={item.logo} roundedCircle />
                 </Col>
-                <Col style={{ textAlign: 'left', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
                   {item.title}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={3}>
+                <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={3}>
                   {item.company_name}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
                   {item.type}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} className='button-col' sm={2}>
+                <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} className='button-col' sm={2}>
                   {item.phone}
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
+                <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center' }} className='button-col' sm={2}>
                   <Button
                     className='button'
-                    style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                    style={{ backgroundColor: '#504edf', textAlign: 'center' }}
                     onClick={() => {
                       <If condition={item.job_id}>
                         <Then>
