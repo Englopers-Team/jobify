@@ -3,7 +3,8 @@ import cookie from 'react-cookies';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+
 
 dotenv.config();
 const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com'
@@ -22,15 +23,30 @@ function AuthProvider(props) {
     const token = cookie.load('token');
     validateToken(token);
     setError(false)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+
+    if (token && pathname !== '/logout') {
+      console.log(token)
+      checkUser(token)
+    } else if (pathname === '/logout') {
+      logout();
+      history.push('/')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, token]);
 
   const checkUser = async (tk) => {
     await superagent.get(`${API}/verify/0`).set({ 'Authorization': `Basic ${tk}` }).then((data) => {
+      console.log(data.body)
       if (data.body === 'blocked') {
         history.push("/banned")
+      } else if (data.body === false && tk !== null) {
+        history.push('/verify')
       }
     })
   }
@@ -53,13 +69,11 @@ function AuthProvider(props) {
   };
 
   const login = async (email, password) => {
-    console.log('here')
     try {
       const response = await superagent
         .post(`${API}/signin`)
         .send({ email, password })
 
-      console.log('cry', response.body)
       validateToken(response.body.token);
       return true
     } catch (e) {
@@ -72,9 +86,7 @@ function AuthProvider(props) {
   const signup = async (payload, type) => {
     try {
       if (type === 'p') {
-        console.log('1')
         const { firstName, lastName, email, phone, jobTitle, country, password } = payload;
-        console.log(API)
         const response = await superagent
           .post(`${API}/signup`)
           .send({ first_name: firstName, last_name: lastName, email, phone, job_title: jobTitle, country, password, account_type: 'p' });
@@ -96,6 +108,7 @@ function AuthProvider(props) {
 
   const logout = () => {
     setLoginState(false, null, {});
+    setToken('')
   };
 
   const state = { login, logout, signup, loggedIn, user, error, setError, token, setToken, checkUser };

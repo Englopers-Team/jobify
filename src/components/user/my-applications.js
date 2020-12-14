@@ -1,6 +1,7 @@
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav, Modal, Spinner } from 'react-bootstrap';
 import { useContext, useState, useEffect } from 'react';
 import { If, Then } from 'react-if';
+import { AuthContext } from '../../context/auth';
 import superagent from 'superagent';
 import './styles.scss';
 
@@ -8,15 +9,16 @@ import { useHistory } from 'react-router-dom';
 
 export default function UserApplications() {
   let history = useHistory();
+  const context = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
   const [loader, setLoader] = useState(false);
 
   const API = 'https://jobify-app-v2.herokuapp.com/user/app';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjkzMzMxLCJleHAiOjM2MTYwNzY5MzMzMX0.UjxBO5cHePzHJaJcuZgQb-zZ1B_-XAFJYxfsKuUB_ig';
+
   async function getData() {
-    const response = await superagent.get(`${API}`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}`).set('authorization', `Basic ${context.token}`);
     console.log('osama', response.body);
     setData([...response.body.API, ...response.body.DB]);
   }
@@ -24,7 +26,7 @@ export default function UserApplications() {
     setLoader(true);
     superagent
       .delete(`${API}/${id}`)
-      .set('authorization', `Basic ${token}`)
+      .set('authorization', `Basic ${context.token}`)
       .then((data) => {
         console.log(data.text);
         getData();
@@ -33,8 +35,11 @@ export default function UserApplications() {
       });
   };
   useEffect(() => {
-    getData();
-  }, []);
+    if (context.token) {
+      getData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.token]);
 
   return (
     <>
