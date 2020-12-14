@@ -136,9 +136,7 @@ export default function AdminDashboard() {
       new Chart(jobs, chartBarHandler(`Total Jobs ${data.numOfJobs}`, dataJob, labelsJob));
       let dataApp = [];
       let labelsApp = [];
-      let totalApplication = 0;
       data.statusApps.forEach(app => {
-        totalApplication += Number(app.number_of_accepted_apps);
         dataApp.push(app.number_of_accepted_apps)
         labelsApp.push(`${app.status} Application`)
       })
@@ -205,6 +203,7 @@ export default function AdminDashboard() {
       getData()
       setErrHand(false)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
 

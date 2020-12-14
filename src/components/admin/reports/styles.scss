@@ -14,7 +14,7 @@
 
 /* custom colors  */
 .scrollbar-primary::-webkit-scrollbar {
-  background-color: #f5f5f5;
+  background-color: #E1E3E8;
 }
 .scrollbar-primary {
   scrollbar-color: #232B4E #f5f5f5;
@@ -24,16 +24,13 @@
   background-color: #232B4E;
 }
 
-.country {
-  margin: 5px;
-  border-bottom: 1px black solid;
-  font-size: 19px;
-  font-family: Fantasy;
-  text-align: center;
+.scrollbar-white::-webkit-scrollbar {
+  background-color: rgb(255, 255, 255);
 }
-
-.countryHeader {
-  font-size: 25px;
-  font-family: Fantasy;
-  text-align: center;
+.scrollbar-white {
+  scrollbar-color: #232B4E rgb(255, 255, 255);
+}
+.scrollbar-white::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #232B4E;
 }

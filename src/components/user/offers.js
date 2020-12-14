@@ -1,12 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav, Modal, Spinner, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useContext, useState, useEffect } from 'react';
 import { If, Then } from 'react-if';
+import { AuthContext } from '../../context/auth';
 import superagent from 'superagent';
 import './styles.scss';
 
 import { useHistory } from 'react-router-dom';
 
 export default function UserOffers() {
+  const context = useContext(AuthContext);
   let history = useHistory();
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
@@ -15,9 +18,9 @@ export default function UserOffers() {
   const [appStatus, setAppStatus] = useState('');
 
   const API = 'https://jobify-app-v2.herokuapp.com/user/offers';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjkzMzMxLCJleHAiOjM2MTYwNzY5MzMzMX0.UjxBO5cHePzHJaJcuZgQb-zZ1B_-XAFJYxfsKuUB_ig';
+
   async function getData() {
-    const response = await superagent.get(`${API}`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}`).set('authorization', `Basic ${context.token}`);
     console.log('osama', response.body);
     setData(response.body);
   }
@@ -33,7 +36,7 @@ export default function UserOffers() {
     superagent
       .put(`${API}/${id}`)
       .send({ status: status1 })
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjkzMzMxLCJleHAiOjM2MTYwNzY5MzMzMX0.UjxBO5cHePzHJaJcuZgQb-zZ1B_-XAFJYxfsKuUB_ig` })
+      .set({ Authorization: `Basic ${context.token}` })
       .then((data) => {
         console.log(data);
         getData();
@@ -42,8 +45,11 @@ export default function UserOffers() {
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (context.token) {
+      getData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.token]);
 
   return (
     <>

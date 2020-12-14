@@ -3,7 +3,10 @@ import AuthProvider from './context/auth';
 import SocketProvider from './context/socket';
 import Header from './components/header/';
 import Footer from './components/footer/';
+import ScrollTop from './components/helpers/scroll-top';
 import { BrowserRouter } from 'react-router-dom';
+import Chat from './components/chat';
+import Notification from './components/notification';
 import './app.scss';
 
 function App() {
@@ -11,7 +14,10 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <SocketProvider>
-          <div className='page-container'>
+          <ScrollTop />
+          <Notification />
+          <Chat />
+          <div className='page-container' style={{ animation: `fadeIn 2s` }}>
             <div className='content-wrap'>
               <Header />
               <Routes />
@@ -21,7 +27,6 @@ function App() {
         </SocketProvider>
       </AuthProvider>
     </BrowserRouter>
-
   );
 }
 

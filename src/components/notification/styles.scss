@@ -1,0 +1,48 @@
+.notif{
+  background-color: #6967e6;
+  color:whitesmoke;
+  width: 75%;
+  max-width: 500px;
+  position: fixed;
+  // display: fixed;
+  z-index: 999;
+  bottom: -300px;
+  left: 10px;
+}
+
+// .hideNot{
+//   display:none;
+// }
+
+.showNotfi{
+  bottom: 10px !important;
+}
+
+// .downtoup {
+//   animation-duration: 0.5s !important;
+//   animation-name: downtoup !important;
+// }
+
+.downtoup {
+  animation-duration: 3s !important;
+  animation-name: downtoup !important;
+}
+
+@keyframes downtoup {
+  0% {
+    bottom: -300px;
+  }
+
+  20% {
+    bottom: 10px;
+  }
+
+  80%{
+    bottom: 10px;
+  }
+
+  100%{
+    bottom: -300px;
+  }
+
+}
