@@ -31,7 +31,6 @@ export default function UserEdit() {
 
   async function getData() {
     const API = 'https://jobify-app-v2.herokuapp.com';
-
     const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${context.token}`);
     setData(response.body);
     setFirstName(response.body.first_name);
@@ -44,7 +43,6 @@ export default function UserEdit() {
   async function handleSubmit(e) {
     e.preventDefault();
     const API = 'https://jobify-app-v2.herokuapp.com/user/edit';
-
     await superagent.put(`${API}`).set('authorization', `Basic ${context.token}`).send({ first_name: firstName, last_name: lastName, phone: phone, job_title: jobTitle, country: data.country, age: data.age, avatar: avatar, experince: data.experince, cv: cv });
     history.push('/userhome');
   }
