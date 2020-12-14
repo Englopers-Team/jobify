@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Chart from 'chart.js';
 import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
 
 import './styles.scss';
 import { Container, Row, Col } from 'react-bootstrap';
+import { AuthContext } from '../../context/auth'
 
 
 export default function AdminDashboard() {
@@ -15,6 +16,7 @@ export default function AdminDashboard() {
   const [topCountryPerson, setTopCountryPerson] = useState([]);
   const [topCountryComapny, setTopCountryComapny] = useState([]);
 
+  const context = useContext(AuthContext)
 
   const color = [
     '#504EDF',
@@ -97,8 +99,7 @@ export default function AdminDashboard() {
 
   async function getData() {
     const API = 'https://jobify-app-v2.herokuapp.com';
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NjEzOTUwLCJleHAiOjM2MTYwNzYxMzk1MH0.cV-8lRQZKQbI_-4V8TujDoE5n0oMrXixx223HCyRIH4';
-    const response = await superagent.get(`${API}/admin`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/admin`).set('authorization', `Basic ${context.token}`);
     setData(response.body);
   }
 
@@ -199,11 +200,11 @@ export default function AdminDashboard() {
       new Chart(topJobTitle, chartBarHandler(`Most Applicant Job Title`, applicpintNumJobTitle, labelsapplicpintNumJobTitle));
 
 
-    } else {
+    } else if (context.token) {
       getData()
       setErrHand(false)
     }
-  }, [data]);
+  }, [data, context.token]);
 
 
 
@@ -211,7 +212,7 @@ export default function AdminDashboard() {
     return topCountryPerson.map(item => {
 
       return (
-        <Row  style={{margin : '5px' , fontSize:'19px' , fontFamily : 'Fantasy', textAlign : 'center' }} className="country">
+        <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country">
           <Col>{item.country}</Col>
           <Col>{item.number_person_ofeach_country}</Col>
         </Row>
@@ -222,7 +223,7 @@ export default function AdminDashboard() {
   function Company() {
     return topCountryComapny.map(item => {
       return (
-        <Row style={{margin : '5px' , fontSize:'19px' , fontFamily : 'Fantasy', textAlign : 'center' }} className="country">
+        <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country">
           <Col>{item.country}</Col>
           <Col>{item.number_company_ofeach_country}</Col>
         </Row>
