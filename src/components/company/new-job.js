@@ -1,5 +1,75 @@
+import superagent from 'superagent';
+import { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '../../context/auth';
+import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';
+import { If, Else } from 'react-if';
+import './styles.scss';
+import Spinner from 'react-bootstrap/Spinner';
+import { useHistory } from 'react-router-dom';
+
 export default function SubmitJob() {
+  const [title, setTitle] = useState('');
+  const [location, setLocation] = useState('');
+  const [type, setType] = useState('');
+  const [description, setDescription] = useState('');
+  const [loader, setLoader] = useState(false);
+  const history = useHistory();
+  const context = useContext(AuthContext);
+
+  const API = 'https://jobify-app-v2.herokuapp.com';
+
+  async function handleSubmit(e) {
+    setLoader(true);
+    e.preventDefault();
+    await superagent.post(`${API}/company/submit`).set('authorization', `Basic ${context.token}`).send({ title: title, location: location, type: type, description: description });
+    setLoader(false);
+    history.push('/company/submitted-jobs');
+  }
+
   return (
-    <></>
-  )
+    <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+      <Row style={{ justifyContent: 'center' }}>
+        <Col sm={8}>
+          <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>New Job </Card.Title>
+            <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
+
+            <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
+              <Form onSubmit={(e) => handleSubmit(e)} style={{ width: '80%' }}>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control required onChange={(e) => setTitle(e.target.value)} className='input' type='text' value={title} />
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control required onChange={(e) => setLocation(e.target.value)} className='input' type='text' value={location} />
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Type</Form.Label>
+                  <Form.Control as='select' required onChange={(e) => setType(e.target.value)} className='input' value={type}>
+                    <option>Full-Time</option>
+                    <option>Part-Time</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control required onChange={(e) => setDescription(e.target.value)} className='input' type='text' value={description} />
+                </Form.Group>
+
+                <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center', height: 50 }} sm={1.5}>
+                  <If condition={loader}>
+                    <Spinner animation='border' variant='primary' />
+                    <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
+                  </If>
+                </Col>
+                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
+                  Submit
+                </Button>
+              </Form>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
 }

@@ -1,51 +1,64 @@
 import { useEffect, useState, useContext } from 'react';
-import { Badge, ListGroup, Form, Col, Container, Row, Image } from 'react-bootstrap';
+import { Badge, ListGroup, Form, Col, Container, Row, Image, Button } from 'react-bootstrap';
 
 import * as Icon from 'react-bootstrap-icons';
 
 import { If, Then, Else } from 'react-if';
 import { SocketContext } from '../../context/socket';
+import { AuthContext } from '../../context/auth';
 import './styles.scss';
 
 export default function Chat() {
   const context = useContext(SocketContext);
+  const authContext = useContext(AuthContext);
 
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState('');
   const [secondParty, setSecondParty] = useState();
   const [secondPartyChar, setSecondPartyChar] = useState('');
 
   const [secondPartyIId, setSecondPartyIId] = useState();
 
   const [messages, setMessages] = useState([]);
-  const [visibleL, setVisibleL] = useState(false);
-  const [visibleC, setVisibleC] = useState(false);
   const [targerIndex, setTargerIndex] = useState();
   const [specificName, setSpecificName] = useState('')
 
-  const [comp, setComp] = useState('list')
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjA2ODQyLCJleHAiOjM2MTYwNzYwNjg0Mn0.ZBf0SDIjCv3JQK42nNhmGgdhWbJHY2FQNz1fI2WwXkQ';
+  // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjA2ODQyLCJleHAiOjM2MTYwNzYwNjg0Mn0.ZBf0SDIjCv3JQK42nNhmGgdhWbJHY2FQNz1fI2WwXkQ';
   useEffect(() => {
-    context.socketMessg.emit('join', token);
-    context.socketMessg.on('message', (payload) => {
-      setMessages(payload[0]);
-      if (payload[1] === 'person') {
-        setSecondParty('company_id');
-        setSecondPartyChar('c');
-      } else {
-        setSecondParty('person_id');
-        setSecondPartyChar('p');
-      }
-    })
 
-    context.socketMessg.emit('checkMsg', { token })
+    if (authContext.token) {
+      context.socketMessg.emit('join', authContext.token);
+      context.socketMessg.on('message', (payload) => {
+
+        if (typeof payload == 'string') {
+          // setMessages([...messages,payload[0]]);
+          context.socketMessg.emit('checkMsg', { token: authContext.token })
+        } else {
+          setMessages(payload[0]);
+        }
+        setTimeout(() => {
+          var objDiv = document.getElementById("compChat");
+          objDiv.scrollTop = objDiv.scrollHeight;
+
+        }, 300)
+        
+        if (payload[1] === 'person') {
+          setSecondParty('company_id');
+          setSecondPartyChar('c');
+        } else {
+          setSecondParty('person_id');
+          setSecondPartyChar('p');
+        }
+      })
+
+      context.socketMessg.emit('checkMsg', { token: authContext.token })
+    }
 
     return () => {
       context.socketMessg.off('message');
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authContext.token]);
 
 
   function ChatListView() {
@@ -63,11 +76,16 @@ export default function Chat() {
             compChat.classList.add('opin')
             compChat.classList.remove('compdel')
           }, 500)
+          setTimeout(() => {
+            var objDiv = document.getElementById("compChat");
+            objDiv.scrollTop = objDiv.scrollHeight;
+  
+          }, 600)
           // compShow.classList.add('slideoutBtn')
         }
         }>
           <Col style={{ justifyContent: 'center', alignSelf: 'center' }} sm={2}>
-            <Image style={{ width: '48px' }} src={item.profile.logo} roundedCircle />
+            <Image style={{ width: '48px' }} src={item.profile.avatar ? item.profile.avatar : item.profile.logo} roundedCircle />
           </Col>
           <Col sm={0} lg={1}>
           </Col>
@@ -84,21 +102,36 @@ export default function Chat() {
     const arr = messages.filter((item, index) => {
       return index === targerIndex
     })
-
     return arr[0][specificName].map((mesg, index) => {
       if (mesg.sender === secondPartyChar) {
         return (
-          <Row id='messg' className='otherMessg'>
-            { mesg.body}
+          <Row className='otherMessg' key={index}>
+            {/* <Col sm={1}></Col> */}
+            <Col style={{ padding: '2px' }} sm={11}>
+              <p id='messg' style={{ float: 'right', marginRight: '10px' }}>
+                {mesg.body}
+              </p>
+            </Col>
+            <Col style={{ alignSelf: 'center', padding: 0, textAlign: 'right' }} sm={1}>
+              <Image style={{ width: '28px' }} src={authContext.user.profile.avatar ? authContext.user.profile.avatar : authContext.user.profile.logo} roundedCircle />
+            </Col>
           </Row>
           // <ListGroup.Item id='messg' className='otherMessg' key={index}>
           // </ListGroup.Item>
         )
       } else {
         return (
-          <ListGroup.Item id='messg' className='myMessg' key={index}>
-            {mesg.body}
-          </ListGroup.Item>
+          <Row className='myMessg' key={index}>
+            <Col style={{ alignSelf: 'center', padding: 0, textAlign: 'left', marginRight: '10px' }} sm={1}>
+              <Image style={{ width: '28px' }} src={arr[0].profile.logo ? arr[0].profile.logo : arr[0].profile.avatar} roundedCircle />
+            </Col>
+            <Col style={{ padding: '2px' }} sm={10}>
+              <p id='messg' style={{ float: 'left' }}>
+                {mesg.body}
+              </p>
+            </Col>
+            {/* <Col sm={1}></Col> */}
+          </Row>
         )
       }
     })
@@ -134,56 +167,95 @@ export default function Chat() {
       }}><p style={{ margin: 0, alignSelf: "center" }}> <Icon.ChatRightDotsFill color='whitesmoke' size='32' /></p>
       </Container>
 
-      <Container >
 
-        <Container id='chat' className='hideChat' >
-          <Row className='flexRow' style={{ backgroundColor: '#504edf', color: 'whitesmoke', paddingBottom: '10px' }}>
-            <Col sm={2}>
-              <If condition={secondPartyIId}>
-                <Icon.ArrowLeftCircleFill onClick={() => {
-                  const compList = document.getElementById('compList')
-                  const compChat = document.getElementById('compChat')
-                  compChat.classList.add('opout')
-                  setTimeout(() => {
-                    compChat.classList.remove('opout')
-                    compChat.classList.add('compdel')
-                    compList.classList.add('opin')
-                    compList.classList.remove('compdel')
-                    setSecondPartyIId()
-                  }, 500)
-                }} size='22' color='#DEDEE3' style={{ cursor: 'pointer' }} />
-              </If>
-            </Col>
-            <Col sm={7}>
-              <h4 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>Messages</h4>
-            </Col>
-            <Col style={{ textAlign: 'center' }} sm={2}>
-              <Icon.XCircleFill onClick={() => {
-                const chatBox = document.getElementById('chat')
-                const sideBtn = document.getElementById('chatButton')
-                chatBox.classList.remove('slideinChat')
-                chatBox.classList.add('slideoutChat')
+      <Container id='chat' className='hideChat' >
+        <Row className='flexRow' style={{ backgroundColor: '#504edf', color: 'whitesmoke', width: '100%', margin: 0, borderTopLeftRadius: '10px' }}>
+          <Col sm={2}>
+            <If condition={secondPartyIId}>
+              <Icon.ArrowLeftCircleFill onClick={() => {
+                const compList = document.getElementById('compList')
+                const compChat = document.getElementById('compChat')
+                compChat.classList.add('opout')
                 setTimeout(() => {
-                  chatBox.classList.add('hideChat')
-                  chatBox.classList.remove('slideoutChat')
-                  sideBtn.classList.remove('hide')
-                  sideBtn.classList.add('slideinBtn')
-                }, 600)
+                  compChat.classList.remove('opout')
+                  compChat.classList.add('compdel')
+                  compList.classList.add('opin')
+                  compList.classList.remove('compdel')
+                  setSecondPartyIId()
+                }, 500)
               }} size='22' color='#DEDEE3' style={{ cursor: 'pointer' }} />
+            </If>
+          </Col>
+          <Col sm={7}>
+            <If condition={secondPartyIId}>
+              <Then>
+                <h5 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>
+                  {specificName}
+                </h5>
+              </Then>
+              <Else>
+                <h4 style={{ fontWeight: '500', marginTop: '12px', marginBottom: '12px', marginRight: 0, textAlign: 'center' }}>
+                  Messages
+                  </h4>
+              </Else>
+            </If>
 
-            </Col>
-          </Row>
-          <Row className='flexCol' >
-            <Container id='compList' style={{ width: '80%' }}>
-              <ChatListView />
-            </Container>
-            <Container id='compChat' className='compdel' style={{ width: '80%' }}>
-              <If condition={secondPartyIId}>
+          </Col>
+          <Col className='xPhone' style={{ textAlign: 'center' }} sm={2}>
+            <Icon.XCircleFill onClick={() => {
+              const chatBox = document.getElementById('chat')
+              const sideBtn = document.getElementById('chatButton')
+              chatBox.classList.remove('slideinChat')
+              chatBox.classList.add('slideoutChat')
+
+              const compList = document.getElementById('compList')
+              const compChat = document.getElementById('compChat')
+              compChat.classList.add('opout')
+              setTimeout(() => {
+                compChat.classList.remove('opout')
+                compChat.classList.add('compdel')
+                compList.classList.add('opin')
+                compList.classList.remove('compdel')
+                setSecondPartyIId()
+              }, 500)
+
+              setTimeout(() => {
+                chatBox.classList.add('hideChat')
+                chatBox.classList.remove('slideoutChat')
+                sideBtn.classList.remove('hide')
+                sideBtn.classList.add('slideinBtn')
+              }, 600)
+            }} size='22' color='#DEDEE3' style={{ cursor: 'pointer' }} />
+
+          </Col>
+        </Row>
+        <Row className='flexCol' >
+          <Container id='compList' style={{ width: '80%' }}>
+            <ChatListView />
+          </Container>
+          <Container id='compChat' className='compdel' style={{ width: '85%' }}>
+            <If condition={secondPartyIId}>
+              <Then>
                 <ChatView />
-              </If>
-            </Container>
-          </Row>
-        </Container>
+                <Container id='compInput' style={{ width: '100%', padding: 0 }}>
+                  <Form.Control id='inputSend' value={message} required onChange={(e) => { setMessage(e.target.value) }} type="text" />
+                </Container>
+                <Container id='compSend' style={{ width: '100%', padding: 0 }}>
+                  <Button className='buttonSend' onClick={() => {
+                    context.socketMessg.emit('message', { body: message, receiver: secondPartyIId, token: authContext.token, type: secondPartyChar })
+                    context.socketMessg.emit('checkMsg', { token: authContext.token })
+                    setMessage('')
+                    setTimeout(() => {
+                      var objDiv = document.getElementById("compChat");
+                      objDiv.scrollTop = objDiv.scrollHeight;
+
+                    }, 300)
+                  }}>Send</Button>
+                </Container>
+              </Then>
+            </If>
+          </Container>
+        </Row>
       </Container>
     </>
   )

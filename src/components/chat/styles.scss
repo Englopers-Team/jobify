@@ -3,8 +3,9 @@
   max-width: 320px;
   max-height: 400px;
   min-height: 400px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  // overflow-y: visible;
+  // overflow-x: hidden;
+  // overflow: auto;
   position: fixed;
   background-color: #e1e3e8;
   right: 0;
@@ -19,8 +20,88 @@
   border-right: 0;
 }
 
+.buttonSend {
+  background-color: #504edf;
+  height: 40px;
+  font-size: 20px;
+  color: whitesmoke;
+  border-width: 0;
+  border-radius: 0;
+  width: 80px;
+  &:hover {
+    background-color: #232b4e;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+    border-width: 0;
+    box-shadow: 0;
+  }
+}
+
+#compSend {
+  position: fixed;
+  bottom: 45px;
+  max-width: 80px;
+  // border: 0;
+  right: 0px;
+}
+
+#compChat {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 287px;
+  min-height: 287px;
+  bottom: 45px;
+  // right: 5px;
+}
+#compInput {
+  position: fixed;
+  bottom: 40px;
+  border: 0;
+  right: 80px;
+  background-color: transparent;
+  border-bottom-left-radius: 10px;
+  width: 90%;
+  max-width: 240px;
+}
+#inputSend {
+  padding: 5px;
+  margin: 5px;
+  height: 40px;
+  background-color: #e1e3e8;
+  border: solid #232b4e70 0.5px;
+  // box-shadow: 0 0 2px #232B4E;
+  border-radius: 0;
+  border-right: 0;
+  // box-shadow: transparent;
+  // border:0;
+  &:focus {
+    border-color: #232B4E;
+    box-shadow: 0 01px 0px rgba(0, 0, 0, 0.075) inset, 0 0 0px #504edf;
+    outline: 0 none;
+  }
+}
+
+@media (max-width: 600px) {
+  #compChat {
+    max-height: 250px;
+    min-height: 250px;
+    bottom: 47px;
+    // right: 5px;
+  }
+  .xPhone {
+    margin-bottom: 10px;
+  }
+}
+
+#compChat::-webkit-scrollbar {
+  display: none;
+}
+
 .hideChat {
-  right: -320px !important;
+  right: -330px !important;
 }
 
 .slideinChat {
@@ -35,7 +116,7 @@
 
 @keyframes slideinchat {
   from {
-    right: -320px;
+    right: -330px;
     // width: 300%;
   }
 
@@ -52,7 +133,7 @@
   }
 
   to {
-    right: -320px;
+    right: -330px;
     // width: 100%;
   }
 }
@@ -176,11 +257,7 @@
   bottom: 85px;
 }
 
-#inputSend {
-  padding: 0px;
-  margin: 0px;
-  height: 30px;
-}
+//
 
 #clickSend {
   padding: 0px;
@@ -191,16 +268,22 @@
 
 #messg {
   font-size: 14px;
-  padding: 4px;
-  margin-bottom: 9px;
+  padding: 6px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  // background-color: #DEDEE3;
+  background-color: #dedee3;
+  border-radius: 12px;
+  box-shadow: 0 0 2px #232b4e;
+  width: fit-content;
 }
 
 .myMessg {
-  color: red;
+  color: #232B4E;
 }
 
 .otherMessg {
-  color: blue;
+  color: #232B4E;
 }
 
 .opin {

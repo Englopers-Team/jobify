@@ -17,19 +17,18 @@ export default function EditJob(props) {
   const [description, setDescription] = useState('');
   const [loader, setLoader] = useState(false);
   const id = props.match.params.id;
-  let history = useHistory();
-  console.log('====================================');
-  console.log(history);
-  console.log('====================================');
+  const context = useContext(AuthContext);
+  const history = useHistory();
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (context.token) {
+      getData();
+    }
+  }, [context.token]);
 
   const API = 'https://jobify-app-v2.herokuapp.com/company/jobs';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc3MzMwNjIsImV4cCI6MzYxNjA3NzMzMDYyfQ.4m57l6B3uXRcUpylAEzUAdfNx0E3xTuh9SukCEtZuX8';
   async function getData() {
-    const response = await superagent.get(`${API}/${id}`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/${id}`).set('authorization', `Basic ${context.token}`);
     console.log(response.body);
     setData(response.body);
     setTitle(response.body.title);
@@ -40,7 +39,7 @@ export default function EditJob(props) {
   async function handleSubmit(e) {
     setLoader(true);
     e.preventDefault();
-    await superagent.put(`${API}/${id}`).set('authorization', `Basic ${token}`).send({ title: title, location: location, type: type, description: description });
+    await superagent.put(`${API}/${id}`).set('authorization', `Basic ${context.token}`).send({ title: title, location: location, type: type, description: description });
     setLoader(false);
     history.goBack();
   }
@@ -50,22 +49,28 @@ export default function EditJob(props) {
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>{data.title} Edit </Card.Title>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}> Edit Job </Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
 
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
               <Form onSubmit={(e) => handleSubmit(e)} style={{ width: '80%' }}>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Title</Form.Label>
                   <Form.Control required onChange={(e) => setTitle(e.target.value)} className='input' type='text' value={title} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Location</Form.Label>
                   <Form.Control required onChange={(e) => setLocation(e.target.value)} className='input' type='text' value={location} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
-                  <Form.Control required onChange={(e) => setType(e.target.value)} className='input' type='text' value={type} />
+                  <Form.Label>Type</Form.Label>
+                  <Form.Control as='select' required onChange={(e) => setType(e.target.value)} className='input' value={type}>
+                    <option>Full-Time</option>
+                    <option>Part-Time</option>
+                  </Form.Control>
                 </Form.Group>
-
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Description</Form.Label>
                   <Form.Control required onChange={(e) => setDescription(e.target.value)} className='input' type='text' value={description} />
                 </Form.Group>
 
@@ -75,8 +80,8 @@ export default function EditJob(props) {
                     <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
                   </If>
                 </Col>
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500' }}>
-                  Save
+                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
+                  Submit
                 </Button>
               </Form>
             </Row>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth';
@@ -20,12 +21,12 @@ export default function MyJobs(props) {
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
 
-  // const context = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
   const jobList = async (e) => {
     superagent
       .get(jobsApi)
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+      .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
         setResults(data.body);
@@ -41,7 +42,7 @@ export default function MyJobs(props) {
     setLoader(true);
     superagent
       .delete(`${jobsApi}/${id}`)
-      .set({ Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudF90eXBlIjoiYyIsInByb2ZpbGUiOnsiaWQiOjEsIm5hbWUiOiJEZW1vIENvbXBhbnkiLCJsb2dvIjoiaHR0cHM6Ly93d3cuZmxhdGljb24uY29tL3N2Zy9zdGF0aWMvaWNvbnMvc3ZnLzk5My85OTM4OTEuc3ZnIiwiY291bnRyeSI6IlVTQSJ9LCJpYXQiOjE2MDc2OTc0NDAsImV4cCI6MzYxNjA3Njk3NDQwfQ.L0t96L4ru5l0zA1wh4f0PvV22QRg49jtWsDC130M7qM` })
+      .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
         console.log(data.text);
@@ -52,12 +53,16 @@ export default function MyJobs(props) {
   };
 
   useEffect(() => {
-    jobList();
-  }, []);
+    if (context.token) {
+      jobList();
+    }
+  }, [context.token]);
 
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    jobList();
+    if (context.token) {
+      jobList();
+    }
     return () => {
       window.removeEventListener('resize', checkSize);
     };
@@ -70,8 +75,8 @@ export default function MyJobs(props) {
         </Row>
         <Row>
           <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-            <Row sm={8} className='flexRow list-header2'>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={2}>
+            <Row sm={8} className='flexRow list-header2' style={{ height: '1.5%' }}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                 Title
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
@@ -81,9 +86,6 @@ export default function MyJobs(props) {
                 Location
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-                Description
-              </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
                 Num Of App
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
@@ -111,7 +113,7 @@ export default function MyJobs(props) {
               return (
                 <>
                   <Row className='flexRow list-body' sm={12}>
-                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
+                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                       {item.title}
                     </Col>
                     <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
@@ -121,9 +123,6 @@ export default function MyJobs(props) {
                       {item.location}
                     </Col>
                     <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-                      {item.description}
-                    </Col>
-                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
                       {item.applicants_num}
                     </Col>
                     <Row sm={2.5}>
