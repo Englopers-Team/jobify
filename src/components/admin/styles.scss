@@ -42,7 +42,7 @@
   cursor: pointer;
   margin-bottom: 15px;
   border-bottom: #9393a19c 1px solid;
-  margin :10px;
+  margin: 10px;
   margin-top: 15px;
   margin-bottom: 20px;
 }
@@ -50,18 +50,30 @@
   background-color: #e1e3e883;
 }
 
-.resulTarget{
-  border : 3px solid #f5f5f5;
-  margin-left : 0px;
-  box-shadow: 1px  1px 1px 1px #9393a19c;
-}
-.buttonBlock{
-  position: absolute;
-  right : 0;
-  bottom : 0;
+.resulTarget {
+  border: 3px solid #f5f5f5;
+  margin-left: 0px;
+  box-shadow: 1px 1px 1px 1px #9393a19c;
 }
 
-.BolckSign{
+
+.BolckSign {
   background-color: red;
   border-radius: 50%;
+}
+
+.button1 {
+  width : 90px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #504edf;
+  color: whitesmoke;
+  &:hover {
+    background-color: #232b4e;
+  }
+  &:not(:disabled):not(.disabled):focus,
+  :not(:disabled):not(.disabled).focus {
+    background-color: #232b4e;
+  }
 }

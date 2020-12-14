@@ -115,10 +115,10 @@ export default function Block() {
           <Col >
             <If condition={target.account_status === 'blocked'}>
               <Then>
-                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Unblock</Button>
+                <Button className=' button1' onClick={() => { blockUserHanler(target.auth_id) }}>Unblock</Button>
               </Then>
               <Else>
-                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Block</Button>
+                <Button className=' button1' onClick={() => { blockUserHanler(target.auth_id) }}>Block</Button>
               </Else>
             </If>
           </Col>
@@ -151,10 +151,10 @@ export default function Block() {
           <Col >
             <If condition={target.account_status === 'blocked'}>
               <Then>
-                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Unblock</Button>
+                <Button className=' button1' onClick={() => { blockUserHanler(target.auth_id) }}>Unblock</Button>
               </Then>
               <Else>
-                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Block</Button>
+                <Button className=' button1' onClick={() => { blockUserHanler(target.auth_id) }}>Block</Button>
               </Else>
             </If>          </Col>
         </Row>
