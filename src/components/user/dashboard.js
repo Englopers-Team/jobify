@@ -56,6 +56,7 @@ export default function UserDashboard() {
     if (context.token) {
       userStatistics();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
   return (
     <Container>
