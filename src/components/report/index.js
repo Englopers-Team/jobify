@@ -25,10 +25,18 @@ export default function Reports() {
   const scrollContainerStyle = { width: 'auto', maxHeight: '400px', height: 'fit-content', overflowY: 'scroll', overflowX: 'hidden', marginTop: '0 !important' };
 
   useEffect(() => {
+    window.addEventListener('resize', checkSize);
     if (context.token) {
       getData();
     }
-  }, [context.token]);
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
+  }, [context.token, screenSize]);
+
+  const checkSize = () => {
+    setScreenSize(window.screen.width);
+  };
 
   async function getData() {
     const API = 'https://jobify-app-v2.herokuapp.com';
@@ -44,7 +52,7 @@ export default function Reports() {
 
   return (
     <>
-      <Container style={{ animation: `fadeIn 2s` }}>
+      <Container style={{ marginTop: '30px' }}>
         <Row style={{ justifyContent: 'space-between' }}>
           <Col style={{ borderLeft: 'solid', height: '90%', borderRadius: '2px', borderLeftColor: '#504EDF', borderLeftWidth: '3px', paddingLeft: '8px' }}>
             <h2 style={{ marginBottom: 0 }}>Your Feedback is Valuable</h2>
@@ -57,7 +65,7 @@ export default function Reports() {
             </Link>
           </Col>
         </Row>
-        <Row style={{ marginTop: '40px' }}></Row>
+        <Row style={{ marginTop: '30px' }}></Row>
       </Container>
       <If condition={context.token && data[0]}>
         <Then>
@@ -67,7 +75,7 @@ export default function Reports() {
             </Row>
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row sm={8} className='flexRow list-header2' style={{ height: 75 }}>
+                <Row sm={8} className='flexRow list-header2' style={{ height: screenSize > 575 ? 75 : 130 }}>
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
@@ -75,9 +83,9 @@ export default function Reports() {
                     Description
                   </Col>
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
-                    State
+                    Status
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}></Col>
+                  <Col style={{ textAlign: 'center' }} sm={2}></Col>
                 </Row>
                 <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
                   <Modal.Header closeButton>
@@ -93,10 +101,9 @@ export default function Reports() {
                 </Modal>
 
                 <MDBContainer className='scrollbar scrollbar-white  mt-5 mx-auto' style={scrollContainerStyle}>
-                  {data.map((item) => {
-                    console.log(item);
+                  {data.map((item, index) => {
                     return (
-                      <Row className='flexRow list-body' sm={12}>
+                      <Row key={index} className='flexRow list-body' sm={8}>
                         <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
@@ -106,7 +113,7 @@ export default function Reports() {
                             {item.description.length > 45 ? '...' : ''}
                           </p>
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525' }} sm={3}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
                           {item.response === null ? 'Open' : 'Closed'}
                         </Col>
                         <Col style={{ textAlign: 'center' }} sm={2}>
@@ -127,9 +134,6 @@ export default function Reports() {
                   })}
                 </MDBContainer>
               </Container>
-            </Row>
-            <Row className='image-container' style={{ justifyContent: 'center' }}>
-              <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
             </Row>
           </Container>
         </Then>
