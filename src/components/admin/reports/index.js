@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Dropdown, FormControl } from 'react-bootstrap';
 import superagent from 'superagent';
