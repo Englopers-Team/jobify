@@ -11,13 +11,11 @@ export default function Header(props) {
 
   useEffect(() => {
     if (context.token) {
-
     }
-  }, [context.token])
+  }, [context.token]);
   return (
     <>
       <If condition={context.token !== ''}>
-
         <If condition={context.user.account_type === 'p'}>
           <Then>
             <UserHeader />
@@ -30,7 +28,7 @@ export default function Header(props) {
               <Else>
                 <If condition={context.user.account_type === 'admin'}>
                   <Then>
-                    <CompanyHeader />
+                    <GuestHeader />
                   </Then>
                   <Else>
                     <GuestHeader />
