@@ -43,11 +43,11 @@ export default function Block() {
         if (item.company_name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username' || query == item.auth_id && searchTypeQuery === 'Id' || query === '') {
           return (
             <Row className='profile' key={index} onClick={() => { setId(item.auth_id) }}>
-              <Col  sm={2} style={{ textAlign: 'center', lineHeight: '300%' , fontWeight : 'bold' , color : '#9393A1' }}>{item.auth_id}</Col>
-              <Col  sm={2}>
+              <Col sm={2} style={{ textAlign: 'center', lineHeight: '300%', fontWeight: 'bold', color: '#9393A1' }}>{item.auth_id}</Col>
+              <Col sm={2}>
                 <Image src={`${item.logo}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
               </Col>
-              <Col  sm={8} style={{ margin: '0' , color : '#9393A1' }}>{item.company_name}</Col>
+              <Col sm={8} style={{ margin: '0', color: '#9393A1' }}>{item.company_name}</Col>
             </Row>
           )
         }
@@ -58,13 +58,13 @@ export default function Block() {
         if (name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username' || query == item.auth_id && searchTypeQuery === 'Id' || query === '') {
           return (
             <Row className='profile' key={index} onClick={() => { setId(item.auth_id) }}>
-              <Col  sm={2} style={{ textAlign: 'center', lineHeight: '300%' , fontWeight : 'bold' , color : '#9393A1' }} sm={2}>{item.auth_id}</Col>
+              <Col sm={2} style={{ textAlign: 'center', lineHeight: '300%', fontWeight: 'bold', color: '#9393A1' }} sm={2}>{item.auth_id}</Col>
               <Col sm={2}>
                 <Image src={`${item.avatar}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
               </Col>
               <Col sm={8}>
-                <p style={{ margin: '0' , color : '#9393A1' }}>{name}</p>
-                <p style={{ margin: '0'  , color : '#9393A1'}}>{item.job_title}</p>
+                <p style={{ margin: '0', color: '#9393A1' }}>{name}</p>
+                <p style={{ margin: '0', color: '#9393A1' }}>{item.job_title}</p>
               </Col>
             </Row>
           )
@@ -85,24 +85,31 @@ export default function Block() {
 
     if (target.first_name) {
       data = (
-        <Row>
+        <Row className='resulTarget' style={{ display: 'flex', flexDirection: 'column' }}>
           <Col>{target.auth_id}</Col>
-          <Image src={`${target.avatar}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
+          <Image src={`${target.avatar}`}  style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
           <Col>{target.company_name}</Col>
         </Row>
       )
     } else if (target.company_name) {
       let name = `${target.first_name} ${target.last_name}`
       data = (
-        <Row>
-          <Col style={{  color : '#9393A1'}} sm={2}>{target.auth_id}</Col>
-          <Col sm={4}>
-            <Image src={`${target.avatar}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
-          </Col>
-          <Col sm={6}>
-            <p>{name}</p>
-            <p>{target.job_title}</p>
-          </Col>
+        <Row className='resulTarget' sm={12} style={{ width: '100%', flexDirection: 'column' }}>
+          <Row sm={12} astyle={{}} >
+            <Col style={{}} >User ID : {target.auth_id}</Col>
+            <Col style={{ textAlign: 'right' }} >{target.auth_id}</Col>
+          </Row>
+          <Row style={{ textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
+            <Col style={{ textAlign: 'center' }} sm={4}>
+              <Image src={`${target.logo}`}  style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
+            </Col>
+            <Col style={{ textAlign: 'center' }} sm={6}>
+              <p style={{ textAlign: 'left' }}>{target.company_name}</p>
+              <p style={{ textAlign: 'left' }}>{target.country}</p>
+              <p style={{ textAlign: 'left' }}>{target.phone}</p>
+              <p style={{ textAlign: 'left' }}>{target.company_url}</p>
+            </Col>
+          </Row>
         </Row>
       )
     }
@@ -112,15 +119,14 @@ export default function Block() {
     <Container>
       <Row sm={10}>
         <Col sm={7}>
-          <Row>
+          <Row style={{ maxHight: '100px', height: '100px' }}>
             <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
             <FormControl placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
             <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
             <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
           </Row>
-          <Row>
+          <Row style={{ maxHight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
             <Result />
-
           </Row>
         </Col>
         <Col sm={5}>
