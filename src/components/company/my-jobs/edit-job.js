@@ -1,13 +1,13 @@
+/* eslint-disable no-unused-vars */
 import superagent from 'superagent';
 
-import * as Icon from 'react-bootstrap-icons';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../../context/auth';
-import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { If, Else } from 'react-if';
 import '../styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function EditJob(props) {
   const [data, setData] = useState({});
@@ -24,6 +24,7 @@ export default function EditJob(props) {
     if (context.token) {
       getData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
 
   const API = 'https://jobify-app-v2.herokuapp.com/company/jobs';

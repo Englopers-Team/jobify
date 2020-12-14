@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav, Modal, Spinner } from 'react-bootstrap';
 import { useContext, useState, useEffect } from 'react';
 import { If, Then, Else } from 'react-if';

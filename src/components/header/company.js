@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import './styles.scss';
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';

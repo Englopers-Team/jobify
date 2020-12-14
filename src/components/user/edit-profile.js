@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import superagent from 'superagent';
 
 import Results from '../search/jobs/results';
