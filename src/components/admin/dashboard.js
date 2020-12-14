@@ -17,6 +17,11 @@ export default function AdminDashboard() {
   const [topCountryComapny, setTopCountryComapny] = useState([]);
 
   const context = useContext(AuthContext)
+  Chart.defaults.global.defaultFontSize = 14;
+  Chart.defaults.global.defaultFontColor = 'black';
+  Chart.defaults.global.defaultFontStyle = 'bold';
+
+
 
   const color = [
     '#504EDF',
@@ -54,6 +59,7 @@ export default function AdminDashboard() {
         legend: {
           labels: {
             boxWidth: 0,
+            family: "Georgia"
           }
         },
         scales: {
@@ -213,8 +219,8 @@ export default function AdminDashboard() {
 
       return (
         <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country1">
-          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.country}</Col>
-          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.number_person_ofeach_country}</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>{item.country}</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>{item.number_person_ofeach_country}</Col>
         </Row>
       )
     })
@@ -224,8 +230,8 @@ export default function AdminDashboard() {
     return topCountryComapny.map(item => {
       return (
         <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country1">
-          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.country}</Col>
-          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.number_company_ofeach_country}</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>{item.country}</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>{item.number_company_ofeach_country}</Col>
         </Row>
       )
     })
@@ -309,10 +315,10 @@ export default function AdminDashboard() {
 
       </Row>
       <Row className="countryHeaderl">
-        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Location</Col>
-        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Total Applicant</Col>
-        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Location</Col>
-        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Total Companies</Col>
+        <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Location</Col>
+        <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Total Applicant</Col>
+        <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Location</Col>
+        <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Total Companies</Col>
       </Row>
       <ScrollBarPage />
 
