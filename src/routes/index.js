@@ -34,6 +34,8 @@ import ApplicantSavedJobs from '../components/user/saved-jobs';
 
 // for testing osama
 import dash from '../components/user/dashboard';
+import Guest from '../components/guest/dashboard';
+import NoAccess from '../components/no-access';
 
 export default function Routes() {
   return (
@@ -67,6 +69,7 @@ export default function Routes() {
 
       <Route exact path='/reports/' component={Reports} />
       <Route exact path='/reports/submit' component={ReportDetails} />
+      <Route exact path='/reports/new' component={SubmitReport} />
       <Route exact path='/reports/:id' component={SubmitReport} />
 
       <Route exact path='/search/jobs' component={SearchJobs} />
@@ -78,8 +81,10 @@ export default function Routes() {
       <Route exact path='/applicant/offers' component={ApplicantOffers} />
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
-      {/* tset */}
+      <Route exact path='/banned' component={NoAccess} />
+
       <Route path='/userhome' component={dash} />
+      <Route path='/guest' component={Guest} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useContext } from 'react';
 import './styles.scss';
 import superagent from 'superagent';
 import Form from 'react-bootstrap/Form';
@@ -6,12 +7,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from '../search/jobs/results';
+import { AuthContext } from '../../context/auth';
 
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/job';
 const userApi = 'https://jobify-app-v2.herokuapp.com/home';
 
 export default function UserDashboard() {
+  const context = useContext(AuthContext);
+
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [results, setResults] = useState([]);
@@ -39,7 +43,7 @@ export default function UserDashboard() {
   async function userStatistics() {
     await superagent
       .get(userApi)
-      .set({ Authorization: 'Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NzAzODg0LCJleHAiOjM2MTYwNzcwMzg4NH0.IP0748ZpYKsYqSiKLp9oooUNLwvDYuJ01dEvARsIfCg' })
+      .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
         setSugJobs([...data.body.suggJob.resultAPI, ...data.body.suggJob.resultDB]);
@@ -49,8 +53,11 @@ export default function UserDashboard() {
       });
   }
   useEffect(() => {
-    userStatistics();
-  }, []);
+    if (context.token) {
+      userStatistics();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.token]);
   return (
     <Container>
       <Container style={{ textAlign: 'center' }}>

@@ -1,44 +1,50 @@
-import { useContext, useState, useEffect } from 'react'
-import { AuthContext } from '../../context/auth'
+import { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '../../context/auth';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
-import superagent from 'superagent'
-import './styles.scss'
+import superagent from 'superagent';
+import './styles.scss';
 import { PlusCircle, ChatSquareTextFill, HeartFill, BookmarkStarFill } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import dotenv from 'dotenv';
-import { If, Then, Else } from 'react-if'
+import { If, Then, Else } from 'react-if';
 dotenv.config();
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
-  const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com'
-  const context = useContext(AuthContext)
+  const API = process.env.API_SERVER || 'https://jobify-app-v2.herokuapp.com';
+  const context = useContext(AuthContext);
 
   useEffect(() => {
     if (context.token) {
-      getPosts()
+      getPosts();
     }
     // console.log(context.token)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context.token])
+  }, [context.token]);
 
   const getPosts = () => {
-    superagent.get(`${API}/community`).set({ 'Authorization': `Basic ${context.token}` }).then(async (data) => {
-      setPosts([...data.body.pinned, ...data.body.personPost, ...data.body.communityPosts])
-    })
-  }
+    superagent
+      .get(`${API}/community`)
+      .set({ Authorization: `Basic ${context.token}` })
+      .then(async (data) => {
+        setPosts([...data.body.pinned, ...data.body.personPost, ...data.body.communityPosts]);
+      });
+  };
 
   const handleLike = (id) => {
-    superagent.patch(`${API}/community/like/${id}`).set({ 'Authorization': `Basic ${context.token}` }).then(() => {
-      getPosts()
-    })
-  }
+    superagent
+      .patch(`${API}/community/like/${id}`)
+      .set({ Authorization: `Basic ${context.token}` })
+      .then(() => {
+        getPosts();
+      });
+  };
 
   const PostsList = () => {
     return posts.map((post) => {
-      let date = new Date(post.date)
-      const postPath = `/community/posts/${post._id}`
-      date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()
+      let date = new Date(post.date);
+      const postPath = `/community/posts/${post._id}`;
+      date = (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) + '/' + date.getFullYear();
       return (
         <Container key={post._id} style={{ marginBottom: '30px' }}>
           <Row>
@@ -46,7 +52,7 @@ export default function Community() {
               <Col sm={3} lg={2}>
                 <Image className='imgShadow' style={{ width: '64px' }} src={post.profile.avatar} roundedCircle />
               </Col>
-              <Col >
+              <Col>
                 <h4 style={{ marginBottom: 0, fontSize: '20px', fontWeight: '600' }}>{post.profile.name}</h4>
                 <p style={{ marginBottom: 0 }}>{post.profile.job_title}</p>
               </Col>
@@ -58,7 +64,9 @@ export default function Community() {
           <Row>
             <Col sm={7} style={{ marginLeft: '30px', marginTop: '15px', fontWeight: 'bold', color: '#232B4E' }}>
               <Row style={{ marginLeft: '5px' }}>
-                <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>{post.title}</Link>
+                <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
+                  {post.title}
+                </Link>
               </Row>
               <Row style={{ marginLeft: '5px', marginTop: '8px' }}>
                 <p style={{ marginBottom: 0 }}>
@@ -67,11 +75,10 @@ export default function Community() {
                   </If>
                   <If condition={post.likes.includes(context.user.id)}>
                     <Then>
-                      <ChatSquareTextFill color='#232B4E' size={18} />  {post.comments.length}  <HeartFill onClick={() => handleLike(post._id)} color='red' style={{ marginLeft: '5px' }} size={18} />  {post.likes.length}
+                      <ChatSquareTextFill color='#232B4E' size={18} /> {post.comments.length} <HeartFill onClick={() => handleLike(post._id)} color='red' style={{ marginLeft: '5px' }} size={18} /> {post.likes.length}
                     </Then>
                     <Else>
-                      <ChatSquareTextFill color='#232B4E' size={18} />  {post.comments.length}  <HeartFill onClick={() => handleLike(post._id)} color='#232B4E' style={{ marginLeft: '5px' }} size={18} />  {post.likes.length}
-
+                      <ChatSquareTextFill color='#232B4E' size={18} /> {post.comments.length} <HeartFill onClick={() => handleLike(post._id)} color='#232B4E' style={{ marginLeft: '5px' }} size={18} /> {post.likes.length}
                     </Else>
                   </If>
                 </p>
@@ -79,26 +86,29 @@ export default function Community() {
             </Col>
           </Row>
           <hr />
-        </Container >
-      )
-    })
-  }
+        </Container>
+      );
+    });
+  };
 
   return (
-    <Container>
+    <Container style={{ animation: `fadeIn 2s` }}>
       <Row style={{ justifyContent: 'space-between' }}>
         <Col style={{ borderLeft: 'solid', height: '90%', borderRadius: '2px', borderLeftColor: '#504EDF', borderLeftWidth: '3px', paddingLeft: '8px' }}>
-          <h2 style={{ marginBottom: 0 }} >Discuss Your Problems With Our Community</h2>
+          <h2 style={{ marginBottom: 0 }}>Discuss Your Thoughts With Our Community</h2>
         </Col>
         <Col style={{ textAlign: 'right', alignSelf: 'center' }}>
-          <Link to='/community/submit'> <Button variant='outline-dark' className='buttonTopic' size="lg" type="submit" style={{ marginBottom: '50px', height: '40px', fontWeight: '500' }}>
-            <PlusCircle style={{ paddingBottom: '2px' }} size={20} />  New Topic
-          </Button></Link>
+          <Link to='/community/submit'>
+            {' '}
+            <Button variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginBottom: '50px', height: '40px', fontWeight: '500' }}>
+              <PlusCircle style={{ paddingBottom: '2px' }} size={20} /> New Topic
+            </Button>
+          </Link>
         </Col>
       </Row>
       <Row style={{ marginTop: '40px' }}>
         <PostsList />
       </Row>
     </Container>
-  )
+  );
 }

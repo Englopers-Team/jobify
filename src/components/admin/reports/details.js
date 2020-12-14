@@ -44,6 +44,7 @@ export default function ReportDetails() {
   }, [context.token]);
 
 
+
   async function getData() {
     const response = await superagent.get(`${API}/admin/report/${id}`).set('authorization', `Basic ${context.token}`);
     console.log(response.body.report.description)

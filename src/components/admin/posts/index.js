@@ -1,12 +1,12 @@
 /* eslint-disable eqeqeq */
 import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../../context/auth'
-import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck } from 'react-bootstrap';
 import superagent from 'superagent'
 import { Link } from 'react-router-dom'
 import dotenv from 'dotenv';
 import { If, Then, Else } from 'react-if'
-import { PlusCircle, ChatSquareTextFill, HeartFill, BookmarkStarFill, Search } from 'react-bootstrap-icons';
+import { ChatSquareTextFill, HeartFill } from 'react-bootstrap-icons';
 
 import { MDBContainer } from "mdbreact";
 
@@ -33,6 +33,7 @@ export default function Posts() {
     if (context.token) {
       getPosts()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token])
 
   const getPosts = () => {
@@ -96,7 +97,6 @@ export default function Posts() {
             </Link>
           );
         }
-      }
     })
   }
 

@@ -15,23 +15,18 @@ export default function SearchCompany() {
   const [results, setResults] = useState([]);
   const [visable, setVisable] = useState(false);
   const [loader, setLoader] = useState(false);
-
   const jobList = async (e) => {
     e.preventDefault();
     setLoader(true);
     setVisable(true);
-
     await superagent
       .get(jobsApi)
       .query({ company_name: name, country: location })
-
       .then((data) => {
-        console.log('fffffff', data.body);
         setResults(data.body);
         setLoader(false);
       });
   };
-  console.log(results);
 
   return (
     <Container style={{ justifyContent: 'center' }}>
@@ -41,11 +36,11 @@ export default function SearchCompany() {
           <Col sm={5} className='input-filed'>
             <Icon.EnvelopeFill className='icon' />
 
-            <Form.Control className='input' required name='title' type='text' onChange={(e) => setName(e.target.value)} placeholder='Job Title' />
+            <Form.Control className='input' required name='company' type='text' onChange={(e) => setName(e.target.value)} placeholder='Company name' />
           </Col>
           <Col sm={5} className='input-filed'>
             <Icon.GeoAltFill className='icon' />
-            <Form.Control className='input' required name='location' type='text' onChange={(e) => setLocation(e.target.value)} placeholder='Country' />
+            <Form.Control className='input' required name='location' type='text' onChange={(e) => setLocation(e.target.value)} placeholder='Location' />
           </Col>
 
           <Col sm={2}>
