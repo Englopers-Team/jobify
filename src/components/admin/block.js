@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import superagent from 'superagent';
-import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel, Button } from 'react-bootstrap';
 import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
 
@@ -84,32 +84,56 @@ export default function Block() {
     })
 
     if (target.first_name) {
+      let name = `${target.first_name} ${target.last_name}`
       data = (
-        <Row className='resulTarget' style={{ display: 'flex', flexDirection: 'column' }}>
-          <Col>{target.auth_id}</Col>
-          <Image src={`${target.avatar}`}  style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
-          <Col>{target.company_name}</Col>
+        <Row className='resulTarget' sm={12} style={{ maxHeight: '400px', height: '400px', width: '100%', flexDirection: 'column' }}>
+          <Row sm={12} astyle={{ height: '20%' }} >
+            <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
+            <Col style={{ textAlign: 'right' }} >{target.auth_id}</Col>
+          </Row>
+          <Row style={{ height: '60%', textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
+
+            <Col style={{ textAlign: 'center', alignItem: 'center' }} sm={4}>
+              <Image src={`${target.avatar}`} style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
+            </Col>
+            <Col style={{ textAlign: 'center', alignItem: 'center' }} sm={6}>
+              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Name :  </span> {name}</p>
+              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Job Title : </span> {target.job_title}</p>
+              <p style={{ textAlign: 'left' }}>   <span style={{ fontWeight: 'bold' }}>Country : </span>{target.country}</p>
+              <p style={{ textAlign: 'left' }}>   <span style={{ fontWeight: 'bold' }}>Phone : </span>{target.phone}</p>
+              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Age : </span> {target.age}</p>
+              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Experince :  </span>{target.experince}</p>
+              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>CV : </span> {target.cv}</p>
+            </Col>
+          </Row>
+          <Col >
+            <Button className='buttonBlock'>Block</Button>
+          </Col>
         </Row>
       )
     } else if (target.company_name) {
-      let name = `${target.first_name} ${target.last_name}`
       data = (
-        <Row className='resulTarget' sm={12} style={{ width: '100%', flexDirection: 'column' }}>
-          <Row sm={12} astyle={{}} >
-            <Col style={{}} >User ID : {target.auth_id}</Col>
+        <Row className='resulTarget' sm={12} style={{ maxHeight: '400px', height: '400px', width: '100%', flexDirection: 'column' }}>
+          <Row sm={12} astyle={{ height: '20%' }} >
+            <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
             <Col style={{ textAlign: 'right' }} >{target.auth_id}</Col>
           </Row>
-          <Row style={{ textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
+          <Row style={{ height: '60%', textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
             <Col style={{ textAlign: 'center' }} sm={4}>
-              <Image src={`${target.logo}`}  style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
+              <Image src={`${target.logo}`} style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
             </Col>
             <Col style={{ textAlign: 'center' }} sm={6}>
-              <p style={{ textAlign: 'left' }}>{target.company_name}</p>
-              <p style={{ textAlign: 'left' }}>{target.country}</p>
-              <p style={{ textAlign: 'left' }}>{target.phone}</p>
-              <p style={{ textAlign: 'left' }}>{target.company_url}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Company Name : </span> {target.company_name}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Country : </span> {target.country}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Phone : </span>{target.phone}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Website: </span> {target.company_url}</p>
             </Col>
           </Row>
+          <Row style={{ height: '20%', maxHeight: '20%' }}>
+          </Row>
+          <Col >
+            <Button className='buttonBlock'>Block</Button>
+          </Col>
         </Row>
       )
     }
@@ -125,7 +149,7 @@ export default function Block() {
             <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
             <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
           </Row>
-          <Row style={{ maxHight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
+          <Row style={{ maxHeight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
             <Result />
           </Row>
         </Col>
