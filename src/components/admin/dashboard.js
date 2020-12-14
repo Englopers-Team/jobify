@@ -4,8 +4,7 @@ import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
 import AdminHeader from '../header/admin';
 import './styles.scss';
-import './bgstyle.scss';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { AuthContext } from '../../context/auth'
 
 
@@ -240,7 +239,7 @@ export default function AdminDashboard() {
   const ScrollBarPage = () => {
     const scrollContainerStyle = { width: "200px", maxHeight: "200px", overflowY: 'scroll', overflowX: 'hidden' };
     return (
-      <Row>
+      <Row style={{ marginBottom: '100px' }}>
         <Col className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
           <MDBContainer>
             <People />
@@ -257,93 +256,110 @@ export default function AdminDashboard() {
 
 
   return (
-    <Row style={{ width: '100%',backgroundColor:'#E1E3E8' }}>
+    <Row style={{ width: '100%', backgroundColor: '#E1E3E8' }}>
       <Col sm={2}>
         <AdminHeader />
 
       </Col>
-      <Col sm={10} style={{marginTop:'50px'}}>
-          <Row style={{marginBottom:'300px',height:'400px',marginLeft:'50px'}}>
-            <Col style={{ width: '400px', margin: '70px', height: '400px',boxShadow:'0 0 5px #232B4E',backgroundColor:'#b4bdcc',borderRadius:'10px' }}>
-              <canvas className='myChart' id="appUser" width="400" height="200"></canvas>
-            </Col>
-            <Col style={{ width: '400px', margin: '70px', height: '400px',boxShadow:'0 0 5px #232B4E',backgroundColor:'#b4bdcc',borderRadius:'10px' }}>
-              <canvas className='myChart' id="appReportsOpenClose" width="400" height="200" ></canvas>
-            </Col>
-          </Row>
+      <Col sm={10} style={{ marginTop: '50px' }}>
+        <Row style={{ marginBottom: '120px', height: '400px', marginLeft: '50px', marginRight: '50px' }}>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="appUser" width="400" height="200"></canvas>
+          </Col>
+          <Col sm={1} style={{ padding: 0 }}></Col>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="appReportsOpenClose" width="400" height="200" ></canvas>
+          </Col>
+        </Row>
 
-          <Row style={{boxShadow:'0 0 5px #232B4E',marginBottom:'300px',marginLeft:'50px'}}>
-            <Col style={{ width: '400px', margin: '70px', height: '200px' }}>
-              <canvas className='myChart' id="jobs" width="400" height="200"></canvas>
-            </Col>
-            <Col style={{ width: '400px', margin: '70px', height: '200px' }}>
-              <canvas className='myChart' id="appReports" width="400" height="200" ></canvas>
-            </Col>
-          </Row>
-          <Row >
-            <Col style={{ width: '400px', margin: '70px', height: '200px' }}>
-              <canvas className='myChart' id="statusApps" width="400" height="200" ></canvas>
-            </Col>
-            <Col style={{ width: '400px', margin: '70px', height: '200px' }}>
-              <canvas className='myChart' id="statusOffer" width="400" height="200" ></canvas>
-            </Col>
-          </Row>
+        <Row style={{ marginBottom: '120px', height: '400px', marginLeft: '50px', marginRight: '50px' }}>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="jobs" width="400" height="200"></canvas>
+          </Col>
+          <Col sm={1} style={{ padding: 0 }}></Col>
 
-          <Row >
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="appReports" width="400" height="200" ></canvas>
+          </Col>
+        </Row>
+
+        <Row style={{ marginBottom: '120px', height: '400px', marginLeft: '50px', marginRight: '50px' }}>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="statusApps" width="400" height="200" ></canvas>
+          </Col>
+          <Col sm={1} style={{ padding: 0 }}></Col>
+
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="statusOffer" width="400" height="200" ></canvas>
+          </Col>
+        </Row>
+
+        <Row style={{ marginBottom: '120px', height: '400px', marginLeft: '50px', marginRight: '50px' }}>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+
             <canvas className='myChart' id="offerJob" width="200" height="50" ></canvas>
-          </Row>
-
+          </Col>
+        </Row>
+        {/* 
           <Row style={{
             height: '150px',
           }}>
 
-          </Row>
+          </Row> */}
 
-          <Row >
-            <Col style={{ width: '400px', height: '200px', margin: '70px',marginBottom:'150px' }}>
-              <canvas className='myChart' id="appOfferJob" width="400" height="200" ></canvas>
-            </Col>
-            <Col style={{ width: '400px', height: '200px', margin: '70px',marginBottom:'150px', fontSize: '50px', fontFamily: 'Fantasy', textAlign: 'center' }}>
-              Average age
+        <Row style={{ marginBottom: '120px', height: '400px', marginLeft: '50px', marginRight: '50px' }} >
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="appOfferJob" width="400" height="200" ></canvas>
+          </Col>
+          <Col sm={1} style={{ padding: 0 }}></Col>
+
+          <Col className='flexCol' style={{ width: '400px', height: '400px', fontSize: '50px', fontFamily: 'Fantasy', textAlign: 'center', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            Average age
            <br />
-              {avgAge} Years
+            {avgAge} Years
         </Col>
-          </Row>
-          <Row >
+        </Row>
+
+        <Row style={{ marginBottom: '120px', height: '600px', marginLeft: '50px', marginRight: '50px' }}>
+          <Col className='flexCol' style={{ width: '400px', height: '600px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+
             <canvas className='myChart' id="dbApiRatio" width="150" height="60" ></canvas>
-          </Row>
+          </Col>
+        </Row>
 
 
+        {/* 
+        <Row style={{
+          height: '150px',
+        }}>
 
-          <Row style={{
-            height: '150px',
-          }}>
+        </Row> */}
+        <Row className="countryHeaderl">
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Location</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Total Applicant</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Location</Col>
+          <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Total Companies</Col>
+        </Row>
+        <ScrollBarPage />
 
-          </Row>
-          <Row className="countryHeaderl">
-            <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Location</Col>
-            <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Total Applicant</Col>
-            <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Location</Col>
-            <Col style={{ fontSize: '19px', fontFamily: 'Fantasy' }}>Total Companies</Col>
-          </Row>
-          <ScrollBarPage />
-
-          <Row >
-            <Col style={{ width: '400px', height: '200px', margin: '70px',marginBottom:'150px' }}>
-              <canvas className='myChart' id="topComponiesSendApp" width="400" height="200" ></canvas>
-            </Col>
-            <Col style={{ width: '400px', height: '200px', margin: '70px',marginBottom:'150px', fontSize: '50px', fontFamily: 'Fantasy', textAlign: 'center' }}>
-              <canvas className='myChart' id="topComponiesSendOffer" width="400" height="200" ></canvas>
-            </Col>
-          </Row>
+        <Row style={{ marginBottom: '0px', height: '600px', marginLeft: '50px', marginRight: '50px' }}>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="topComponiesSendApp" width="400" height="200" ></canvas>
+          </Col>
+          <Col sm={1}></Col>
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
+            <canvas className='myChart' id="topComponiesSendOffer" width="400" height="200" ></canvas>
+          </Col>
+        </Row>
 
 
-          <Row >
+        <Row style={{ marginBottom: '120px', height: '600px', marginLeft: '50px', marginRight: '50px' }} >
+          <Col className='flexCol' style={{ width: '400px', height: '400px', boxShadow: '0 0 5px #232B4E', backgroundColor: '#b4bdcc', borderRadius: '10px' }}>
             <canvas className='myChart' id="topJobTitle" width="400" height="100" ></canvas>
-          </Row>
+          </Col>
+        </Row>
       </Col>
     </Row>
-
   )
 }
 
