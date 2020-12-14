@@ -10,6 +10,8 @@ import { useHistory } from 'react-router-dom';
 
 export default function UserApplications() {
   let history = useHistory();
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
   const context = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
@@ -35,12 +37,21 @@ export default function UserApplications() {
         setShow(false);
       });
   };
+
+  const checkSize = () => {
+    setScreenSize(window.screen.width);
+  };
+
   useEffect(() => {
+    window.addEventListener('resize', checkSize);
     if (context.token) {
       getData();
     }
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context.token]);
+  }, [screenSize, context.token]);
 
   return (
     <>
@@ -49,23 +60,25 @@ export default function UserApplications() {
           <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: '#504edf' }}>My Applications</h2>
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-          <Row sm={8} className='flexRow list-header'>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} className='col-title' sm={2}></Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} className='col-title' sm={2}>
+          <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px' }}>
+            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={1}>
+              Photo
+            </Col>
+            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={2}>
               Job Title
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={3}>
+            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={3}>
               Company Name
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
               Job Type
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
               Application Status
             </Col>
             <Col sm={1}>
               <If condition={loader}>
-                <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
+                <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
                   <Spinner animation='border' variant='primary' />
                 </Col>
               </If>
@@ -85,25 +98,25 @@ export default function UserApplications() {
           {data.map((item) => {
             return (
               <Row className='flexRow list-body' sm={8}>
-                <Col style={{ fontWeight: 650 }} sm={2}>
-                  <Image style={{ width: '50px' }} src={item.logo} roundedCircle />
+                <Col style={{ fontWeight: 650, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={1}>
+                  <Image style={{ width: '50px', height: '50px', objectFit: 'cover' }} src={item.logo} roundedCircle />
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#9393A1' }} sm={2}>
                   {item.title}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={3}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#9393A1' }} sm={3}>
                   {item.company_name}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#9393A1' }} sm={2}>
                   {item.type}
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={2}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center' }} className='button-col' sm={2}>
                   {item.status}
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center' }} className='button-col' sm={2}>
                   <Button
                     className='button'
-                    style={{ paddingRight: '60px', backgroundColor: '#504edf' }}
+                    style={{ backgroundColor: '#504edf' }}
                     onClick={() => {
                       setShow(true);
                       setId(item.id);

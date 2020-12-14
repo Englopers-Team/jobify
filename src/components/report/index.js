@@ -67,14 +67,14 @@ export default function Reports() {
             </Row>
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row sm={8} className='flexRow list-header2' style={{ height: 75 }}>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
+                <Row sm={8} className='flexRow list-header2' style={{ justifyContent: 'center' }}>
+                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={4}>
+                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={5}>
                     Description
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
                     State
                   </Col>
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}></Col>
@@ -97,16 +97,16 @@ export default function Reports() {
                     console.log(item);
                     return (
                       <Row className='flexRow list-body' sm={12}>
-                        <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                        <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={4}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={5}>
                           <p style={{ wordWrap: 'break-word' }}>
                             {item.description.slice(0, 45)}
                             {item.description.length > 45 ? '...' : ''}
                           </p>
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525' }} sm={3}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: item.response === null ? '#69D95B' : '#B72525' }} sm={2}>
                           {item.response === null ? 'Open' : 'Closed'}
                         </Col>
                         <Col style={{ textAlign: 'center' }} sm={2}>
@@ -127,9 +127,6 @@ export default function Reports() {
                   })}
                 </MDBContainer>
               </Container>
-            </Row>
-            <Row className='image-container' style={{ justifyContent: 'center' }}>
-              <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
             </Row>
           </Container>
         </Then>
