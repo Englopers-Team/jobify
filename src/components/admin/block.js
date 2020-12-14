@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import superagent from 'superagent';
 import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel, Button } from 'react-bootstrap';
 import { If, Then, Else } from 'react-if'
@@ -6,6 +6,7 @@ import { MDBContainer } from "mdbreact";
 import { DashCircle } from 'react-bootstrap-icons';
 
 import './styles.scss';
+import { AuthContext } from '../../context/auth'
 
 export default function Block() {
   const [person, setPerson] = useState([]);
@@ -16,16 +17,19 @@ export default function Block() {
   const [searchTypeQuery, setSearchTypeQuery] = useState('Id');
   const scrollContainerStyle = { backgroundColor: 'white', width: "auto", maxHeight: "500px", height: '500px', overflowY: 'scroll', overflowX: 'hidden' };
 
+  const context = useContext(AuthContext)
 
   const API = 'https://jobify-app-v2.herokuapp.com';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NzA4MDY2LCJleHAiOjM2MTYwNzcwODA2Nn0.uErZAP_4ZCFUp-WLXIhXlV7SZu40itfj0C6m1Ppwm_c';
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (context.token) {
+      getData();
+    }
+
+  }, [context.token]);
 
   async function getData() {
-    const response = await superagent.get(`${API}/admin/users`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/admin/users`).set('authorization', `Basic ${context.token}`);
     setPerson(response.body.dataPerson);
     setCompany(response.body.dataCompany);
     // getinfo
@@ -33,7 +37,7 @@ export default function Block() {
 
 
   async function blockUserHanler(idBlocked) {
-    await superagent.patch(`${API}/admin/block/${idBlocked}`).set('authorization', `Basic ${token}`);
+    await superagent.patch(`${API}/admin/block/${idBlocked}`).set('authorization', `Basic ${context.token}`);
     getData()
   }
 
