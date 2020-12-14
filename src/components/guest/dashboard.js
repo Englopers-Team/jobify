@@ -7,13 +7,13 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from '../search/jobs/results';
 import { AuthContext } from '../../context/auth';
-
+import { useHistory } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/job';
 
 export default function GuestDashbaord() {
   const context = useContext(AuthContext);
-
+  let history = useHistory();
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [results, setResults] = useState([]);
@@ -114,7 +114,7 @@ export default function GuestDashbaord() {
   };
 
   return (
-    <Container>
+    <Container style={{ textAlign: 'center' }}>
       <Container style={{ textAlign: 'center' }}>
         <Form onSubmit={jobList}>
           <br></br>
@@ -154,78 +154,78 @@ export default function GuestDashbaord() {
           </Row>
         </Form>
       </Container>
-      <Container style={{ textAlign: 'center', marginTop: '150px', marginBottom: '100px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <Container style={{ justifyContent: 'center', marginTop: '150px', marginBottom: '100px' }}>
         <Row style={{ justifyContent: 'center' }}>
           <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Jobs Categories</h2>
         </Row>
         <Row sm={8} style={{ justifyContent: 'center' }}>
           <Row style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }} sm={8}>
-            <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+            <Col style={{ marginTop: '30px', justifyContent: 'center' }}>
+              <Card style={{ width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon1.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Software Engineering</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>The combination of autonomy, pay, flexibility, and job satisfaction leads to software engineers being quite happy compared to people in other professions.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon2.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Applications Developments</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px', justifyContent: 'center' }}>
-              <Card style={{ width: '18rem', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px', justifyContent: 'center' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Constructional Engineering</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
           <Row sm={8} style={{ justifyContent: 'center' }}>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Bussnies Adminestrations</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Marketing</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon6.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Finance</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
         </Row>
       </Container>
-      <Container style={{ marginTop: '50px' }}>
-        <Container style={{ width: '28%', textAlign: 'center', marginBottom: '30px' }}>
-          <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Featured Jobs</h2>
+      <Container style={{ textAlign: 'center', marginTop: '50px' }}>
+        <Container style={{ width: 'fit-content', textAlign: 'center', marginBottom: '30px' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Featured Jobs</h2>
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header'>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} className='col-title' sm={4}>
+            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title media' sm={4}>
               Job Title
             </Col>
             <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
@@ -243,7 +243,7 @@ export default function GuestDashbaord() {
           {sugJobs.map((item) => {
             return (
               <Row className='flexRow list-body' sm={8}>
-                <Col style={{ fontWeight: 650 }} sm={4}>
+                <Col style={{ fontWeight: 650, textAlign: 'left' }} className='media' sm={4}>
                   {item.title}
                 </Col>
                 <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
@@ -255,13 +255,26 @@ export default function GuestDashbaord() {
                 <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
                   {item.type}
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
-                  <Button className='button' onClick={console.log(item.email)} variant='praimary'>
+                <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
+                  <Button
+                    className='button'
+                    onClick={() => {
+                      history.push('/signup');
+                    }}
+                    variant='praimary'
+                  >
                     Save
                   </Button>
                 </Col>
-                <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
-                  <Button className='button' style={{ paddingRight: '50px' }} onClick={console.log(item.email)} variant='praimary'>
+                <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
+                  <Button
+                    className='button'
+                    style={{}}
+                    onClick={() => {
+                      history.push('/signup');
+                    }}
+                    variant='praimary'
+                  >
                     Apply
                   </Button>
                 </Col>

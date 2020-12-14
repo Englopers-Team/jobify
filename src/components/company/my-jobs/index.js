@@ -15,9 +15,9 @@ export default function MyJobs(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(true);
-  let history = useHistory();
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
+  let history = useHistory();
 
   const context = useContext(AuthContext);
 

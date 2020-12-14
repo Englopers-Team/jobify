@@ -69,6 +69,7 @@ export default function Routes() {
 
       <Route exact path='/reports/' component={Reports} />
       <Route exact path='/reports/submit' component={ReportDetails} />
+      <Route exact path='/reports/new' component={SubmitReport} />
       <Route exact path='/reports/:id' component={SubmitReport} />
 
       <Route exact path='/search/jobs' component={SearchJobs} />
