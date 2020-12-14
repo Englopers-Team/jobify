@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Chat from './components/chat';
 import Notification from './components/notification';
 import './app.scss';
+import { If, Else, Then } from 'react-if'
 
 function App() {
   return (
