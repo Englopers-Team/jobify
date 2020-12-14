@@ -21,7 +21,7 @@ function AuthProvider(props) {
   let history = useHistory();
   useEffect(() => {
     const token = cookie.load('token');
-    console.log('load token',token)
+    // console.log('load token', token)
     validateToken(token);
     setError(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,14 +30,20 @@ function AuthProvider(props) {
   const { pathname } = useLocation();
 
   useEffect(() => {
-
+    const oauthPath = pathname.split('/')
+    // console.log(oauthPath[1])
+    // console.log(oauthPath[2])
     if (token && pathname !== '/logout') {
-      console.log(token,'test with token only')
       checkUser(token)
     } else if (pathname === '/logout') {
       logout();
       history.push('/')
     }
+    if (oauthPath[1] === 'oauth') {
+      validateToken(oauthPath[2]);
+      history.push('/')
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, token]);
 
