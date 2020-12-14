@@ -55,19 +55,23 @@ export default function CompanyEdit() {
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
               <Form onSubmit={(e) => handleSubmit(e)} style={{ width: '80%' }}>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Company Name</Form.Label>
                   <Form.Control required onChange={(e) => setCompanyName(e.target.value)} className='input' type='text' value={companyName} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Phone Number</Form.Label>
                   <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='text' value={phone} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Logo</Form.Label>
                   <Form.Control required onChange={(e) => setLogo(e.target.value)} className='input' type='text' value={logo} />
                 </Form.Group>
-
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Location</Form.Label>
                   <Form.Control required onChange={(e) => setCountry(e.target.value)} className='input' type='text' value={country} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                  <Form.Label>Website</Form.Label>
                   <Form.Control required onChange={(e) => setCompanyUrl(e.target.value)} className='input' type='text' value={companyUrl} />
                 </Form.Group>
 
@@ -77,7 +81,7 @@ export default function CompanyEdit() {
                     <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
                   </If>
                 </Col>
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500' }}>
+                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
                   Save
                 </Button>
               </Form>

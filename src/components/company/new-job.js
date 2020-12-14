@@ -50,7 +50,6 @@ export default function SubmitJob() {
                     <option>Full-Time</option>
                     <option>Part-Time</option>
                   </Form.Control>
-                  {/* <Form.Control required onChange={(e) => setType(e.target.value)} className='input' type='text' value={type} /> */}
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Description</Form.Label>

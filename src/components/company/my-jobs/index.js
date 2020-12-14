@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth';
@@ -52,12 +53,16 @@ export default function MyJobs(props) {
   };
 
   useEffect(() => {
-    jobList();
-  }, []);
+    if (context.token) {
+      jobList();
+    }
+  }, [context.token]);
 
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    jobList();
+    if (context.token) {
+      jobList();
+    }
     return () => {
       window.removeEventListener('resize', checkSize);
     };
@@ -70,8 +75,8 @@ export default function MyJobs(props) {
         </Row>
         <Row>
           <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-            <Row sm={8} className='flexRow list-header2'>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={2}>
+            <Row sm={8} className='flexRow list-header2' style={{ height: '1.5%' }}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                 Title
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
@@ -81,9 +86,6 @@ export default function MyJobs(props) {
                 Location
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-                Description
-              </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1}>
                 Num Of App
               </Col>
               <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={1.5}>
@@ -111,7 +113,7 @@ export default function MyJobs(props) {
               return (
                 <>
                   <Row className='flexRow list-body' sm={12}>
-                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
+                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                       {item.title}
                     </Col>
                     <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
@@ -121,9 +123,6 @@ export default function MyJobs(props) {
                       {item.location}
                     </Col>
                     <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-                      {item.description}
-                    </Col>
-                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
                       {item.applicants_num}
                     </Col>
                     <Row sm={2.5}>
