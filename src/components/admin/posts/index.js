@@ -30,7 +30,6 @@ export default function Posts() {
   const scrollContainerStyle = { width: "auto", maxHeight: "500px", height: '500px', overflowY: 'scroll', overflowX: 'hidden' };
 
   useEffect(() => {
-    context.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3Nzk0NjA4LCJleHAiOjM2MTYwNzc5NDYwOH0.5HvXYp1M7afaUyAoYeWyqbuWjv9Og4RSpLHqOtu92p4'
     if (context.token) {
       getPosts()
     }

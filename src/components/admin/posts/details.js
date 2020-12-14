@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useContext } from 'react';
 import superagent from 'superagent';
 import { Container, Row, Col, Form, Button, Image, Card } from 'react-bootstrap';
 import { PencilFill, XCircleFill, BookmarkStarFill } from 'react-bootstrap-icons';
@@ -7,6 +7,7 @@ import { MDBContainer } from "mdbreact";
 
 import { useHistory, useParams } from "react-router-dom";
 import './styles.scss';
+import { AuthContext } from '../../../context/auth'
 
 import '../../community/styles.scss'
 
@@ -24,23 +25,23 @@ export default function PostDetails() {
   const [writer, setWriter] = useState(0)
   const [pin, setPin] = useState(false)
   let myComment = ''
+  const context = useContext(AuthContext)
 
 
   const API = 'https://jobify-app-v2.herokuapp.com';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3ODcxOTg3LCJleHAiOjM2MTYwNzg3MTk4N30.fP9YVGp6druDKjvYwDPNqScFkWFpAd5ZmkDWeByrZIk';
   const scrollContainerStyle = { maxHeight: "500px", height: '500px', overflowY: 'scroll', overflowX: 'hidden' };
 
   useEffect(() => {
-    if (token) {
+    if (context.token) {
       getPost()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token])
+  }, [context.token])
 
 
 
   const getPost = () => {
-    superagent.get(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${token}` }).then((data) => {
+    superagent.get(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${context.token}` }).then((data) => {
       setComments(data.body.comments)
       setTitle(data.body.title)
       setBody(data.body.body)
@@ -56,12 +57,12 @@ export default function PostDetails() {
   }
 
   const handlePind = async () => {
-    await superagent.patch(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${token}` })
+    await superagent.patch(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${context.token}` })
     getPost();
   }
 
   const handleDelete = async () => {
-    await superagent.delete(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${token}` })
+    await superagent.delete(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${context.token}` })
     history.push('/admin/posts')
   }
 
