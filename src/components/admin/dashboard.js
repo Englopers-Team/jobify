@@ -212,9 +212,9 @@ export default function AdminDashboard() {
     return topCountryPerson.map(item => {
 
       return (
-        <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country">
-          <Col>{item.country}</Col>
-          <Col>{item.number_person_ofeach_country}</Col>
+        <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country1">
+          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.country}</Col>
+          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.number_person_ofeach_country}</Col>
         </Row>
       )
     })
@@ -223,9 +223,9 @@ export default function AdminDashboard() {
   function Company() {
     return topCountryComapny.map(item => {
       return (
-        <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country">
-          <Col>{item.country}</Col>
-          <Col>{item.number_company_ofeach_country}</Col>
+        <Row style={{ margin: '5px', fontSize: '19px', fontFamily: 'Fantasy', textAlign: 'center' }} className="country1">
+          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.country}</Col>
+          <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>{item.number_company_ofeach_country}</Col>
         </Row>
       )
     })
@@ -308,11 +308,11 @@ export default function AdminDashboard() {
       }}>
 
       </Row>
-      <Row className="countryHeader">
-        <Col>Location</Col>
-        <Col>Total Applicant</Col>
-        <Col>Location</Col>
-        <Col>Total Companies</Col>
+      <Row className="countryHeaderl">
+        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Location</Col>
+        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Total Applicant</Col>
+        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Location</Col>
+        <Col style={{fontSize: '19px', fontFamily: 'Fantasy'}}>Total Companies</Col>
       </Row>
       <ScrollBarPage />
 
