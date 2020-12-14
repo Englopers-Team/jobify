@@ -41,7 +41,7 @@ export default function GuestHeader() {
               <NavLink to='/search/jobs'>Jobs</NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
-              <NavLink to='/community'>Community</NavLink>
+              <NavLink to='/search/company'>Companies</NavLink>
             </Nav.Link>
             <Nav.Link className='link' to='/about'>
               <NavLink to='/about'>About</NavLink>
