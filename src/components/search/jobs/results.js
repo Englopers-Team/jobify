@@ -5,12 +5,11 @@ import { useContext, useState } from 'react';
 import { If, Then, Else } from 'react-if';
 import superagent from 'superagent';
 import Button from 'react-bootstrap/Button';
-import { AuthContext } from '../../../context/auth'
-
+import { AuthContext } from '../../../context/auth';
 
 export default function JobsResults(props) {
   let results = props.results;
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -34,7 +33,6 @@ export default function JobsResults(props) {
       .set('authorization', `Basic ${context.token}`)
       .send(payload)
       .then((data) => {
-
         setLoader(false);
         setShow(false);
       });
@@ -44,30 +42,31 @@ export default function JobsResults(props) {
       <If condition={props.visable}>
         <Then>
           <Container className='list-container' fluid>
-            <Row sm={8} className='flexRow list-header'>
-              <Col style={{ color: '#717171', fontWeight: 550 }} className='col-title' sm={4}>
+            <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title ' sm={4}>
                 Job Title
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
                 Company{' '}
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
                 Location
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
                 Type
               </Col>
               <If condition={props.loader}>
-                <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
+                <Col style={{ color: '#717171', fontWeight: 550 }} sm={1}>
                   <Spinner animation='border' variant='primary' />
                 </Col>
               </If>
+              <Col style={{ color: '#717171', fontWeight: 550 }} sm={1}></Col>
             </Row>
 
             {results.map((item, index) => {
               return (
                 <Row key={index} className='flexRow list-body' sm={8}>
-                  <Col style={{ fontWeight: 650 }} sm={4}>
+                  <Col style={{ fontWeight: 650, textAlign: 'left' }} sm={4}>
                     {item.title}
                   </Col>
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
