@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import './styles.scss';
 import superagent from 'superagent';
 import Spinner from 'react-bootstrap/Spinner';
-import { If, Then, Else } from 'react-if';
+import { If, Else } from 'react-if';
 import Image from 'react-bootstrap/Image';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import * as Icon from 'react-bootstrap-icons';
-import { NavLink, Link } from 'react-router-dom';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/offers';
 export default function CompanyApplications(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -54,6 +51,7 @@ export default function CompanyApplications(props) {
     if (context.token) {
       offersList();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
 
   useEffect(() => {
@@ -62,6 +60,7 @@ export default function CompanyApplications(props) {
     return () => {
       window.removeEventListener('resize', checkSize);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenSize]);
   return (
     <>
