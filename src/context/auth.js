@@ -21,6 +21,7 @@ function AuthProvider(props) {
   let history = useHistory();
   useEffect(() => {
     const token = cookie.load('token');
+    console.log('load token',token)
     validateToken(token);
     setError(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -31,7 +32,7 @@ function AuthProvider(props) {
   useEffect(() => {
 
     if (token && pathname !== '/logout') {
-      console.log(token)
+      console.log(token,'test with token only')
       checkUser(token)
     } else if (pathname === '/logout') {
       logout();
@@ -42,7 +43,7 @@ function AuthProvider(props) {
 
   const checkUser = async (tk) => {
     await superagent.get(`${API}/verify/0`).set({ 'Authorization': `Basic ${tk}` }).then((data) => {
-      console.log(data.body)
+      // console.log(data.body)
       if (data.body === 'blocked') {
         history.push("/banned")
       } else if (data.body === false && tk !== null) {
@@ -66,6 +67,7 @@ function AuthProvider(props) {
     setUser(user)
     setLoggedIn(loggedIn);
     setError(false)
+    setToken(token)
   };
 
   const login = async (email, password) => {
@@ -108,7 +110,6 @@ function AuthProvider(props) {
 
   const logout = () => {
     setLoginState(false, null, {});
-    setToken('')
   };
 
   const state = { login, logout, signup, loggedIn, user, error, setError, token, setToken, checkUser };

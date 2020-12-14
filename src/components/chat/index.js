@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Badge, ListGroup, Form, Col, Container, Row, Image, Button } from 'react-bootstrap';
+import { Form, Col, Container, Row, Image, Button } from 'react-bootstrap';
 
 import * as Icon from 'react-bootstrap-icons';
 
@@ -40,7 +40,7 @@ export default function Chat() {
           objDiv.scrollTop = objDiv.scrollHeight;
 
         }, 300)
-        
+
         if (payload[1] === 'person') {
           setSecondParty('company_id');
           setSecondPartyChar('c');
@@ -79,7 +79,7 @@ export default function Chat() {
           setTimeout(() => {
             var objDiv = document.getElementById("compChat");
             objDiv.scrollTop = objDiv.scrollHeight;
-  
+
           }, 600)
           // compShow.classList.add('slideoutBtn')
         }

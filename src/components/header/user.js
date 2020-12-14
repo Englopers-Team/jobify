@@ -1,6 +1,6 @@
 import './styles.scss';
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
@@ -80,7 +80,10 @@ export default function UserHeader() {
               </NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
-              <NavLink to='/search/company'>Employers</NavLink>
+              <NavLink to='/search/jobs'>Jobs</NavLink>
+            </Nav.Link>
+            <Nav.Link className='link'>
+              <NavLink to='/search/company'>Companies</NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
               <NavLink to='/Community'>Community</NavLink>

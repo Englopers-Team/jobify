@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
-import { Badge, ListGroup, Form, Col, Container, Row, Image, Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { SocketContext } from '../../context/socket';
 import { AuthContext } from '../../context/auth';
-import { If, Else, Then } from 'react-if'
+import { If, Then } from 'react-if'
 import './styles.scss'
 
 export default function Notification() {
@@ -16,7 +16,7 @@ export default function Notification() {
     if (authContext.token) {
       context.socketNotif.emit('join', authContext.token);
       context.socketNotif.on('notification', (payload) => {
-        if(!show){
+        if (!show) {
           setShow(true)
           setTitle(payload.title)
           setBody(payload.description)
@@ -43,8 +43,8 @@ export default function Notification() {
   return (
     <If condition={show}>
       <Then>
-      <Alert id='notification' className='notif'>
-          <Alert.Heading style={{fontSize:'30px'}}>{title}</Alert.Heading>
+        <Alert id='notification' className='notif'>
+          <Alert.Heading style={{ fontSize: '30px' }}>{title}</Alert.Heading>
           <p >
             {body}
           </p>

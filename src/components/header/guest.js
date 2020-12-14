@@ -1,13 +1,10 @@
 import './styles.scss';
 import { NavLink, Link } from 'react-router-dom';
-import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../context/auth';
+import React, { useState, useEffect } from 'react';
 import './styles.scss';
-import * as Icon from 'react-bootstrap-icons';
 import superagent from 'superagent';
 import Button from 'react-bootstrap/Button';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 export default function GuestHeader() {
   const [flag, setFlag] = useState('');
@@ -41,7 +38,7 @@ export default function GuestHeader() {
               <NavLink to='/search/jobs'>Jobs</NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
-              <NavLink to='/community'>Community</NavLink>
+              <NavLink to='/search/company'>Companies</NavLink>
             </Nav.Link>
             <Nav.Link className='link' to='/about'>
               <NavLink to='/about'>About</NavLink>

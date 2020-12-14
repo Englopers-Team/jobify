@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import './styles.scss';
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
@@ -107,7 +108,7 @@ export default function CompanyHeader() {
             eventKey={1}
             title={
               <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
-                {companyName.split(' ')[0]}
+                {/* {companyName.split(' ')[0]} */}
                 <img className='thumbnail-image' src={logo} alt='user pic' style={{ width: 30, height: 30, objectFit: 'cover', borderRadius: 15, marginLeft: 10 }} />
               </span>
             }
@@ -116,6 +117,11 @@ export default function CompanyHeader() {
             <NavDropdown.Item>
               <NavLink exact to='/'>
                 Dashboard
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink exact to='/company/applications'>
+                Applications
               </NavLink>
             </NavDropdown.Item>
             <NavDropdown.Item>
@@ -134,13 +140,8 @@ export default function CompanyHeader() {
               </NavLink>
             </NavDropdown.Item>
             <NavDropdown.Item>
-              <NavLink exact to='/company/applications'>
-                Applications
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/submit-job'>
-                Submit a Job
+              <NavLink exact to='/company/edit-profile'>
+                Edit Profile
               </NavLink>
             </NavDropdown.Item>
             <NavDropdown.Item>
@@ -148,12 +149,6 @@ export default function CompanyHeader() {
                 Reports
               </NavLink>
             </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/edit-profile'>
-                Edit Profile
-              </NavLink>
-            </NavDropdown.Item>
-
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
           </NavDropdown>

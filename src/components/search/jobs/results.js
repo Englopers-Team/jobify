@@ -1,25 +1,27 @@
+/* eslint-disable no-unused-vars */
 import { Container, Row, Col } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { If, Then, Else } from 'react-if';
 import superagent from 'superagent';
 import Button from 'react-bootstrap/Button';
+import { AuthContext } from '../../../context/auth'
+
+
 export default function JobsResults(props) {
   let results = props.results;
+  const context = useContext(AuthContext)
   const [show, setShow] = useState(false);
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjkzMzMxLCJleHAiOjM2MTYwNzY5MzMzMX0.UjxBO5cHePzHJaJcuZgQb-zZ1B_-XAFJYxfsKuUB_ig';
   const [loader, setLoader] = useState(false);
+
   const Apply = (payload) => {
     const API = 'https://jobify-app-v2.herokuapp.com/user/apply';
     setLoader(true);
     superagent
       .post(`${API}/${payload.job_id}`)
-      .set('authorization', `Basic ${token}`)
+      .set('authorization', `Basic ${context.token}`)
       .send(payload)
-      .then((data) => {
-        console.log(data.text);
-
+      .then(() => {
         setLoader(false);
         setShow(false);
       });
@@ -29,10 +31,9 @@ export default function JobsResults(props) {
     setLoader(true);
     superagent
       .post(`${API}`)
-      .set('authorization', `Basic ${token}`)
+      .set('authorization', `Basic ${context.token}`)
       .send(payload)
       .then((data) => {
-        console.log(data.text);
 
         setLoader(false);
         setShow(false);
@@ -63,9 +64,9 @@ export default function JobsResults(props) {
               </If>
             </Row>
 
-            {results.map((item) => {
+            {results.map((item, index) => {
               return (
-                <Row className='flexRow list-body' sm={8}>
+                <Row key={index} className='flexRow list-body' sm={8}>
                   <Col style={{ fontWeight: 650 }} sm={4}>
                     {item.title}
                   </Col>

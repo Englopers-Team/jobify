@@ -1,15 +1,12 @@
-import { Container, Row, Col, Table, Card } from 'react-bootstrap';
+/* eslint-disable no-unused-vars */
+import { Container, Row, Col } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import { If, Then } from 'react-if';
 import Image from 'react-bootstrap/Image';
-import React, { useContext, useState, useEffect } from 'react';
+import React, {  useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../../context/auth';
 import '../styles.scss';
-import superagent from 'superagent';
-import { NavLink, Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import * as Icon from 'react-bootstrap-icons';
 import Modal from 'react-bootstrap/Modal';
 export default function CompanyResults(props) {
   let results = props.results;
