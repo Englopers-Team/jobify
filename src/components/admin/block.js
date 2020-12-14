@@ -3,6 +3,7 @@ import superagent from 'superagent';
 import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel, Button } from 'react-bootstrap';
 import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
+import { DashCircle } from 'react-bootstrap-icons';
 
 import './styles.scss';
 
@@ -30,9 +31,10 @@ export default function Block() {
     // getinfo
   }
 
-  async function getInfo() {
-    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${token}`);
 
+  async function blockUserHanler(idBlocked) {
+    await superagent.patch(`${API}/admin/block/${idBlocked}`).set('authorization', `Basic ${token}`);
+    getData()
   }
 
 
@@ -89,7 +91,11 @@ export default function Block() {
         <Row className='resulTarget' sm={12} style={{ maxHeight: '400px', height: '400px', width: '100%', flexDirection: 'column' }}>
           <Row sm={12} astyle={{ height: '20%' }} >
             <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
-            <Col style={{ textAlign: 'right' }} >{target.auth_id}</Col>
+            <Col style={{ textAlign: 'right' }} >
+              <If condition={target.account_status === 'blocked'}>
+                <DashCircle className='BolckSign' />
+              </If>
+            </Col>
           </Row>
           <Row style={{ height: '60%', textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
 
@@ -107,7 +113,14 @@ export default function Block() {
             </Col>
           </Row>
           <Col >
-            <Button className='buttonBlock'>Block</Button>
+            <If condition={target.account_status === 'blocked'}>
+              <Then>
+                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Unblock</Button>
+              </Then>
+              <Else>
+                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Block</Button>
+              </Else>
+            </If>
           </Col>
         </Row>
       )
@@ -116,7 +129,11 @@ export default function Block() {
         <Row className='resulTarget' sm={12} style={{ maxHeight: '400px', height: '400px', width: '100%', flexDirection: 'column' }}>
           <Row sm={12} astyle={{ height: '20%' }} >
             <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
-            <Col style={{ textAlign: 'right' }} >{target.auth_id}</Col>
+            <Col style={{ textAlign: 'right' }} >
+              <If condition={target.account_status === 'blocked'}>
+                <DashCircle className='BolckSign' />
+              </If>
+            </Col>
           </Row>
           <Row style={{ height: '60%', textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
             <Col style={{ textAlign: 'center' }} sm={4}>
@@ -132,8 +149,14 @@ export default function Block() {
           <Row style={{ height: '20%', maxHeight: '20%' }}>
           </Row>
           <Col >
-            <Button className='buttonBlock'>Block</Button>
-          </Col>
+            <If condition={target.account_status === 'blocked'}>
+              <Then>
+                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Unblock</Button>
+              </Then>
+              <Else>
+                <Button className='buttonBlock' onClick={() => { blockUserHanler(target.auth_id) }}>Block</Button>
+              </Else>
+            </If>          </Col>
         </Row>
       )
     }
