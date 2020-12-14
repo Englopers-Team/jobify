@@ -48,7 +48,7 @@
 }
 
 .navbar {
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
 }
 .bg-custom {
@@ -173,8 +173,11 @@
 
 .activeSide {
   color: #42a0ec;
-  background-color:'#1f2531';
+  background-color:#1f2531;
   width:240px;
-  height:40px;
+  // height:40px;
+  // padding:8px;
+  // padding-top: 6px;
+  // padding-bottom: 6px;
   border:#1d2635 solid 1px;
 }

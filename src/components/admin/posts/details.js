@@ -1,9 +1,11 @@
-import React, { useState, useEffect , useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
 import { Container, Row, Col, Form, Button, Image, Card } from 'react-bootstrap';
 import { PencilFill, XCircleFill, BookmarkStarFill } from 'react-bootstrap-icons';
 import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
+import AdminHeader from '../../header/admin';
+
 
 import { useHistory, useParams } from "react-router-dom";
 import './styles.scss';
@@ -115,13 +117,13 @@ export default function PostDetails() {
                   <Row style={{ justifyContent: 'flex-end', marginTop: '10px' }}>
                     <If condition={pin === 'false'}>
                       <Then>
-                        <Button className='button12'  style={{width : '70px' , maxWidth : '70px' , marginRight : '3px'}}  onClick={() => { handlePind() }}>pin</Button>
+                        <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>pin</Button>
                       </Then>
                       <Else>
-                        <Button className='button12' style={{width : '70px' , maxWidth : '70px'  ,  marginRight : '3px'}} onClick={() => { handlePind() }}>Unpin</Button>
+                        <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>Unpin</Button>
                       </Else>
                     </If>
-                    <Button style={{width : '70px' , maxWidth : '70px' , backgroundColor : '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
+                    <Button style={{ width: '70px', maxWidth: '70px', backgroundColor: '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
                   </Row>
                 </Col>
 
@@ -159,11 +161,17 @@ export default function PostDetails() {
   }
 
   return (
-    <>
-      <Container className='post' style={{ width: '80%', backgroundColor: 'white' }}>
-        <Post />
-      </Container>
-    </>
+    <Row style={{ width: '100%' }}>
+      <Col sm={2}>
+        <AdminHeader />
+
+      </Col>
+      <Col sm={10} style={{marginTop:'120px'}}>
+        <Container className='post' style={{ width: '80%', backgroundColor: 'white' }}>
+          <Post />
+        </Container>
+      </Col>
+    </Row>
   )
 }
 

@@ -29,7 +29,7 @@ export default function Header(props) {
               <Else>
                 <If condition={context.user.account_type === 'admin'}>
                   <Then>
-                    <AdminHeader />
+                    {/* <AdminHeader /> */}
                   </Then>
                   <Else>
                     <GuestHeader />
