@@ -56,10 +56,10 @@ export default function ReportDetails() {
 
   function Report() {
     let state = 'Open';
-    let color = 'green'
+    let color = '#69D95B'
     if (data.report.response !== null) {
       state = 'Close';
-      color = 'red'
+      color = '#B72525'
     }
     return (
       <>
@@ -98,7 +98,7 @@ export default function ReportDetails() {
       <>
         <Row style={{ marginTop: '60px', height: '30%', textAlign: 'center' }} >
           <Col >
-            <Image src={`${data.sender.avatar}`} roundedCircle style={{ width: '150px' , height : '150px' ,  objectFit: 'cover'}} />
+            <Image src={`${data.sender.avatar}`} roundedCircle style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
           </Col>
         </Row>
         <Row style={{ height: '20%', textAlign: 'center', fontSize: '22px', fontWeight: 'bold', marginTop: '3px' }} >
@@ -169,10 +169,10 @@ export default function ReportDetails() {
             </If>
             <Row >
               <Col className='flexRow' style={{ alignItems: 'flex-start', justifyContent: 'flex-end' }}>
-                <Button style={{ marginLeft: '5px', marginTop: '5px' }} onClick={() => {
+                <Button className='button13' style={{ marginLeft: '5px', marginTop: '5px' }} onClick={() => {
                   handleSubmit()
                 }}>Send</Button>
-                <Button style={{ marginLeft: '5px', marginTop: '5px', backgroundColor: 'red' }} onClick={() => {
+                <Button style={{ marginLeft: '5px', marginTop: '5px', backgroundColor: '#B72525' }} onClick={() => {
                   handleDelete()
                 }}>Delete</Button>
               </Col>
