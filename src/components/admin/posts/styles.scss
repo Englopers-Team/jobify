@@ -17,3 +17,12 @@
   border : 1px solid white ;
   border-radius: 10px;
 }
+
+.button12 {
+  background-color: #504edf;
+  color: whitesmoke;
+  &:hover {
+    background-color: #232b4e;
+  }
+  
+}

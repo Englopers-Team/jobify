@@ -114,13 +114,13 @@ export default function PostDetails() {
                   <Row style={{ justifyContent: 'flex-end', marginTop: '10px' }}>
                     <If condition={pin === 'false'}>
                       <Then>
-                        <Button style={{width : '70px' , maxWidth : '70px' , marginRight : '3px'}} onClick={() => { handlePind() }}>pin</Button>
+                        <Button className='button12'  style={{width : '70px' , maxWidth : '70px' , marginRight : '3px'}}  onClick={() => { handlePind() }}>pin</Button>
                       </Then>
                       <Else>
-                        <Button style={{width : '70px' , maxWidth : '70px'  ,  marginRight : '3px'}} onClick={() => { handlePind() }}>Unpin</Button>
+                        <Button className='button12' style={{width : '70px' , maxWidth : '70px'  ,  marginRight : '3px'}} onClick={() => { handlePind() }}>Unpin</Button>
                       </Else>
                     </If>
-                    <Button style={{width : '70px' , maxWidth : '70px' , backgroundColor : 'red' }} onClick={() => { handleDelete() }}>Delete</Button>
+                    <Button style={{width : '70px' , maxWidth : '70px' , backgroundColor : '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
                   </Row>
                 </Col>
 
