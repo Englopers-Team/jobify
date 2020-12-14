@@ -154,65 +154,65 @@ export default function GuestDashbaord() {
           </Row>
         </Form>
       </Container>
-      <Container style={{ justifyContent: 'center', marginTop: '150px', marginBottom: '100px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <Container style={{ justifyContent: 'center', marginTop: '150px', marginBottom: '100px' }}>
         <Row style={{ justifyContent: 'center' }}>
           <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Jobs Categories</h2>
         </Row>
         <Row sm={8} style={{ justifyContent: 'center' }}>
           <Row style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }} sm={8}>
             <Col style={{ marginTop: '30px', justifyContent: 'center' }}>
-              <Card style={{ width: '18rem', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon1.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Software Engineering</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>The combination of autonomy, pay, flexibility, and job satisfaction leads to software engineers being quite happy compared to people in other professions.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon2.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Applications Developments</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px', justifyContent: 'center' }}>
-              <Card style={{ width: '18rem', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px', justifyContent: 'center' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Constructional Engineering</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
           <Row sm={8} style={{ justifyContent: 'center' }}>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Bussnies Adminestrations</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Marketing</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon6.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Finance</Card.Title>
+                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
