@@ -1,15 +1,14 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import './styles.scss';
 import superagent from 'superagent';
 import Spinner from 'react-bootstrap/Spinner';
-import { If, Then, Else } from 'react-if';
+import { If, Else } from 'react-if';
 import Image from 'react-bootstrap/Image';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import * as Icon from 'react-bootstrap-icons';
-import { NavLink, Link } from 'react-router-dom';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/app';
 export default function CompanyApplications(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);

@@ -4,13 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth';
 import '../styles.scss';
 import superagent from 'superagent';
-import { NavLink, Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-import { If, Then } from 'react-if';
+import { If } from 'react-if';
 import Image from 'react-bootstrap/Image';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import * as Icon from 'react-bootstrap-icons';
 import Modal from 'react-bootstrap/Modal';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/jobs';
 export default function MyJobs(props) {

@@ -1,11 +1,14 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable array-callback-return */
 import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../../context/auth'
-import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck } from 'react-bootstrap';
 import superagent from 'superagent'
 import { Link } from 'react-router-dom'
 import dotenv from 'dotenv';
 import { If, Then, Else } from 'react-if'
-import { PlusCircle, ChatSquareTextFill, HeartFill, BookmarkStarFill, Search } from 'react-bootstrap-icons';
+import { ChatSquareTextFill, HeartFill } from 'react-bootstrap-icons';
 
 import { MDBContainer } from "mdbreact";
 
@@ -31,6 +34,7 @@ export default function Posts() {
     if (context.token) {
       getPosts()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token])
 
   const getPosts = () => {
@@ -55,7 +59,7 @@ export default function Posts() {
 
       if (sortSearch === '' && dateSearch === '' || sortSearchType === 'Post ID' && sortSearch == 0 || sortSearchType === 'Post ID' && sortSearch == index || sortSearchType === 'Username' && item.profile.name.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'Post Title' && item.title.toLowerCase().includes(sortSearch.toLowerCase()) || sortSearchType === 'date' && date.split('-').reverse()[0] === dateSearch.split('-')[0] && date.split('-').reverse()[1] === dateSearch.split('-')[1] && date.split('-').reverse()[2] === dateSearch.split('-')[2]) {
         return (
-          <Link  style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
+          <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/posts/${item.id}` }}>
             <Row id='postInfoLink' className='flexRow list-body' sm={8}>
               <Col style={{ fontWeight: 650, textAlign: 'start', color: '#9393A1' }} sm={1}>
                 {index}

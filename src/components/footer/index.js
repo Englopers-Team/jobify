@@ -1,6 +1,6 @@
 import './styles.scss';
 import { Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 export default function Footer() {
   return (
     <>

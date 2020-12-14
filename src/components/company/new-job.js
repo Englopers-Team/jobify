@@ -1,7 +1,7 @@
 import superagent from 'superagent';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/auth';
-import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { If, Else } from 'react-if';
 import './styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
