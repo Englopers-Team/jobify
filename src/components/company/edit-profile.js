@@ -1,8 +1,4 @@
 import superagent from 'superagent';
-
-import Results from '../search/jobs/results';
-
-import * as Icon from 'react-bootstrap-icons';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';

@@ -139,6 +139,11 @@ export default function CompanyHeader() {
               </NavLink>
             </NavDropdown.Item>
             <NavDropdown.Item>
+              <NavLink exact to='/company/submit-job'>
+                Submit a Job
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
               <NavLink exact to='/reports'>
                 Reports
               </NavLink>
