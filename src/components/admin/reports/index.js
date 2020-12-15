@@ -37,7 +37,7 @@ export default function Reports() {
     return data.map((item) => {
       if (typeof (item.response) == type || type === false && (Number(sortId) === item.id || sortId === '')) {
         return (
-          <Row className='flexRow list-body' sm={8}>
+          <Row className='flexRow list-body' sm={12}>
             <Col style={{ fontWeight: 650, textAlign: 'center' }} sm={2}>
               {item.id}
             </Col>
@@ -66,7 +66,7 @@ export default function Reports() {
 
       </Col>
       <Col sm={10}>
-      <Container style={{ marginLeft: 'auto', marginRight: 'auto',marginTop:'120px', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItem: 'center' }}>
+      <Container style={{ marginLeft: 'auto', marginRight: 'auto',marginTop:'60px', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItem: 'center' }}>
         <Row sm={8} style={{ justifyContent: 'center', alignItem: 'center', textAlign: 'center' }}  >
           <Col sm={1} style={{ marginTop: '5px' }}>
             <Icon.Search size='25' />
@@ -90,7 +90,7 @@ export default function Reports() {
       </Container>
 
       <Container className='list-container' style={{ width: '80%' }}>
-        <Row sm={8} className='flexRow list-header' style={{ textAlign: 'center' }}>
+        <Row sm={12} className='flexRow list-header' style={{ textAlign: 'center' }}>
           <Col style={{ color: '#717171', fontWeight: 550 }} className='col-title' sm={2}>
             Report Number
         </Col>

@@ -113,14 +113,14 @@ export default function Posts() {
 
       </Col>
       <Col sm={10}>
-        <Container style={{ display: 'flex', flexDirection: 'row',marginTop:'120px' }}>
+        <Container style={{ display: 'flex', flexDirection: 'row',marginTop:'60px' }}>
           <Col sm={9} className='list-container' style={{ width: '100%' }}>
             <MDBContainer className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
               <PostsList />
             </MDBContainer>
           </Col>
 
-          <Col className='list-container' style={{ textAlign: 'center', backgroundColor: '#232B4E', color: '#E1E3E8', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} sm={3} >
+          <Col className='list-container' style={{ textAlign: 'center', backgroundColor: '#253544', color: '#E1E3E8', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} sm={3} >
             <Row style={{ height: '15%', fontWeight: 'bold', marginTop: '10px' }}>
               <Col style={{ fontSize: '20px' }}>
                 Total Result : {countSeacr}

@@ -147,7 +147,7 @@ export default function ReportDetails() {
 
       </Col>
       <Col sm={10}>
-        <Container style={{marginTop:'120px'}}>
+        <Container style={{marginTop:'60px'}}>
           <If condition={data.report}>
             <Row sm={8}>
               <Col sm={3}>

@@ -55,7 +55,7 @@ export default function Block() {
               <Col sm={2}>
                 <Image src={`${item.logo}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
               </Col>
-              <Col sm={8} style={{ margin: '0', color: '#9393A1' }}>{item.company_name}</Col>
+              <Col sm={8} style={{ margin: '0', color: '#9393A1', fontWeight: 'bold' }}>{item.company_name}</Col>
             </Row>
           )
         }
@@ -71,7 +71,7 @@ export default function Block() {
                 <Image src={`${item.avatar}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
               </Col>
               <Col sm={8}>
-                <p style={{ margin: '0', color: '#9393A1' }}>{name}</p>
+                <p style={{ margin: '0', color: '#9393A1', fontWeight: 'bold' }}>{name}</p>
                 <p style={{ margin: '0', color: '#9393A1' }}>{item.job_title}</p>
               </Col>
             </Row>
@@ -82,7 +82,7 @@ export default function Block() {
   }
 
   const Result = () => {
-    let data = (<h1>Hello</h1>)
+    let data = (<h1 className='resulTarget' style={{ maxHeight: '400px', height: '400px', width: '100%', flexDirection: 'column' }}></h1>)
     let target = {};
     let tempList = [...person, ...company]
     tempList.forEach(item => {
@@ -174,21 +174,23 @@ export default function Block() {
         <AdminHeader />
 
       </Col>
-      <Col sm={10} style={{marginTop:'120px'}}>
+      <Col sm={10} style={{ marginTop: '10px' }}>
         <Container>
           <Row sm={10}>
             <Col sm={7}>
-              <Row style={{ maxHight: '100px', height: '100px' }}>
-                <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
-                <FormControl placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
-                <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
-                <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
+              <Row className='list-container' style={{ maxHight: '120px', height: '120px', backgroundColor: '#253544', color: '#b4bdcc', flexDirection: 'column' , justifyContent : 'space-between' }}>
+                <Col>
+                  <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
+                  <FormControl style={{  width: '70%' }} placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
+                  <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
+                  <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
+                </Col>
               </Row>
-              <Row style={{ maxHeight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
+              <Row className='list-container' style={{ maxHeight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
                 <Result />
               </Row>
             </Col>
-            <Col sm={5}>
+            <Col className='list-container' sm={5}>
               <MDBContainer className="scrollbar scrollbar-primary" style={scrollContainerStyle}>
                 <List />
               </MDBContainer>
