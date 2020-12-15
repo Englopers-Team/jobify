@@ -67,23 +67,23 @@ export default function CompanyApplications(props) {
         </Row>
         <Row>
           <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-            <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
-              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={1}>
+            <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center', height: screenSize > 570 ? '80px' : 'fit-content' }}>
+              <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1', fontWeight: '660' }} sm={2} lg={1}>
                 <p>Image</p>
               </Col>
-              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3} lg={2}>
+              <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1', fontWeight: '660' }} sm={3} lg={2}>
                 <p>Name</p>
               </Col>
-              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={2}>
+              <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1', fontWeight: '660' }} sm={2} lg={2}>
                 <p>Title</p>
               </Col>
               {/* <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1} lg={1}>
                 <p style={{ fontSize: 10 }}>Experience</p>
               </Col> */}
-              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={1}>
+              <Col style={{ textAlign: 'center', color: '#9393A1', fontWeight: '660' }} sm={2} lg={1}>
                 <p>Country</p>
               </Col>
-              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
+              <Col style={{ textAlign: 'center', color: '#9393A1', fontWeight: '660' }} sm={2} lg={2}>
                 <p>Status</p>
               </Col>
               <Col sm={3.5}>
@@ -113,10 +113,10 @@ export default function CompanyApplications(props) {
                   <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2} lg={1}>
                     <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3} lg={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={3} lg={2}>
                     {item.first_name}&nbsp;{item.last_name}
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2} lg={2}>
                     {item.job_title}
                   </Col>
                   {/* <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1} lg={1}>
@@ -131,18 +131,18 @@ export default function CompanyApplications(props) {
                   <Col sm={3.5}>
                     <Row>
                       <Col style={{ textAlign: 'center', paddingRight: '15px' }} sm={1.5}>
-                        <Button className='buttons' id='btn' onClick={() => rejectApp(item.id, 'Accepted')} variant='outline-light' style={{ backgroundColor: '#28a745', fontSize: 15 }}>
+                        <Button className='buttons' id='btn' onClick={() => rejectApp(item.id, 'Accepted')} variant='outline-light' style={{ backgroundColor: '#504edf', fontSize: 15 }}>
                           Accept
                         </Button>
                       </Col>
                       <Col style={{ textAlign: 'center', paddingRight: '15px' }} sm={1.5}>
-                        <Button className='buttons' id='btn' onClick={() => rejectApp(item.id, 'Rejected')} variant='outline-light' style={{ backgroundColor: '#E85D67', fontSize: 15 }}>
+                        <Button className='buttons' id='btn' onClick={() => rejectApp(item.id, 'Rejected')} variant='outline-light' style={{ backgroundColor: '#B72525', fontSize: 15 }}>
                           Reject
                         </Button>
                       </Col>
                       <Col style={{ textAlign: 'center', paddingRight: '10px' }} sm={1.5}>
                         <a href={item.cv} target='_blank'>
-                          <Button className='buttons' variant='outline-light' style={{ backgroundColor: '#232B4E', fontSize: 15 }}>
+                          <Button className='buttons' variant='outline-light' style={{ backgroundColor: '#504edf', fontSize: 15 }}>
                             CV
                           </Button>
                         </a>
