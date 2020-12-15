@@ -49,7 +49,6 @@ export default function ReportDetails() {
 
   async function getData() {
     const response = await superagent.get(`${API}/admin/report/${id}`).set('authorization', `Basic ${context.token}`);
-    console.log(response.body.report.description)
     setData(response.body);
     if (response.body.report.response === null) {
       setBody(' ')
@@ -79,7 +78,7 @@ export default function ReportDetails() {
         </Row>
         <Row >
           <Col >
-            <MDBContainer className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+            <MDBContainer className="scrollbar scrollbar-primary2  mt-5 mx-auto" style={scrollContainerStyle}>
               {data.report.description}
             </MDBContainer>
           </Col>
@@ -115,22 +114,22 @@ export default function ReportDetails() {
 
         <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
           <Col >
-            Acccount Type : {account}
+            <span style={{ fontWeight: 'bold' }}>Acccount Type : </span>{account}
           </Col>
         </Row>
         <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
           <Col >
-            Country : {data.sender.country}
+            <span style={{ fontWeight: 'bold' }}>Country : </span>{data.sender.country}
           </Col>
         </Row>
         <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
           <Col >
-            Phone : {data.sender.phone}
+            <span style={{ fontWeight: 'bold' }}>Phone : </span>{data.sender.phone}
           </Col>
         </Row>
         <Row style={{ height: '8%', marginLeft: '12px', textAlign: 'left', fontSize: '18px' }} >
           <Col >
-            Email : {data.report.email}
+            <span style={{ fontWeight: 'bold' }}>Email : </span>{data.report.email}
           </Col>
         </Row>
 
@@ -147,7 +146,7 @@ export default function ReportDetails() {
 
       </Col>
       <Col sm={10}>
-        <Container style={{marginTop:'60px'}}>
+        <Container style={{ marginTop: '60px' }}>
           <If condition={data.report}>
             <Row sm={8}>
               <Col sm={3}>
