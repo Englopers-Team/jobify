@@ -51,7 +51,7 @@ export default function CompanyApplications(props) {
     if (context.token) {
       offersList();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
 
   useEffect(() => {
@@ -60,34 +60,34 @@ export default function CompanyApplications(props) {
     return () => {
       window.removeEventListener('resize', checkSize);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenSize]);
   return (
     <>
       <Container style={{ justifyContent: 'center', width: '85%' }}>
         <Row sm={8}>
-          <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>Sent Offers</Col>
+          <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>Sent Offers</Col>
         </Row>
         <Row>
           <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
             <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
-              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={1}>
+              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={1}>
                 <p>Image</p>
               </Col>
-              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3} lg={2}>
+              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={3} lg={2}>
                 <p>Name</p>
               </Col>
-              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={2}>
+              <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={2}>
                 <p>Title</p>
               </Col>
 
-              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
+              <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={2}>
                 <p>Country</p>
               </Col>
-              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
+              <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={2}>
                 <p>Status</p>
               </Col>
-              <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1} lg={1}>
+              <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={1} lg={1}>
                 <p>Type</p>
               </Col>
               <Col style={{ textAlign: 'center', paddingRight: '10px' }}>
@@ -107,7 +107,7 @@ export default function CompanyApplications(props) {
               </Modal.Header>
               <Modal.Body>
                 <p>Are you sure that you want to DELETE this job?</p>
-                <Button className='button' onClick={() => deleteOffer(offerId)} variant='outline-light' style={{ backgroundColor: '#E85D67' }}>
+                <Button className='button' onClick={() => deleteOffer(offerId)} variant='outline-light' style={{ backgroundColor: '#B72525' }}>
                   Delete
                 </Button>
               </Modal.Body>
@@ -119,19 +119,19 @@ export default function CompanyApplications(props) {
                   <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2} lg={1}>
                     <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={3} lg={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={3} lg={2}>
                     {item.first_name}&nbsp;{item.last_name}
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2} lg={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2} lg={2}>
                     {item.title}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
+                  <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                     {item.country}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2} lg={2}>
+                  <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                     {item.status}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1} lg={1}>
+                  <Col style={{ textAlign: 'center', color: '#515151' }} sm={1} lg={1}>
                     {item.type}
                   </Col>
 
@@ -144,7 +144,7 @@ export default function CompanyApplications(props) {
                         setShow(true);
                       }}
                       variant='outline-light'
-                      style={{ backgroundColor: '#E85D67', fontSize: 15 }}
+                      style={{ backgroundColor: '#B72525', fontSize: 15 }}
                     >
                       Delete
                     </Button>

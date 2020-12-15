@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 export default function SubmitJob() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Full-Time');
   const [description, setDescription] = useState('');
   const [loader, setLoader] = useState(false);
   const history = useHistory();
@@ -31,7 +31,7 @@ export default function SubmitJob() {
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>New Job </Card.Title>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#515151' }}>New Job </Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
 
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
@@ -47,8 +47,8 @@ export default function SubmitJob() {
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Type</Form.Label>
                   <Form.Control as='select' required onChange={(e) => setType(e.target.value)} className='input' value={type}>
-                    <option>Full-Time</option>
-                    <option>Part-Time</option>
+                    <option value='Full-Time'>Full Time</option>
+                    <option value='Part-Time'>Part Time</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
