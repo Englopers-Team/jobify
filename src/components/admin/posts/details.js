@@ -77,24 +77,62 @@ export default function PostDetails() {
   const Comments = () => {
     return comments.map((comm, index) => {
       return (
-        <Card key={index} className='comment'>
-          <Card.Body>
-            <Card.Title className='flexRow'>
-              <Col sm={11} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '0px' }}>
-                <Col style={{ padding: 0 }} sm={2} lg={1}>
-                  <Image className='imgShadow' style={{ width: '32px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
+        <>
+          <Card key={index} className='comment' style={{ marginTop: '15px' }}>
+            <Card.Body style={{ paddingLeft: 0 }}>
+              <Card.Title className='flexRow' >
+                <Col className='flexRow' style={{ justifyContent: 'flex-start', width: '100%' }}>
+                  <Col sm={2} style={{ padding: '0' }} >
+                    <Image className='imgShadow' style={{ width: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
+                  </Col>
+                  <Col sm={10} style={{ justifyContent: 'flex-start' }} >
+                    <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
+                    <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
+                  </Col>
                 </Col>
-                <Col style={{ padding: 0 }}>
-                  <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
-                  <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
+              </Card.Title>
+              <Card.Text style={{ paddingLeft: '20px' }}>
+                {comm.comment}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card key={index} className='comment' style={{ marginTop: '15px' }}>
+            <Card.Body style={{ paddingLeft: 0 }}>
+              <Card.Title className='flexRow' >
+                <Col className='flexRow' style={{ justifyContent: 'flex-start', width: '100%' }}>
+                  <Col sm={2} style={{ padding: '0' }} >
+                    <Image className='imgShadow' style={{ width: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
+                  </Col>
+                  <Col sm={10} style={{ justifyContent: 'flex-start' }} >
+                    <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
+                    <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
+                  </Col>
                 </Col>
-              </Col>
-            </Card.Title>
-            <Card.Text>
-              {comm.comment}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+              </Card.Title>
+              <Card.Text style={{ paddingLeft: '20px' }}>
+                {comm.comment}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card key={index} className='comment' style={{ marginTop: '15px' }}>
+            <Card.Body style={{ paddingLeft: 0 }}>
+              <Card.Title className='flexRow' >
+                <Col className='flexRow' style={{ justifyContent: 'flex-start', width: '100%' }}>
+                  <Col sm={2} style={{ padding: '0' }} >
+                    <Image className='imgShadow' style={{ width: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
+                  </Col>
+                  <Col sm={10} style={{ justifyContent: 'flex-start' }} >
+                    <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
+                    <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
+                  </Col>
+                </Col>
+              </Card.Title>
+              <Card.Text style={{ paddingLeft: '20px' }}>
+                {comm.comment}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </>
       );
     })
   }
@@ -106,15 +144,14 @@ export default function PostDetails() {
           <Col sm={7}>
             <Row  >
               <Col sm={12} >
-                <Col style={{ flexDirection: 'row' }}>
-
-                  <h2 style={{ marginBottom: 0, marginRight: '10px' }} >
+                <Row style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
+                  <Col style={{fontWeight : 'bold' , fontSize:'22px'}}>
                     <If condition={pin !== 'false'}>
                       <BookmarkStarFill color='#232B4E' style={{ marginRight: '6px' }} size={22} />
                     </If>
                     {title}
-                  </h2>
-                  <Row style={{ justifyContent: 'flex-end', marginTop: '10px' }}>
+                  </Col>
+                  <Col>
                     <If condition={pin === 'false'}>
                       <Then>
                         <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>pin</Button>
@@ -124,8 +161,8 @@ export default function PostDetails() {
                       </Else>
                     </If>
                     <Button style={{ width: '70px', maxWidth: '70px', backgroundColor: '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
-                  </Row>
-                </Col>
+                  </Col>
+                </Row>
 
                 <Col sm={12} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '30px' }}>
                   <Col style={{ padding: 0 }} sm={3} lg={2}>
@@ -166,8 +203,8 @@ export default function PostDetails() {
         <AdminHeader />
 
       </Col>
-      <Col  sm={10} style={{marginTop:'60px'}}>
-        <Container className='list-container post'   style={{ width: '80%', backgroundColor: 'white' }}>
+      <Col sm={10} style={{ marginTop: '30px' }}>
+        <Container className='list-container post' style={{ width: '80%', backgroundColor: 'white' }}>
           <Post />
         </Container>
       </Col>

@@ -99,7 +99,7 @@ export default function Block() {
             <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
             <Col style={{ textAlign: 'right' }} >
               <If condition={target.account_status === 'blocked'}>
-                <DashCircle className='BolckSign' />
+                <DashCircle size='32' color='white'className='BolckSign' />
               </If>
             </Col>
           </Row>
@@ -135,7 +135,7 @@ export default function Block() {
             <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
             <Col style={{ textAlign: 'right' }} >
               <If condition={target.account_status === 'blocked'}>
-                <DashCircle className='BolckSign' />
+              <DashCircle size='32' color='white'className='BolckSign' />
               </If>
             </Col>
           </Row>
