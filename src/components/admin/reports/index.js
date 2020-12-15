@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Dropdown, FormControl } from 'react-bootstrap';
 import superagent from 'superagent';
@@ -24,6 +25,7 @@ export default function Reports() {
     if (context.token) {
       getData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
 
   async function getData() {
@@ -34,10 +36,11 @@ export default function Reports() {
 
   function Result() {
 
-    return data.map((item) => {
+    // eslint-disable-next-line array-callback-return
+    return data.map((item, index) => {
       if (typeof (item.response) == type || type === false && (Number(sortId) === item.id || sortId === '')) {
         return (
-          <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/reports/${item.id}` }}>
+          <Link key={index} style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/reports/${item.id}` }}>
             <Row className='flexRow list-body profile2' sm={12}>
               <Col style={{ fontWeight: 650, textAlign: 'center' }} sm={2}>
                 {item.id}
@@ -89,18 +92,16 @@ export default function Reports() {
         </Container>
 
         <Container className='list-container' style={{ width: '80%' }}>
-          <Row sm={12} className='flexRow list-header' style={{ textAlign: 'center' }}>
-            <Col style={{ color: '#717171', fontWeight: 550 }} className='col-title' sm={2}>
+          <Row sm={12} className='flexRow list-header' style={{ textAlign: 'center'  }}>
+            <Col style={{ color: '#717171', fontWeight: 550  , paddingLeft : '50px'}} className='col-title' sm={2}>
               Report Number
         </Col>
-            <Col style={{ color: '#717171', fontWeight: 550 }} sm={6}>
+            <Col style={{ color: '#717171', fontWeight: 550 }} sm={8}>
               Description
         </Col>
-            <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
+            <Col style={{ color: '#717171', fontWeight: 550  , paddingRight : '80px'}} sm={2}>
               State
         </Col>
-            <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
-            </Col>
           </Row>
 
           <MDBContainer className="scrollbar scrollbar-white  mt-5 mx-auto" style={scrollContainerStyle}>

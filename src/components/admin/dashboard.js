@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react';
 import Chart from 'chart.js';
 import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
 import AdminHeader from '../header/admin';
 import './styles.scss';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { AuthContext } from '../../context/auth'
 
 

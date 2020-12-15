@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
-import { Container, Row, Col, Form, Button, Image, Card } from 'react-bootstrap';
-import { PencilFill, XCircleFill, BookmarkStarFill } from 'react-bootstrap-icons';
+import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
+import { BookmarkStarFill } from 'react-bootstrap-icons';
 import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
 import AdminHeader from '../../header/admin';
@@ -24,9 +24,7 @@ export default function PostDetails() {
   const [avatar, setAvatar] = useState('')
   const [jobTitle, setJobTitle] = useState('')
   const [name, setName] = useState('')
-  const [writer, setWriter] = useState(0)
   const [pin, setPin] = useState(false)
-  let myComment = ''
   const context = useContext(AuthContext)
 
 
@@ -50,7 +48,6 @@ export default function PostDetails() {
       setName(`${data.body.profile.name}`)
       setAvatar(data.body.profile.avatar)
       setJobTitle(data.body.profile.job_title)
-      setWriter(data.body.auth_id)
       setPin(data.body.pinned)
       let formatedDate = new Date(data.body.date)
       formatedDate = ((formatedDate.getMonth() > 8) ? (formatedDate.getMonth() + 1) : ('0' + (formatedDate.getMonth() + 1))) + '/' + ((formatedDate.getDate() > 9) ? formatedDate.getDate() : ('0' + formatedDate.getDate())) + '/' + formatedDate.getFullYear()
@@ -65,7 +62,7 @@ export default function PostDetails() {
 
   const handleDelete = async () => {
     await superagent.delete(`${API}/admin/posts/${id}`).set({ 'Authorization': `Basic ${context.token}` })
-    history.push('/admin/posts')
+    history.push('/admin/community')
   }
 
   const Render = () => {
@@ -145,7 +142,7 @@ export default function PostDetails() {
             <Row  >
               <Col sm={12} >
                 <Row style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
-                  <Col style={{fontWeight : 'bold' , fontSize:'22px'}}>
+                  <Col style={{ fontWeight: 'bold', fontSize: '22px' }}>
                     <If condition={pin !== 'false'}>
                       <BookmarkStarFill color='#232B4E' style={{ marginRight: '6px' }} size={22} />
                     </If>

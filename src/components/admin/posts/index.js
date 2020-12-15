@@ -56,6 +56,7 @@ export default function Posts() {
     let count = 0;
     let num = -1
     setCountSearch(count)
+    // eslint-disable-next-line array-callback-return
     return tempPosts.map((item, index) => {
       num++;
       let date = new Date(item.date)
@@ -67,7 +68,7 @@ export default function Posts() {
           count += 1;
           setCountSearch(count)
           return (
-            <Link style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/community/${item._id}` }}>
+            <Link key={index} style={{ textDecoration: 'none' }} id='link' to={{ pathname: `/admin/community/${item._id}` }}>
               <Row id='postInfoLink' className='flexRow list-body' sm={8}>
                 <Col style={{ fontWeight: 650, textAlign: 'start', color: '#9393A1' }} sm={1}>
                   {num}
