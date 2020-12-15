@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { Container, Row, Col } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { If, Then, Else } from 'react-if';
 import superagent from 'superagent';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../context/auth';
 
 export default function JobsResults(props) {
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
   let results = props.results;
   const context = useContext(AuthContext);
   const [show, setShow] = useState(false);
@@ -37,36 +39,49 @@ export default function JobsResults(props) {
         setShow(false);
       });
   };
+
+  const checkSize = () => {
+    setScreenSize(window.screen.width);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', checkSize);
+    if (context.token) {
+    }
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenSize, context.token]);
   return (
     <>
       <If condition={props.visable}>
         <Then>
           <Container className='list-container' fluid>
-            <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title ' sm={4}>
+            <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px' }}>
+              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} className='col-title ' sm={4}>
                 Job Title
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-                Company{' '}
+              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={2}>
+                Company
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={2}>
                 Location
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={2}>
                 Type
               </Col>
               <If condition={props.loader}>
-                <Col style={{ color: '#717171', fontWeight: 550 }} sm={1}>
+                <Col style={{ color: '#717171', fontWeight: 660 }} sm={2}>
                   <Spinner animation='border' variant='primary' />
                 </Col>
               </If>
-              <Col style={{ color: '#717171', fontWeight: 550 }} sm={1}></Col>
             </Row>
 
             {results.map((item, index) => {
               return (
                 <Row key={index} className='flexRow list-body' sm={8}>
-                  <Col style={{ fontWeight: 650, textAlign: 'left' }} sm={4}>
+                  <Col style={{ fontWeight: 650, textAlign: 'center', verticalAlign: 'center' }} sm={4}>
                     {item.title}
                   </Col>
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
@@ -83,7 +98,7 @@ export default function JobsResults(props) {
                       <Then>
                         <Button
                           className='button'
-                          style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                          style={{ paddingRight: '50px', backgroundColor: '#504edf', width: screenSize > '575' ? 'fit-content' : '', padding: screenSize > '575' ? '150px' : '' }}
                           onClick={() => {
                             save({
                               job_id: item.job_id,
@@ -97,7 +112,7 @@ export default function JobsResults(props) {
                       <Else>
                         <Button
                           className='button'
-                          style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                          style={{ backgroundColor: '#504edf', textAlign: 'center', width: screenSize > '575' ? 'fit-content' : '', padding: screenSize > '575' ? '5px 12px' : '' }}
                           onClick={() => {
                             save({
                               title: item.title,
@@ -123,7 +138,7 @@ export default function JobsResults(props) {
                   <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
                     <Button
                       className='button'
-                      style={{ paddingRight: '50px', backgroundColor: '#504edf' }}
+                      style={{ backgroundColor: '#504edf', textAlign: 'center', width: screenSize > '575' ? 'fit-content' : '' }}
                       onClick={() => {
                         <If condition={item.job_id}>
                           <Then>

@@ -6,13 +6,15 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from '../search/jobs/results';
-import { AuthContext } from '../../context/auth';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../context/auth';
+
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/job';
 
 export default function GuestDashbaord() {
   const context = useContext(AuthContext);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
   let history = useHistory();
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
@@ -96,6 +98,15 @@ export default function GuestDashbaord() {
       auth_id: 2,
     },
   ];
+  const checkSize = () => {
+    setScreenSize(window.screen.width);
+  };
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenSize]);
 
   const jobList = async (e) => {
     e.preventDefault();
@@ -121,11 +132,11 @@ export default function GuestDashbaord() {
           <Row style={{ display: 'flex', flexDirection: 'row' }}>
             <Row style={{ display: 'flex', flexDirection: 'column', marginTop: '40px' }}>
               <Row style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignContent: 'flex-start', marginLeft: '5px' }}>
-                <h2 style={{ textAlign: 'left', fontSize: '45px', fontWeight: 'bold' }}>Lets find your</h2>
+                <h2 style={{ textAlign: 'left', fontSize: '45px', fontWeight: 'bold' }}>Lets Find your</h2>
                 <h2 style={{ textAlign: 'left', fontSize: '45px', fontWeight: 'bold' }}>
                   Dream <span style={{ color: '#504edf', fontSize: '45px', fontWeight: 'bold' }}>Job</span>
                 </h2>
-                <h3 style={{ color: '#ababab', marginTop: '15px', marginBottom: '15px' }}>We have What you are looking for</h3>
+                <h3 style={{ color: '#9393A1', marginTop: '15px', marginBottom: '15px' }}>We have what you are looking for</h3>
               </Row>
               <Row sm={6} className='search-container' style={{ width: 'fit-content', justifyContent: 'flex-start', margin: 0, height: 'fit-content' }}>
                 <Col sm={5} className='input-filed'>
@@ -165,7 +176,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon1.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Software Engineering</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>The combination of autonomy, pay, flexibility, and job satisfaction leads to software engineers being quite happy compared to people in other professions.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The combination of autonomy, pay, flexibility, and job satisfaction leads to software engineers being quite happy compared to people in other professions.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -174,7 +185,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon2.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Applications Developments</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The process of creating a computer program or a set of programs to perform the different tasks that a business requires.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -183,7 +194,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px', justifyContent: 'center' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Constructional Engineering</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>Professional discipline that deals with the designing, planning, construction and management of infrastructures.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -194,7 +205,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Bussnies Adminestrations</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The performance or management of business operations and decision-making.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -203,7 +214,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Marketing</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The process of understanding your customers, and building and maintaining relationships with them.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -212,7 +223,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon6.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Finance</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The management, creation, and study of money and investments.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -224,17 +235,17 @@ export default function GuestDashbaord() {
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Featured Jobs</h2>
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-          <Row sm={8} className='flexRow list-header'>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title media' sm={4}>
+          <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='col-title media' sm={4}>
               Job Title
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
               Company{' '}
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
               Location
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
               Type
             </Col>
             <Col sm={1}></Col>
@@ -246,18 +257,19 @@ export default function GuestDashbaord() {
                 <Col style={{ fontWeight: 650, textAlign: 'left' }} className='media' sm={4}>
                   {item.title}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                   {item.company_name}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                   {item.location}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                   {item.type}
                 </Col>
                 <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
                   <Button
                     className='button'
+                    style={{ width: '100%' }}
                     onClick={() => {
                       history.push('/signup');
                     }}
@@ -269,7 +281,7 @@ export default function GuestDashbaord() {
                 <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
                   <Button
                     className='button'
-                    style={{}}
+                    style={{ width: '100%' }}
                     onClick={() => {
                       history.push('/signup');
                     }}

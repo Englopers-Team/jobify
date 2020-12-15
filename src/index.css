@@ -50,8 +50,16 @@ code {
   flex-wrap: wrap;
 }
 
+.fadeLoad {
+  animation-duration: 0s !important;
+  animation-name: fadeIn !important;
+}
+
 @keyframes fadeIn {
   0% {
+    opacity: 0;
+  }
+  15% {
     opacity: 0;
   }
   100% {
