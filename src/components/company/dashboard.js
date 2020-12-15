@@ -278,6 +278,5 @@ export default function CompanyDashboard() {
           <Image style={{ width: '70%' }} src='../../assets/undraw_Work_time_re_hdyv.svg'></Image>
         </Row>
       </Container>
-    </>
   );
 }

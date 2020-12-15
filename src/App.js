@@ -8,9 +8,9 @@ import { BrowserRouter } from 'react-router-dom';
 import Chat from './components/chat';
 import Notification from './components/notification';
 import './app.scss';
-import { If, Else, Then } from 'react-if';
 
 function App() {
+
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -18,7 +18,7 @@ function App() {
           <ScrollTop />
           <Notification />
           <Chat />
-          <div className='page-container' style={{ animation: `fadeIn 2s` }}>
+          <div id='contAnima' className='page-container'>
             <div className='content-wrap'>
               <Header />
               <Routes />
