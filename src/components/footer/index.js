@@ -15,7 +15,7 @@ export default function Footer() {
                   <NavLink to='/search/employees'>Jobs</NavLink>
                 </Nav.Link>
                 <Nav.Link>
-                  <NavLink to='/community'>community</NavLink>
+                  <NavLink to='/community'>Community</NavLink>
                 </Nav.Link>
                 <Nav.Link to='/about'>
                   <NavLink to='/about'>About</NavLink>
