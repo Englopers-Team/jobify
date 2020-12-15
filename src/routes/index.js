@@ -31,6 +31,7 @@ import ApplicantEdit from '../components/user/edit-profile';
 import ApplicantApplications from '../components/user/my-applications';
 import ApplicantOffers from '../components/user/offers';
 import ApplicantSavedJobs from '../components/user/saved-jobs';
+import About from '../components/about';
 
 // for testing osama
 import dash from '../components/user/dashboard';
@@ -84,6 +85,7 @@ export default function Routes() {
 
       <Route exact path='/banned' component={NoAccess} />
       <Route exact path='/companyd' component={CompanyDashboard} />
+      <Route exact path='/about' component={About} />
 
       <Route path='/userhome' component={dash} />
       <Route path='/guest' component={Guest} />
