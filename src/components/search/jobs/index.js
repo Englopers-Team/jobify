@@ -42,14 +42,14 @@ export default function SearchJobs() {
 
             <Form.Control className='input' required name='title' type='text' onChange={(e) => setTitle(e.target.value)} placeholder='Job Title' />
           </Col>
-          <Col sm={4} className='input-filed'>
+          <Col sm={3} className='input-filed'>
             <Icon.GeoAltFill className='icon' />
             <Form.Control className='input' required name='location' type='text' onChange={(e) => setLocation(e.target.value)} placeholder='Country' />
           </Col>
           <Col sm={3} className='input-filed'>
-            <Form.Control className='input' required name='category' type='text' placeholder='Category' />
+            <Form.Control className='input' name='category' type='text' placeholder='Category' />
           </Col>
-          <Col sm={1}>
+          <Col sm={2}>
             <Button variant='outline-dark' className='button' type='submit'>
               <Icon.Search size='20' />
             </Button>
