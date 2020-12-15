@@ -69,27 +69,27 @@ export default function MyJobs(props) {
     <>
       <Container style={{ justifyContent: 'center', width: '85%' }}>
         <Row sm={8}>
-          <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Jobs</Col>
+          <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Jobs</Col>
         </Row>
         <Row>
           <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
             <Row sm={8} className='flexRow list-header2' style={{ height: screenSize > 575 ? '80px' : 'fit-content' }}>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
+              <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                 Title
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
+              <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
                 Type
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
+              <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2}>
                 Location
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={2}>
+              <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
                 Num Of App
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={1.5}>
+              <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={1.5}>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={1}>
+              <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={1}>
                 <If condition={loader}>
                   <Spinner animation='border' variant='primary' />
                 </If>
@@ -111,16 +111,16 @@ export default function MyJobs(props) {
               return (
                 <>
                   <Row className='flexRow list-body' sm={12}>
-                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={3}>
                       {item.title}
                     </Col>
-                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
+                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2}>
                       {item.type}
                     </Col>
-                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={2}>
+                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2}>
                       {item.location}
                     </Col>
-                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                    <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                       {item.applicants_num}
                     </Col>
                     <Row sm={2.5}>
