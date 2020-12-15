@@ -56,7 +56,9 @@ export default function CompanyApplications(props) {
 
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    offersList();
+    if (context.token) {      
+      offersList();
+    }
     return () => {
       window.removeEventListener('resize', checkSize);
     };

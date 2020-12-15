@@ -23,8 +23,8 @@ export default function CompanyEdit() {
 
   useEffect(() => {
     if (context.token) {
+      getData();
     }
-    getData();
   }, [context.token]);
 
   async function getData() {

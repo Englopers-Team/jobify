@@ -54,7 +54,10 @@ export default function CompanyApplications(props) {
 
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    jobList();
+    if (context.token) {
+      jobList();
+    }
+
     return () => {
       window.removeEventListener('resize', checkSize);
     };

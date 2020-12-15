@@ -41,18 +41,24 @@ function AuthProvider(props) {
     // console.log(oauthPath[1])
     // console.log(oauthPath[2])
     if (token && pathname !== '/logout') {
+      // console.log('999')
       checkUser(token)
     } else if (pathname === '/logout') {
       logout();
       history.push('/')
     }
     if (oauthPath[1] === 'oauth') {
+      // console.log(oauthPath[2], 'test')
+      // cookie.clear('token');
+      setToken(oauthPath[2])
       validateToken(oauthPath[2]);
-      history.push('/')
+      setTimeout(() => {
+        history.push('/')
+      }, 1000)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, token]);
+  }, [pathname]);
 
   const checkUser = async (tk) => {
     await superagent.get(`${API}/verify/0`).set({ 'Authorization': `Basic ${tk}` }).then((data) => {
@@ -68,19 +74,20 @@ function AuthProvider(props) {
   const validateToken = (token) => {
     try {
       const user = jwt.verify(token, SECRET);
-      setToken(token)
+      // setToken(token)
       setLoginState(true, token, user);
     } catch (e) {
+      console.log('haa')
       setLoginState(false, null, {});
     }
   };
 
   const setLoginState = (loggedIn, token, user) => {
-    cookie.save('token', token);
+    cookie.save('token', token, { path: '/' });
+    setToken(token)
     setUser(user)
     setLoggedIn(loggedIn);
     setError(false)
-    setToken(token)
   };
 
   const login = async (email, password) => {
@@ -122,6 +129,7 @@ function AuthProvider(props) {
   };
 
   const logout = () => {
+    cookie.remove('token', { path: '/' })
     setLoginState(false, null, {});
   };
 
