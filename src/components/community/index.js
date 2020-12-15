@@ -92,7 +92,7 @@ export default function Community() {
   };
 
   return (
-    <Container style={{ animation: `fadeIn 2s` }}>
+    <Container>
       <Row style={{ justifyContent: 'space-between' }}>
         <Col style={{ borderLeft: 'solid', height: '90%', borderRadius: '2px', borderLeftColor: '#504EDF', borderLeftWidth: '3px', paddingLeft: '8px' }}>
           <h2 style={{ marginBottom: 0 }}>Discuss Your Thoughts With Our Community</h2>

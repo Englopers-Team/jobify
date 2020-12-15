@@ -7,10 +7,14 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from '../search/jobs/results';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../context/auth';
+
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/job';
 
 export default function GuestDashbaord() {
+  const context = useContext(AuthContext);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
   let history = useHistory();
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
@@ -94,6 +98,15 @@ export default function GuestDashbaord() {
       auth_id: 2,
     },
   ];
+  const checkSize = () => {
+    setScreenSize(window.screen.width);
+  };
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenSize]);
 
   const jobList = async (e) => {
     e.preventDefault();
@@ -223,16 +236,16 @@ export default function GuestDashbaord() {
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title media' sm={4}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='col-title media' sm={4}>
               Job Title
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
               Company{' '}
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
               Location
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
               Type
             </Col>
             <Col sm={1}></Col>
@@ -244,18 +257,19 @@ export default function GuestDashbaord() {
                 <Col style={{ fontWeight: 650, textAlign: 'left' }} className='media' sm={4}>
                   {item.title}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                   {item.company_name}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                   {item.location}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                   {item.type}
                 </Col>
                 <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
                   <Button
                     className='button'
+                    style={{ width: '100%' }}
                     onClick={() => {
                       history.push('/signup');
                     }}
@@ -267,7 +281,7 @@ export default function GuestDashbaord() {
                 <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
                   <Button
                     className='button'
-                    style={{}}
+                    style={{ width: '100%' }}
                     onClick={() => {
                       history.push('/signup');
                     }}
