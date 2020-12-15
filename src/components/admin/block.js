@@ -104,19 +104,17 @@ export default function Block() {
             </Col>
           </Row>
           <Row style={{ height: '60%', textAlign: 'right', paddingTop: '60px', justifyContent: 'center' }}>
-
-            <Col style={{ textAlign: 'center', alignItem: 'center' }} sm={4}>
+            <Col style={{ textAlign: 'center' }} sm={4}>
               <Image src={`${target.avatar}`} style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
             </Col>
-            <Col style={{ textAlign: 'center', alignItem: 'center' }} sm={6}>
-              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Name :  </span> {name}</p>
-              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Job Title : </span> {target.job_title}</p>
-              <p style={{ textAlign: 'left' }}>   <span style={{ fontWeight: 'bold' }}>Country : </span>{target.country}</p>
-              <p style={{ textAlign: 'left' }}>   <span style={{ fontWeight: 'bold' }}>Phone : </span>{target.phone}</p>
-              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Age : </span> {target.age}</p>
-              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>Experince :  </span>{target.experince}</p>
-              <p style={{ textAlign: 'left' }}>  <span style={{ fontWeight: 'bold' }}>CV : </span> {target.cv}</p>
+            <Col style={{ textAlign: 'center' }} sm={6}>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Name :  </span> {name}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Job Title : </span> {target.job_title}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Country : </span>{target.country}</p>
+              <p style={{ textAlign: 'left' }}> <span style={{ fontWeight: 'bold' }}>Phone : </span>{target.phone}</p>
             </Col>
+          </Row>
+          <Row style={{ height: '20%', maxHeight: '20%' }}>
           </Row>
           <Col >
             <If condition={target.account_status === 'blocked'}>
@@ -178,10 +176,10 @@ export default function Block() {
         <Container>
           <Row sm={10}>
             <Col sm={7}>
-              <Row className='list-container' style={{ maxHight: '120px', height: '120px', backgroundColor: '#253544', color: '#b4bdcc', flexDirection: 'column' , justifyContent : 'space-between' }}>
+              <Row className='list-container' style={{ maxHight: '120px', height: '120px', backgroundColor: '#253544', color: '#b4bdcc', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <Col>
                   <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
-                  <FormControl style={{  width: '70%' }} placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
+                  <FormControl style={{ width: '70%' }} placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
                   <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
                   <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
                 </Col>
