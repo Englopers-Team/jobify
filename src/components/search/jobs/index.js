@@ -30,7 +30,6 @@ export default function SearchJobs() {
         setLoader(false);
       });
   };
-  console.log(results);
 
   return (
     <Container style={{ textAlign: 'center' }}>
