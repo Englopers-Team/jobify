@@ -31,7 +31,7 @@ export default function SubmitJob() {
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>New Job </Card.Title>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#515151' }}>New Job </Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
 
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>

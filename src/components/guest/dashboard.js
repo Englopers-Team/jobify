@@ -222,7 +222,7 @@ export default function GuestDashbaord() {
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Featured Jobs</h2>
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-          <Row sm={8} className='flexRow list-header'>
+          <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
             <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title media' sm={4}>
               Job Title
             </Col>

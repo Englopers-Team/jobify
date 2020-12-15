@@ -177,7 +177,7 @@ export default function CompanyDashboard() {
             </Card>
           </Col>
           <Col md='8'>
-            <CardTitle style={{ margin: '9px 0', textAlign: 'center' }} tag='h4'>
+            <CardTitle style={{ margin: '9px 0', textAlign: 'center', color: '#515151' }} tag='h4'>
               Recent Applications
             </CardTitle>
             <Card className='two'>
