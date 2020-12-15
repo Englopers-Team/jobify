@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 export default function SubmitJob() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Full-Time');
   const [description, setDescription] = useState('');
   const [loader, setLoader] = useState(false);
   const history = useHistory();
@@ -47,8 +47,8 @@ export default function SubmitJob() {
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Type</Form.Label>
                   <Form.Control as='select' required onChange={(e) => setType(e.target.value)} className='input' value={type}>
-                    <option>Full-Time</option>
-                    <option>Part-Time</option>
+                    <option value='Full-Time'>Full Time</option>
+                    <option value='Part-Time'>Part Time</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
