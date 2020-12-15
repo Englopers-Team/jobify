@@ -24,7 +24,7 @@ export default function EditJob(props) {
     if (context.token) {
       getData();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
 
   const API = 'https://jobify-app-v2.herokuapp.com/company/jobs';
@@ -50,7 +50,7 @@ export default function EditJob(props) {
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}> Edit Job </Card.Title>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#515151' }}> Edit Job </Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
 
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
