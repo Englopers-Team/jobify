@@ -4,6 +4,8 @@ import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel
 import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
 import { DashCircle } from 'react-bootstrap-icons';
+import AdminHeader from '../header/admin';
+
 
 import './styles.scss';
 import { AuthContext } from '../../context/auth'
@@ -167,27 +169,35 @@ export default function Block() {
     return data
   }
   return (
-    <Container>
-      <Row sm={10}>
-        <Col sm={7}>
-          <Row style={{ maxHight: '100px', height: '100px' }}>
-            <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
-            <FormControl placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
-            <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
-            <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
-          </Row>
-          <Row style={{ maxHeight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
-            <Result />
-          </Row>
-        </Col>
-        <Col sm={5}>
-          <MDBContainer className="scrollbar scrollbar-primary" style={scrollContainerStyle}>
-            <List />
-          </MDBContainer>
+    <Row style={{ width: '100%' }}>
+      <Col sm={2}>
+        <AdminHeader />
 
-        </Col>
-      </Row>
-    </Container>
+      </Col>
+      <Col sm={10} style={{marginTop:'120px'}}>
+        <Container>
+          <Row sm={10}>
+            <Col sm={7}>
+              <Row style={{ maxHight: '100px', height: '100px' }}>
+                <FormCheck type="switch" name="formHorizontalSwitch" id="custom" label="Search By Username" onChange={(e) => { setSearchTypeQuery(searchTypeQuery === 'Id' ? 'Username' : 'Id') }} />
+                <FormControl placeholder={`Search By ${searchTypeQuery}`} onChange={(e) => { setQuery(e.target.value) }} />
+                <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label='Person' onChange={() => { setSearchType('p') }} />
+                <FormCheck type="radio" name="formHorizontalRadios" id="custom-switch" label="Company" onChange={() => { setSearchType('c') }} />
+              </Row>
+              <Row style={{ maxHeight: '400px', height: '400px', display: 'flex', flexDirection: 'Row' }}>
+                <Result />
+              </Row>
+            </Col>
+            <Col sm={5}>
+              <MDBContainer className="scrollbar scrollbar-primary" style={scrollContainerStyle}>
+                <List />
+              </MDBContainer>
+
+            </Col>
+          </Row>
+        </Container>
+      </Col>
+    </Row>
   )
 }
 

@@ -1,6 +1,7 @@
 import CompanyHeader from './company';
 import UserHeader from './user';
 import GuestHeader from './guest';
+import AdminHeader from './admin';
 import './styles.scss';
 import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
@@ -28,7 +29,7 @@ export default function Header(props) {
               <Else>
                 <If condition={context.user.account_type === 'admin'}>
                   <Then>
-                    <GuestHeader />
+                    {/* <AdminHeader /> */}
                   </Then>
                   <Else>
                     <GuestHeader />

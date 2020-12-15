@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
 import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
+import AdminHeader from '../../header/admin';
 
 import '../../search/styles.scss'
 import '../styles.scss'
@@ -59,8 +60,13 @@ export default function Reports() {
 
 
   return (
-    <>
-      <Container style={{ marginLeft: 'auto', marginRight: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItem: 'center' }}>
+    <Row style={{width:'100%'}}>
+      <Col sm={2}>
+      <AdminHeader />
+
+      </Col>
+      <Col sm={10}>
+      <Container style={{ marginLeft: 'auto', marginRight: 'auto',marginTop:'120px', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItem: 'center' }}>
         <Row sm={8} style={{ justifyContent: 'center', alignItem: 'center', textAlign: 'center' }}  >
           <Col sm={1} style={{ marginTop: '5px' }}>
             <Icon.Search size='25' />
@@ -102,6 +108,7 @@ export default function Reports() {
           <Result />
         </MDBContainer>
       </Container>
-    </>
+      </Col>
+    </Row>
   );
 }
