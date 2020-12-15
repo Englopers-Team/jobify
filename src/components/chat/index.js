@@ -62,6 +62,7 @@ export default function Chat() {
 
 
   function ChatListView() {
+    console.log(context.update)
     return messages.map((item, index) => {
       return (
         <Row className='listNames' key={index} onClick={() => {

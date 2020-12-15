@@ -1,16 +1,31 @@
-import { Link } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '../../context/auth';
+import { If, Then, Else } from 'react-if'
+
+import Guest from '../guest/dashboard'
+import User from '../user/dashboard'
+import Company from '../company/dashboard'
+
 export default function Home() {
+  const context = useContext(AuthContext);
+
+
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Link to={{ pathname: '/signin' }}>test</Link>
-        <Link to={{ pathname: '/company/submitted-jobs' }}>company submitted jobs</Link>
-        <Link to={{ pathname: '/company/applications' }}>company applications</Link>
-        <Link to={{ pathname: '/company/edit-profile' }}>company edit profile</Link>
-        <Link to={{ pathname: '/company/submit-job' }}>Submit job</Link>
-        <Link to={{ pathname: '/company/offers' }}>company offers</Link>
-        <Link to={{ pathname: '/search/employees' }}>Search employees</Link>
-      </div>
+      <If condition={context.token}>
+        <Then>
+          <If condition={context.user.account_type === 'p'}>
+            <User />
+          </If>
+
+          <If condition={context.user.account_type === 'c'}>
+            <Company/>
+          </If>
+        </Then>
+        <Else>
+          <Guest />
+        </Else>
+      </If>
     </>
   );
 }
