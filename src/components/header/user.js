@@ -117,48 +117,50 @@ export default function UserHeader() {
               </If>
             </NavDropdown>
           </Nav>
-          <NavDropdown
-            title={
-              <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
-                {companyName.split(' ')[0]}
-                <img className='thumbnail-image' src={logo} alt='user pic' style={{ width: 30, height: 30, objectFit: 'cover', borderRadius: 15, marginLeft: 10 }} />
-              </span>
-            }
-            id='basic-nav-dropdown'
-          >
-            <NavDropdown.Item>
-              <NavLink exact to='/'>
-                Dashboard
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/applicant/saved-jobs'>
-                Saved Jobs
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/applicant/offers'>
-                My Offers
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/applicant/applications'>
-                Applications
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/reports'>
-                Reports
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/applicant/edit-profile'>
-                Edit Profile
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
-          </NavDropdown>
+          <Nav className='user-drop-down'>
+            <NavDropdown
+              title={
+                <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
+                  {companyName.split(' ')[0]}
+                  <img className='thumbnail-image' src={logo} alt='user pic' style={{ width: 30, height: 30, objectFit: 'cover', borderRadius: 15, marginLeft: 10 }} />
+                </span>
+              }
+              id='basic-nav-dropdown'
+            >
+              <NavDropdown.Item>
+                <NavLink exact to='/'>
+                  Dashboard
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/applicant/saved-jobs'>
+                  Saved Jobs
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/applicant/offers'>
+                  My Offers
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/applicant/applications'>
+                  Applications
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/reports'>
+                  Reports
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/applicant/edit-profile'>
+                  Edit Profile
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </>

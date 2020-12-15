@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .logo {
   width: 140px;
 }
@@ -10,7 +10,7 @@
   font-size: 15px;
   min-width: 50px;
   width: 90%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: whitesmoke;
   border-width: 0;
   &:hover {
@@ -30,7 +30,7 @@
   margin: 2px 10px;
   padding: 5px 12px;
   font-size: 15px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: whitesmoke;
   border-width: 0;
   width: 90%;
@@ -57,8 +57,8 @@
 
 .link {
   margin: 2px 8px;
-  font-family: "Montserrat", sans-serif;
-  color: "black";
+  font-family: 'Montserrat', sans-serif;
+  color: 'black';
   width: 100%;
   a {
     text-decoration: none;
@@ -98,7 +98,7 @@
   padding-bottom: 0px;
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     margin: 0 auto;
     width: 0%;
@@ -112,7 +112,7 @@
   padding-bottom: 10px;
   padding-top: 10px;
   &:after {
-    content: "";
+    content: '';
     display: block;
     margin: 0 auto;
     width: 98%;
@@ -122,6 +122,23 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .user-drop-down {
+    align-items: center;
+    .nav .dropdown {
+      cursor: pointer;
+      position: absolute;
+      left: 88%;
+      top: 30%;
+    }
+
+    .dropdown-menu {
+      cursor: pointer;
+      position: absolute !important;
+      left: -5em;
+      top: 3em;
+      width: fit-content;
+    }
+  }
   .one {
     align-items: center;
     .nav .dropdown {
@@ -136,6 +153,7 @@
       position: absolute !important;
       left: -15em;
       top: 3em;
+      min-width: 3rem;
     }
   }
 }
@@ -173,11 +191,11 @@
 
 .activeSide {
   color: #42a0ec;
-  background-color:#1f2531;
-  width:200px;
+  background-color: #1f2531;
+  width: 200px;
   // height:40px;
   // padding:8px;
   // padding-top: 6px;
   // padding-bottom: 6px;
-  border:#1d2635 solid 1px;
+  border: #1d2635 solid 1px;
 }

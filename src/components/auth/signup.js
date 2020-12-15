@@ -68,7 +68,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setLastName(e.target.value)} className='input' type='text' placeholder='Last name' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }} controlId='formBasicEmail'>
-                        <Form.Control required onChange={(e) => setEmail(e.target.value)} className='input' type='email' placeholder='Email' />
+                        <Form.Control required onChange={(e) => setEmail(e.target.value.toLowerCase())} className='input' type='email' placeholder='Email' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='number' placeholder='Phone number' />

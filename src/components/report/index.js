@@ -44,7 +44,7 @@ export default function Reports() {
 
   return (
     <>
-      <Container style={{ animation: `fadeIn 2s` }}>
+      <Container>
         <Row style={{ justifyContent: 'space-between' }}>
           <Col style={{ borderLeft: 'solid', height: '90%', borderRadius: '2px', borderLeftColor: '#504EDF', borderLeftWidth: '3px', paddingLeft: '8px' }}>
             <h2 style={{ marginBottom: 0 }}>Your Feedback is Valuable</h2>
@@ -67,7 +67,7 @@ export default function Reports() {
             </Row>
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row sm={8} className='flexRow list-header2' style={{ textAlign: 'center', padding: '0 !improtant' }}>
+                <Row sm={8} className='flexRow list-header2' style={{ textAlign: 'center', padding: '0 !important' }}>
                   <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
                     Report Number
                   </Col>
