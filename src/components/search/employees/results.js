@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import { If, Then } from 'react-if';
 import Image from 'react-bootstrap/Image';
@@ -7,35 +7,50 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../styles.scss';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { AuthContext } from '../../../context/auth';
+import { SocketContext } from '../../../context/socket';
+import superagent from 'superagent'
 
 export default function CompanyResults(props) {
-  const context = useContext(AuthContext);
   let results = props.results;
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [loader, setLoader] = useState(false);
   let history = useHistory();
   const [show, setShow] = useState(false);
+  const [title, setTitle] = useState('');
+  const [location, setLocation] = useState('');
+  const [type, setType] = useState('Full-Time');
+  const [description, setDescription] = useState('');
+  const [personID, setPersonID] = useState(1);
+  const context = useContext(AuthContext);
+  const chat = useContext(SocketContext);
+
+  const API = 'https://jobify-app-v2.herokuapp.com';
 
   const checkSize = () => {
     setScreenSize(window.screen.width);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    superagent.post(`${API}/company/offers/${personID}`).set({ Authorization: `Basic ${context.token}` }).send({ title, location, type, description }).then((data) => {
+      history.push('/company/offers')
+    })
+  }
+
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    if (context.token) {
-    }
+
     return () => {
       window.removeEventListener('resize', checkSize);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [screenSize, context.token]);
+  }, [screenSize]);
   return (
     <>
       <If condition={props.visable === 'noData'}>
         <Row style={{ backgroundColor: 'transparent', marginTop: 50 }} sm={8}>
-          <Col style={{ color: '#717171', fontSize: 30, fontWeight: 500, textAlign: 'center' }}>No Results</Col>
+          <Col style={{ color: '#515151', fontSize: 30, fontWeight: 500, textAlign: 'center' }}>No Results</Col>
         </Row>
       </If>
       <Container className='list-container' fluid>
@@ -69,51 +84,87 @@ export default function CompanyResults(props) {
                   <Modal.Title id='example-custom-modal-styling-title'>Send Offer</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <p>Are you sure that you want to submit this job?</p>
-                  <Button className='button' onClick={() => console.log('hu')} variant='outline-light' style={{ backgroundColor: '#504edf' }}>
-                    Submit
-                  </Button>
+                  <Form className='flexCol'>
+                    <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId="exampleForm.jobtitle">
+                      <Form.Control required onChange={(e) => setTitle(e.target.value)} className='input' type='text' placeholder='Job Title' />
+                    </Form.Group>
+
+                    <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId="exampleForm.location">
+                      <Form.Control required onChange={(e) => setLocation(e.target.value)} className='input' type='text' placeholder='Location' />
+                    </Form.Group>
+
+                    <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId="exampleForm.type">
+                      <Form.Control onChange={(e) => {
+                        setType(e.target.value)
+                      }} as="select" defaultValue="Full Time">
+                        <option value='Full-Time'>Full Time</option>
+                        <option value='Part-Time'>Part Time</option>
+                      </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId="exampleForm.desc">
+                      <Form.Control as="textarea" rows={3} required onChange={(e) => setDescription(e.target.value)} className='input' type='text' placeholder='Description' />
+                    </Form.Group>
+
+                    <Button onClick={(e) => handleSubmit(e)} variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: '40px', width: '30%' }}>
+                      Send
+              </Button>
+                  </Form>
                 </Modal.Body>
               </Modal>
             </Row>
 
-            {results.map((item) => {
+            {results.map((item, index) => {
               return (
-                <>
-                  <Row sm={8} className='flexRow list-body'>
-                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
-                      <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
-                    </Col>
-                    <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
-                      {item.first_name} {item.last_name}
-                    </Col>
-                    <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
-                      {item.job_title}
-                    </Col>
-                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
-                      {item.country}
-                    </Col>
-                    <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-                      {item.phone}
-                    </Col>
-                    <Col style={{ textAlign: 'center' }} sm={1}>
-                      <Button className='button' onClick={() => history.push(`submitted-jobs/${item.id}`)} style={{ backgroundColor: '#504edf', width: '100px' }}>
-                        Message
+                <Row key={index} sm={8} className='flexRow list-body'>
+                  <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
+                    <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
+                  </Col>
+                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
+                    {item.first_name} {item.last_name}
+                  </Col>
+                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
+                    {item.job_title}
+                  </Col>
+                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
+                    {item.country}
+                  </Col>
+                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                    {item.phone}
+                  </Col>
+                  <Col style={{ textAlign: 'center' }} sm={1}>
+                    <Button className='button' onClick={() => {
+                      chat.socketMessg.emit('message', { body: 'Hello, I have an offer for you.', receiver: item.id, token: context.token, type: 'p' })
+                      chat.socketMessg.emit('checkMsg', { token: context.token })
+                      const sideBtn = document.getElementById('chatButton')
+                      const chatBox = document.getElementById('chat')
+                      sideBtn.classList.remove('slideinBtn')
+                      sideBtn.classList.add('slideoutBtn')
+                      setTimeout(() => {
+                        sideBtn.classList.add('hide')
+                        sideBtn.classList.remove('slideoutBtn')
+                        chatBox.classList.remove('hideChat')
+                        chatBox.classList.add('slideinChat')
+                        chat.setUpdate(item.id)
+                      }, 500)
+
+                    }} style={{ backgroundColor: '#504edf', width: '100px' }}>
+                      Contact
                       </Button>
-                    </Col>
-                    <Col style={{ textAlign: 'center' }} sm={2}>
-                      <Button
-                        className='button'
-                        onClick={() => {
-                          setShow(true);
-                        }}
-                        style={{ backgroundColor: '#504edf', width: '100px' }}
-                      >
-                        Send Offer
+                  </Col>
+                  <Col style={{ textAlign: 'center' }} sm={2}>
+                    <Button
+                      className='button'
+                      onClick={() => {
+                        setShow(true);
+                        setPersonID(item.id)
+                      }}
+                      style={{ backgroundColor: '#504edf', width: '100px' }}
+                    >
+                      Send Offer
                       </Button>
-                    </Col>
-                  </Row>
-                </>
+                  </Col>
+                </Row>
               );
             })}
           </Then>
@@ -123,55 +174,3 @@ export default function CompanyResults(props) {
   );
 }
 
-// <>
-//   <If condition={props.visable}>
-//     <Then>
-//       <Container className='list-container' fluid>
-//         <Row sm={8} className='flexRow list-header'>
-//           <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'left' }} className='col-title' sm={2}>
-//             First Name
-//           </Col>
-//           <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-//             Last Name
-//           </Col>
-//           <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-//             Job Title
-//           </Col>
-//           <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-//             Phone
-//           </Col>
-//           <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}>
-//             Location
-//           </Col>
-//           <If condition={props.loader}>
-//             <Col style={{ color: '#717171', fontWeight: 550 }} sm={2}>
-//               <Spinner animation='border' variant='primary' />
-//             </Col>
-//           </If>
-//         </Row>
-
-//         {results.map((item) => {
-//           return (assName='flexRow list-body' sm={8}>
-//               <Col style={{ fontWeight: 650 }} sm={4}>
-//                 {item.first_name}
-//               </Col>
-//               <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-//                 {i
-//             <Row cltem.last_name}
-//               </Col>
-//               <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-//                 {item.job_title}
-//               </Col>
-//               <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-//                 {item.country}
-//               </Col>
-//               <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
-//                 <Image style={{ width: '50px' }} src={item.avatar} roundedCircle />
-//               </Col>
-//             </Row>
-//           );
-//         })}
-//       </Container>
-//     </Then>
-//   </If>
-// </>

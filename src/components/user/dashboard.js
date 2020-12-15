@@ -191,10 +191,10 @@ export default function CompanyDashboard() {
                 {applications[0].map((item, index) => {
                   return (
                     <Row className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
-                      <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={1} lg={1}>
+                      <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center' }} sm={1} lg={1}>
                         {index + 1}
                       </Col>
-                      <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={4} lg={4}>
+                      <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 650 }} sm={4} lg={4}>
                         {item.company_name}
                       </Col>
                       <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2} lg={2}>

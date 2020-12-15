@@ -6,8 +6,9 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from '../search/jobs/results';
-import { AuthContext } from '../../context/auth';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../context/auth';
+
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/job';
 
@@ -131,11 +132,11 @@ export default function GuestDashbaord() {
           <Row style={{ display: 'flex', flexDirection: 'row' }}>
             <Row style={{ display: 'flex', flexDirection: 'column', marginTop: '40px' }}>
               <Row style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignContent: 'flex-start', marginLeft: '5px' }}>
-                <h2 style={{ textAlign: 'left', fontSize: '45px', fontWeight: 'bold' }}>Lets find your</h2>
+                <h2 style={{ textAlign: 'left', fontSize: '45px', fontWeight: 'bold' }}>Lets Find your</h2>
                 <h2 style={{ textAlign: 'left', fontSize: '45px', fontWeight: 'bold' }}>
                   Dream <span style={{ color: '#504edf', fontSize: '45px', fontWeight: 'bold' }}>Job</span>
                 </h2>
-                <h3 style={{ color: '#ababab', marginTop: '15px', marginBottom: '15px' }}>We have What you are looking for</h3>
+                <h3 style={{ color: '#9393A1', marginTop: '15px', marginBottom: '15px' }}>We have what you are looking for</h3>
               </Row>
               <Row sm={6} className='search-container' style={{ width: 'fit-content', justifyContent: 'flex-start', margin: 0, height: 'fit-content' }}>
                 <Col sm={5} className='input-filed'>
@@ -175,7 +176,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon1.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Software Engineering</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>The combination of autonomy, pay, flexibility, and job satisfaction leads to software engineers being quite happy compared to people in other professions.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The combination of autonomy, pay, flexibility, and job satisfaction leads to software engineers being quite happy compared to people in other professions.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -184,7 +185,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon2.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Applications Developments</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The process of creating a computer program or a set of programs to perform the different tasks that a business requires.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -193,7 +194,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px', justifyContent: 'center' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Constructional Engineering</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>Professional discipline that deals with the designing, planning, construction and management of infrastructures.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -204,7 +205,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Bussnies Adminestrations</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The performance or management of business operations and decision-making.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -213,7 +214,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Marketing</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The process of understanding your customers, and building and maintaining relationships with them.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -222,7 +223,7 @@ export default function GuestDashbaord() {
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon6.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Finance</Card.Title>
-                  <Card.Text style={{ color: '#9393A1', fontSize: '14px' }}>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The management, creation, and study of money and investments.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>

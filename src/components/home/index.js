@@ -1,14 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
-import { If, Then, Else } from 'react-if'
+import { If, Then, Else } from 'react-if';
 
-import Guest from '../guest/dashboard'
-import User from '../user/dashboard'
-import Company from '../company/dashboard'
+import Guest from '../guest/dashboard';
+import User from '../user/dashboard';
+import Company from '../company/dashboard';
 
 export default function Home() {
   const context = useContext(AuthContext);
-
 
   return (
     <>
@@ -19,7 +18,7 @@ export default function Home() {
           </If>
 
           <If condition={context.user.account_type === 'c'}>
-            {/* <Company/> */}
+            <Company />
           </If>
         </Then>
         <Else>

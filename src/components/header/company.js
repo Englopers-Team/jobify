@@ -88,7 +88,7 @@ export default function CompanyHeader() {
 
           <Nav className='one'>
             <img style={{ width: 30, height: 30, objectFit: 'cover', marginRight: 20, marginLeft: 7 }} src={flag} alt='bell' border='0' />
-            <NavDropdown data-toggle='dropdown' eventKey={1} title={notifiIcon ? seen ? <Icon.Bell color='#232b4e' size={22} /> : <img style={{ width: 22, height: 22, objectFit: 'cover' }} src='https://i.ibb.co/5Tqh4jH/bell.png' alt='bell' border='0' /> : <p style={{ fontSize: 17 }}>&nbsp;Notification</p>} id='basic-nav-dropdown'>
+            <NavDropdown data-toggle='dropdown' title={notifiIcon ? seen ? <Icon.Bell color='#232b4e' size={22} /> : <img style={{ width: 22, height: 22, objectFit: 'cover' }} src='https://i.ibb.co/5Tqh4jH/bell.png' alt='bell' border='0' /> : <p style={{ fontSize: 17 }}>&nbsp;Notification</p>} id='basic-nav-dropdown'>
               <If condition={!notification[0]}>
                 <Then>
                   <NavDropdown.Item href='#action/3.1'>You don't have any notification</NavDropdown.Item>
@@ -96,8 +96,8 @@ export default function CompanyHeader() {
 
                 <Else>
                   <Then>
-                    {notification.map((item) => {
-                      return <Container className='notification-item'>{item.description}</Container>;
+                    {notification.map((item,index) => {
+                      return <Container key={index} className='notification-item'>{item.description}</Container>;
                     })}
                   </Then>
                 </Else>
@@ -105,7 +105,7 @@ export default function CompanyHeader() {
             </NavDropdown>
           </Nav>
           <NavDropdown
-            eventKey={1}
+            //
             title={
               <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
                 {/* {companyName.split(' ')[0]} */}
