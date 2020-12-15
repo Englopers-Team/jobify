@@ -31,6 +31,13 @@ function AuthProvider(props) {
 
   useEffect(() => {
     const oauthPath = pathname.split('/')
+
+    // const element = document.getElementById('contAnima')
+    // element.classList.add('fadeLoad')
+
+    // setTimeout(()=>{
+    // element.classList.remove('fadeLoad')
+    // },1000)
     // console.log(oauthPath[1])
     // console.log(oauthPath[2])
     if (token && pathname !== '/logout') {
