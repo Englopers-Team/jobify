@@ -68,19 +68,21 @@ export default function PostDetails() {
     return comments.map((comm, index) => {
       return (
         <Card key={index} className='comment'>
-          <Card.Body>
+          <Card.Body style={{paddingLeft:'15px',paddingRight:'15px'}}>
             <Card.Title className='flexRow'>
-              <Col sm={11} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '0px' }}>
-                <Col style={{ padding: 0 }} sm={2} lg={1}>
+              <Col sm={10} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '0px' }}>
+                <Col style={{ padding: 0 }} sm={1} lg={1}>
                   <Image className='imgShadow' style={{ width: '32px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
                 </Col>
-                <Col style={{ padding: 0 }}>
+                <Col sm={10} style={{ padding: 0, marginLeft: '25px' }}>
                   <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
                   <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
                 </Col>
               </Col>
               <If condition={comm.writerID === context.user.id}>
-                <XCircleFill onClick={() => handleDelete(index)} color='#232B4E' size={16} style={{ alignSelf: 'flex-start', cursor: 'pointer' }} />
+                <Col style={{textAlign:'right'}}>
+                  <XCircleFill onClick={() => handleDelete(index)} color='#232B4E' size={16} style={{ alignSelf: 'flex-start', cursor: 'pointer' }} />
+                </Col>
               </If>
             </Card.Title>
             <Card.Text>
@@ -147,10 +149,10 @@ export default function PostDetails() {
             </Row>
             <Row style={{ borderLeft: 'solid', height: '90%', borderRadius: '0px', borderLeftColor: '#504EDF', borderLeftWidth: '3px', paddingLeft: '8px' }}>
               <Col sm={12} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '10px' }}>
-                <Col style={{ padding: 0 }} sm={3} lg={2}>
+                <Col style={{ padding: 0,marginLeft: '10px',marginRight:'10px'}} sm={1} lg={1}>
                   <Image className='imgShadow' style={{ width: '32px' }} src={context.user.profile.avatar} roundedCircle />
                 </Col>
-                <Col style={{ padding: 0 }}>
+                <Col sm={8} style={{ padding: 0 }}>
                   <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{context.user.profile.first} {context.user.profile.last}</h4>
                   <p style={{ marginBottom: 0, fontSize: '12px' }}>{context.user.profile.job_title}</p>
                 </Col>
