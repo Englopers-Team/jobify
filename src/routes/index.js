@@ -36,6 +36,7 @@ import ApplicantSavedJobs from '../components/user/saved-jobs';
 import dash from '../components/user/dashboard';
 import Guest from '../components/guest/dashboard';
 import NoAccess from '../components/no-access';
+import CompanyDashboard from '../components/company/dashboard';
 
 export default function Routes() {
   return (
@@ -82,6 +83,7 @@ export default function Routes() {
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
       <Route exact path='/banned' component={NoAccess} />
+      <Route exact path='/companyd' component={CompanyDashboard} />
 
       <Route path='/userhome' component={dash} />
       <Route path='/guest' component={Guest} />
