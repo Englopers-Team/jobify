@@ -277,6 +277,4 @@ export default function CompanyDashboard() {
           </Col>
         </Row>
       </Container>
-    </>
-  );
-}
+

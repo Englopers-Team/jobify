@@ -86,7 +86,7 @@ export default function UserHeader() {
               <NavLink to='/search/company'>Companies</NavLink>
             </Nav.Link>
             <Nav.Link className='link'>
-              <NavLink to='/Community'>Community</NavLink>
+              <NavLink to='/community'>Community</NavLink>
             </Nav.Link>
             <Nav.Link className='link' to='/about'>
               <NavLink to='/about'>About</NavLink>
