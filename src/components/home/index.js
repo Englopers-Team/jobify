@@ -19,7 +19,7 @@ export default function Home() {
           </If>
 
           <If condition={context.user.account_type === 'c'}>
-            {/* <Company/> */}
+            <Company/>
           </If>
         </Then>
         <Else>

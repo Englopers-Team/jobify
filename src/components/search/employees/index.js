@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../context/auth';
 import Results from './results';
 import * as Icon from 'react-bootstrap-icons';
+import offersImg from './offers.svg'
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/employee';
 
 export default function SearchEmployees() {
@@ -60,7 +61,7 @@ export default function SearchEmployees() {
       </Row>
 
       <Row className='image-container' style={{ justifyContent: 'center' }}>
-        <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
+        <Image className='image' style={{ width: '70%' }} src={offersImg  } rounded />
       </Row>
     </Container>
   );
