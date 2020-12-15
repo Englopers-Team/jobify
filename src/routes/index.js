@@ -43,11 +43,11 @@ export default function Routes() {
       <Route exact path='/' component={Home} />
 
       <Route exact path='/admin' component={AdminDashboard} />
-      <Route exact path='/admin/block' component={Block} />
+      <Route exact path='/admin/users' component={Block} />
       <Route exact path='/admin/reports' component={AdminReports} />
       <Route exact path='/admin/reports/:id' component={AdminReportsDetails} />
-      <Route exact path='/admin/posts' component={Posts} />
-      <Route exact path='/admin/posts/:id' component={PostsDetails} />
+      <Route exact path='/admin/community' component={Posts} />
+      <Route exact path='/admin/community/:id' component={PostsDetails} />
 
       <Route exact path='/api' component={API} />
 
