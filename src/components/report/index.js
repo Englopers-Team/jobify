@@ -63,21 +63,21 @@ export default function Reports() {
         <Then>
           <Container style={{ justifyContent: 'center', width: '85%' }}>
             <Row sm={8}>
-              <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Reports</Col>
+              <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Reports</Col>
             </Row>
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row sm={8} className='flexRow list-header2' style={{ justifyContent: 'center' }}>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title2' sm={3}>
+                <Row sm={8} className='flexRow list-header2' style={{ textAlign: 'center', padding: '0 !improtant' }}>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
                     Report Number
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={5}>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={6}>
                     Description
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
                     State
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center' }} sm={2}></Col>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}></Col>
                 </Row>
                 <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
                   <Modal.Header closeButton>
@@ -96,12 +96,12 @@ export default function Reports() {
                   {data.map((item) => {
                     console.log(item);
                     return (
-                      <Row className='flexRow list-body' sm={12}>
-                        <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={3}>
+                      <Row className='flexRow list-body' style={{ padding: '0 !improtant' }} sm={8}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151', verticalAlign: 'center' }} sm={2}>
                           {item.id}
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={5}>
-                          <p style={{ wordWrap: 'break-word' }}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={6}>
+                          <p style={{ wordWrap: 'break-word', margin: '0' }}>
                             {item.description.slice(0, 45)}
                             {item.description.length > 45 ? '...' : ''}
                           </p>
