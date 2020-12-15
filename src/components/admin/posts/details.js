@@ -166,8 +166,8 @@ export default function PostDetails() {
         <AdminHeader />
 
       </Col>
-      <Col sm={10} style={{marginTop:'120px'}}>
-        <Container className='post' style={{ width: '80%', backgroundColor: 'white' }}>
+      <Col  sm={10} style={{marginTop:'60px'}}>
+        <Container className='list-container post'   style={{ width: '80%', backgroundColor: 'white' }}>
           <Post />
         </Container>
       </Col>
