@@ -10,6 +10,8 @@ import Image from 'react-bootstrap/Image';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { MDBContainer } from 'mdbreact';
+
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/jobs';
 export default function MyJobs(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -18,7 +20,8 @@ export default function MyJobs(props) {
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
   let history = useHistory();
-
+  const scrollContainerStyle = { width: 'auto', maxHeight: '300px', height: 'fit-content', overflowY: 'scroll', overflowX: 'hidden', padding: 0 };
+  const scrollContainerStyle2 = { width: 'auto', maxHeight: '500px', height: 'fit-content', overflowY: 'scroll', overflowX: 'hidden', padding: 0 };
   const context = useContext(AuthContext);
 
   const jobList = async (e) => {
@@ -106,47 +109,48 @@ export default function MyJobs(props) {
                 </Button>
               </Modal.Body>
             </Modal>
-
-            {results.map((item) => {
-              return (
-                <>
-                  <Row className='flexRow list-body' sm={12}>
-                    <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={3}>
-                      {item.title}
-                    </Col>
-                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2}>
-                      {item.type}
-                    </Col>
-                    <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2}>
-                      {item.location}
-                    </Col>
-                    <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
-                      {item.applicants_num}
-                    </Col>
-                    <Row sm={2.5}>
-                      <Col style={{ textAlign: 'center' }} sm={1.25}>
-                        <Button className='button' onClick={() => history.push(`submitted-jobs/${item.id}`)} variant='outline-light' style={{ backgroundColor: '#504edf' }}>
-                          Update
-                        </Button>
+            <MDBContainer className='scrollbar scrollbar-primary  mt-5 mx-auto' style={screenSize > 575 ? scrollContainerStyle : scrollContainerStyle2}>
+              {results.map((item) => {
+                return (
+                  <>
+                    <Row className='flexRow list-body' sm={12}>
+                      <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={3}>
+                        {item.title}
                       </Col>
-                      <Col style={{ textAlign: 'center' }} sm={1.25}>
-                        <Button
-                          className='button'
-                          onClick={() => {
-                            setShow(true);
-                            setId(item.id);
-                          }}
-                          variant='outline-light'
-                          style={{ backgroundColor: '#B72525' }}
-                        >
-                          Delete
-                        </Button>
+                      <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2}>
+                        {item.type}
                       </Col>
+                      <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2}>
+                        {item.location}
+                      </Col>
+                      <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
+                        {item.applicants_num}
+                      </Col>
+                      <Row sm={2.5}>
+                        <Col style={{ textAlign: 'center' }} sm={1.25}>
+                          <Button className='button' onClick={() => history.push(`submitted-jobs/${item.id}`)} variant='outline-light' style={{ backgroundColor: '#504edf' }}>
+                            Update
+                          </Button>
+                        </Col>
+                        <Col style={{ textAlign: 'center' }} sm={1.25}>
+                          <Button
+                            className='button'
+                            onClick={() => {
+                              setShow(true);
+                              setId(item.id);
+                            }}
+                            variant='outline-light'
+                            style={{ backgroundColor: '#B72525' }}
+                          >
+                            Delete
+                          </Button>
+                        </Col>
+                      </Row>
                     </Row>
-                  </Row>
-                </>
-              );
-            })}
+                  </>
+                );
+              })}
+            </MDBContainer>
           </Container>
         </Row>
 
