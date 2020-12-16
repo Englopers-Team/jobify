@@ -182,9 +182,9 @@ export default function AdminDashboard() {
         }
       })
 
-      new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Send Offers`, compantAppNum, labelsCompantAppNum));
+      new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Received Application`, compantAppNum, labelsCompantAppNum));
 
-      let compantOfferNum = [];
+      let compantOfferNum = []; 
       let labelsCompantOfferNum = [];
       data.numOfCompanyOffersEach.forEach((company, index) => {
         if (index < 5) {
@@ -193,7 +193,7 @@ export default function AdminDashboard() {
         }
       })
 
-      new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Received Application`, compantOfferNum, labelsCompantOfferNum));
+      new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Send Offers`, compantOfferNum, labelsCompantOfferNum));
 
       let applicpintNumJobTitle = [];
       let labelsapplicpintNumJobTitle = [];
