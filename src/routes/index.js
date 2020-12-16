@@ -32,6 +32,7 @@ import ApplicantApplications from '../components/user/my-applications';
 import ApplicantOffers from '../components/user/offers';
 import ApplicantSavedJobs from '../components/user/saved-jobs';
 import About from '../components/about';
+import AccessDenied from '../components/access-denied';
 
 // for testing osama
 import dash from '../components/user/dashboard';
@@ -84,8 +85,8 @@ export default function Routes() {
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
       <Route exact path='/banned' component={NoAccess} />
-      <Route exact path='/companyd' component={CompanyDashboard} />
       <Route exact path='/about' component={About} />
+      <Route exact path='/access-denied' component={AccessDenied} />
 
       <Route path='/userhome' component={dash} />
       <Route path='/guest' component={Guest} />

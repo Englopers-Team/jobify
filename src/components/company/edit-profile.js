@@ -23,8 +23,8 @@ export default function CompanyEdit() {
 
   useEffect(() => {
     if (context.token) {
+      getData();
     }
-    getData();
   }, [context.token]);
 
   async function getData() {
@@ -47,6 +47,9 @@ export default function CompanyEdit() {
 
   return (
     <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+      <Row sm={8}>
+        <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center', marginBottom: '30px' }}>Edit Profile</Col>
+      </Row>
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
