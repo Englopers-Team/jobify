@@ -1,8 +1,11 @@
-
-  @media only screen and (max-width: 768px) {
-      .media{
-        text-align: center !important;
-      
-      }
+@media only screen and (max-width: 768px) {
+  .media {
+    text-align: center !important;
   }
- 
+  #searchImg {
+    width: fit-content !important;
+  }
+  #worldImg {
+    width: 100% !important;
+  }
+}
