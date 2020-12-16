@@ -49,7 +49,7 @@ export default function GuestHeader() {
             <img style={{ width: 30, height: 30, objectFit: 'cover', marginRight: 20, marginLeft: 7 }} src={flag} alt='bell' border='0' />
             <Link exact to='/signup'>
               <Button className='button' variant='outline-light'>
-                SignUp
+                Signup
               </Button>
             </Link>
             <Link exact to='/signin'>

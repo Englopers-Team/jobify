@@ -151,7 +151,7 @@ export default function PostDetails() {
                   <Col>
                     <If condition={pin === 'false'}>
                       <Then>
-                        <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>pin</Button>
+                        <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>Pin</Button>
                       </Then>
                       <Else>
                         <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>Unpin</Button>

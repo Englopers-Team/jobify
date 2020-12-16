@@ -236,7 +236,7 @@ export default function GuestDashbaord() {
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
-            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='col-title media' sm={4}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='' sm={4}>
               Job Title
             </Col>
             <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
@@ -254,7 +254,7 @@ export default function GuestDashbaord() {
           {sugJobs.map((item) => {
             return (
               <Row className='flexRow list-body' sm={8}>
-                <Col style={{ fontWeight: 650, textAlign: 'left' }} className='media' sm={4}>
+                <Col  style={{ fontWeight: 650, textAlign: 'center' }} className='' sm={4}>
                   {item.title}
                 </Col>
                 <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>

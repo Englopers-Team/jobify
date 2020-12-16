@@ -81,16 +81,16 @@ export default function JobsResults(props) {
             {results.map((item, index) => {
               return (
                 <Row key={index} className='flexRow list-body' sm={8}>
-                  <Col style={{ fontWeight: 650, textAlign: 'center', verticalAlign: 'center' }} sm={4}>
+                  <Col style={{ textAlign: 'center', verticalAlign: 'center' }} sm={4}>
                     {item.title}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                     {item.company_name}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                     {item.location}
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
                     {item.type}
                   </Col>
                   <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
