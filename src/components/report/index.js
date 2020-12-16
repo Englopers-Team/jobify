@@ -79,7 +79,7 @@ export default function Reports() {
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
-                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={6}>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={4}>
                     Description
                   </Col>
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
@@ -107,13 +107,13 @@ export default function Reports() {
                         <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={6}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={4}>
                           <p style={{ wordWrap: 'break-word', margin: '0' }}>
                             {item.description.slice(0, 45)}
                             {item.description.length > 45 ? '...' : ''}
                           </p>
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
+                        <Col style={{ fontWeight: '600', textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
                           {item.response === null ? 'Open' : 'Closed'}
                         </Col>
                         <Col style={{ textAlign: 'center' }} sm={2}>

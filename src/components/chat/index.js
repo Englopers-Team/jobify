@@ -105,7 +105,7 @@ export default function Chat() {
         }
         }>
           <Col style={{ justifyContent: 'center', alignSelf: 'center' }} sm={2}>
-            <Image style={{ width: '48px' }} src={item.profile.avatar ? item.profile.avatar : item.profile.logo} roundedCircle />
+            <Image style={{ width: '32px',height:'32px',objectFit:'cover' }} src={item.profile.avatar ? item.profile.avatar : item.profile.logo} roundedCircle />
           </Col>
           <Col sm={0} lg={1}>
           </Col>
@@ -133,7 +133,7 @@ export default function Chat() {
               </p>
             </Col>
             <Col style={{ alignSelf: 'center', padding: 0, textAlign: 'right' }} sm={1}>
-              <Image style={{ width: '28px' }} src={authContext.user.profile.avatar ? authContext.user.profile.avatar : authContext.user.profile.logo} roundedCircle />
+              <Image style={{ width: '28px',height:'28px',objectFit:'cover' }} src={authContext.user.profile.avatar ? authContext.user.profile.avatar : authContext.user.profile.logo} roundedCircle />
             </Col>
           </Row>
           // <ListGroup.Item id='messg' className='otherMessg' key={index}>
@@ -143,7 +143,7 @@ export default function Chat() {
         return (
           <Row className='myMessg' key={index}>
             <Col style={{ alignSelf: 'center', padding: 0, textAlign: 'left', marginRight: '10px' }} sm={1}>
-              <Image style={{ width: '28px' }} src={arr[0].profile.logo ? arr[0].profile.logo : arr[0].profile.avatar} roundedCircle />
+              <Image style={{ width: '28px',height:'28px',objectFit:'cover' }} src={arr[0].profile.logo ? arr[0].profile.logo : arr[0].profile.avatar} roundedCircle />
             </Col>
             <Col style={{ padding: '2px' }} sm={10}>
               <p id='messg' style={{ float: 'left' }}>

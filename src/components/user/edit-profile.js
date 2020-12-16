@@ -92,9 +92,11 @@ export default function UserEdit() {
                   <Form.Control required onChange={(e) => setJobTitle(e.target.value)} className='input' type='text' value={jobTitle} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                <Form.Label>CV</Form.Label>
                   <Form.Control onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
                   </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
+                <Form.Label>Photo</Form.Label>
                   <Form.Control onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                 </Form.Group>
 

@@ -157,7 +157,7 @@ export default function PostDetails() {
                         <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>Unpin</Button>
                       </Else>
                     </If>
-                    <Button style={{ width: '70px', maxWidth: '70px', backgroundColor: '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
+                    <Button className='button12' style={{ width: '70px', maxWidth: '70px', backgroundColor: '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
                   </Col>
                 </Row>
 
@@ -193,12 +193,10 @@ export default function PostDetails() {
       </>
     )
   }
-
   return (
     <Row style={{ width: '100%' }}>
       <Col sm={2}>
         <AdminHeader />
-
       </Col>
       <Col sm={10} style={{ marginTop: '30px' }}>
         <Container className='list-container post' style={{ width: '80%', backgroundColor: 'white' }}>
