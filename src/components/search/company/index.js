@@ -18,13 +18,16 @@ export default function SearchCompany() {
   const jobList = async (e) => {
     e.preventDefault();
     setLoader(true);
-    setVisable(true);
+
     await superagent
       .get(jobsApi)
       .query({ company_name: name, country: location })
       .then((data) => {
         setResults(data.body);
         setLoader(false);
+        // setTimeout(() => {
+        setVisable(true);
+        // }, 10000);
       });
   };
 
