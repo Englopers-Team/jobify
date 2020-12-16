@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { MDBContainer } from 'mdbreact';
-import offersImg from './offers.svg'
+import offersImg from './offers.svg';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/offers';
 
 export default function CompanyApplications(props) {
@@ -59,7 +59,7 @@ export default function CompanyApplications(props) {
 
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    if (context.token) {      
+    if (context.token) {
       offersList();
     }
     return () => {
@@ -170,7 +170,7 @@ export default function CompanyApplications(props) {
           </Else>
         </If>
 
-        <Row className='image-container' style={{ justifyContent: 'center',marginTop:0 }}>
+        <Row className='image-container' style={{ justifyContent: 'center', marginTop: 0 }}>
           <Image className='image' style={{ width: '60%' }} src={offersImg} rounded />
         </Row>
       </Container>
