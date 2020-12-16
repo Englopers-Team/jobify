@@ -10,8 +10,8 @@ const config = {
   bucketName: 'jobify',
   dirName: 'cv' /* optional */,
   region: 'us-east-1',
-  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAIZGQ2UALK7YXCL6Q',
+  secretAccessKey: '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',
 };
 
 export default function Signup() {
@@ -119,7 +119,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
-                      <Form.Label>Photo</Form.Label>
+                        <Form.Label>Photo</Form.Label>
                         <Form.Control required onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                       </Form.Group>
                       <Form.Group>
