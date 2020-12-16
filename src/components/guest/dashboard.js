@@ -157,7 +157,9 @@ export default function GuestDashbaord() {
                 </Col>
               </Row>
             </Row>
+
             <Row style={{ width: '40%', justifyContent: 'flex-end' }} id='searchImg'>
+
               <Col className='flexF'>
                 <Image className='image' style={{ width: '100%' }} src='../../assets/user.png' rounded />
               </Col>
@@ -170,6 +172,7 @@ export default function GuestDashbaord() {
               </Then>
               <Else>
                 <If condition={visable}>
+
                   <Container style={{ justifyContent: 'center', marginTop: '30px' }}>
                     <Col sm={12} style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>
                       NO RESULTS
@@ -346,7 +349,9 @@ export default function GuestDashbaord() {
               </Button>
             </Form>
           </Col>
+
           <Col sm={5} style={{ justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+
             <Image className='image' style={{ width: '100%' }} src='../../assets/Mask6.png' rounded />
           </Col>
         </Row>
