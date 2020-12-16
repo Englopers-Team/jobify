@@ -36,7 +36,7 @@ export default function Signup() {
   const uploadCv = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setCVFile(data.location);
+        setCVFile(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => setError(err));
   };
@@ -44,7 +44,7 @@ export default function Signup() {
   const uploadAvatar = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setAvatarFile(data.location);
+        setAvatarFile(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => setError(err));
   };
@@ -159,7 +159,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='number' placeholder='Phone number' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
-                      <Form.Label>Logo</Form.Label>
+                        <Form.Label>Logo</Form.Label>
                         <Form.Control required onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>

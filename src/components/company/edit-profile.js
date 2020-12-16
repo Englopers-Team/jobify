@@ -33,7 +33,7 @@ export default function CompanyEdit() {
   const uploadLogo = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setLogo(data.location);
+        setLogo(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => {});
   };

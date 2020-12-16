@@ -30,7 +30,7 @@ export default function UserEdit() {
   const uploadCv = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setCv(data.location);
+        setCv(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => {});
   };
@@ -38,7 +38,7 @@ export default function UserEdit() {
   const uploadAvatar = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setAvatar(data.location);
+        setAvatar(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => {});
   };
@@ -92,11 +92,11 @@ export default function UserEdit() {
                   <Form.Control required onChange={(e) => setJobTitle(e.target.value)} className='input' type='text' value={jobTitle} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
-                <Form.Label>CV</Form.Label>
+                  <Form.Label>CV</Form.Label>
                   <Form.Control onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
-                <Form.Label>Photo</Form.Label>
+                  <Form.Label>Photo</Form.Label>
                   <Form.Control onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                 </Form.Group>
 
