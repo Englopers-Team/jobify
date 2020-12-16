@@ -10,8 +10,8 @@ const config = {
   bucketName: 'jobify',
   dirName: 'cv' /* optional */,
   region: 'us-east-1',
-  accessKeyId: 'AKIAIZGQ2UALK7YXCL6Q',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAJVYHXPGRUQZQIPGQ',
+  secretAccessKey: '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',
 };
 
 export default function Signup() {

@@ -13,8 +13,8 @@ const config = {
   bucketName: 'jobify',
   dirName: 'cv' /* optional */,
   region: 'us-east-1',
-  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAJVYHXPGRUQZQIPGQ',
+  secretAccessKey: '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',
 };
 
 export default function CompanyEdit() {
@@ -35,7 +35,7 @@ export default function CompanyEdit() {
       .then((data) => {
         setLogo(data.location);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
   useEffect(() => {
     if (context.token) {

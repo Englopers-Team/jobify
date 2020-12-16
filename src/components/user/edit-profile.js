@@ -11,8 +11,8 @@ const config = {
   bucketName: 'jobify',
   dirName: 'cv' /* optional */,
   region: 'us-east-1',
-  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAJVYHXPGRUQZQIPGQ',
+  secretAccessKey: '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',
 };
 
 export default function UserEdit() {
@@ -32,7 +32,7 @@ export default function UserEdit() {
       .then((data) => {
         setCv(data.location);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const uploadAvatar = (e) => {
@@ -40,7 +40,7 @@ export default function UserEdit() {
       .then((data) => {
         setAvatar(data.location);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function UserEdit() {
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Control onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
-                  </Form.Group>
+                </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Control onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                 </Form.Group>
