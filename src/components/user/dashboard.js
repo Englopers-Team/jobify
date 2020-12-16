@@ -190,7 +190,7 @@ export default function CompanyDashboard() {
               <CardBody>
                 {applications[0].map((item, index) => {
                   return (
-                    <Row className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+                    <Row key={index} className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                       <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center' }} sm={1} lg={1}>
                         {index + 1}
                       </Col>
@@ -237,7 +237,7 @@ export default function CompanyDashboard() {
               <CardBody>
                 {jobsData[0].map((item, index) => {
                   return (
-                    <Row className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+                    <Row key={index} className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={1} lg={1}>
                         {index + 1}
                       </Col>

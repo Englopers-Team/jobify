@@ -29,7 +29,7 @@ export default function SubmitReport() {
       .set({ Authorization: `Basic ${context.token}` })
       .send({ description: body })
       .then((data) => {
-        history.push('/reports')
+
       });
     setShow(true);
   };
@@ -41,11 +41,14 @@ export default function SubmitReport() {
           <Modal.Title id='example-custom-modal-styling-title'>Your Report Has Been Submitted Successfully</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Link to='/reports'>
-            <Button className='button' onClick={() => setShow(false)} variant='outline-light' style={{ backgroundColor: '#504EDF' }}>
+          {/* <Link to='/reports'> */}
+            <Button className='button' onClick={() => {
+              history.push('/reports')
+              setShow(false)
+            }} variant='outline-light' style={{ backgroundColor: '#504EDF' }}>
               Ok
             </Button>
-          </Link>
+          {/* </Link> */}
         </Modal.Body>
       </Modal>
       <Row style={{ justifyContent: 'space-between' }}>

@@ -159,6 +159,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='number' placeholder='Phone number' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
+                      <Form.Label>Logo</Form.Label>
                         <Form.Control required onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
