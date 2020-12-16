@@ -182,7 +182,7 @@ export default function AdminDashboard() {
         }
       })
 
-      new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Received Application`, compantAppNum, labelsCompantAppNum));
+      new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Send Offers`, compantAppNum, labelsCompantAppNum));
 
       let compantOfferNum = []; 
       let labelsCompantOfferNum = [];
@@ -193,7 +193,7 @@ export default function AdminDashboard() {
         }
       })
 
-      new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Send Offers`, compantOfferNum, labelsCompantOfferNum));
+      new Chart(topComponiesSendOffer, chartBarHandler(`Top Companies Interactive By Received Application`, compantOfferNum, labelsCompantOfferNum));
 
       let applicpintNumJobTitle = [];
       let labelsapplicpintNumJobTitle = [];
