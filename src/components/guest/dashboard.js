@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Results from '../search/jobs/results';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
+import { If, Then, Else } from 'react-if';
 
 import * as Icon from 'react-bootstrap-icons';
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/job';
@@ -111,7 +112,6 @@ export default function GuestDashbaord() {
   const jobList = async (e) => {
     e.preventDefault();
     setLoader(true);
-    setVisable(true);
 
     await superagent
       .get(jobsApi)
@@ -121,6 +121,8 @@ export default function GuestDashbaord() {
       .then((data) => {
         setResults([...data.body.resultDB, ...data.body.resultAPI]);
         setLoader(false);
+        setVisable(true);
+
       });
   };
 
@@ -161,7 +163,21 @@ export default function GuestDashbaord() {
             </Row>
           </Row>
           <Row>
-            <Results results={results} visable={visable} loader={loader} />
+            <If condition={results[0]}>
+              <Then>
+                <Results results={results} visable={visable} loader={loader} />
+              </Then>
+              <Else>
+                <If condition={visable}>
+
+                <Container style={{ justifyContent: 'center', marginTop: '30px' }}>
+                  <Col sm={12} style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>
+                    NO RESULTS
+                </Col>
+                </Container>
+                </If>
+              </Else>
+            </If>
           </Row>
         </Form>
       </Container>
@@ -236,7 +252,7 @@ export default function GuestDashbaord() {
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
-            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='col-title media' sm={4}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='' sm={4}>
               Job Title
             </Col>
             <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
@@ -254,7 +270,7 @@ export default function GuestDashbaord() {
           {sugJobs.map((item) => {
             return (
               <Row className='flexRow list-body' sm={8}>
-                <Col style={{ fontWeight: 650, textAlign: 'left' }} className='media' sm={4}>
+                <Col style={{ fontWeight: 650, textAlign: 'center' }} className='' sm={4}>
                   {item.title}
                 </Col>
                 <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>

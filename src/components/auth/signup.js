@@ -37,23 +37,22 @@ export default function Signup() {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
         setCVFile(data.location);
-        console.log(data.location);
       })
       .catch((err) => setError(err));
   };
+
   const uploadAvatar = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
         setAvatarFile(data.location);
-        console.log(data.location);
       })
       .catch((err) => setError(err));
   };
+
   const uploadLogo = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
         setLogoFile(data.location);
-        console.log(data.location);
       })
       .catch((err) => setError(err));
   };
@@ -116,9 +115,11 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setCountry(e.target.value)} className='input' type='text' placeholder='Country' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
+                        <Form.Label>CV</Form.Label>
                         <Form.Control required onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
+                      <Form.Label>Photo</Form.Label>
                         <Form.Control required onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                       </Form.Group>
                       <Form.Group>

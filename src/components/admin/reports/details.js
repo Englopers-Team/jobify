@@ -183,7 +183,7 @@ export default function ReportDetails() {
                     <Button className='button13' style={{ marginLeft: '5px', marginTop: '5px' }} onClick={() => {
                       handleSubmit()
                     }}>Send</Button>
-                    <Button style={{ marginLeft: '5px', marginTop: '5px', backgroundColor: '#B72525' }} onClick={() => {
+                    <Button  className='button13'  style={{ marginLeft: '5px', marginTop: '5px', backgroundColor: '#B72525' }} onClick={() => {
                       handleDelete()
                     }}>Delete</Button>
                   </Col>

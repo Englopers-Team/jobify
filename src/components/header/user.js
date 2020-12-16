@@ -66,7 +66,7 @@ export default function UserHeader() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px' }}>
+      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px',width:'85%'  }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
         </NavLink>

@@ -61,24 +61,24 @@ export default function UserApplications() {
         </Container>
         <Container className='list-container' style={{ marginTop: '20px' }} fluid>
           <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px' }}>
-            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={1}>
-              Photo
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={1}>
+              
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={2}>
               Job Title
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={3}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={3}>
               Company Name
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
               Job Type
             </Col>
-            <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
               Application Status
             </Col>
             <Col sm={1}>
               <If condition={loader}>
-                <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
+                <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={2}>
                   <Spinner animation='border' variant='primary' />
                 </Col>
               </If>
@@ -101,13 +101,13 @@ export default function UserApplications() {
                 <Col style={{ fontWeight: 650, textAlign: screenSize > '575' ? 'center' : 'center' }} sm={1}>
                   <Image style={{ width: '50px', height: '50px', objectFit: 'cover' }} src={item.logo} roundedCircle />
                 </Col>
-                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#515151' }} sm={2}>
                   {item.title}
                 </Col>
-                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#9393A1' }} sm={3}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#515151' }} sm={3}>
                   {item.company_name}
                 </Col>
-                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#9393A1' }} sm={2}>
+                <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#515151' }} sm={2}>
                   {item.type}
                 </Col>
                 <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center' }} className='button-col' sm={2}>

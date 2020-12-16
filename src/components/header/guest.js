@@ -20,8 +20,7 @@ export default function GuestHeader() {
   }
 
   return (
-    <>
-      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px' }}>
+      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px',width:'85%' }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
         </NavLink>
@@ -49,7 +48,7 @@ export default function GuestHeader() {
             <img style={{ width: 30, height: 30, objectFit: 'cover', marginRight: 20, marginLeft: 7 }} src={flag} alt='bell' border='0' />
             <Link exact to='/signup'>
               <Button className='button' variant='outline-light'>
-                SignUp
+                Signup
               </Button>
             </Link>
             <Link exact to='/signin'>
@@ -61,6 +60,5 @@ export default function GuestHeader() {
           <Nav></Nav>
         </Navbar.Collapse>
       </Navbar>
-    </>
   );
 }

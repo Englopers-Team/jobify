@@ -164,7 +164,7 @@ export default function CompanyDashboard() {
                             <Col md='7' xs='7'>
                               {item.first_name}&nbsp;{item.last_name} <br />
                               <span className='text-muted'>
-                                <small style={{ color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
+                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
                               </span>
                             </Col>
                           </Row>
@@ -181,7 +181,7 @@ export default function CompanyDashboard() {
               Recent Applications
             </CardTitle>
             <Card className='two'>
-              <CardHeader style={{ paddingTop: 25, paddingTop: 15 }}>
+              <CardHeader style={{ paddingTop: 25 }}>
                 <Row className='flexRow list-header2' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2} lg={2}>
                     <p>Photo</p>
@@ -216,7 +216,7 @@ export default function CompanyDashboard() {
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                         {item.country}
                       </Col>
-                      <Col style={{ textAlign: 'center', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }} sm={2} lg={2}>
+                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }} sm={2} lg={2}>
                         {item.status === 'Pending' ? 'Pending' : item.status}
                       </Col>
                     </Row>
@@ -228,7 +228,7 @@ export default function CompanyDashboard() {
               Recent Jobs
             </CardTitle>
             <Card className='two'>
-              <CardHeader style={{ paddingTop: 25, paddingTop: 15 }}>
+              <CardHeader style={{ paddingTop: 25 }}>
                 <Row className='flexRow list-header2' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={1} lg={1}>
                     <p>#</p>

@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from './results';
 import * as Icon from 'react-bootstrap-icons';
+import companySearch from './companySearch.svg'
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/company';
 
 export default function SearchCompany() {
@@ -58,7 +59,7 @@ export default function SearchCompany() {
       </Form>
 
       <Row className='image-container' style={{ justifyContent: 'center' }}>
-        <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
+        <Image className='image' style={{ width: '70%' }} src={companySearch} rounded />
       </Row>
     </Container>
   );

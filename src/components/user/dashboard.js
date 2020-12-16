@@ -139,7 +139,7 @@ export default function CompanyDashboard() {
                 </div>
               </CardFooter>
             </Card>
-            <CardTitle style={{ margin: '7px 0', textAlign: 'center' }} tag='h4'>
+            <CardTitle style={{ margin: '7px 0', textAlign: 'center',marginTop:'40px'  }} tag='h4'>
               Recent Offers
             </CardTitle>
             <Card className='reports' md='4'>
@@ -147,12 +147,12 @@ export default function CompanyDashboard() {
                 <ul className='list-unstyled team-members'>
                   {offers[0].map((item, index) => {
                     return (
-                      <li>
+                      <li key={index}>
                         <Row>
                           <Col md='12' xs='12'>
                             {item.company_name},&nbsp;{item.title} <br />
                             <span className='text-muted'>
-                              <small style={{ color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
+                              <small style={{fontWeight:'600',fontSize:'14px', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
                             </span>
                           </Col>
                         </Row>
@@ -168,7 +168,7 @@ export default function CompanyDashboard() {
               Recent Applications
             </CardTitle>
             <Card className='two'>
-              <CardHeader style={{ paddingTop: 25, paddingTop: 15 }}>
+              <CardHeader style={{ paddingTop: 25 }}>
                 <Row className='flexRow list-header' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={1} lg={1}>
                     <p>#</p>
@@ -203,7 +203,7 @@ export default function CompanyDashboard() {
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                         {item.location}
                       </Col>
-                      <Col style={{ textAlign: 'center', color: item.status === 'Submitted' ? '#69D95B' : '#B72525' }} sm={3} lg={3}>
+                      <Col style={{ textAlign: 'center',fontWeight:'600', color: item.status === 'Submitted' ? '#69D95B' : '#B72525' }} sm={3} lg={3}>
                         {item.status === 'Pending' ? 'Pending' : item.status}
                       </Col>
                     </Row>
@@ -211,11 +211,11 @@ export default function CompanyDashboard() {
                 })}
               </CardBody>
             </Card>
-            <CardTitle style={{ margin: '9px 0', textAlign: 'center' }} tag='h4'>
+            <CardTitle style={{ margin: '9px 0', textAlign: 'center',marginTop:'40px' }} tag='h4'>
               Saved Jobs
             </CardTitle>
             <Card className='two'>
-              <CardHeader style={{ paddingTop: 25, paddingTop: 15 }}>
+              <CardHeader style={{ paddingTop: 25 }}>
                 <Row className='flexRow list-header2' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={1} lg={1}>
                     <p>#</p>

@@ -11,6 +11,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { MDBContainer } from 'mdbreact';
+import myjobs from './myjobs.svg'
 
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/jobs';
 export default function MyJobs(props) {
@@ -155,7 +156,7 @@ export default function MyJobs(props) {
         </Row>
 
         <Row className='image-container' style={{ justifyContent: 'center' }}>
-          <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
+          <Image className='image' style={{ width: '50%' }} src={myjobs} rounded />
         </Row>
       </Container>
     </>

@@ -34,6 +34,7 @@ export default function SavedJobs() {
       .then((data) => {
         setLoader(false);
         setShow(false);
+        history.push('/applicant/applications')
       });
   };
 
@@ -83,9 +84,9 @@ export default function SavedJobs() {
                 </Col>
               </Row>
               <MDBContainer className='scrollbar scrollbar-primary  mt-5 mx-auto' style={screenSize > 575 ? scrollContainerStyle : scrollContainerStyle2}>
-                {data.map((item) => {
+                {data.map((item,index) => {
                   return (
-                    <Row className='flexRow list-body' sm={8}>
+                    <Row key={index} className='flexRow list-body' sm={8}>
                       <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={1}>
                         <Image style={{ width: '50px', height: '50px', objectFit: 'cover' }} src={item.logo} roundedCircle />
                       </Col>
