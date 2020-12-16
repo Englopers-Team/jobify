@@ -154,7 +154,7 @@ export default function CompanyApplications(props) {
           </Then>
           <Else>
             <Row sm={8}>
-              <Col style={{ color: '#717171', fontSize: 35, fontWeight: 400, textAlign: 'center', marginTop: 30 }}>NO RESULTS</Col>
+              <Col style={{ color: '#717171', fontSize: 35, fontWeight: 400, textAlign: 'center', marginTop: 30 }}>There is no applications</Col>
             </Row>
           </Else>
         </If>

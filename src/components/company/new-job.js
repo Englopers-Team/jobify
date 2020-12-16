@@ -27,7 +27,10 @@ export default function SubmitJob() {
   }
 
   return (
-    <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+    <Container style={{ marginTop: '50px', marginBottom: '50px', justifyContent: 'center', width: '85%' }}>
+      <Row sm={8}>
+        <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center', marginBottom: '30px' }}>Add New Job</Col>
+      </Row>
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
