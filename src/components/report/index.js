@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import { If, Else, Then } from 'react-if';
 import './styles.scss';
-import Spinner from 'react-bootstrap/Spinner';
 import { useHistory } from 'react-router-dom';
 
 import '../search/styles.scss';
@@ -139,7 +138,7 @@ export default function Reports() {
         </Then>
         <Else>
           <Row sm={8}>
-            <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>You Didn't Submit Any Report</Col>
+            <Col style={{ color: '#717171', fontSize: 35, fontWeight: 400, textAlign: 'center', marginTop: 30 }}>No Reports</Col>
           </Row>
         </Else>
       </If>
