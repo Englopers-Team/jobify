@@ -139,7 +139,7 @@ export default function CompanyDashboard() {
                 </div>
               </CardFooter>
             </Card>
-            <CardTitle style={{ margin: '7px 0', textAlign: 'center' }} tag='h4'>
+            <CardTitle style={{ margin: '7px 0', textAlign: 'center',marginTop:'40px'  }} tag='h4'>
               Recent Offers
             </CardTitle>
             <Card className='reports' md='4'>
@@ -211,11 +211,11 @@ export default function CompanyDashboard() {
                 })}
               </CardBody>
             </Card>
-            <CardTitle style={{ margin: '9px 0', textAlign: 'center' }} tag='h4'>
+            <CardTitle style={{ margin: '9px 0', textAlign: 'center',marginTop:'40px' }} tag='h4'>
               Saved Jobs
             </CardTitle>
             <Card className='two'>
-              <CardHeader style={{ paddingTop: 25, paddingTop: 15 }}>
+              <CardHeader style={{ paddingTop: 25 }}>
                 <Row className='flexRow list-header2' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={1} lg={1}>
                     <p>#</p>

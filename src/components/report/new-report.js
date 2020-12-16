@@ -27,7 +27,7 @@ export default function SubmitReport() {
       .set({ Authorization: `Basic ${context.token}` })
       .send({ description: body })
       .then((data) => {
-        console.log(data.body);
+        history.push('/reports')
       });
   };
 
@@ -60,7 +60,7 @@ export default function SubmitReport() {
           <Button onClick={() => handleSubmit()} variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginTop: '20px', backgroundColor: '#232B4E', marginRight: '20px', height: '40px', fontWeight: '500' }}>
             Save
           </Button>
-          <Button onClick={() => history.push(`/community/posts/${id}`)} variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginTop: '20px', marginLeft: '20px', height: '40px', fontWeight: '500' }}>
+          <Button onClick={() => history.push(`/reports`)} variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginTop: '20px', marginLeft: '20px', height: '40px', fontWeight: '500' }}>
             Cancel
           </Button>
         </Row>

@@ -168,11 +168,14 @@ export default function GuestDashbaord() {
                 <Results results={results} visable={visable} loader={loader} />
               </Then>
               <Else>
+                <If condition={visable}>
+
                 <Container style={{ justifyContent: 'center', marginTop: '30px' }}>
                   <Col sm={12} style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>
                     NO RESULTS
                 </Col>
                 </Container>
+                </If>
               </Else>
             </If>
           </Row>

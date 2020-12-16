@@ -34,6 +34,7 @@ export default function SavedJobs() {
       .then((data) => {
         setLoader(false);
         setShow(false);
+        history.push('/applicant/applications')
       });
   };
 
