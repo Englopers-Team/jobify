@@ -122,7 +122,6 @@ export default function GuestDashbaord() {
         setResults([...data.body.resultDB, ...data.body.resultAPI]);
         setLoader(false);
         setVisable(true);
-
       });
   };
 
@@ -175,7 +174,7 @@ export default function GuestDashbaord() {
                   <Container style={{ justifyContent: 'center', marginTop: '30px' }}>
                     <Col sm={12} style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>
                       NO RESULTS
-                </Col>
+                    </Col>
                   </Container>
                 </If>
               </Else>
@@ -202,7 +201,7 @@ export default function GuestDashbaord() {
               <Card style={{ margin: '0 auto', width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon2.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Applications Developments</Card.Title>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Application Development</Card.Title>
                   <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The process of creating a computer program or a set of programs to perform the different tasks that a business requires.</Card.Text>
                 </Card.Body>
               </Card>
@@ -211,7 +210,7 @@ export default function GuestDashbaord() {
               <Card style={{ margin: '0 auto', width: '18rem', height: '300px', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px', justifyContent: 'center' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Constructional Engineering</Card.Title>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Construction Engineering</Card.Title>
                   <Card.Text style={{ color: '#515151', fontSize: '14px' }}>Professional discipline that deals with the designing, planning, construction and management of infrastructures.</Card.Text>
                 </Card.Body>
               </Card>
@@ -222,7 +221,7 @@ export default function GuestDashbaord() {
               <Card style={{ margin: '0 auto', width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon.png' roundedCircle />
                 <Card.Body>
-                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Bussnies Adminestrations</Card.Title>
+                  <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Business Administrations</Card.Title>
                   <Card.Text style={{ color: '#515151', fontSize: '14px' }}>The performance or management of business operations and decision-making.</Card.Text>
                 </Card.Body>
               </Card>
