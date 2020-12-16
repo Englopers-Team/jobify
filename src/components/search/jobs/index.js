@@ -19,7 +19,6 @@ export default function SearchJobs() {
   const jobList = async (e) => {
     e.preventDefault();
     setLoader(true);
-    setVisable(true);
 
     await superagent
       .get(jobsApi)
@@ -28,6 +27,7 @@ export default function SearchJobs() {
       .then((data) => {
         setResults([...data.body.resultDB, ...data.body.resultAPI]);
         setLoader(false);
+        setVisable(true);
       });
   };
 
