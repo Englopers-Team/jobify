@@ -86,12 +86,15 @@
   bottom: 0;
   background-color: #232b4e;
   color: whitesmoke;
+  border-width: 0;
   &:hover {
     background-color: #504edf;
   }
   &:not(:disabled):not(.disabled):focus,
   :not(:disabled):not(.disabled).focus {
-    background-color: #232b4e;
+    background-color: #504edf;
+    border-width: 0;
+    box-shadow: 0;
   }
 }
 

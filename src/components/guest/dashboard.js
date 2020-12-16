@@ -158,8 +158,10 @@ export default function GuestDashbaord() {
                 </Col>
               </Row>
             </Row>
-            <Row style={{ width: '40%', justifyContent: 'flex-end' }}>
-              <Image className='image' style={{ width: '100%' }} src='../../assets/user.png' rounded />
+            <Row style={{ width: '40%', justifyContent: 'flex-end' }} id='searchImg' >
+              <Col className='flexF'>
+                <Image className='image' style={{ width: '100%' }} src='../../assets/user.png' rounded />
+              </Col>
             </Row>
           </Row>
           <Row>
@@ -170,11 +172,11 @@ export default function GuestDashbaord() {
               <Else>
                 <If condition={visable}>
 
-                <Container style={{ justifyContent: 'center', marginTop: '30px' }}>
-                  <Col sm={12} style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>
-                    NO RESULTS
+                  <Container style={{ justifyContent: 'center', marginTop: '30px' }}>
+                    <Col sm={12} style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>
+                      NO RESULTS
                 </Col>
-                </Container>
+                  </Container>
                 </If>
               </Else>
             </If>
@@ -187,8 +189,8 @@ export default function GuestDashbaord() {
         </Row>
         <Row sm={8} style={{ justifyContent: 'center' }}>
           <Row style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }} sm={8}>
-            <Col style={{ marginTop: '30px', justifyContent: 'center' }}>
-              <Card style={{ width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+            <Col style={{ marginTop: '30px', justifyContent: 'center', alignSelf: 'center' }}>
+              <Card style={{ margin: '0 auto', width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon1.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Software Engineering</Card.Title>
@@ -197,7 +199,7 @@ export default function GuestDashbaord() {
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ margin: '0 auto', width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon2.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Applications Developments</Card.Title>
@@ -206,7 +208,7 @@ export default function GuestDashbaord() {
               </Card>
             </Col>
             <Col style={{ marginTop: '30px', justifyContent: 'center' }}>
-              <Card style={{ width: '18rem', height: '300px', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ margin: '0 auto', width: '18rem', height: '300px', justifyContent: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px', justifyContent: 'center' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Constructional Engineering</Card.Title>
@@ -217,7 +219,7 @@ export default function GuestDashbaord() {
           </Row>
           <Row sm={8} style={{ justifyContent: 'center' }}>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ margin: '0 auto', width: '18rem', height: '300px', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Bussnies Adminestrations</Card.Title>
@@ -226,7 +228,7 @@ export default function GuestDashbaord() {
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ margin: '0 auto', width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon5.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Marketing</Card.Title>
@@ -235,7 +237,7 @@ export default function GuestDashbaord() {
               </Card>
             </Col>
             <Col style={{ marginTop: '30px' }}>
-              <Card style={{ width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
+              <Card style={{ margin: '0 auto', width: '18rem', height: '300px', textAlign: 'center', alignItems: 'center', paddingTop: '20px', backgroundColor: ' #eaecf1', border: '1px solid #e1e3e8 ', boxShadow: '0 0 7px #888888', borderRadius: '5px' }}>
                 <Card.Img style={{ width: '70px' }} variant='top' src='../../assets/Icon6.png' roundedCircle />
                 <Card.Body>
                   <Card.Title style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>Finance</Card.Title>
@@ -311,14 +313,16 @@ export default function GuestDashbaord() {
           })}
         </Container>
       </Container>
-      <Container style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '100px', width: '75%' }}>
-        <Row style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignContent: 'flex-start', marginLeft: '5px', marginTop: '50px' }}>
-          <h2 style={{ textAlign: 'left', fontSize: '35px', fontWeight: 'bold' }}>We Offer Jobs From </h2>
-          <h2 style={{ textAlign: 'left', fontSize: '35px', fontWeight: 'bold' }}>Companies All Over</h2>
-          <h2 style={{ textAlign: 'left', fontSize: '35px', fontWeight: 'bold' }}>The World</h2>
-        </Row>
-        <Row style={{ width: '47%', justifyContent: 'flex-end' }}>
-          <Image className='image' style={{ width: '100%' }} src='../../assets/Mask8.png' rounded />
+      <Container style={{ marginTop: '100px', width: '75%' }}>
+        <Row>
+          <Col sm={6} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignContent: 'flex-start', marginLeft: '5px', marginTop: '50px' }}>
+            <h2 style={{ textAlign: 'left', fontSize: '35px', fontWeight: 'bold' }}>We Offer Jobs From </h2>
+            <h2 style={{ textAlign: 'left', fontSize: '35px', fontWeight: 'bold' }}>Companies All Over</h2>
+            <h2 style={{ textAlign: 'left', fontSize: '35px', fontWeight: 'bold' }}>The World</h2>
+          </Col>
+          <Col sm={4} style={{ justifyContent: 'center' }}>
+            <Image id='worldImg' className='image' style={{ width: '400px' }} src='../../assets/Mask8.png' rounded />
+          </Col>
         </Row>
       </Container>
       <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop: '100px', width: '85%', alignItems: 'center', marginBottom: '50px' }}>
@@ -344,7 +348,7 @@ export default function GuestDashbaord() {
               </Button>
             </Form>
           </Col>
-          <Col sm={5} style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Col sm={5} style={{ justifyContent: 'center', alignItems: 'center',marginTop:'20px' }}>
             <Image className='image' style={{ width: '100%' }} src='../../assets/Mask6.png' rounded />
           </Col>
         </Row>

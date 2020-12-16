@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../context/auth'
 import { Container, Row, Col, Form, Button, Image, Card } from 'react-bootstrap';
 import superagent from 'superagent'
-import { If } from 'react-if'
+import { If,Then,Else } from 'react-if'
 import { useParams, useHistory } from "react-router-dom";
 import './styles.scss'
 import { PencilFill, XCircleFill } from 'react-bootstrap-icons';
@@ -80,9 +80,14 @@ export default function PostDetails() {
                 </Col>
               </Col>
               <If condition={comm.writerID === context.user.id}>
+                <Then>
                 <Col style={{textAlign:'right'}}>
                   <XCircleFill onClick={() => handleDelete(index)} color='#232B4E' size={16} style={{ alignSelf: 'flex-start', cursor: 'pointer' }} />
                 </Col>
+                </Then>
+                <Else>
+                  <Col></Col>
+                </Else>
               </If>
             </Card.Title>
             <Card.Text>
@@ -97,10 +102,12 @@ export default function PostDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    superagent.post(`${API}/community/comment/${id}`).set({ 'Authorization': `Basic ${context.token}` }).send({ comment: myComment }).then(() => {
-      setComments([...comments, { writerID: context.user.id, comment: myComment, avatar: context.user.profile.avatar, job_title: context.user.profile.job_title, profile: `${context.user.profile.first} ${context.user.profile.last}` }])
-      myComment = '';
-    })
+    if(myComment.length>0){
+      superagent.post(`${API}/community/comment/${id}`).set({ 'Authorization': `Basic ${context.token}` }).send({ comment: myComment }).then(() => {
+        setComments([...comments, { writerID: context.user.id, comment: myComment, avatar: context.user.profile.avatar, job_title: context.user.profile.job_title, profile: `${context.user.profile.first} ${context.user.profile.last}` }])
+        myComment = '';
+      })
+    }
   }
 
   const handleChange = (e) => {
