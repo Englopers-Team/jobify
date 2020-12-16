@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react';
 import Chart from 'chart.js';
 import superagent from 'superagent';
 import { MDBContainer } from "mdbreact";
 import AdminHeader from '../header/admin';
 import './styles.scss';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { AuthContext } from '../../context/auth'
 
 
@@ -240,12 +241,12 @@ export default function AdminDashboard() {
     const scrollContainerStyle = { width: "200px", maxHeight: "200px", overflowY: 'scroll', overflowX: 'hidden' };
     return (
       <Row style={{ marginBottom: '100px' }}>
-        <Col className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+        <Col className="scrollbar scrollbar-primary3  mt-5 mx-auto" style={scrollContainerStyle}>
           <MDBContainer>
             <People />
           </MDBContainer>
         </Col>
-        <Col className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
+        <Col className="scrollbar scrollbar-primary3  mt-5 mx-auto" style={scrollContainerStyle}>
           <MDBContainer>
             <Company />
           </MDBContainer>

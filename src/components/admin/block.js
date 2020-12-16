@@ -1,6 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/heading-has-content */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState, useContext } from 'react';
 import superagent from 'superagent';
-import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck, FormLabel, Button } from 'react-bootstrap';
+import { Container, Row, Col, FormControl, Image, FormCheck, Button } from 'react-bootstrap';
 import { If, Then, Else } from 'react-if'
 import { MDBContainer } from "mdbreact";
 import { DashCircle } from 'react-bootstrap-icons';
@@ -45,7 +50,6 @@ export default function Block() {
 
 
   const List = () => {
-    console.log(searchTypeQuery)
     if (searchType === 'c') {
       return company.map((item, index) => {
         if (item.company_name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username' || query == item.auth_id && searchTypeQuery === 'Id' || query === '') {
@@ -66,7 +70,7 @@ export default function Block() {
         if (name.toLowerCase().includes(query.toLowerCase()) && searchTypeQuery === 'Username' || query == item.auth_id && searchTypeQuery === 'Id' || query === '') {
           return (
             <Row className='profile' key={index} onClick={() => { setId(item.auth_id) }}>
-              <Col sm={2} style={{ textAlign: 'center', lineHeight: '300%', fontWeight: 'bold', color: '#9393A1' }} sm={2}>{item.auth_id}</Col>
+              <Col sm={2} style={{ textAlign: 'center', lineHeight: '300%', fontWeight: 'bold', color: '#9393A1' }} >{item.auth_id}</Col>
               <Col sm={2}>
                 <Image src={`${item.avatar}`} roundedCircle style={{ width: '38px', height: '38px', objectFit: 'cover' }} />
               </Col>
@@ -99,7 +103,7 @@ export default function Block() {
             <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
             <Col style={{ textAlign: 'right' }} >
               <If condition={target.account_status === 'blocked'}>
-                <DashCircle className='BolckSign' />
+                <DashCircle size='32' color='white' className='BolckSign' />
               </If>
             </Col>
           </Row>
@@ -135,7 +139,7 @@ export default function Block() {
             <Col style={{ fontWeight: 'bold', margin: '3px' }} >User ID : {target.auth_id}</Col>
             <Col style={{ textAlign: 'right' }} >
               <If condition={target.account_status === 'blocked'}>
-                <DashCircle className='BolckSign' />
+                <DashCircle size='32' color='white' className='BolckSign' />
               </If>
             </Col>
           </Row>
