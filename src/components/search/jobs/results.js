@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../context/auth';
 import { useHistory } from 'react-router-dom';
 
-
 export default function JobsResults(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   let history = useHistory();
@@ -19,6 +18,7 @@ export default function JobsResults(props) {
   const [loader, setLoader] = useState(false);
 
   const Apply = (payload) => {
+    console.log(payload);
     if (context.token) {
       const API = 'https://jobify-app-v2.herokuapp.com/user/apply';
       setLoader(true);
@@ -26,17 +26,16 @@ export default function JobsResults(props) {
         .post(`${API}/${payload.job_id}`)
         .set('authorization', `Basic ${context.token}`)
         .send(payload)
-        .then(() => {
+        .then((data) => {
+          console.log(data.body);
           setLoader(false);
           setShow(false);
-          history.push('/applicant/applications')
+          history.push('/applicant/applications');
         });
-    } else history.push('/signup')
-
+    } else history.push('/signup');
   };
   const save = (payload) => {
     if (context.token) {
-
       const API = 'https://jobify-app-v2.herokuapp.com/user/save';
       setLoader(true);
       superagent
@@ -46,10 +45,9 @@ export default function JobsResults(props) {
         .then((data) => {
           setLoader(false);
           setShow(false);
-          history.push('/applicant/saved-jobs')
+          history.push('/applicant/saved-jobs');
         });
-    } else history.push('/signup')
-
+    } else history.push('/signup');
   };
 
   const checkSize = () => {
@@ -117,7 +115,7 @@ export default function JobsResults(props) {
                                 save({
                                   job_id: item.job_id,
                                   company_id: item.company_id,
-                                })
+                                });
                               }}
                             >
                               Save
@@ -140,10 +138,8 @@ export default function JobsResults(props) {
                                   country: item.country,
                                   job_id: 0,
                                   api: true,
-                                })
-                              }
-
-                              }
+                                });
+                              }}
                               variant='praimary'
                             >
                               Save
@@ -152,37 +148,44 @@ export default function JobsResults(props) {
                         </If>
                       </Col>
                       <Col style={{ textAlign: 'center' }} className='button-col' sm={1}>
-                        <Button
-                          className='button'
-                          style={{ backgroundColor: '#504edf', textAlign: 'center', width: screenSize > '575' ? 'fit-content' : '' }}
-                          onClick={() => {
-                            <If condition={item.job_id}>
-                              <Then>
-                                {
-                                  Apply({
-                                    job_id: item.job_id,
-                                    company_id: item.company_id,
-                                  })
-                                }
-                              </Then>
-                              <Else>
-                                {Apply({
+                        <If condition={item.id}>
+                          <Then>
+                            <Button
+                              className='button'
+                              style={{ backgroundColor: '#504edf', textAlign: 'center', width: screenSize > '575' ? 'fit-content' : '' }}
+                              onClick={() => {
+                                Apply({
+                                  job_id: item.id,
+                                  company_id: item.company_id,
+                                });
+                              }}
+                              variant='praimary'
+                            >
+                              Apply
+                            </Button>
+                          </Then>
+                          <Else>
+                            <Button
+                              className='button'
+                              style={{ backgroundColor: '#504edf', textAlign: 'center', width: screenSize > '575' ? 'fit-content' : '' }}
+                              onClick={() =>
+                                Apply({
                                   title: item.title,
                                   location: item.location,
                                   type: item.type,
                                   company_name: item.company_name,
                                   logo: item.logo,
                                   email: item.email,
-                                  job_id: 0,
+                                  job_id: '0',
                                   api: true,
-                                })}
-                              </Else>
-                            </If>
-                          }}
-                          variant='praimary'
-                        >
-                          Apply
-                        </Button>
+                                })
+                              }
+                              variant='praimary'
+                            >
+                              Apply
+                            </Button>
+                          </Else>
+                        </If>
                       </Col>
                     </Row>
                   );
