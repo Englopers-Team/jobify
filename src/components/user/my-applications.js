@@ -73,7 +73,7 @@ export default function UserApplications() {
         <Row sm={8}>
           <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Applications</Col>
         </Row>
-        <If condition={context.token && !data[0]}>
+        <If condition={context.token && data[0]}>
           <Then>
             <Container className='list-container' style={{ marginTop: '20px' }} fluid>
               <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px' }}>
