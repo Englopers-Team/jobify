@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import superagent from 'superagent';
 import { If } from 'react-if';
 import { Container, Image, Row, Col, Card, Button } from 'react-bootstrap';
 import { MDBContainer } from 'mdbreact';
 import { Editor } from '@tinymce/tinymce-react';
 import { useHistory, useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/auth';
+
+
 
 import './styles.scss';
 
 export default function ReportDetails() {
   let { id } = useParams();
   let history = useHistory();
+  const context = useContext(AuthContext);
 
   const [data, setData] = useState({});
   const [body, setBody] = useState('');
   const API = 'https://jobify-app-v2.herokuapp.com';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiYWNjb3VudF90eXBlIjoiYWRtaW4iLCJwcm9maWxlIjp7fSwiaWF0IjoxNjA3NzA4MDY2LCJleHAiOjM2MTYwNzcwODA2Nn0.uErZAP_4ZCFUp-WLXIhXlV7SZu40itfj0C6m1Ppwm_c';
 
   const scrollContainerStyle = { width: 'auto', maxHeight: '200px', height: '200px', overflowY: 'scroll', overflowX: 'hidden' };
 
@@ -24,22 +27,25 @@ export default function ReportDetails() {
   };
 
   async function handleSubmit() {
-    await superagent.patch(`${API}/admin/report/${id}`).set('authorization', `Basic ${token}`).send({ response: body });
+    await superagent.patch(`${API}/admin/report/${id}`).set('authorization', `Basic ${context.token}`).send({ response: body });
     getData();
   }
 
   async function handleDelete() {
-    await superagent.delete(`${API}/admin/report/${id}`).set('authorization', `Basic ${token}`);
+    await superagent.delete(`${API}/admin/report/${id}`).set('authorization', `Basic ${context.token}`);
     history.push('/admin/reports');
   }
 
   useEffect(() => {
-    getData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (context.token) {
+      getData();
+
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.token]);
 
   async function getData() {
-    const response = await superagent.get(`${API}/admin/report/${id}`).set('authorization', `Basic ${token}`);
+    const response = await superagent.get(`${API}/admin/report/${id}`).set('authorization', `Basic ${context.token}`);
     console.log(response.body.report.description);
     setData(response.body);
     if (response.body.report.response === null) {
