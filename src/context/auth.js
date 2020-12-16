@@ -57,7 +57,7 @@ function AuthProvider(props) {
       setToken(oauthPath[2])
       validateToken(oauthPath[2]);
       setTimeout(() => {
-        history.push('/')
+        history.push('/applicant/edit-profile')
       }, 1000)
     }
 
