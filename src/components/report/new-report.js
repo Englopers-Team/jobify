@@ -29,7 +29,7 @@ export default function SubmitReport() {
       .set({ Authorization: `Basic ${context.token}` })
       .send({ description: body })
       .then((data) => {
-        console.log(data.body);
+        history.push('/reports')
       });
     setShow(true);
   };

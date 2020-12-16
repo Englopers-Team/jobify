@@ -7,6 +7,15 @@ import { If, Else } from 'react-if';
 import './styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory } from 'react-router-dom';
+import S3FileUpload from 'react-s3';
+
+const config = {
+  bucketName: 'jobify',
+  dirName: 'cv' /* optional */,
+  region: 'us-east-1',
+  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
+  secretAccessKey: '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',
+};
 
 export default function CompanyEdit() {
   const [data, setData] = useState({});
@@ -21,10 +30,17 @@ export default function CompanyEdit() {
 
   const API = 'https://jobify-app-v2.herokuapp.com';
 
+  const uploadLogo = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setLogo(data.location);
+      })
+      .catch((err) => { });
+  };
   useEffect(() => {
     if (context.token) {
+      getData();
     }
-    getData();
   }, [context.token]);
 
   async function getData() {
@@ -37,6 +53,7 @@ export default function CompanyEdit() {
     setCountry(response.body.country);
     setCompanyUrl(response.body.company_url);
   }
+
   async function handleSubmit(e) {
     setLoader(true);
     e.preventDefault();
@@ -47,11 +64,14 @@ export default function CompanyEdit() {
 
   return (
     <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+      <Row sm={8}>
+        <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center', marginBottom: '30px' }}>Edit Profile</Col>
+      </Row>
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}>{data.company_name} Profile </Card.Title>
-            <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#515151' }}>{data.company_name} Profile </Card.Title>
+            <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '65%' }} />
 
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
               <Form onSubmit={(e) => handleSubmit(e)} style={{ width: '80%' }}>
@@ -65,7 +85,7 @@ export default function CompanyEdit() {
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Logo</Form.Label>
-                  <Form.Control required onChange={(e) => setLogo(e.target.value)} className='input' type='text' value={logo} />
+                  <Form.Control onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Location</Form.Label>

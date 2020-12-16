@@ -7,6 +7,7 @@ import { If, Then, Else } from 'react-if';
 import { SocketContext } from '../../context/socket';
 import { AuthContext } from '../../context/auth';
 import './styles.scss';
+import { useLocation } from "react-router-dom";
 
 export default function Chat() {
   const context = useContext(SocketContext);
@@ -21,6 +22,10 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [targerIndex, setTargerIndex] = useState();
   const [specificName, setSpecificName] = useState('')
+
+  const { pathname } = useLocation();
+
+
 
   // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudF90eXBlIjoicCIsInByb2ZpbGUiOnsiaWQiOjEsImZpcnN0IjoiTWFsZWsiLCJsYXN0IjoiQWhtZWQiLCJhdmF0YXIiOiJodHRwczovL2xpYnJhcnkua2lzc2NsaXBhcnQuY29tLzIwMTgwOTI5L29vcS9raXNzY2xpcGFydC1hdmF0YXItcGVyc29uLWNsaXBhcnQtYXZhdGFyLWNvbXB1dGVyLWljb25zLXBlcnNvbi04NzM1NWM1NmExNzQ4NDczLmpwZyIsImNvdW50cnkiOiJVU0EifSwiaWF0IjoxNjA3NjA2ODQyLCJleHAiOjM2MTYwNzYwNjg0Mn0.ZBf0SDIjCv3JQK42nNhmGgdhWbJHY2FQNz1fI2WwXkQ';
   useEffect(() => {
@@ -60,8 +65,23 @@ export default function Chat() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authContext.token]);
 
+  // useEffect(() => {
+  //   console.log('123',pathname)
+  //   if (pathname === '/logout') {
+  //     setMessage('');
+  //     setSecondParty();
+  //     setSecondPartyChar('');
+  //     setSecondPartyIId();
+  //     setMessages([]);
+  //     setTargerIndex();
+  //     setSpecificName('')
+  //   }
+  // }, [pathname]);
 
   function ChatListView() {
+    if(context.update){
+      // 
+    }
     return messages.map((item, index) => {
       return (
         <Row className='listNames' key={index} onClick={() => {

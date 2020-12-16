@@ -31,11 +31,14 @@ import ApplicantEdit from '../components/user/edit-profile';
 import ApplicantApplications from '../components/user/my-applications';
 import ApplicantOffers from '../components/user/offers';
 import ApplicantSavedJobs from '../components/user/saved-jobs';
+import About from '../components/about';
+import AccessDenied from '../components/access-denied';
 
 // for testing osama
 import dash from '../components/user/dashboard';
 import Guest from '../components/guest/dashboard';
 import NoAccess from '../components/no-access';
+import CompanyDashboard from '../components/company/dashboard';
 
 export default function Routes() {
   return (
@@ -43,11 +46,11 @@ export default function Routes() {
       <Route exact path='/' component={Home} />
 
       <Route exact path='/admin' component={AdminDashboard} />
-      <Route exact path='/admin/block' component={Block} />
+      <Route exact path='/admin/users' component={Block} />
       <Route exact path='/admin/reports' component={AdminReports} />
       <Route exact path='/admin/reports/:id' component={AdminReportsDetails} />
-      <Route exact path='/admin/posts' component={Posts} />
-      <Route exact path='/admin/posts/:id' component={PostsDetails} />
+      <Route exact path='/admin/community' component={Posts} />
+      <Route exact path='/admin/community/:id' component={PostsDetails} />
 
       <Route exact path='/api' component={API} />
 
@@ -82,6 +85,8 @@ export default function Routes() {
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
       <Route exact path='/banned' component={NoAccess} />
+      <Route exact path='/about' component={About} />
+      <Route exact path='/access-denied' component={AccessDenied} />
 
       <Route path='/userhome' component={dash} />
       <Route path='/guest' component={Guest} />

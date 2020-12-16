@@ -12,6 +12,7 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import * as Icon from 'react-bootstrap-icons';
 import { If, Then, Else } from 'react-if';
+import { MDBContainer } from 'mdbreact';
 
 export default function CompanyHeader() {
   const [companyName, setCompanyName] = useState('');
@@ -21,7 +22,7 @@ export default function CompanyHeader() {
   const [notifiIcon, setNotifiIcon] = useState('');
   const [seen, setSeen] = useState('');
   const [flag, setFlag] = useState('');
-
+  const scrollContainerStyle = { width: 'auto', maxHeight: '300px', height: '300px', overflowY: 'scroll', overflowX: 'hidden', padding: 0 };
   const checkSize = () => {
     setScreenSize(window.screen.width);
   };
@@ -65,7 +66,7 @@ export default function CompanyHeader() {
 
   return (
     <>
-      <Navbar className='nav' collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#eaecf1', marginBottom: '30px' }}>
+      <Navbar className='nav' collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px',width:'85%'  }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
         </NavLink>
@@ -88,7 +89,7 @@ export default function CompanyHeader() {
 
           <Nav className='one'>
             <img style={{ width: 30, height: 30, objectFit: 'cover', marginRight: 20, marginLeft: 7 }} src={flag} alt='bell' border='0' />
-            <NavDropdown data-toggle='dropdown' eventKey={1} title={notifiIcon ? seen ? <Icon.Bell color='#232b4e' size={22} /> : <img style={{ width: 22, height: 22, objectFit: 'cover' }} src='https://i.ibb.co/5Tqh4jH/bell.png' alt='bell' border='0' /> : <p style={{ fontSize: 17 }}>&nbsp;Notification</p>} id='basic-nav-dropdown'>
+            <NavDropdown data-toggle='dropdown' title={notifiIcon ? seen ? <Icon.Bell color='#232b4e' size={22} /> : <img style={{ width: 22, height: 22, objectFit: 'cover' }} src='https://i.ibb.co/5Tqh4jH/bell.png' alt='bell' border='0' /> : <p style={{ fontSize: 17 }}>&nbsp;Notification</p>} id='basic-nav-dropdown'>
               <If condition={!notification[0]}>
                 <Then>
                   <NavDropdown.Item href='#action/3.1'>You don't have any notification</NavDropdown.Item>
@@ -96,62 +97,69 @@ export default function CompanyHeader() {
 
                 <Else>
                   <Then>
-                    {notification.map((item) => {
-                      return <Container className='notification-item'>{item.description}</Container>;
-                    })}
+                    <MDBContainer className='scrollbar scrollbar-primary  mt-5 mx-auto' style={scrollContainerStyle}>
+                      {notification.map((item, index) => {
+                        return (
+                          <Container key={index} className='notification-item'>
+                            {item.description}
+                          </Container>
+                        );
+                      })}
+                    </MDBContainer>
                   </Then>
                 </Else>
               </If>
             </NavDropdown>
           </Nav>
-          <NavDropdown
-            eventKey={1}
-            title={
-              <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
-                {/* {companyName.split(' ')[0]} */}
-                <img className='thumbnail-image' src={logo} alt='user pic' style={{ width: 30, height: 30, objectFit: 'cover', borderRadius: 15, marginLeft: 10 }} />
-              </span>
-            }
-            id='basic-nav-dropdown'
-          >
-            <NavDropdown.Item>
-              <NavLink exact to='/'>
-                Dashboard
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/applications'>
-                Applications
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/submitted-jobs'>
-                My Jobs
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/offers'>
-                My Offers
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/submit-job'>
-                Submit Job
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/company/edit-profile'>
-                Edit Profile
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <NavLink exact to='/reports'>
-                Reports
-              </NavLink>
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
-          </NavDropdown>
+          <Nav className='user-drop-down'>
+            <NavDropdown
+              title={
+                <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
+                  {companyName.split(' ')[0]}
+                  <img className='thumbnail-image' src={logo} alt='user pic' style={{ width: 30, height: 30, objectFit: 'cover', borderRadius: 15, marginLeft: 10 }} />
+                </span>
+              }
+              id='basic-nav-dropdown'
+            >
+              <NavDropdown.Item>
+                <NavLink exact to='/'>
+                  Dashboard
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/company/applications'>
+                  Applications
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/company/submitted-jobs'>
+                  My Jobs
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/company/offers'>
+                  My Offers
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/company/submit-job'>
+                  Submit Job
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/company/edit-profile'>
+                  Edit Profile
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink exact to='/reports'>
+                  Reports
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </>

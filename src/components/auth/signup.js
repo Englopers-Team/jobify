@@ -4,6 +4,15 @@ import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 
 import { If } from 'react-if';
 import './styles.scss';
 import { useHistory } from 'react-router-dom';
+import S3FileUpload from 'react-s3';
+
+const config = {
+  bucketName: 'jobify',
+  dirName: 'cv' /* optional */,
+  region: 'us-east-1',
+  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
+  secretAccessKey: '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',
+};
 
 export default function Signup() {
   const [firstName, setFirstName] = useState('');
@@ -14,24 +23,50 @@ export default function Signup() {
   const [country, setCountry] = useState('');
   const [password, setPassword] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [logo, setLogo] = useState('');
+  const [logoFile, setLogoFile] = useState('');
   const [url, setURL] = useState('');
   const [error, setError] = useState(false);
+  const [cvFile, setCVFile] = useState('');
+  const [avatarFile, setAvatarFile] = useState('');
 
   let history = useHistory();
 
   const context = useContext(AuthContext);
 
+  const uploadCv = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setCVFile(data.location);
+      })
+      .catch((err) => setError(err));
+  };
+
+  const uploadAvatar = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setAvatarFile(data.location);
+      })
+      .catch((err) => setError(err));
+  };
+
+  const uploadLogo = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setLogoFile(data.location);
+      })
+      .catch((err) => setError(err));
+  };
+
   const handleSubmitApplicant = async (e) => {
     e.preventDefault();
-    const payload = { firstName, lastName, email, phone, jobTitle, country, password };
+    const payload = { firstName, lastName, email, phone, jobTitle, country, password, cv: cvFile, avatar: avatarFile };
     const check = await context.signup(payload, 'p');
     check ? history.push('/verify') : setError(true);
   };
 
   const handleSubmitCompany = async (e) => {
     e.preventDefault();
-    const payload = { companyName, email, phone, logo, url, country, password };
+    const payload = { companyName, email, phone, logo: logoFile, url, country, password };
     const check = await context.signup(payload, 'c');
     check ? history.push('/verify') : setError(true);
   };
@@ -68,7 +103,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setLastName(e.target.value)} className='input' type='text' placeholder='Last name' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }} controlId='formBasicEmail'>
-                        <Form.Control required onChange={(e) => setEmail(e.target.value)} className='input' type='email' placeholder='Email' />
+                        <Form.Control required onChange={(e) => setEmail(e.target.value.toLowerCase())} className='input' type='email' placeholder='Email' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='number' placeholder='Phone number' />
@@ -78,6 +113,14 @@ export default function Signup() {
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Control required onChange={(e) => setCountry(e.target.value)} className='input' type='text' placeholder='Country' />
+                      </Form.Group>
+                      <Form.Group style={{ marginBottom: '15px' }}>
+                        <Form.Label>CV</Form.Label>
+                        <Form.Control required onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
+                      </Form.Group>
+                      <Form.Group style={{ marginBottom: '15px' }}>
+                      <Form.Label>Photo</Form.Label>
+                        <Form.Control required onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                       </Form.Group>
                       <Form.Group>
                         <Form.Control required onChange={(e) => setPassword(e.target.value)} className='input' type='password' placeholder='Password' />
@@ -116,7 +159,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='number' placeholder='Phone number' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
-                        <Form.Control required onChange={(e) => setLogo(e.target.value)} className='input' type='url' placeholder='Logo' />
+                        <Form.Control required onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Control required onChange={(e) => setURL(e.target.value)} className='input' type='url' placeholder='Company Website' />

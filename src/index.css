@@ -11,11 +11,11 @@ html {
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  background-color: #eaecf1;
+  background-color: #f4f4f4;
 }
 
 body {
-  background-color: #eaecf1;
+  background-color: #f4f4f4;
   box-sizing: border-box;
 
   margin: 0 auto;
@@ -43,15 +43,23 @@ code {
   align-items: center;
 }
 
-.cont{
+.cont {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
 }
 
+.fadeLoad {
+  animation-duration: 0s !important;
+  animation-name: fadeIn !important;
+}
+
 @keyframes fadeIn {
   0% {
+    opacity: 0;
+  }
+  15% {
     opacity: 0;
   }
   100% {

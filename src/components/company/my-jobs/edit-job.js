@@ -24,7 +24,7 @@ export default function EditJob(props) {
     if (context.token) {
       getData();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.token]);
 
   const API = 'https://jobify-app-v2.herokuapp.com/company/jobs';
@@ -47,10 +47,13 @@ export default function EditJob(props) {
 
   return (
     <Container style={{ marginTop: '50px', marginBottom: '50px' }}>
+      <Row sm={8}>
+        <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center', marginBottom: '30px' }}>Edit Job</Col>
+      </Row>
       <Row style={{ justifyContent: 'center' }}>
         <Col sm={8}>
           <Card style={{ padding: '6%', boxShadow: '0 0 10px #888888', borderRadius: '10px' }}>
-            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#6D6D6D' }}> Edit Job </Card.Title>
+            <Card.Title style={{ marginBottom: 5, fontSize: '28px', color: '#515151' }}> Edit Job </Card.Title>
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
 
             <Row style={{ justifyContent: 'center', marginTop: '30px' }}>
@@ -66,8 +69,9 @@ export default function EditJob(props) {
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Type</Form.Label>
                   <Form.Control as='select' required onChange={(e) => setType(e.target.value)} className='input' value={type}>
-                    <option>Full-Time</option>
-                    <option>Part-Time</option>
+                    <option value='Full-Time'>Full Time</option>
+                    <option value='Part-Time'>Part Time</option>
+                    <option value='Remote'>Remote</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>

@@ -71,7 +71,7 @@ export default function Reports() {
         <Then>
           <Container style={{ justifyContent: 'center', width: '85%' }}>
             <Row sm={8}>
-              <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Reports</Col>
+              <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Reports</Col>
             </Row>
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
@@ -79,7 +79,7 @@ export default function Reports() {
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={4}>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={6}>
                     Description
                   </Col>
                   <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
@@ -107,8 +107,8 @@ export default function Reports() {
                         <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#9393A1' }} sm={4}>
-                          <p style={{ wordWrap: 'break-word' }}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={6}>
+                          <p style={{ wordWrap: 'break-word', margin: '0' }}>
                             {item.description.slice(0, 45)}
                             {item.description.length > 45 ? '...' : ''}
                           </p>

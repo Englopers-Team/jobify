@@ -10,6 +10,7 @@ import Notification from './components/notification';
 import './app.scss';
 
 function App() {
+
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -17,7 +18,7 @@ function App() {
           <ScrollTop />
           <Notification />
           <Chat />
-          <div className='page-container' style={{ animation: `fadeIn 2s` }}>
+          <div id='contAnima' className='page-container'>
             <div className='content-wrap'>
               <Header />
               <Routes />
