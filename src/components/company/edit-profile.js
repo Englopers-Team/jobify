@@ -7,6 +7,15 @@ import { If, Else } from 'react-if';
 import './styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory } from 'react-router-dom';
+import S3FileUpload from 'react-s3';
+
+const config = {
+  bucketName: 'jobify',
+  dirName: 'cv' /* optional */,
+  region: 'us-east-1',
+  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
+  secretAccessKey: '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',
+};
 
 export default function CompanyEdit() {
   const [data, setData] = useState({});
@@ -21,6 +30,13 @@ export default function CompanyEdit() {
 
   const API = 'https://jobify-app-v2.herokuapp.com';
 
+  const uploadLogo = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setLogo(data.location);
+      })
+      .catch((err) => { });
+  };
   useEffect(() => {
     if (context.token) {
       getData();
@@ -37,6 +53,7 @@ export default function CompanyEdit() {
     setCountry(response.body.country);
     setCompanyUrl(response.body.company_url);
   }
+
   async function handleSubmit(e) {
     setLoader(true);
     e.preventDefault();
@@ -68,7 +85,7 @@ export default function CompanyEdit() {
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Logo</Form.Label>
-                  <Form.Control required onChange={(e) => setLogo(e.target.value)} className='input' type='text' value={logo} />
+                  <Form.Control onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Location</Form.Label>

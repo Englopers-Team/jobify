@@ -10,6 +10,8 @@ import Image from 'react-bootstrap/Image';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { MDBContainer } from 'mdbreact';
+import appsImg from './APP.svg'
+
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/app';
 export default function CompanyApplications(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -163,7 +165,7 @@ export default function CompanyApplications(props) {
         </If>
 
         <Row className='image-container' style={{ justifyContent: 'center' }}>
-          <Image className='image' style={{ width: '70%' }} src='../../assets/search.png' rounded />
+          <Image className='image' style={{ width: '50%' }} src={appsImg} rounded />
         </Row>
       </Container>
     </>

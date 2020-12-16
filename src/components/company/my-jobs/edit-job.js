@@ -69,8 +69,9 @@ export default function EditJob(props) {
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Type</Form.Label>
                   <Form.Control as='select' required onChange={(e) => setType(e.target.value)} className='input' value={type}>
-                    <option>Full-Time</option>
-                    <option>Part-Time</option>
+                    <option value='Full-Time'>Full Time</option>
+                    <option value='Part-Time'>Part Time</option>
+                    <option value='Remote'>Remote</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>

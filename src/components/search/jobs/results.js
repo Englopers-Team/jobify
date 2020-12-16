@@ -80,7 +80,7 @@ export default function JobsResults(props) {
 
             {results.map((item, index) => {
               return (
-                <Row key={index} className='flexRow list-body' sm={8}>
+                <Row key={index} className='flexRow list-body'>
                   <Col style={{ textAlign: 'center', verticalAlign: 'center' }} sm={4}>
                     {item.title}
                   </Col>

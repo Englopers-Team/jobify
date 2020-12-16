@@ -1,15 +1,19 @@
 /* eslint-disable no-unused-vars */
 import superagent from 'superagent';
-
-import Results from '../search/jobs/results';
-
-import * as Icon from 'react-bootstrap-icons';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
 import { Container, Row, Col, Card, Image, Form, Button, Alert, Tab, Nav } from 'react-bootstrap';
-import { If } from 'react-if';
 import './styles.scss';
 import { useHistory } from 'react-router-dom';
+import S3FileUpload from 'react-s3';
+
+const config = {
+  bucketName: 'jobify',
+  dirName: 'cv' /* optional */,
+  region: 'us-east-1',
+  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
+  secretAccessKey: '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',
+};
 
 export default function UserEdit() {
   let history = useHistory();
@@ -22,6 +26,22 @@ export default function UserEdit() {
   const [jobTitle, setJobTitle] = useState('');
   const [cv, setCv] = useState('');
   const [avatar, setAvatar] = useState('');
+
+  const uploadCv = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setCv(data.location);
+      })
+      .catch((err) => { });
+  };
+
+  const uploadAvatar = (e) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        setAvatar(data.location);
+      })
+      .catch((err) => { });
+  };
 
   useEffect(() => {
     if (context.token) {
@@ -72,10 +92,10 @@ export default function UserEdit() {
                   <Form.Control required onChange={(e) => setJobTitle(e.target.value)} className='input' type='text' value={jobTitle} />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
-                  <Form.Control required onChange={(e) => setCv(e.target.value)} className='input' type='text' value={cv} />
-                </Form.Group>
+                  <Form.Control onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
+                  </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
-                  <Form.Control required onChange={(e) => setAvatar(e.target.value)} className='input' type='text' value={avatar} />
+                  <Form.Control onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                 </Form.Group>
 
                 <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
