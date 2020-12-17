@@ -183,7 +183,7 @@ export default function GuestDashbaord() {
       </Container>
       <Container style={{ justifyContent: 'center', marginTop: '150px', marginBottom: '100px' }}>
         <Row style={{ justifyContent: 'center' }}>
-          <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Jobs Categories</h2>
+          <h2 style={{ fontSize: '35px', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Job Categories</h2>
         </Row>
         <Row sm={8} style={{ justifyContent: 'center' }}>
           <Row style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }} sm={8}>
