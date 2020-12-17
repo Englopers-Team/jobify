@@ -152,7 +152,7 @@ export default function CompanyDashboard() {
                           <Col md='12' xs='12'>
                             {item.company_name},&nbsp;{item.title} <br />
                             <span className='text-muted'>
-                              <small style={{fontWeight:'600',fontSize:'14px', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
+                              <small style={{fontWeight:'600',fontSize:'14px', color: item.status === 'Accepted' ? '#69D95B' : item.status === 'Rejected' ? '#B72525':'#515151' }}>{item.status}</small>
                             </span>
                           </Col>
                         </Row>
