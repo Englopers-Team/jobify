@@ -126,7 +126,7 @@ export default function CompanyApplications(props) {
                         <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={1}>
                           {item.country}
                         </Col>
-                        <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
+                        <Col style={{ textAlign: 'center',fontWeight:600, color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525' : '#69D95B' }} sm={2} lg={2}>
                           {item.status === 'Pending' ? 'Pending' : item.status}
                         </Col>
                         <Col sm={3.5}>

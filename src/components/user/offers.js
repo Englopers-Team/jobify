@@ -113,7 +113,7 @@ export default function UserOffers() {
                       <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center' }} className='button-col' sm={1}>
                         {item.country}
                       </Col>
-                      <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={1}>
+                      <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center',fontWeight:600, color: item.status === 'Accepted' ? '#69D95B' : item.status === 'Rejected' ? '#B72525' : '#515151' }} sm={1}>
                         {item.status}
                       </Col>
                       <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', display: 'flex', flexDirection: 'row' }} className='button-col' sm={3}>
