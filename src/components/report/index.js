@@ -75,13 +75,13 @@ export default function Reports() {
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
                 <Row sm={8} className='flexRow list-header2' style={{ height: screenSize > 575 ? 75 : 130 }}>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
-                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={4}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={4}>
                     Description
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                     Status
                   </Col>
                   <Col style={{ textAlign: 'center' }} sm={2}></Col>
@@ -103,7 +103,7 @@ export default function Reports() {
                   {data.map((item, index) => {
                     return (
                       <Row key={index} className='flexRow list-body' sm={8}>
-                        <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                        <Col style={{ fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
                         <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={4}>

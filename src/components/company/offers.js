@@ -79,7 +79,6 @@ export default function CompanyApplications(props) {
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
                 <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={1}>
-                    <p>Image</p>
                   </Col>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={3} lg={2}>
                     <p>Name</p>
@@ -91,10 +90,10 @@ export default function CompanyApplications(props) {
                   <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={2}>
                     <p>Country</p>
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={2}>
+                  <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={1} lg={1}>
                     <p>Status</p>
                   </Col>
-                  <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={1} lg={1}>
+                  <Col style={{ textAlign: 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={2}>
                     <p>Type</p>
                   </Col>
                   <Col style={{ textAlign: 'center', paddingRight: '10px' }}>
@@ -135,10 +134,10 @@ export default function CompanyApplications(props) {
                         <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                           {item.country}
                         </Col>
-                        <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
+                        <Col style={{ textAlign: 'center',fontWeight:600, color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }} sm={1} lg={1}>
                           {item.status}
                         </Col>
-                        <Col style={{ textAlign: 'center', color: '#515151' }} sm={1} lg={1}>
+                        <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                           {item.type}
                         </Col>
 
