@@ -226,7 +226,7 @@ export default function CompanyDashboard() {
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={2} lg={2}>
                     <p>Type</p>
                   </Col>
-                  <Col style={{ textAlign: 'left', color: '#515151' }} sm={3} lg={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151' }} sm={3} lg={2}>
                     <p>Location</p>
                   </Col>
                   <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
