@@ -159,12 +159,12 @@ export default function CompanyDashboard() {
 
                     offers[0].map((item, index) => {
                       return (
-                        <li key={index}>
+                        <li style={{marginBottom:'10px'}} key={index}>
                           <Row>
                             <Col md='7' xs='7'>
                               {item.first_name}&nbsp;{item.last_name} <br />
                               <span className='text-muted'>
-                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
+                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }}>{item.status}</small>
                               </span>
                             </Col>
                           </Row>
@@ -216,7 +216,7 @@ export default function CompanyDashboard() {
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                         {item.country}
                       </Col>
-                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }} sm={2} lg={2}>
+                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }} sm={2} lg={2}>
                         {item.status === 'Pending' ? 'Pending' : item.status}
                       </Col>
                     </Row>

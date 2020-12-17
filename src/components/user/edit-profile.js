@@ -65,7 +65,7 @@ export default function UserEdit() {
     e.preventDefault();
     const API = 'https://jobify-app-v2.herokuapp.com/user/edit';
     await superagent.put(`${API}`).set('authorization', `Basic ${context.token}`).send({ first_name: firstName, last_name: lastName, phone: phone, job_title: jobTitle, country: data.country, age: data.age, avatar: avatar, experince: data.experince, cv: cv });
-    history.push('/userhome');
+    history.push('/');
   }
 
   return (
