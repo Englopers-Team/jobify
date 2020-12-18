@@ -13,7 +13,7 @@ import { If, Then, Else } from 'react-if';
 import { MDBContainer } from 'mdbreact';
 
 export default function UserHeader() {
-  const [companyName, setCompanyName] = useState('');
+  const [name, setName] = useState('');
   const [logo, setLogo] = useState('');
   const [notification, setNotification] = useState([]);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -40,19 +40,18 @@ export default function UserHeader() {
   }, [screenSize]);
 
   useEffect(() => {
-    if (context.token) {
+    if (context.token && context.logo && context.name) {
       getData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context.token]);
+  }, [context.token, context.logo, context.name]);
   const API = 'https://jobify-app-v2.herokuapp.com';
 
   async function getData() {
     const flagData = await superagent.get(`${API}/flag`);
     setFlag(flagData.body);
-    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${context.token}`);
-    setCompanyName(response.body.first_name);
-    setLogo(response.body.avatar);
+    setName(context.name);
+    setLogo(context.logo);
     const data = await superagent.get(`${API}/home`).set('authorization', `Basic ${context.token}`);
     setNotification(data.body.notifications);
     data.body.notifications[0] ? setSeen(data.body.notifications[data.body.notifications.length - 1].seen) : setSeen(true);
@@ -66,7 +65,7 @@ export default function UserHeader() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px',width:'85%'  }}>
+      <Navbar collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px', width: '85%' }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
         </NavLink>
@@ -121,7 +120,7 @@ export default function UserHeader() {
             <NavDropdown
               title={
                 <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>
-                  {companyName.split(' ')[0]}
+                  {name.split(' ')[0]}
                   <img className='thumbnail-image' src={logo} alt='user pic' style={{ width: 30, height: 30, objectFit: 'cover', borderRadius: 15, marginLeft: 10 }} />
                 </span>
               }
