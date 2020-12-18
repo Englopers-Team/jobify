@@ -8,4 +8,23 @@
   #worldImg {
     width: 100% !important;
   }
+  h2 {
+    padding-left: 1rem;
+  }
+  .button {
+    margin: 3px 0px !important;
+  }
+  .pad {
+    padding-right: 15 !important;
+    padding-left: 15 !important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .table-row-l-home {
+    text-align: center !important;
+  }
+}
+.list-container-sp {
+  padding-left: 17px !important;
 }

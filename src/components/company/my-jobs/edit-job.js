@@ -30,7 +30,6 @@ export default function EditJob(props) {
   const API = 'https://jobify-app-v2.herokuapp.com/company/jobs';
   async function getData() {
     const response = await superagent.get(`${API}/${id}`).set('authorization', `Basic ${context.token}`);
-    console.log(response.body);
     setData(response.body);
     setTitle(response.body.title);
     setLocation(response.body.location);

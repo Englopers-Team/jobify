@@ -11,15 +11,16 @@ import Image from 'react-bootstrap/Image';
 import * as Icon from 'react-bootstrap-icons';
 import { If, Then, Else } from 'react-if';
 import { MDBContainer } from 'mdbreact';
+import defaultAvatar from './avatar.jpg';
 
 export default function UserHeader() {
   const [name, setName] = useState('');
-  const [logo, setLogo] = useState('');
+  const [logo, setLogo] = useState(defaultAvatar);
   const [notification, setNotification] = useState([]);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [notifiIcon, setNotifiIcon] = useState('');
   const [seen, setSeen] = useState('');
-  const [flag, setFlag] = useState('');
+  const [flag, setFlag] = useState('https://www.countryflags.io/JO/shiny/64.png');
 
   const checkSize = () => {
     setScreenSize(window.screen.width);

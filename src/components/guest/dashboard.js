@@ -140,18 +140,18 @@ export default function GuestDashbaord() {
                 <h3 style={{ color: '#9393A1', marginTop: '15px', marginBottom: '15px' }}>We have what you are looking for</h3>
               </Row>
               <Row sm={6} className='search-container' style={{ width: 'fit-content', justifyContent: 'flex-start', margin: 0, height: 'fit-content' }}>
-                <Col sm={5} className='input-filed'>
+                <Col sm={5} className='input-filed pad'>
                   <Icon.EnvelopeFill className='icon' />
 
                   <Form.Control className='input' required name='title' type='text' onChange={(e) => setTitle(e.target.value)} placeholder='Job Title' />
                 </Col>
-                <Col sm={5} className='input-filed'>
+                <Col sm={5} className='input-filed pad'>
                   <Icon.GeoAltFill className='icon' />
                   <Form.Control className='input' required name='location' type='text' onChange={(e) => setLocation(e.target.value)} placeholder='Country' />
                 </Col>
 
                 <Col sm={2}>
-                  <Button variant='outline-dark' className='button' type='submit'>
+                  <Button variant='outline-dark' className='button ' type='submit'>
                     <Icon.Search size='20' />
                   </Button>
                 </Col>
@@ -250,18 +250,18 @@ export default function GuestDashbaord() {
         <Container style={{ width: 'fit-content', textAlign: 'center', marginBottom: '30px' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'black', borderBottom: '4px solid #504edf', padding: '10px' }}>Featured Jobs</h2>
         </Container>
-        <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-          <Row sm={8} className='flexRow list-header' style={{ padding: '25px' }}>
-            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='' sm={4}>
+        <Container className='list-container ' style={{ marginTop: '20px' }} fluid>
+          <Row sm={8} className='flexRow list-header list-container-sp' style={{ padding: '25px' }}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='table-row-l-home' sm={3}>
               Job Title
             </Col>
-            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='table-row-l-home' sm={3}>
               Company{' '}
             </Col>
-            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='table-row-l-home' sm={2}>
               Location
             </Col>
-            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
+            <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='table-row-l-home' sm={2}>
               Type
             </Col>
             <Col sm={1}></Col>
@@ -270,19 +270,19 @@ export default function GuestDashbaord() {
           {sugJobs.map((item) => {
             return (
               <Row className='flexRow list-body' sm={8}>
-                <Col style={{ fontWeight: 650, textAlign: 'center' }} className='' sm={4}>
+                <Col style={{ fontWeight: 650, textAlign: 'left' }} className='table-row-l-home' sm={3}>
                   {item.title}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
+                <Col style={{ textAlign: 'left', color: '#515151' }} className='table-row-l-home' sm={3}>
                   {item.company_name}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
+                <Col style={{ textAlign: 'left', color: '#515151' }} className='table-row-l-home' sm={2}>
                   {item.location}
                 </Col>
-                <Col style={{ textAlign: 'center', color: '#515151' }} sm={2}>
+                <Col style={{ textAlign: 'center', color: '#515151' }} className='table-row-l-home' sm={2}>
                   {item.type}
                 </Col>
-                <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
+                <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col pad' sm={1}>
                   <Button
                     className='button'
                     style={{ width: '100%' }}
@@ -294,7 +294,7 @@ export default function GuestDashbaord() {
                     Save
                   </Button>
                 </Col>
-                <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col' sm={1}>
+                <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col pad' sm={1}>
                   <Button
                     className='button'
                     style={{ width: '100%' }}
