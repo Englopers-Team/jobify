@@ -27,6 +27,12 @@ function AuthProvider(props) {
     setError(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // Esseili Edit to load the logo and the name and keep them updated always
+  useEffect(() => {
+    if (token && (user.account_type === 'p' || user.account_type === 'c')) {
+      updateUser(token, user);
+    }
+  }, [token, user]);
 
   const { pathname } = useLocation();
 
@@ -62,6 +68,7 @@ function AuthProvider(props) {
         history.push('/');
       }, 1000);
     }
+    // Esseili Edit to load the logo and the name and keep them updated always
     if (user.account_type === 'p' || user.account_type === 'c') {
       updateUser(token, user);
     }

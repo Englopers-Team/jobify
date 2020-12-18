@@ -31,7 +31,7 @@ export default function CompanyHeader() {
   const history = useHistory();
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    if (context.token) {
+    if (context.token && context.name && context.logo) {
       getData();
     }
 
@@ -50,8 +50,15 @@ export default function CompanyHeader() {
   async function getData() {
     const flagData = await superagent.get(`${API}/flag`);
     setFlag(flagData.body);
-    setCompanyName(context.name);
-    setLogo(context.logo);
+    if (context.name && context.logo) {
+      setCompanyName(context.name);
+      setLogo(context.logo);
+    }
+    // } else {
+    //   const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${context.token}`);
+    //   setCompanyName(response.body.company_name);
+    //   setLogo(response.body.logo);
+    // }
     const data = await superagent.get(`${API}/home`).set('authorization', `Basic ${context.token}`);
     setNotification(data.body.notifications);
     data.body.notifications[0] ? setSeen(data.body.notifications[data.body.notifications.length - 1].seen) : setSeen(true);
