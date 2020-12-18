@@ -13,8 +13,8 @@ const config = {
   bucketName: 'jobify',
   dirName: 'cv' /* optional */,
   region: 'us-east-1',
-  accessKeyId: 'AKIAJVYHXPGRUQZQIPGQ',
-  secretAccessKey: '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',
+  accessKeyId: process.env.REACT_APP_accessKeyId,
+  secretAccessKey: process.env.REACT_APP_secretAccessKey,
 };
 
 export default function CompanyEdit() {
