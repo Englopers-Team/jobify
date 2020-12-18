@@ -10,8 +10,8 @@ const config = {
   bucketName: 'jobify',
   dirName: 'cv' /* optional */,
   region: 'us-east-1',
-  accessKeyId: 'AKIAJ5A5J442WJRBOOKQ',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAJVYHXPGRUQZQIPGQ',
+  secretAccessKey: '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',
 };
 
 export default function Signup() {
@@ -36,7 +36,7 @@ export default function Signup() {
   const uploadCv = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setCVFile(data.location);
+        setCVFile(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => setError(err));
   };
@@ -44,7 +44,7 @@ export default function Signup() {
   const uploadAvatar = (e) => {
     S3FileUpload.uploadFile(e.target.files[0], config)
       .then((data) => {
-        setAvatarFile(data.location);
+        setAvatarFile(data.location.replace(/ /g, '%20'));
       })
       .catch((err) => setError(err));
   };
@@ -119,7 +119,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
-                      <Form.Label>Photo</Form.Label>
+                        <Form.Label>Photo</Form.Label>
                         <Form.Control required onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                       </Form.Group>
                       <Form.Group>
@@ -159,6 +159,7 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setPhone(e.target.value)} className='input' type='number' placeholder='Phone number' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
+                        <Form.Label>Logo</Form.Label>
                         <Form.Control required onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>

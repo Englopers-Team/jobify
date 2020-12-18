@@ -184,7 +184,7 @@ export default function AdminDashboard() {
 
       new Chart(topComponiesSendApp, chartBarHandler(`Top Companies Interactive By Send Offers`, compantAppNum, labelsCompantAppNum));
 
-      let compantOfferNum = [];
+      let compantOfferNum = []; 
       let labelsCompantOfferNum = [];
       data.numOfCompanyOffersEach.forEach((company, index) => {
         if (index < 5) {

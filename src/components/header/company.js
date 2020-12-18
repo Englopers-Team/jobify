@@ -66,7 +66,7 @@ export default function CompanyHeader() {
 
   return (
     <>
-      <Navbar className='nav' collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px',width:'85%'  }}>
+      <Navbar className='nav' collapseOnSelect expand='sm' bg='bg-transparent' variant='light' style={{ backgroundColor: '#F4F4F4', marginBottom: '30px', width: '85%' }}>
         <NavLink exact to='/'>
           <Image className='logo' src='../../assets/jobify.png' />
         </NavLink>
@@ -111,7 +111,7 @@ export default function CompanyHeader() {
               </If>
             </NavDropdown>
           </Nav>
-          <Nav className='user-drop-down'>
+          <Nav className='comp-drop-down'>
             <NavDropdown
               title={
                 <span className='pull-left' style={{ color: '#232b4e', textDecoration: 'underline', fontWeight: '600', fontSize: 17 }}>

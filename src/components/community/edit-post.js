@@ -20,8 +20,10 @@ export default function EditPost() {
 
     const getPost = () => {
       superagent.get(`${API}/community/post/${id}`).set({ 'Authorization': `Basic ${context.token}` }).then((data) => {
-        setTitle(data.body.title)
-        setBody(data.body.body)
+        setTimeout(() => {
+          setTitle(data.body.title)
+          setBody(data.body.body)
+        }, 1000);
       })
     }
     if (context.token) {
@@ -55,7 +57,7 @@ export default function EditPost() {
         </Col>
       </Row>
       <Row className='flexCol' style={{ marginTop: '40px', justifyContent: 'center' }}>
-        <If condition={body.length>=0}>
+        <If condition={body}>
           <Editor
             apiKey="vbaon8jny71c8uc0ebn1nn45htchbunbi6b9wp9v3e072trm"
             initialValue={body}

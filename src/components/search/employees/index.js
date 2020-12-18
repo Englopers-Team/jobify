@@ -41,7 +41,6 @@ export default function SearchEmployees() {
         <Row sm={10} className='search-container' style={{ width: '75%', textAlign: 'center' }}>
           <Col sm={5} className='input-filed'>
             <Icon.EnvelopeFill className='icon' />
-
             <Form.Control className='input' required name='title' type='text' onChange={(e) => setTitle(e.target.value)} placeholder='Job Title' />
           </Col>
           <Col sm={5} className='input-filed'>
