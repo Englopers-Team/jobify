@@ -43,8 +43,14 @@ function AuthProvider(props) {
       checkUser(token)
     } else if (pathname === '/logout') {
       logout();
-      history.push('/');
+      setTimeout(()=>{
+        history.push('/');
+      },100)
     }
+    if (user.account_type === 'admin' && oauthPath[1] !== 'admin') {
+      history.push('/admin')
+    }
+
     if (oauthPath[1] === 'oauth') {
       // console.log(oauthPath[2], 'test')
       // cookie.clear('token');

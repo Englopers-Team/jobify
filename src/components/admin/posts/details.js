@@ -93,42 +93,6 @@ export default function PostDetails() {
               </Card.Text>
             </Card.Body>
           </Card>
-          <Card key={index} className='comment' style={{ marginTop: '15px' }}>
-            <Card.Body style={{ paddingLeft: 0 }}>
-              <Card.Title className='flexRow' >
-                <Col className='flexRow' style={{ justifyContent: 'flex-start', width: '100%' }}>
-                  <Col sm={2} style={{ padding: '0' }} >
-                    <Image className='imgShadow' style={{ width: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
-                  </Col>
-                  <Col sm={10} style={{ justifyContent: 'flex-start' }} >
-                    <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
-                    <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
-                  </Col>
-                </Col>
-              </Card.Title>
-              <Card.Text style={{ paddingLeft: '20px' }}>
-                {comm.comment}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card key={index} className='comment' style={{ marginTop: '15px' }}>
-            <Card.Body style={{ paddingLeft: 0 }}>
-              <Card.Title className='flexRow' >
-                <Col className='flexRow' style={{ justifyContent: 'flex-start', width: '100%' }}>
-                  <Col sm={2} style={{ padding: '0' }} >
-                    <Image className='imgShadow' style={{ width: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
-                  </Col>
-                  <Col sm={10} style={{ justifyContent: 'flex-start' }} >
-                    <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
-                    <p style={{ marginBottom: 0, fontSize: '12px' }}>{comm.job_title}</p>
-                  </Col>
-                </Col>
-              </Card.Title>
-              <Card.Text style={{ paddingLeft: '20px' }}>
-                {comm.comment}
-              </Card.Text>
-            </Card.Body>
-          </Card>
         </>
       );
     })
@@ -157,7 +121,7 @@ export default function PostDetails() {
                         <Button className='button12' style={{ width: '70px', maxWidth: '70px', marginRight: '3px' }} onClick={() => { handlePind() }}>Unpin</Button>
                       </Else>
                     </If>
-                    <Button style={{ width: '70px', maxWidth: '70px', backgroundColor: '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
+                    <Button className='button12' style={{ width: '70px', maxWidth: '70px', backgroundColor: '#B72525' }} onClick={() => { handleDelete() }}>Delete</Button>
                   </Col>
                 </Row>
 
@@ -193,12 +157,10 @@ export default function PostDetails() {
       </>
     )
   }
-
   return (
     <Row style={{ width: '100%' }}>
       <Col sm={2}>
         <AdminHeader />
-
       </Col>
       <Col sm={10} style={{ marginTop: '30px' }}>
         <Container className='list-container post' style={{ width: '80%', backgroundColor: 'white' }}>

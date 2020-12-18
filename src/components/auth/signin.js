@@ -29,7 +29,7 @@ export default function Signin() {
             <hr style={{ height: '1.5px', backgroundColor: '#504EDF', marginTop: 0, marginBottom: '30px', width: '23%' }} />
             <Form onSubmit={handleSubmit}>
               <Form.Group style={{ marginBottom: '15px' }} controlId='formBasicEmail'>
-                <Form.Control required onChange={(e) => setEmail(e.target.value)} className='input' type='email' placeholder='Email' />
+                <Form.Control required onChange={(e) => setEmail(e.target.value.toLowerCase())} className='input' type='email' placeholder='Email' />
               </Form.Group>
 
               <Form.Group controlId='formBasicPassword'>

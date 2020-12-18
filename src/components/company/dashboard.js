@@ -159,12 +159,12 @@ export default function CompanyDashboard() {
 
                     offers[0].map((item, index) => {
                       return (
-                        <li>
+                        <li style={{marginBottom:'10px'}} key={index}>
                           <Row>
                             <Col md='7' xs='7'>
                               {item.first_name}&nbsp;{item.last_name} <br />
                               <span className='text-muted'>
-                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }}>{item.status}</small>
+                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }}>{item.status}</small>
                               </span>
                             </Col>
                           </Row>
@@ -201,9 +201,9 @@ export default function CompanyDashboard() {
                 </Row>
               </CardHeader>
               <CardBody>
-                {applications[0].map((item) => {
+                {applications[0].map((item,index) => {
                   return (
-                    <Row className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+                    <Row key={index} className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                       <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2} lg={2}>
                         <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
                       </Col>
@@ -216,7 +216,7 @@ export default function CompanyDashboard() {
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                         {item.country}
                       </Col>
-                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Approved' ? '#B72525' : '#69D95B' }} sm={2} lg={2}>
+                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }} sm={2} lg={2}>
                         {item.status === 'Pending' ? 'Pending' : item.status}
                       </Col>
                     </Row>
@@ -250,7 +250,7 @@ export default function CompanyDashboard() {
               <CardBody>
                 {jobsData[0].map((item, index) => {
                   return (
-                    <Row className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+                    <Row key={index} className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={1} lg={1}>
                         {index + 1}
                       </Col>

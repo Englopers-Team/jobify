@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import { If, Else, Then } from 'react-if';
 import './styles.scss';
-import Spinner from 'react-bootstrap/Spinner';
 import { useHistory } from 'react-router-dom';
 
 import '../search/styles.scss';
@@ -76,13 +75,13 @@ export default function Reports() {
             <Row>
               <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
                 <Row sm={8} className='flexRow list-header2' style={{ height: screenSize > 575 ? 75 : 130 }}>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
-                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={6}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={4}>
                     Description
                   </Col>
-                  <Col style={{ color: '#717171', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                     Status
                   </Col>
                   <Col style={{ textAlign: 'center' }} sm={2}></Col>
@@ -104,16 +103,16 @@ export default function Reports() {
                   {data.map((item, index) => {
                     return (
                       <Row key={index} className='flexRow list-body' sm={8}>
-                        <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                        <Col style={{ fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={6}>
+                        <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={4}>
                           <p style={{ wordWrap: 'break-word', margin: '0' }}>
                             {item.description.slice(0, 45)}
                             {item.description.length > 45 ? '...' : ''}
                           </p>
                         </Col>
-                        <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
+                        <Col style={{ fontWeight: '600', textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
                           {item.response === null ? 'Open' : 'Closed'}
                         </Col>
                         <Col style={{ textAlign: 'center' }} sm={2}>
@@ -139,7 +138,7 @@ export default function Reports() {
         </Then>
         <Else>
           <Row sm={8}>
-            <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>You Didn't Submit Any Report</Col>
+            <Col style={{ color: '#717171', fontSize: 35, fontWeight: 400, textAlign: 'center', marginTop: 30 }}>No Reports</Col>
           </Row>
         </Else>
       </If>
