@@ -16,6 +16,8 @@ function AuthProvider(props) {
   const [user, setUser] = useState({});
   const [token, setToken] = useState('');
   const [error, setError] = useState(false);
+  const [logo, setLogo] = useState('');
+  const [name, setName] = useState('');
 
   let history = useHistory();
   useEffect(() => {
@@ -40,27 +42,29 @@ function AuthProvider(props) {
     // console.log(oauthPath[1])
     // console.log(oauthPath[2])
     if (token && pathname !== '/logout') {
-      checkUser(token)
+      checkUser(token);
     } else if (pathname === '/logout') {
       logout();
-      setTimeout(()=>{
+      setTimeout(() => {
         history.push('/');
-      },100)
+      }, 100);
     }
     if (user.account_type === 'admin' && oauthPath[1] !== 'admin') {
-      history.push('/admin')
+      history.push('/admin');
     }
 
     if (oauthPath[1] === 'oauth') {
       // console.log(oauthPath[2], 'test')
       // cookie.clear('token');
-      setToken(oauthPath[2])
+      setToken(oauthPath[2]);
       validateToken(oauthPath[2]);
       setTimeout(() => {
-        history.push('/')
-      }, 1000)
+        history.push('/');
+      }, 1000);
     }
-
+    if (user.account_type === 'p' || user.account_type === 'c') {
+      updateUser(token, user);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -84,17 +88,17 @@ function AuthProvider(props) {
       // setToken(token)
       setLoginState(true, token, user);
     } catch (e) {
-      console.log('haa')
+      console.log('haa');
       setLoginState(false, null, {});
     }
   };
 
   const setLoginState = (loggedIn, token, user) => {
     cookie.save('token', token, { path: '/' });
-    setUser(user)
+    setUser(user);
     setLoggedIn(loggedIn);
-    setError(false)
-    setToken(token)
+    setError(false);
+    setToken(token);
   };
 
   const login = async (email, password) => {
@@ -130,11 +134,21 @@ function AuthProvider(props) {
   };
 
   const logout = () => {
-    cookie.remove('token', { path: '/' })
+    cookie.remove('token', { path: '/' });
     setLoginState(false, null, {});
   };
+  const updateUser = async (tk, user) => {
+    const response = await superagent.get(`${API}/getInfo`).set('authorization', `Basic ${tk}`);
+    if (user.account_type === 'p') {
+      setLogo(response.body.avatar);
+      setName(response.body.first_name);
+    } else if (user.account_type === 'c') {
+      setLogo(response.body.logo);
+      setName(response.body.company_name);
+    }
+  };
 
-  const state = { login, logout, signup, loggedIn, user, error, setError, token, setToken, checkUser };
+  const state = { login, logout, signup, loggedIn, user, error, setError, token, setToken, checkUser, logo, name };
 
   return <AuthContext.Provider value={state}>{props.children}</AuthContext.Provider>;
 }
