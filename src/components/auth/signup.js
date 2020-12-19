@@ -73,7 +73,6 @@ export default function Signup() {
 
   return (
     <Container style={{ marginTop: '100px', marginBottom: '50px' }}>
-      <img alt='' src={defaultAvatar} />
       <meta name='google-signin-client_id' content='60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com' />
       <Row>
         <Col sm={6}>

@@ -151,7 +151,7 @@ export default function GuestDashbaord() {
                 </Col>
 
                 <Col sm={2}>
-                  <Button variant='outline-dark' className='button ' type='submit'>
+                  <Button variant='outline-dark' className='button land-page-btn' type='submit'>
                     <Icon.Search size='20' />
                   </Button>
                 </Col>
@@ -284,7 +284,7 @@ export default function GuestDashbaord() {
                 </Col>
                 <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col pad' sm={1}>
                   <Button
-                    className='button'
+                    className='button land-page-btn'
                     style={{ width: '100%' }}
                     onClick={() => {
                       history.push('/signup');
@@ -296,7 +296,7 @@ export default function GuestDashbaord() {
                 </Col>
                 <Col style={{ textAlign: 'center', paddingRight: '10px' }} className='button-col pad' sm={1}>
                   <Button
-                    className='button'
+                    className='button land-page-btn'
                     style={{ width: '100%' }}
                     onClick={() => {
                       history.push('/signup');
