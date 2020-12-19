@@ -13,14 +13,49 @@
   }
 }
 
-.imgShadow{
+.imgShadow {
   // box-shadow: 0 0 5px rgba(83, 83, 83, 0.15);;
 }
 
-.comment{
+.comment {
   width: 100%;
-  background-color: #DEDEE3;
+  background-color: #dedee3;
   // box-shadow: 0 0 3px #232B4E;
   margin-bottom: 15px;
   border-radius: 7px;
+  width: 95%;
+}
+
+.post-style {
+  box-shadow: 0 0 10px #888888;
+  min-height: 5rem;
+  height: fit-content;
+  border-radius: 15px;
+  padding-top: 15px;
+  background-color: #ffffff;
+  width: 85%;
+}
+
+.post-style:nth-last-of-type() {
+  margin-bottom: 100rem;
+}
+
+.post-style-full {
+  box-shadow: 0 0 10px #888888;
+  min-height: 5rem;
+  height: fit-content;
+  border-radius: 15px;
+  padding-top: 15px;
+  background-color: #ffffff;
+  width: 85%;
+  margin-bottom: 2rem;
+}
+.post-style-full2 {
+  box-shadow: 0 0 10px #888888;
+  min-height: 5rem;
+  height: fit-content;
+  border-radius: 15px;
+  padding-top: 15px;
+  background-color: #ffffff;
+  width: 85%;
 }
