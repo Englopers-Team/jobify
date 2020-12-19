@@ -1,18 +1,18 @@
 import { Container, Image, Row, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import err from './undraw_page_not_found_su7k.svg';
+import err from './808.svg';
 
 export default function NotFound() {
   return (
     <>
-      <Container style={{ justifyContent: 'center' }}>
+      <Container style={{ justifyContent: 'center', marginTop: '5rem' }}>
         <Row style={{ justifyContent: 'center' }}>
-          <Spinner style={{ width: '70%' }} animation='border' variant='primary' />
-          {/* <Image style={{ width: '70%' }} src={err} /> */}
+          {/* <Spinner animation='border' variant='primary' size='lg' /> */}
+          <Image style={{ width: '25%', marginBottom: '1rem' }} src={err} />
         </Row>
         <Row style={{ justifyContent: 'center' }}>
           <Link to={{ pathname: '/' }}>
-            <h1>Go back home</h1>
+            <h3 style={{ color: '#515151' }}>Redirecting Please Wait...</h3>
           </Link>
         </Row>
       </Container>

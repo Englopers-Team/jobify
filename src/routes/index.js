@@ -44,7 +44,6 @@ import CompanyDashboard from '../components/company/dashboard';
 export default function Routes() {
   return (
     <Switch>
-      <Route path='/oauth' component={Redirect} />
       <Route exact path='/' component={Home} />
 
       <Route exact path='/admin' component={AdminDashboard} />
@@ -86,6 +85,7 @@ export default function Routes() {
       <Route exact path='/applicant/offers' component={ApplicantOffers} />
       <Route exact path='/applicant/saved-jobs' component={ApplicantSavedJobs} />
 
+      <Route exact path='/oauth' component={Redirect} />
       <Route exact path='/banned' component={NoAccess} />
       <Route exact path='/about' component={About} />
       <Route exact path='/access-denied' component={AccessDenied} />
