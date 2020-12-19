@@ -25,7 +25,6 @@ export default function UserApplications() {
 
   async function getData() {
     const response = await superagent.get(`${API}/app`).set('authorization', `Basic ${context.token}`);
-    console.log('osama', response.body);
     setData([...response.body.API, ...response.body.DB]);
     setApiLength(response.body.API.length);
   }

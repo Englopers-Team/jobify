@@ -11,7 +11,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { MDBContainer } from 'mdbreact';
-import myjobs from './myjobs.svg'
+import myjobs from './myjobs.svg';
 
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/company/jobs';
 export default function MyJobs(props) {
@@ -47,7 +47,6 @@ export default function MyJobs(props) {
       .set({ Authorization: `Basic ${context.token}` })
 
       .then((data) => {
-        console.log(data.text);
         jobList();
         setLoader(false);
         setShow(false);

@@ -5,26 +5,21 @@ import superagent from 'superagent';
 // import { Container, Row, Col } from 'react-bootstrap';
 import { Image, Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import './styles.scss';
 import { Nav, Navbar, NavDropdown, Spinner } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import { If, Then, Else } from 'react-if';
 import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Form, Input, Row, Col } from 'reactstrap';
-const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/company';
+import defaultAvatar from './avatar.jpg';
 export default function CompanyDashboard() {
   const [companyName, setCompanyName] = useState('');
-  const [logo, setLogo] = useState('');
-  const [notification, setNotification] = useState([]);
+  const [logo, setLogo] = useState(defaultAvatar);
   const [location, setLocation] = useState(true);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [applications, setApplications] = useState([[], '']);
   const [jobsData, setJobs] = useState([[], '']);
   const [offers, setOffers] = useState([[], '']);
-
-  const [seen, setSeen] = useState('');
-  const [flag, setFlag] = useState('');
 
   const API = 'https://jobify-app-v2.herokuapp.com';
   const checkSize = () => {
@@ -32,7 +27,6 @@ export default function CompanyDashboard() {
   };
 
   const context = useContext(AuthContext);
-  const history = useHistory();
   useEffect(() => {
     window.addEventListener('resize', checkSize);
     if (context.token) {
@@ -159,12 +153,12 @@ export default function CompanyDashboard() {
 
                     offers[0].map((item, index) => {
                       return (
-                        <li style={{marginBottom:'10px'}} key={index}>
+                        <li style={{ marginBottom: '10px' }} key={index}>
                           <Row>
                             <Col md='7' xs='7'>
                               {item.first_name}&nbsp;{item.last_name} <br />
                               <span className='text-muted'>
-                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }}>{item.status}</small>
+                                <small style={{ fontWeight: '600', fontSize: '14px', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525' : '#69D95B' }}>{item.status}</small>
                               </span>
                             </Col>
                           </Row>
@@ -201,7 +195,7 @@ export default function CompanyDashboard() {
                 </Row>
               </CardHeader>
               <CardBody>
-                {applications[0].map((item,index) => {
+                {applications[0].map((item, index) => {
                   return (
                     <Row key={index} className='flexRow list-body-one' sm={12} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                       <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2} lg={2}>
@@ -216,7 +210,7 @@ export default function CompanyDashboard() {
                       <Col style={{ textAlign: 'center', color: '#515151' }} sm={2} lg={2}>
                         {item.country}
                       </Col>
-                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525':'#69D95B' }} sm={2} lg={2}>
+                      <Col style={{ fontWeight: '600', textAlign: 'center', color: item.status === 'Pending' ? '#515151' : item.status === 'Rejected' ? '#B72525' : '#69D95B' }} sm={2} lg={2}>
                         {item.status === 'Pending' ? 'Pending' : item.status}
                       </Col>
                     </Row>

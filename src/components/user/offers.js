@@ -24,7 +24,6 @@ export default function UserOffers() {
 
   async function getData() {
     const response = await superagent.get(`${API}`).set('authorization', `Basic ${context.token}`);
-    console.log('osama', response.body);
     setData(response.body);
   }
   const rejectApp = (id, payload) => {
@@ -35,13 +34,11 @@ export default function UserOffers() {
       status1 = 'Accepted';
     }
     setLoader(true);
-    console.log('Heerr', id, payload);
     superagent
       .put(`${API}/${id}`)
       .send({ status: status1 })
       .set({ Authorization: `Basic ${context.token}` })
       .then((data) => {
-        console.log(data);
         getData();
         setLoader(false);
       });
@@ -113,7 +110,7 @@ export default function UserOffers() {
                       <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center' }} className='button-col' sm={1}>
                         {item.country}
                       </Col>
-                      <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center',fontWeight:600, color: item.status === 'Accepted' ? '#69D95B' : item.status === 'Rejected' ? '#B72525' : '#515151' }} sm={1}>
+                      <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', fontWeight: 600, color: item.status === 'Accepted' ? '#69D95B' : item.status === 'Rejected' ? '#B72525' : '#515151' }} sm={1}>
                         {item.status}
                       </Col>
                       <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', display: 'flex', flexDirection: 'row' }} className='button-col' sm={3}>

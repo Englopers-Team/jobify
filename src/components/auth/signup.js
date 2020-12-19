@@ -13,7 +13,7 @@ const config = {
   accessKeyId: process.env.REACT_APP_accessKeyId,
   secretAccessKey: process.env.REACT_APP_secretAccessKey,
 };
-
+const defaultAvatar = 'https://dl.dropboxusercontent.com/s/zc4nrkuosrtlmbt/google.jpg?dl=0';
 export default function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -23,11 +23,11 @@ export default function Signup() {
   const [country, setCountry] = useState('');
   const [password, setPassword] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [logoFile, setLogoFile] = useState('');
+  const [logoFile, setLogoFile] = useState(defaultAvatar);
   const [url, setURL] = useState('');
   const [error, setError] = useState(false);
-  const [cvFile, setCVFile] = useState('');
-  const [avatarFile, setAvatarFile] = useState('');
+  const [cvFile, setCVFile] = useState('No CV');
+  const [avatarFile, setAvatarFile] = useState(defaultAvatar);
 
   let history = useHistory();
 
@@ -73,6 +73,7 @@ export default function Signup() {
 
   return (
     <Container style={{ marginTop: '100px', marginBottom: '50px' }}>
+      <img alt='' src={defaultAvatar} />
       <meta name='google-signin-client_id' content='60556511916-bh8hf6uf6hoagsua5f5cbtnf9pnja6pu.apps.googleusercontent.com' />
       <Row>
         <Col sm={6}>
@@ -116,11 +117,11 @@ export default function Signup() {
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Label>CV</Form.Label>
-                        <Form.Control required onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
+                        <Form.Control onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Label>Photo</Form.Label>
-                        <Form.Control required onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
+                        <Form.Control onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
                       </Form.Group>
                       <Form.Group>
                         <Form.Control required onChange={(e) => setPassword(e.target.value)} className='input' type='password' placeholder='Password' />
@@ -160,7 +161,7 @@ export default function Signup() {
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Label>Logo</Form.Label>
-                        <Form.Control required onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
+                        <Form.Control onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Control required onChange={(e) => setURL(e.target.value)} className='input' type='url' placeholder='Company Website' />
