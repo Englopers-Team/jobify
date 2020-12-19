@@ -41,65 +41,62 @@ export default function Community() {
   };
 
   const PostsList = () => {
-    return posts
-      .slice(0)
-      .reverse()
-      .map((post) => {
-        let date = new Date(post.date);
-        const postPath = `/community/posts/${post._id}`;
-        date = (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) + '/' + date.getFullYear();
-        return (
-          <Container key={post._id} style={{ marginBottom: '30px' }} className='post-style'>
-            <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
-              <Row>
-                <Col className='flexRow'>
-                  <Col sm={3} lg={2}>
-                    <Image className='imgShadow' style={{ width: '64px' }} src={post.profile.avatar} roundedCircle />
-                  </Col>
-                  <Col>
-                    <h4 style={{ marginBottom: 0, fontSize: '20px', fontWeight: '600' }}>{post.profile.name}</h4>
-                    <p style={{ marginBottom: 0 }}>{post.profile.job_title}</p>
-                  </Col>
-                </Col>
-                <Col style={{ textAlign: 'right' }}>
-                  <p>{date}</p>
-                </Col>
-              </Row>
-            </Link>
+    return posts.map((post) => {
+      let date = new Date(post.date);
+      const postPath = `/community/posts/${post._id}`;
+      date = (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) + '/' + date.getFullYear();
+      return (
+        <Container key={post._id} style={{ marginBottom: '30px' }} className='post-style'>
+          <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
             <Row>
-              <Col sm={7} style={{ marginLeft: '30px', marginTop: '15px', fontWeight: 'bold', color: '#232B4E' }}>
-                <Row style={{ marginLeft: '5px' }}>
-                  <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
-                    {post.title}
-                  </Link>
-                </Row>
-                <Row style={{ marginLeft: '5px', marginTop: '8px' }}>
-                  <p style={{ marginBottom: 0 }}>
-                    <If condition={post.pinned === 'true'}>
-                      <BookmarkStarFill color='#232B4E' style={{ marginRight: '11px', cursor: 'pointer' }} size={18} />
-                    </If>
-                    <If condition={post.likes.includes(context.user.id)}>
-                      <Then>
-                        <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
-                          <ChatSquareTextFill color='#232B4E' size={18} style={{ cursor: 'pointer' }} /> {post.comments.length}
-                        </Link>{' '}
-                        <HeartFill onClick={() => handleLike(post._id)} color='red' style={{ marginLeft: '5px', cursor: 'pointer' }} size={18} /> {post.likes.length}
-                      </Then>
-                      <Else>
-                        <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
-                          <ChatSquareTextFill color='#232B4E' size={18} style={{ cursor: 'pointer' }} /> {post.comments.length}
-                        </Link>{' '}
-                        <HeartFill onClick={() => handleLike(post._id)} color='#232B4E' style={{ marginLeft: '5px', cursor: 'pointer' }} size={18} /> {post.likes.length}
-                      </Else>
-                    </If>
-                  </p>
-                </Row>
+              <Col className='flexRow'>
+                <Col sm={3} lg={2}>
+                  <Image className='imgShadow' style={{ width: '64px' }} src={post.profile.avatar} roundedCircle />
+                </Col>
+                <Col>
+                  <h4 style={{ marginBottom: 0, fontSize: '20px', fontWeight: '600' }}>{post.profile.name}</h4>
+                  <p style={{ marginBottom: 0 }}>{post.profile.job_title}</p>
+                </Col>
+              </Col>
+              <Col style={{ textAlign: 'right' }}>
+                <p>{date}</p>
               </Col>
             </Row>
-            <hr />
-          </Container>
-        );
-      });
+          </Link>
+          <Row>
+            <Col sm={7} style={{ marginLeft: '30px', marginTop: '15px', fontWeight: 'bold', color: '#232B4E' }}>
+              <Row style={{ marginLeft: '5px' }}>
+                <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
+                  {post.title}
+                </Link>
+              </Row>
+              <Row style={{ marginLeft: '5px', marginTop: '8px' }}>
+                <p style={{ marginBottom: 0 }}>
+                  <If condition={post.pinned === 'true'}>
+                    <BookmarkStarFill color='#232B4E' style={{ marginRight: '11px', cursor: 'pointer' }} size={18} />
+                  </If>
+                  <If condition={post.likes.includes(context.user.id)}>
+                    <Then>
+                      <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
+                        <ChatSquareTextFill color='#232B4E' size={18} style={{ cursor: 'pointer' }} /> {post.comments.length}
+                      </Link>{' '}
+                      <HeartFill onClick={() => handleLike(post._id)} color='red' style={{ marginLeft: '5px', cursor: 'pointer' }} size={18} /> {post.likes.length}
+                    </Then>
+                    <Else>
+                      <Link style={{ color: '#232B4E', fontWeight: 'bold' }} to={postPath}>
+                        <ChatSquareTextFill color='#232B4E' size={18} style={{ cursor: 'pointer' }} /> {post.comments.length}
+                      </Link>{' '}
+                      <HeartFill onClick={() => handleLike(post._id)} color='#232B4E' style={{ marginLeft: '5px', cursor: 'pointer' }} size={18} /> {post.likes.length}
+                    </Else>
+                  </If>
+                </p>
+              </Row>
+            </Col>
+          </Row>
+          <hr />
+        </Container>
+      );
+    });
   };
 
   return (
