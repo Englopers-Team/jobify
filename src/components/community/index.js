@@ -51,7 +51,7 @@ export default function Community() {
             <Row>
               <Col className='flexRow'>
                 <Col sm={3} lg={2}>
-                  <Image className='imgShadow' style={{ width: '64px' }} src={post.profile.avatar} roundedCircle />
+                  <Image className='imgShadow' style={{ width: '64px', height: '64px', objectFit: 'cover' }} src={post.profile.avatar} roundedCircle />
                 </Col>
                 <Col>
                   <h4 style={{ marginBottom: 0, fontSize: '20px', fontWeight: '600' }}>{post.profile.name}</h4>
