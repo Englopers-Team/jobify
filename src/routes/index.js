@@ -33,6 +33,7 @@ import ApplicantOffers from '../components/user/offers';
 import ApplicantSavedJobs from '../components/user/saved-jobs';
 import About from '../components/about';
 import AccessDenied from '../components/access-denied';
+import Redirect from '../components/redirecting';
 
 // for testing osama
 import dash from '../components/user/dashboard';
@@ -43,6 +44,7 @@ import CompanyDashboard from '../components/company/dashboard';
 export default function Routes() {
   return (
     <Switch>
+      <Route path='/oauth' component={Redirect} />
       <Route exact path='/' component={Home} />
 
       <Route exact path='/admin' component={AdminDashboard} />
