@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { Nav, Navbar } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 export default function GuestHeader() {
-  const [flag, setFlag] = useState('');
+  const [flag, setFlag] = useState('https://www.countryflags.io/JO/shiny/64.png');
 
   useEffect(() => {
     getData();
@@ -15,7 +15,6 @@ export default function GuestHeader() {
   const API = 'https://jobify-app-v2.herokuapp.com';
   async function getData() {
     const data = await superagent.get(`${API}/flag`);
-    console.log(data.body);
     setFlag(data.body);
   }
 
