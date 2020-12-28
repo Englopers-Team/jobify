@@ -80,6 +80,8 @@ typings/
 # dotenv environment variables file
 .env.production
 .env.development
+*.env.production
+*.env.development
 
 
 ### OSX ###
