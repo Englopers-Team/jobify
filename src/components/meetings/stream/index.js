@@ -98,6 +98,20 @@ function Stream(props) {
 
     peer.signal(callerSignal);
   }
+
+  let UserVideo;
+  if (stream) {
+    UserVideo = (
+      <video style={{ width: '100%' , border: '2px solid #232333' , borderRadius: '5px' }} muted playsInline ref={userVideo} autoPlay />
+    );
+  }
+
+  let PartnerVideo;
+  if (callAccepted) {
+    PartnerVideo = (
+      <video style={{ width: '100%' , height:'90vh'  }} muted={mute} playsInline ref={partnerVideo} autoPlay />
+    );
+  }
   
   return(
     <>
