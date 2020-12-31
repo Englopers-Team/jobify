@@ -3,9 +3,12 @@ import { Row, Col } from 'react-bootstrap';
 
 let data = {
   '11/29/2020': { '12:00:00 AM': 'omar', ' 5:00:00 PM': 'ali' },
+  '12/28/2020': { '12:00:00 AM': 'omar', ' 5:00:00 PM': 'ali' },
   '12/30/2020': { '12:00:00 AM': 'abdallah', ' 1:00:00 PM': 'zatar' },
-  '12/31/2020': { '12:00:00 AM': 'khaled', ' 6:00:00 PM': 'rami' },
-  '1/1/2021': { '12:00:00 AM': 'khaled', ' 6:00:00 PM': 'rami' }
+  '12/31/2020': { '12:00:00 AM': 'sara', ' 6:00:00 PM': 'rami' },
+  '1/1/2021': { '12:00:00 AM': 'sara', ' 6:00:00 PM': 'rami' },
+  '1/2/2021': { '12:00:00 AM': 'sara', ' 3:00:00 PM': 'rami' },
+  '1/3/2021': { '12:00:00 AM': 'sara', ' 6:00:00 PM': 'rami' }
 }
 
 function Meetings(props) {
