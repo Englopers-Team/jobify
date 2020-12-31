@@ -4,10 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { If, Then, Else } from 'react-if';
 import io from "socket.io-client";
 
-import stream from './stream';
-import meetings from './meetings';
-import profile from './profile';
-import schedule from './schedule' 
+import Stream from './stream';
+import Meetings from './meetings';
+import Profile from './profile';
+import Schedule from './schedule'
 
 import './lobby.scss';
 
@@ -39,10 +39,27 @@ function Lobby(props) {
     }
   }, [])
 
-  return(
-    <>
-
-    </>
+  return (
+    <Container >
+    <Row style={{ display: 'flex', flexDirection: 'row' }}>
+      <Col sm={3} style={{ width: '20%', height: '100vh', backgroundColor: 'green' }}>
+        <input type='checkbox' name='test' onClick={() => { setInitalCall(initalCall ? false : true) }} />
+        <h1>Jobify Meetings</h1>
+        <button onClick={() => {
+          socket.current.emit("leaveMeeting")
+          props.setShowHandler(false)
+        }}>Close Meetings</button>
+        <If condition={show && userToCall !== ''}>
+          <Then>
+            <Profile />
+          </Then>
+          <Else>
+            <Meetings  users={users} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value}/>
+          </Else>
+        </If>
+      </Col>
+    </Row>
+  </Container >
   )
 }
 
