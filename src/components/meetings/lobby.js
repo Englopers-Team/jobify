@@ -65,7 +65,7 @@ function Lobby(props) {
             </Then>
             <Else>
               <Container style={{ height: '100vh' }}>
-                <Schedule className="react-calendar" onChange={onChange}
+                <Schedule  onChange={onChange}
                   value={value} />
               </Container >
             </Else>
