@@ -6,7 +6,7 @@ import { If, Else, Then } from 'react-if';
 import { Container, Row, Col } from 'react-bootstrap';
 import { CameraVideo, CameraVideoOff, Mic, MicMute, DoorOpen } from 'react-bootstrap-icons';
 
-import './stream.scss'
+import './stream.scss';
 
 function Stream(props) {
 
