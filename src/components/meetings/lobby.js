@@ -12,7 +12,18 @@ import profile from './profile';
 import './lobby.scss';
 
 function Lobby(props) {
+  const [show, setShow] = useState(false);
+  const [yourID, setYourID] = useState("");
+  const [users, setUsers] = useState({});
+  const [userToCall, setUserToCall] = useState('');
+  const [initalCall, setInitalCall] = useState(false);
+  const [value, onChange] = useState(new Date());
+  
+  return(
+    <>
 
+    </>
+  )
 }
 
 export default Lobby;
