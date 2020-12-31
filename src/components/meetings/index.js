@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -5,11 +6,13 @@ import { If, Then, Else } from 'react-if';
 import io from "socket.io-client";
 
 import Stream from './stream';
-import Meetings from './meetings';
+import Meetings from './meetingsDetails';
 import Profile from './profile';
 import Schedule from './schedule'
 
 import './lobby.scss';
+
+console.log('hello');
 
 function Lobby(props) {
   const [show, setShow] = useState(false);
@@ -23,7 +26,7 @@ function Lobby(props) {
 
   useEffect(() => {
 
-    socket.current = io("http://localhost:8000/");
+    socket.current = io("https://backendmrstream.herokuapp.com/");
 
     socket.current.on("yourID", (id) => {
       setYourID(id);

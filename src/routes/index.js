@@ -34,6 +34,8 @@ import ApplicantSavedJobs from '../components/user/saved-jobs';
 import About from '../components/about';
 import AccessDenied from '../components/access-denied';
 import Redirect from '../components/redirecting';
+import Meetings from '../components/meetings';
+
 
 // for testing osama
 import dash from '../components/user/dashboard';
@@ -45,6 +47,9 @@ export default function Routes() {
   return (
     <Switch>
       <Route exact path='/' component={Home} />
+
+      <Route exact path='/meetings' component={Meetings} />
+
 
       <Route exact path='/admin' component={AdminDashboard} />
       <Route exact path='/admin/users' component={Block} />
