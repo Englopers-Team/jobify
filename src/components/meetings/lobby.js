@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import stream from './stream';
 import meetings from './meetings';
 import profile from './profile';
-
+import schedule from './schedule' 
 
 import './lobby.scss';
 
@@ -18,7 +18,9 @@ function Lobby(props) {
   const [userToCall, setUserToCall] = useState('');
   const [initalCall, setInitalCall] = useState(false);
   const [value, onChange] = useState(new Date());
-  
+
+  const socket = useRef();
+
   return(
     <>
 
