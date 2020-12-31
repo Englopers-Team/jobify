@@ -42,6 +42,38 @@ function Stream(props) {
     }
   }, [])
 
+  function callPeer() {
+    console.log('peer')
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      // config: {
+      //   iceServers: [{ 'url': 'stun:custom.stun.server:3478' }]
+      // },
+      stream: stream,
+    });
+
+    peer.on("signal", data => {
+      props.socket.emit("callUser", { userToCall: props.userToCall, signalData: data, from: props.yourID })
+    })
+
+    peer.on("stream", stream => {
+      if (partnerVideo.current) {
+        partnerVideo.current.srcObject = stream;
+      }
+    });
+
+    props.socket.on("callAccepted", signal => {
+      setCallAccepted(true);
+      peer.signal(signal);
+    })
+
+    props.socket.on('endCall', () => {
+      peer.destroy();
+    })
+
+  }
+
   function acceptCall() {
     console.log('peer')
 
