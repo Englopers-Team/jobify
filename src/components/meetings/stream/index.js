@@ -146,6 +146,38 @@ function Stream(props) {
           </If>
         </Col>
       </Row>
+      <Row style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0', width: '100%', height: '10vh', backgroundColor: '#232333', alignItems: 'center', right: '0' }}>
+        <Col style={{ display: 'flex', flexDirection: 'row' }}>
+
+          <Col style={{ marginRight: '20px', marginLeft: '20px' }} >
+            <If condition={mute}>
+              <Then>
+                <MicMute color='#BABACC' style={{ cursor: 'pointer', alignItems: 'center' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
+              </Then>
+              <Else>
+                <Mic color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
+              </Else>
+            </If>
+          </Col>
+          <Col >
+            <If condition={videoShow}>
+              <Then>
+                <CameraVideo color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => {
+                  videoOff()
+                  setVideoShow(false)
+                }} />
+              </Then>
+              <Else>
+                <CameraVideoOff color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => {
+                  videoOff()
+                  setVideoShow(true)
+                }} />
+              </Else>
+            </If>
+          </Col>
+        </Col>
+
+      </Row>
       <If condition={!callAccepted}>
         <div style={{ position: 'absolute', top: '75%', left: '50%', transform: 'translate(-50%,-50%)'  }}>
           {incomingCall}
