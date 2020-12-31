@@ -176,7 +176,14 @@ function Stream(props) {
             </If>
           </Col>
         </Col>
-
+        <Col style={{ marginRight: '20px' }}>
+          <DoorOpen color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => {
+            stream.getAudioTracks()[0].stop();
+            stream.getVideoTracks()[0].stop();
+            props.socket.emit("leaveRoom", { userToCall: caller, from: props.yourID })
+            props.setShowHandler(false)
+          }} />
+        </Col>
       </Row>
       <If condition={!callAccepted}>
         <div style={{ position: 'absolute', top: '75%', left: '50%', transform: 'translate(-50%,-50%)'  }}>
