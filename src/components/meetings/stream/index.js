@@ -41,6 +41,31 @@ function Stream(props) {
       props.socket.emit("leaveRoom", { userToCall: caller, from: props.yourID })
     }
   }, [])
+
+  function acceptCall() {
+    console.log('peer')
+
+    setCallAccepted(true);
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
+    });
+
+    peer.on("signal", data => {
+      props.socket.emit("acceptCall", { signal: data, to: caller })
+    })
+
+    peer.on("stream", stream => {
+      partnerVideo.current.srcObject = stream;
+    });
+
+    props.socket.on('endCall', signal => {
+      peer.destroy();
+    })
+
+    peer.signal(callerSignal);
+  }
   
   return(
     <>
