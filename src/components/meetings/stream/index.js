@@ -102,14 +102,14 @@ function Stream(props) {
   let UserVideo;
   if (stream) {
     UserVideo = (
-      <video style={{ width: '100%' , border: '2px solid #232333' , borderRadius: '5px' }} muted playsInline ref={userVideo} autoPlay />
+      <video style={{ width: '100%', border: '2px solid #232333', borderRadius: '5px' }} muted playsInline ref={userVideo} autoPlay />
     );
   }
 
   let PartnerVideo;
   if (callAccepted) {
     PartnerVideo = (
-      <video style={{ width: '100%' , height:'90vh'  }} muted={mute} playsInline ref={partnerVideo} autoPlay />
+      <video style={{ width: '100%', height: '90vh' }} muted={mute} playsInline ref={partnerVideo} autoPlay />
     );
   }
 
@@ -117,19 +117,30 @@ function Stream(props) {
   if (receivingCall) {
     incomingCall = (
       <div id='goDiv'>
-        <Row style={{fontSize:'32px' }}> Interviewer request you to the meeting </Row>
-        <Row style={{display:'flex' , justifyContent: 'space-between'}}>
+        <Row style={{ fontSize: '32px' }}> Interviewer request you to the meeting </Row>
+        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Col>Press <b>GO</b> to start, <b>Jobify wish you luck</b></Col>
-          <Col><button id='goButton'  onClick={acceptCall}>GO</button></Col>
+          <Col><button id='goButton' onClick={acceptCall}>GO</button></Col>
         </Row>
-        
+
       </div>
     )
   }
-  
-  return(
-    <>
-    </>
+
+  return (
+    <Container style={{ position: 'relative', height: '100vh' }}>
+      <Row style={{ display: 'flex', justifyContent: 'center', minHeight: '90vh', backgroundColor: 'black' }}>
+        <Col style={{ width: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: '99', position: 'fixed', right: '10px', top: '10px' }} sm={6}>
+          {UserVideo}
+        </Col>
+        <Col style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'cover' }} sm={6} >
+          {PartnerVideo}
+          <If condition={!callAccepted}>
+            <img style={{ width: '25%' }} src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt="thumbnail" className="img-thumbnail" />
+          </If>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
