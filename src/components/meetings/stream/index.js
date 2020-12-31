@@ -126,6 +126,12 @@ function Stream(props) {
       </div>
     )
   }
+  function videoOff() {
+    stream.getTracks().forEach(track => track.enabled = !track.enabled);
+  }
+  if (props.initalCall) {
+    callPeer();
+  }
 
   return (
     <Container style={{ position: 'relative', height: '100vh' }}>
@@ -140,6 +146,11 @@ function Stream(props) {
           </If>
         </Col>
       </Row>
+      <If condition={!callAccepted}>
+        <div style={{ position: 'absolute', top: '75%', left: '50%', transform: 'translate(-50%,-50%)'  }}>
+          {incomingCall}
+        </div>
+      </If>
     </Container>
   )
 }
