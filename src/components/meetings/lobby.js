@@ -21,6 +21,24 @@ function Lobby(props) {
 
   const socket = useRef();
 
+  useEffect(() => {
+
+    socket.current = io("http://localhost:8000/");
+
+    socket.current.on("yourID", (id) => {
+      setYourID(id);
+    })
+    socket.current.on("allUsers", (users) => {
+      setUsers(users);
+    })
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      socket.current.emit("leaveMeeting")
+    }
+  }, [])
+
   return(
     <>
 
