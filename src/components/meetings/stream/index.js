@@ -19,6 +19,28 @@ function Stream(props) {
 
   const userVideo = useRef();
   const partnerVideo = useRef();
+
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      setStream(stream);
+      if (userVideo.current) {
+        userVideo.current.srcObject = stream;
+      }
+    })
+
+    props.socket.on("calling", (data) => {
+      setReceivingCall(true);
+      setCaller(data.from);
+      setCallerSignal(data.signal);
+    })
+
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      props.socket.emit("leaveRoom", { userToCall: caller, from: props.yourID })
+    }
+  }, [])
   
   return(
     <>
