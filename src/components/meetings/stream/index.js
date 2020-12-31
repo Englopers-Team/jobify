@@ -112,6 +112,20 @@ function Stream(props) {
       <video style={{ width: '100%' , height:'90vh'  }} muted={mute} playsInline ref={partnerVideo} autoPlay />
     );
   }
+
+  let incomingCall;
+  if (receivingCall) {
+    incomingCall = (
+      <div id='goDiv'>
+        <Row style={{fontSize:'32px' }}> Interviewer request you to the meeting </Row>
+        <Row style={{display:'flex' , justifyContent: 'space-between'}}>
+          <Col>Press <b>GO</b> to start, <b>Jobify wish you luck</b></Col>
+          <Col><button id='goButton'  onClick={acceptCall}>GO</button></Col>
+        </Row>
+        
+      </div>
+    )
+  }
   
   return(
     <>
