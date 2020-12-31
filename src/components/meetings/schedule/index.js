@@ -5,7 +5,7 @@ import './schedule.scss';
 
 function Schedule (props){
   return(
-    <Calendar className="react-calendar"/>
+    <Calendar  className="react-calendar" onChange={props.onChange} value={props.value}/>
   )
 
 }
