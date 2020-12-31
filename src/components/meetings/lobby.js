@@ -58,6 +58,19 @@ function Lobby(props) {
           </Else>
         </If>
       </Col>
+      <Col sm={9} style={{ width: '80%' }}>
+          <If condition={show && userToCall !== ''}>
+            <Then>
+              <Stream setShowHandler={setShow} yourID={yourID} userToCall={userToCall} socket={socket.current} initalCall={initalCall} />
+            </Then>
+            <Else>
+              <Container style={{ height: '100vh' }}>
+                <Schedule className="react-calendar" onChange={onChange}
+                  value={value} />
+              </Container >
+            </Else>
+          </If>
+        </Col>
     </Row>
   </Container >
   )
