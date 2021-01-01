@@ -5,6 +5,7 @@ import { If } from 'react-if';
 import './styles.scss';
 import { useHistory } from 'react-router-dom';
 import S3FileUpload from 'react-s3';
+import { v4 as uuidv4 } from 'uuid';
 
 const config = {
   bucketName: 'jobify',
@@ -23,50 +24,97 @@ export default function Signup() {
   const [country, setCountry] = useState('');
   const [password, setPassword] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [logoFile, setLogoFile] = useState(defaultAvatar);
+  const [logo, setLogo] = useState(defaultAvatar);
   const [url, setURL] = useState('');
   const [error, setError] = useState(false);
-  const [cvFile, setCVFile] = useState('No CV');
-  const [avatarFile, setAvatarFile] = useState(defaultAvatar);
+  const [cv, setCv] = useState('No CV');
+  const [avatar, setAvatar] = useState(defaultAvatar);
+  const [alert, setAlert] = useState([false, '', '']);
+  const [isUploading, setIsUploading] = useState(false);
 
   let history = useHistory();
 
   const context = useContext(AuthContext);
 
-  const uploadCv = (e) => {
-    S3FileUpload.uploadFile(e.target.files[0], config)
+  const uploadFile = (e, type) => {
+    setIsUploading(true);
+    let file = e.target.files[0];
+    let fileType = file.name.split('.')[1];
+    if (!['pdf', 'doc', 'docx'].includes(fileType.toLowerCase()) && type === 'cv') {
+      setAlert([true, 'We accept PDF, DOC and DOCX files Only', 'danger']);
+      return;
+    }
+    if (!['png', 'jpg', 'jpeg', 'gif'].includes(fileType.toLowerCase()) && type === 'pic') {
+      setAlert([true, 'We accept PNG, JPG, and JPEG files Only', 'danger']);
+      return;
+    }
+    if (file.size > 2000000) {
+      setAlert([true, 'Max file size is 2MB', 'danger']);
+      return;
+    }
+    let fileName = `${uuidv4()}.${fileType}`;
+    var blob = file.slice(0, file.size);
+    let newFile = new File([blob], fileName, { type: file.type });
+    setAlert([true, 'Uploading, Please wait ...', 'primary']);
+    S3FileUpload.uploadFile(newFile, { ...config, dirName: type })
       .then((data) => {
-        setCVFile(data.location.replace(/ /g, '%20'));
+        if ((type = 'cv')) {
+          setCv(data.location.replace(/ /g, '%20'));
+        }
+        if ((type = 'pic')) {
+          setAvatar(data.location.replace(/ /g, '%20'));
+          setLogo(data.location.replace(/ /g, '%20'));
+        }
+        setIsUploading(false);
+        setAlert([true, 'Uploaded Successfully', 'success']);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setAlert([true, err, 'danger']);
+      });
   };
 
-  const uploadAvatar = (e) => {
-    S3FileUpload.uploadFile(e.target.files[0], config)
-      .then((data) => {
-        setAvatarFile(data.location.replace(/ /g, '%20'));
-      })
-      .catch((err) => setError(err));
-  };
+  // const uploadCv = (e) => {
+  //   S3FileUpload.uploadFile(e.target.files[0], config)
+  //     .then((data) => {
+  //       setCv(data.location.replace(/ /g, '%20'));
+  //     })
+  //     .catch((err) => setError(err));
+  // };
 
-  const uploadLogo = (e) => {
-    S3FileUpload.uploadFile(e.target.files[0], config)
-      .then((data) => {
-        setLogoFile(data.location);
-      })
-      .catch((err) => setError(err));
-  };
+  // const uploadAvatar = (e) => {
+  //   S3FileUpload.uploadFile(e.target.files[0], config)
+  //     .then((data) => {
+  //       setAvatar(data.location.replace(/ /g, '%20'));
+  //     })
+  //     .catch((err) => setError(err));
+  // };
+
+  // const uploadLogo = (e) => {
+  //   S3FileUpload.uploadFile(e.target.files[0], config)
+  //     .then((data) => {
+  //       setLogo(data.location);
+  //     })
+  //     .catch((err) => setError(err));
+  // };
 
   const handleSubmitApplicant = async (e) => {
     e.preventDefault();
-    const payload = { firstName, lastName, email, phone, jobTitle, country, password, cv: cvFile, avatar: avatarFile };
+    if (isUploading) {
+      setAlert([true, 'Please Wait unit the upload is finished', 'warning']);
+      return;
+    }
+    const payload = { firstName, lastName, email, phone, jobTitle, country, password, cv: cv, avatar: avatar };
     const check = await context.signup(payload, 'p');
     check ? history.push('/verify') : setError(true);
   };
 
   const handleSubmitCompany = async (e) => {
     e.preventDefault();
-    const payload = { companyName, email, phone, logo: logoFile, url, country, password };
+    if (isUploading) {
+      setAlert([true, 'Please Wait unit the upload is finished', 'warning']);
+      return;
+    }
+    const payload = { companyName, email, phone, logo: logo, url, country, password };
     const check = await context.signup(payload, 'c');
     check ? history.push('/verify') : setError(true);
   };
@@ -116,18 +164,23 @@ export default function Signup() {
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Label>CV</Form.Label>
-                        <Form.Control onChange={(e) => uploadCv(e)} className='input' type='file' placeholder='CV' />
+                        <Form.Control onChange={(e) => uploadFile(e, 'cv')} className='input' type='file' placeholder='CV' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Label>Photo</Form.Label>
-                        <Form.Control onChange={(e) => uploadAvatar(e)} className='input' type='file' placeholder='Profile Picture' />
+                        <Form.Control onChange={(e) => uploadFile(e, 'pic')} className='input' type='file' placeholder='Profile Picture' />
                       </Form.Group>
                       <Form.Group>
                         <Form.Control required onChange={(e) => setPassword(e.target.value)} className='input' type='password' placeholder='Password' />
                       </Form.Group>
                       <If condition={error}>
-                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant='danger' onClose={() => setError(false)} dismissible>
+                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px', marginBottom: '20px' }} variant='danger' onClose={() => setError(false)} dismissible>
                           <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>Wrong email or password!</p>
+                        </Alert>
+                      </If>
+                      <If condition={alert[0]}>
+                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
+                          <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
                         </Alert>
                       </If>
                       <Form.Group className='flexRow' style={{ justifyContent: 'space-around', marginBottom: '30px', marginTop: '50px' }}>
@@ -160,7 +213,7 @@ export default function Signup() {
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Label>Logo</Form.Label>
-                        <Form.Control onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
+                        <Form.Control onChange={(e) => uploadFile(e, 'pic')} className='input' type='file' placeholder='Logo' />
                       </Form.Group>
                       <Form.Group style={{ marginBottom: '15px' }}>
                         <Form.Control required onChange={(e) => setURL(e.target.value)} className='input' type='url' placeholder='Company Website' />
@@ -172,8 +225,13 @@ export default function Signup() {
                         <Form.Control required onChange={(e) => setPassword(e.target.value)} className='input' type='password' placeholder='Password' />
                       </Form.Group>
                       <If condition={error}>
-                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant='danger' onClose={() => setError(false)} dismissible>
+                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px', marginBottom: '20px' }} variant='danger' onClose={() => setError(false)} dismissible>
                           <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>Wrong email or password!</p>
+                        </Alert>
+                      </If>
+                      <If condition={alert[0]}>
+                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
+                          <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
                         </Alert>
                       </If>
                       <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', marginTop: '122px', height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>

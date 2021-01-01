@@ -2,12 +2,13 @@
 import superagent from 'superagent';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 import { If, Else } from 'react-if';
 import './styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory } from 'react-router-dom';
 import S3FileUpload from 'react-s3';
+import { v4 as uuidv4 } from 'uuid';
 
 const config = {
   bucketName: 'jobify',
@@ -24,18 +25,43 @@ export default function CompanyEdit() {
   const [logo, setLogo] = useState('');
   const [country, setCountry] = useState('');
   const [companyUrl, setCompanyUrl] = useState('');
-  const [loader, setLoader] = useState(false);
   const history = useHistory();
   const context = useContext(AuthContext);
+  const [alert, setAlert] = useState([false, '', '']);
+  const [isUploading, setIsUploading] = useState(false);
 
   const API = 'https://jobify-app-v2.herokuapp.com';
 
-  const uploadLogo = (e) => {
-    S3FileUpload.uploadFile(e.target.files[0], config)
+  const uploadFile = (e, type) => {
+    setIsUploading(true);
+    let file = e.target.files[0];
+    let fileType = file.name.split('.')[1];
+    if (!['pdf', 'doc', 'docx'].includes(fileType.toLowerCase()) && type === 'cv') {
+      setAlert([true, 'We accept PDF, DOC and DOCX files Only', 'danger']);
+      return;
+    }
+    if (!['png', 'jpg', 'jpeg', 'gif'].includes(fileType.toLowerCase()) && type === 'pic') {
+      setAlert([true, 'We accept PNG, JPG, and JPEG files Only', 'danger']);
+      return;
+    }
+    if (file.size > 2000000) {
+      setAlert([true, 'Max file size is 2MB', 'danger']);
+      return;
+    }
+    let fileName = `${uuidv4()}.${fileType}`;
+    var blob = file.slice(0, file.size);
+    let newFile = new File([blob], fileName, { type: file.type });
+    setAlert([true, 'Uploading, Please wait ...', 'primary']);
+    S3FileUpload.uploadFile(newFile, { ...config, dirName: type })
       .then((data) => {
         setLogo(data.location.replace(/ /g, '%20'));
+
+        setIsUploading(false);
+        setAlert([true, 'Uploaded Successfully', 'success']);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setAlert([true, err, 'danger']);
+      });
   };
   useEffect(() => {
     if (context.token) {
@@ -55,10 +81,12 @@ export default function CompanyEdit() {
   }
 
   async function handleSubmit(e) {
-    setLoader(true);
     e.preventDefault();
+    if (isUploading) {
+      setAlert([true, 'Please Wait unit the upload is finished', 'warning']);
+      return;
+    }
     await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${context.token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
-    setLoader(false);
     history.push('/');
   }
 
@@ -85,7 +113,7 @@ export default function CompanyEdit() {
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Logo</Form.Label>
-                  <Form.Control onChange={(e) => uploadLogo(e)} className='input' type='file' placeholder='Logo' />
+                  <Form.Control onChange={(e) => uploadFile(e, 'pic')} className='input' type='file' placeholder='Logo' />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: '15px' }}>
                   <Form.Label>Location</Form.Label>
@@ -96,13 +124,12 @@ export default function CompanyEdit() {
                   <Form.Control required onChange={(e) => setCompanyUrl(e.target.value)} className='input' type='text' value={companyUrl} />
                 </Form.Group>
 
-                <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center', height: 50 }} sm={1.5}>
-                  <If condition={loader}>
-                    <Spinner animation='border' variant='primary' />
-                    <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
-                  </If>
-                </Col>
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
+                <If condition={alert[0]}>
+                  <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
+                    <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
+                  </Alert>
+                </If>
+                <Button variant='outline-dark' size='lg' className='buttongg' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
                   Save
                 </Button>
               </Form>

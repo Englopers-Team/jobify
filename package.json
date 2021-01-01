@@ -34,6 +34,7 @@
     "simple-peer": "^9.9.3",
     "socket.io-client": "^2.3.0",
     "superagent": "^6.1.0",
+    "uuidv4": "^6.2.6",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
