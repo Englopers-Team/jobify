@@ -25,6 +25,8 @@ function Lobby(props) {
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
 
+
+
   const context = useContext(AuthContext);
 
   const socket = useRef();
@@ -48,12 +50,26 @@ function Lobby(props) {
 
     console.log(context.user.id, yourID)
 
+    setTimeout(()=>{
+      const footer = document.querySelector('.footer-container');
+      const headerr = document.querySelector('.navbar');
+      const chatBtn = document.querySelector('#chatButton');
+      const cont = document.querySelector('.page-container');
+      footer.parentNode.removeChild(footer);
+      chatBtn.parentNode.removeChild(chatBtn);
+      headerr.parentNode.removeChild(headerr);
+      cont.style.minHeight = '100vh'
+
+    },500)
+
+
+
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     socket.current.emit('addMyId', { myId: context.user.id })
 
-  },[context.user.id])
+  }, [context.user.id])
 
   useEffect(() => {
     return () => {
@@ -62,11 +78,11 @@ function Lobby(props) {
   }, [])
 
   return (
-    <Container >
+    <Container style={{margin:'0',minWidth:'100%',zIndex:'9999',position:'fixed',top:0,background:'rgb(35, 35, 51)'}}>
       {console.log('userDeatails', userDeatails)}
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
-        <Col sm={3} style={{ width: '20%', height: '100vh', backgroundColor: 'green' }}>
+        <Col sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8' }}>
           <input type='checkbox' name='test' onClick={() => { setInitalCall(initalCall ? false : true) }} />
           <h1>Jobify Meetings</h1>
           <button onClick={() => {
@@ -82,7 +98,7 @@ function Lobby(props) {
             </Else>
           </If>
         </Col>
-        <Col sm={9} style={{ width: '80%' }}>
+        <Col sm={9} style={{ width: '80%',padding:0,border:'solid 5px rgb(35, 35, 51)',borderBottom:'none' }}>
           <If condition={show && userToCall !== ''}>
             <Then>
               <Stream setShowHandler={setShow} yourID={yourID} userToCall={userToCall} socket={socket.current} initalCall={initalCall} />

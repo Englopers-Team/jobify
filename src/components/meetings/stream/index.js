@@ -109,7 +109,7 @@ function Stream(props) {
   let PartnerVideo;
   if (callAccepted) {
     PartnerVideo = (
-      <video style={{ width: '100%', height: '90vh' }} muted={mute} playsInline ref={partnerVideo} autoPlay />
+      <video style={{ minWidth: '100%', height: '90vh' }} muted={mute} playsInline ref={partnerVideo} autoPlay />
     );
   }
 
@@ -134,32 +134,29 @@ function Stream(props) {
   }
 
   return (
-    <Container style={{ position: 'relative', height: '100vh' }}>
+    <Container style={{ position: 'relative', height: '100vh',margin:0,minWidth:'100%' }}>
       <Row style={{ display: 'flex', justifyContent: 'center', minHeight: '90vh', backgroundColor: 'black' }}>
         <Col style={{ width: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: '99', position: 'fixed', right: '10px', top: '10px' }} sm={6}>
           {UserVideo}
         </Col>
-        <Col style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'cover' }} sm={6} >
+        <Col style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'cover',minWidth:'100%' }} sm={6} >
           {PartnerVideo}
           <If condition={!callAccepted}>
             <img style={{ width: '25%' }} src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt="thumbnail" className="img-thumbnail" />
           </If>
         </Col>
       </Row>
-      <Row style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0', width: '100%', height: '10vh', backgroundColor: '#232333', alignItems: 'center', right: '0' }}>
-        <Col style={{ display: 'flex', flexDirection: 'row' }}>
-
-          <Col style={{ marginRight: '20px', marginLeft: '20px' }} >
+      <Row style={{ margin:0,display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0', width: '100%', height: '10vh', backgroundColor: '#232333', alignItems: 'center', right: '0' }}>
+        <Container style={{ display: 'flex', flexDirection: 'row',margin:0,minWidth:'100%' }}>
+            <Col>
             <If condition={mute}>
               <Then>
-                <MicMute color='#BABACC' style={{ cursor: 'pointer', alignItems: 'center' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
+                <MicMute color='#BABACC' style={{ marginRight:'50px',cursor: 'pointer', alignItems: 'center' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
               </Then>
               <Else>
-                <Mic color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
+                <Mic color='#BABACC' style={{marginRight:'50px', cursor: 'pointer' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
               </Else>
             </If>
-          </Col>
-          <Col >
             <If condition={videoShow}>
               <Then>
                 <CameraVideo color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => {
@@ -174,16 +171,19 @@ function Stream(props) {
                 }} />
               </Else>
             </If>
-          </Col>
-        </Col>
-        <Col style={{ marginRight: '20px' }}>
-          <DoorOpen color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => {
+            </Col>
+            
+            <Col style={{textAlign:'right'}}>
+            <DoorOpen color='#BABACC' style={{ cursor: 'pointer' }} size='32' onClick={() => {
             stream.getAudioTracks()[0].stop();
             stream.getVideoTracks()[0].stop();
             props.socket.emit("leaveRoom", { userToCall: caller, from: props.yourID })
             props.setShowHandler(false)
           }} />
-        </Col>
+            </Col>
+            
+        </Container>
+          
       </Row>
       <If condition={!callAccepted}>
         <div style={{ position: 'absolute', top: '75%', left: '50%', transform: 'translate(-50%,-50%)'  }}>
