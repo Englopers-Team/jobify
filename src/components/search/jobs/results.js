@@ -7,6 +7,8 @@ import superagent from 'superagent';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../context/auth';
 import { useHistory } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
+import notification from '../../notification/index';
 
 export default function JobsResults(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -45,7 +47,7 @@ export default function JobsResults(props) {
         .then((data) => {
           setLoader(false);
           setShow(false);
-          history.push('/applicant/saved-jobs');
+          console.log(notification.nf);
         });
     } else history.push('/signup');
   };
@@ -74,6 +76,7 @@ export default function JobsResults(props) {
                   <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='col-title table-row-l-home' sm={4}>
                     Job Title
                   </Col>
+
                   <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='table-row-l-home' sm={2}>
                     Company
                   </Col>
