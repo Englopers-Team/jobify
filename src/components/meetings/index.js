@@ -9,6 +9,8 @@ import Stream from './stream';
 import Meetings from './meetingsDetails';
 import Profile from './profile';
 import Schedule from './schedule'
+import superagent from 'superagent';
+
 
 import { AuthContext } from '../../context/auth';
 
@@ -24,6 +26,8 @@ function Lobby(props) {
   const [initalCall, setInitalCall] = useState(false);
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
+  const [myMeetings, setMyMeetings] = useState([])
+  const [flag, setFlag] = useState(true)
 
 
 
@@ -50,7 +54,7 @@ function Lobby(props) {
 
     console.log(context.user.id, yourID)
 
-    setTimeout(()=>{
+    setTimeout(() => {
       const footer = document.querySelector('.footer-container');
       const headerr = document.querySelector('.navbar');
       const chatBtn = document.querySelector('#chatButton');
@@ -60,16 +64,30 @@ function Lobby(props) {
       headerr.parentNode.removeChild(headerr);
       cont.style.minHeight = '100vh'
 
-    },500)
-
+    }, 500)
 
 
   }, []);
 
+  
+  async function getData() {
+    const API = 'https://jobify-app-v2.herokuapp.com';
+    const response = await superagent.get(`${API}/meetings`).set('authorization', `Basic ${context.token}`);
+    setMyMeetings(response.body);
+  }
+
   useEffect(() => {
     socket.current.emit('addMyId', { myId: context.user.id })
+    if(context.token){
+      getData();
+    }
 
-  }, [context.user.id])
+
+
+  }, [context.user.id , context.token])
+
+
+
 
   useEffect(() => {
     return () => {
@@ -77,8 +95,11 @@ function Lobby(props) {
     }
   }, [])
 
+
+
+
   return (
-    <Container style={{margin:'0',minWidth:'100%',zIndex:'9999',position:'fixed',top:0,background:'rgb(35, 35, 51)'}}>
+    <Container style={{ margin: '0', minWidth: '100%', zIndex: '9999', position: 'fixed', top: 0, background: 'rgb(35, 35, 51)' }}>
       {console.log('userDeatails', userDeatails)}
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
@@ -94,11 +115,11 @@ function Lobby(props) {
               <Profile />
             </Then>
             <Else>
-              <Meetings users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
+              <Meetings myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
             </Else>
           </If>
         </Col>
-        <Col sm={9} style={{ width: '80%',padding:0,border:'solid 5px rgb(35, 35, 51)',borderBottom:'none' }}>
+        <Col sm={9} style={{ width: '80%', padding: 0, border: 'solid 5px rgb(35, 35, 51)', borderBottom: 'none' }}>
           <If condition={show && userToCall !== ''}>
             <Then>
               <Stream setShowHandler={setShow} yourID={yourID} userToCall={userToCall} socket={socket.current} initalCall={initalCall} />
