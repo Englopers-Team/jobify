@@ -81,9 +81,6 @@ function Lobby(props) {
     if(context.token){
       getData();
     }
-
-
-
   }, [context.user.id , context.token])
 
 

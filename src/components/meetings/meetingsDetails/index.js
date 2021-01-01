@@ -23,7 +23,7 @@ function Meetings(props) {
     <>
       {console.log('herep', props.myMeetings)}
       <Row >
-        {Object.keys(props.users).map(id => {
+        {Object.keys(props.userDeatails).map(id => {
           if (id === props.yourID) {
             return null;
           }
@@ -48,10 +48,17 @@ function Meetings(props) {
               return (
                 <Col key={index}>{item.date} , {item.id}</Col>
               )
-            }else {
-              return (
-                <Col style={{color : 'red'}} key={index}>{item.date} , {item.id}</Col>
-              )
+            } else {
+              if (Object.values(props.userDeatails).includes(item.id)) {
+                return (
+                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} , ONLINE</Col>
+                )
+              } else {
+                return (
+                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id}</Col>
+                )
+              }
+
             }
           })
         }
@@ -61,15 +68,3 @@ function Meetings(props) {
 }
 export default Meetings;
 
-
-//   if (item.date === props.value.toLocaleString().split(',')[0]) {
-//     return Object.keys(data[date]).map((meeting, index) => {
-//       if (meeting.split(' ')[2] === new Date().toLocaleString().split(',')[1].split(' ')[2] && meeting.split(' ')[1] > new Date().toLocaleString().split(',')[1].split(' ')[1] && (Number(date.split('/')[2]) >= Number(new Date().toLocaleString().split(',')[0].split('/')[2]) && Number(date.split('/')[0]) >= Number(new Date().toLocaleString().split(',')[0].split('/')[0]) && Number(date.split('/')[1]) >= Number(new Date().toLocaleString().split(',')[0].split('/')[1]))) {
-//         return (
-//           <Col>{meeting} , {Object.values(data[date])[index]}</Col>
-//         )
-//       
-//       }
-//     })
-//   }
-// })
