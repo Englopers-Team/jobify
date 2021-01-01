@@ -21,9 +21,11 @@ function Meetings(props) {
 
   return (
     <>
-      {console.log('herep', props.myMeetings)}
+      {console.log('meetings', props.myMeetings)}
+      {console.log('userDeatails', props.userDeatails)}
+
       <Row >
-        {Object.keys(props.userDeatails).map(id => {
+        {Object.keys(props.userDeatails).map((id , index) => {
           if (id === props.yourID) {
             return null;
           }
@@ -31,12 +33,12 @@ function Meetings(props) {
             <button key={id} onClick={() => {
               props.setUserToCall(id)
               props.setShow(true)
-            }}>Call {id}</button>
+            }}>Peer = {id} -- ID = {Object.values(props.userDeatails)[index]}</button>
           );
         })}
       </Row>
       <Row style={{ flexDirection: 'column' }}>
-        {
+        {/* {
           props.myMeetings.map((item, index) => {
             let itemDate = item.date.split(',')[0].split('/');
             let itemTime = item.date.split(',')[1].split(' ')[0].split(':')[0];
@@ -61,7 +63,7 @@ function Meetings(props) {
 
             }
           })
-        }
+        } */}
       </Row>
     </>
   )

@@ -27,7 +27,6 @@ function Lobby(props) {
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
   const [myMeetings, setMyMeetings] = useState([])
-  const [flag, setFlag] = useState(true)
 
 
 
