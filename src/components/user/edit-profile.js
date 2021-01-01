@@ -54,10 +54,10 @@ export default function UserEdit() {
     setAlert([true, 'Uploading, Please wait ...', 'primary']);
     S3FileUpload.uploadFile(newFile, { ...config, dirName: type })
       .then((data) => {
-        if ((type = 'cv')) {
+        if (type === 'cv') {
           setCv(data.location.replace(/ /g, '%20'));
         }
-        if ((type = 'pic')) {
+        if (type === 'pic') {
           setAvatar(data.location.replace(/ /g, '%20'));
         }
         setIsUploading(false);

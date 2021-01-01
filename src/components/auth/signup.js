@@ -58,10 +58,10 @@ export default function Signup() {
     setAlert([true, 'Uploading, Please wait ...', 'primary']);
     S3FileUpload.uploadFile(newFile, { ...config, dirName: type })
       .then((data) => {
-        if ((type = 'cv')) {
+        if (type === 'cv') {
           setCv(data.location.replace(/ /g, '%20'));
         }
-        if ((type = 'pic')) {
+        if (type === 'pic') {
           setAvatar(data.location.replace(/ /g, '%20'));
           setLogo(data.location.replace(/ /g, '%20'));
         }
@@ -72,30 +72,6 @@ export default function Signup() {
         setAlert([true, err, 'danger']);
       });
   };
-
-  // const uploadCv = (e) => {
-  //   S3FileUpload.uploadFile(e.target.files[0], config)
-  //     .then((data) => {
-  //       setCv(data.location.replace(/ /g, '%20'));
-  //     })
-  //     .catch((err) => setError(err));
-  // };
-
-  // const uploadAvatar = (e) => {
-  //   S3FileUpload.uploadFile(e.target.files[0], config)
-  //     .then((data) => {
-  //       setAvatar(data.location.replace(/ /g, '%20'));
-  //     })
-  //     .catch((err) => setError(err));
-  // };
-
-  // const uploadLogo = (e) => {
-  //   S3FileUpload.uploadFile(e.target.files[0], config)
-  //     .then((data) => {
-  //       setLogo(data.location);
-  //     })
-  //     .catch((err) => setError(err));
-  // };
 
   const handleSubmitApplicant = async (e) => {
     e.preventDefault();
