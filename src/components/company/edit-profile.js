@@ -25,7 +25,6 @@ export default function CompanyEdit() {
   const [logo, setLogo] = useState('');
   const [country, setCountry] = useState('');
   const [companyUrl, setCompanyUrl] = useState('');
-  const [loader, setLoader] = useState(false);
   const history = useHistory();
   const context = useContext(AuthContext);
   const [alert, setAlert] = useState([false, '', '']);
@@ -82,14 +81,12 @@ export default function CompanyEdit() {
   }
 
   async function handleSubmit(e) {
-    setLoader(true);
     e.preventDefault();
     if (isUploading) {
       setAlert([true, 'Please Wait unit the upload is finished', 'warning']);
       return;
     }
     await superagent.put(`${API}/company/edit`).set('authorization', `Basic ${context.token}`).send({ company_name: companyName, phone: phone, logo: logo, country: country, company_url: companyUrl });
-    setLoader(false);
     history.push('/');
   }
 
@@ -127,20 +124,14 @@ export default function CompanyEdit() {
                   <Form.Control required onChange={(e) => setCompanyUrl(e.target.value)} className='input' type='text' value={companyUrl} />
                 </Form.Group>
 
-                <Col style={{ color: '#717171', fontWeight: 550, textAlign: 'center', height: 50 }} sm={1.5}>
-                  <If condition={loader}>
-                    <Spinner animation='border' variant='primary' />
-                    <Else>&nbsp; &nbsp; &nbsp; &nbsp; </Else>
-                  </If>
-                </Col>
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
-                  Save
-                </Button>
                 <If condition={alert[0]}>
-                  <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => context.setError(false)} dismissible>
+                  <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
                     <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
                   </Alert>
                 </If>
+                <Button variant='outline-dark' size='lg' className='buttongg' block type='submit' style={{ marginBottom: '40px', marginTop: 50, height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
+                  Save
+                </Button>
               </Form>
             </Row>
           </Card>

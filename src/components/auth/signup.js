@@ -179,7 +179,7 @@ export default function Signup() {
                         </Alert>
                       </If>
                       <If condition={alert[0]}>
-                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => context.setError(false)} dismissible>
+                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
                           <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
                         </Alert>
                       </If>
@@ -229,14 +229,14 @@ export default function Signup() {
                           <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>Wrong email or password!</p>
                         </Alert>
                       </If>
-                      <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', marginTop: '122px', height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
-                        Sign up
-                      </Button>
                       <If condition={alert[0]}>
-                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => context.setError(false)} dismissible>
+                        <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px' }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
                           <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
                         </Alert>
                       </If>
+                      <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', marginTop: '122px', height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: 40 }}>
+                        Sign up
+                      </Button>
                     </Form>
                   </Tab.Pane>
                 </Tab.Content>

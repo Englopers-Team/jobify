@@ -128,14 +128,14 @@ export default function UserEdit() {
                   <Form.Label>Photo</Form.Label>
                   <Form.Control onChange={(e) => uploadFile(e, 'pic')} className='input' type='file' placeholder='Profile Picture' />
                 </Form.Group>
-                <Button variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
-                  Save
-                </Button>
                 <If condition={alert[0]}>
-                  <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px', marginBottom: 10 }} variant={alert[2]} onClose={() => context.setError(false)} dismissible>
+                  <Alert style={{ margin: 0, padding: '5px', paddingBottom: '2px', marginBottom: 10 }} variant={alert[2]} onClose={() => setAlert([false, '', ''])} dismissible>
                     <p style={{ fontSize: '15px', paddingTop: '10px', marginLeft: '10px' }}>{alert[1]}</p>
                   </Alert>
                 </If>
+                <Button variant='outline-dark' size='lg' className='buttongg' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500' }}>
+                  Save
+                </Button>
               </Form>
             </Row>
           </Card>
