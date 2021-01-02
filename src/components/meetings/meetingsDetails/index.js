@@ -21,6 +21,8 @@ let data = {
 
 function Meetings(props) {
   const [columnName, setColumnName] = useState('')
+  const [image, setImage] = useState('');
+  const [name, setName] = useState('');
   const timeHourNow = new Date().toLocaleString().split(',');
   const date = timeHourNow[0].split('/');
   const hour = timeHourNow[1].slice(1, timeHourNow[1].length).split(' ')[0].split(':')[0];
@@ -30,9 +32,16 @@ function Meetings(props) {
 
   useEffect(() => {
     let column = 'auth_id_person'
+    let imageColumn = 'avatar';
+    let nameColumn = 'first_name';
+
     if (context.user.account_type === 'p') {
       column = 'auth_id_company';
+      imageColumn = 'logo';
+      nameColumn = 'company_name';
     }
+    setImage(imageColumn)
+    setName(nameColumn)
     setColumnName(column)
   }, [context.user.account_type])
 
@@ -66,8 +75,8 @@ function Meetings(props) {
             let itemTime = item.date.split(',')[1].split(' ')[0].split(':')[0];
             let itemAmPm = item.date.split(',')[1].split(' ')[1];
             console.log(props.value.toLocaleString().split(',')[0], itemDate.join('/'))
-            if (props.value.toLocaleString().split(',')[0]=== itemDate.join('/')) {
-              if ((itemDate[2] > date[2] || itemDate[2] === date[2] && itemDate[0] > date[0] || itemDate[2] === date[2] && itemDate[0] === date[0] && itemDate[1] >= date[1]) && (!(itemAmPm === 'AM' && AmPm === 'PM')) && (Number(itemTime) >= Number(hour) || Number(itemTime) === 12)) {
+            if (props.value.toLocaleString().split(',')[0] === itemDate.join('/')) {
+              if ((itemDate[2] > date[2] || itemDate[2] === date[2] && itemDate[0] > date[0] || itemDate[2] === date[2] && itemDate[0] === date[0] && itemDate[1] >= date[1]) && (!(itemAmPm === 'AM' && AmPm === 'PM')) && (Number(itemTime) >= Number(hour) )) {
                 if (Object.values(props.userDeatails).includes(item[columnName])) {
                   let id;
                   Object.values(props.userDeatails).forEach((item2, index2) => {
@@ -88,8 +97,8 @@ function Meetings(props) {
                         props.setShow(true)
                       }} key={index}>
                         <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
-                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item[image]}`} />
+                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item[name]}</p>
                         </Col>
                         <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold' }}>
                           {itemTime}:00 {itemAmPm}
@@ -105,8 +114,8 @@ function Meetings(props) {
                     <>
                       <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px' }} key={index}>
                         <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
-                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item[image]}`} />
+                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item[name]}</p>
                         </Col>
                         <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold' }}>
                           {itemTime}:00 {itemAmPm}
@@ -124,8 +133,8 @@ function Meetings(props) {
                     <>
                       <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px' }} key={index}>
                         <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
-                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item[image]}`} />
+                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item[name]}</p>
                         </Col>
                         <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold', color: 'red' }}>
                           {itemTime}:00 {itemAmPm}
@@ -141,8 +150,8 @@ function Meetings(props) {
                     <>
                       <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px' }} key={index}>
                         <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
-                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                          <img style={{ width: '25px', borderRadius: '50%' }} src={`${item[image]}`} />
+                          <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item[name]}</p>
                         </Col>
                         <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold', color: 'red' }}>
                           {itemTime}:00 {itemAmPm}
