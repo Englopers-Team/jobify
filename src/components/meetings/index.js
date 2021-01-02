@@ -29,6 +29,7 @@ function Lobby(props) {
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
   const [myMeetings, setMyMeetings] = useState([])
+  const [removed, setRemoved] = useState(false)
   const history = useHistory();
 
 
@@ -60,17 +61,21 @@ function Lobby(props) {
       const headerr = document.querySelector('.navbar');
       const chatBtn = document.querySelector('#chatButton');
       const cont = document.querySelector('.page-container');
-      footer.parentNode.removeChild(footer);
-      chatBtn.parentNode.removeChild(chatBtn);
-      headerr.parentNode.removeChild(headerr);
+      if (!removed) {
+        footer.parentNode.removeChild(footer);
+        chatBtn.parentNode.removeChild(chatBtn);
+        headerr.parentNode.removeChild(headerr);
+        setRemoved(true)
+      }
       cont.style.minHeight = '100vh'
+
 
     }, 500)
 
 
   }, []);
 
-  
+
   async function getData() {
     const API = 'https://jobify-app-v2.herokuapp.com';
     const response = await superagent.get(`${API}/meetings`).set('authorization', `Basic ${context.token}`);
@@ -80,10 +85,10 @@ function Lobby(props) {
   useEffect(() => {
     socket.current.emit('addMyId', { myId: context.user.id })
     setInitalCall(context.user.account_type === 'p' ? false : true)
-    if(context.token){
+    if (context.token) {
       getData();
     }
-  }, [context.user.id , context.token])
+  }, [context.user.id, context.token])
 
 
 
@@ -101,21 +106,20 @@ function Lobby(props) {
     <Container style={{ margin: '0', minWidth: '100%', zIndex: '9999', position: 'fixed', top: 0, background: 'rgb(35, 35, 51)' }}>
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
-        <Col sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8' }}>
-          <input type='checkbox' name='test' onClick={() => { setInitalCall(initalCall ? false : true) }} />
-          {initalCall.toString()}
-          <h1>Jobify Meetings</h1>
-          <button onClick={() => {
-            socket.current.emit("leaveMeeting")
-            history.push('/')
-
-          }}>Close Meetings</button>
+        <Col class='flexCol' sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8',display:'flex',flexDirection:'column' }}>
+          <img alt='Jobify' src='./assets/jobify.png' style={{alignSelf:'center',width:'100%',maxWidth:'300px',textAlign:'center'}} />
+          <hr style={{marginTop:0}}></hr>
           <If condition={show && userToCall !== ''}>
             <Then>
               <Profile />
             </Then>
             <Else>
-              <Meetings  myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
+              <Meetings myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
+              <button style={{ background:'#504edf',fontSize:'18px',height:'5vh',fontWeight:'bold',position: 'absolute', bottom: 0,border:0,left:0, width: '100%' }} onClick={() => {
+                socket.current.emit("leaveMeeting")
+                history.push('/')
+
+              }}>Close Meetings</button>
             </Else>
           </If>
         </Col>

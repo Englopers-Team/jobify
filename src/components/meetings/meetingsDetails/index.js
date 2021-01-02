@@ -42,7 +42,7 @@ function Meetings(props) {
 
   return (
     <>
-    
+
       {/* <Row >
         {Object.keys(props.userDeatails).map((id, index) => {
           if (id === props.yourID) {
@@ -60,7 +60,7 @@ function Meetings(props) {
         {
           props.myMeetings.map((item, index) => {
             if (item.date.length < 19) {
-              return <p>Wrong date</p>
+              return <></>
             }
             let itemDate = item.date.split(',')[0].split('/');
             let itemTime = item.date.split(',')[1].split(' ')[0].split(':')[0];
@@ -78,32 +78,79 @@ function Meetings(props) {
                     })
                   }
                 })
+
                 return (
                   <>
-                    {console.log('this is id', id)}
-                    <Col key={index}>{itemTime}:00 , {item.id} <CircleFill color='green' />
-                    <img style={{width:'25px' , borderRadius: '50%'}} src={`${item.avatar}`}/>
-                    <p>{item.first_name}</p>
-                      <button key={id} onClick={() => {
-                        props.setUserToCall(id)
-                        props.setShow(true)
-                      }}>call {id} </button>
+                    <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px',cursor:'pointer' }} onClick={() => {
+                      props.setUserToCall(id)
+                      props.setShow(true)
+                    }} key={index}>
+                      <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
+                        <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                      </Col>
+                      <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold' }}>
+                        {itemTime}:00 {itemAmPm}
+                      </Col>
+                      <Col style={2} style={{ textAlign: 'right', margin: 'auto' }}><CircleFill style={{ marginBottom: '5px' }} color='green' /></Col>
+
                     </Col>
+                    <hr style={{ marginTop: 0, width: '80%', alignSelf: 'center' }}></hr>
                   </>
                 )
               } else {
                 return (
-                  <Col key={index}>{itemTime}:00 , {item.id} <CircleFill color='#BABACC' /></Col>
+                  <>
+                    <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px' }} key={index}>
+                      <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
+                        <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                      </Col>
+                      <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold' }}>
+                        {itemTime}:00 {itemAmPm}
+                      </Col>
+                      <Col style={2} style={{ textAlign: 'right', margin: 'auto' }}><CircleFill style={{ marginBottom: '5px' }} color='#BABACC' /></Col>
+
+                    </Col>
+                    <hr style={{ marginTop: 0, width: '80%', alignSelf: 'center' }}></hr>
+                  </>
                 )
               }
             } else {
               if (Object.values(props.userDeatails).includes(item[columnName])) {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{itemTime}:00 , {item.id} <CircleFill color='green' /></Col>
+                  <>
+                    <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px' }} key={index}>
+                      <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
+                        <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                      </Col>
+                      <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold', color: 'red' }}>
+                        {itemTime}:00 {itemAmPm}
+                      </Col>
+                      <Col style={2} style={{ textAlign: 'right', margin: 'auto' }}><CircleFill style={{ marginBottom: '5px' }} color='green' /></Col>
+
+                    </Col>
+                    <hr style={{ marginTop: 0, width: '80%', alignSelf: 'center' }}></hr>
+                  </>
                 )
               } else {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{itemTime}:00 , {item.id} <CircleFill color='#BABACC' /></Col>
+                  <>
+                    <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px' }} key={index}>
+                      <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <img style={{ width: '25px', borderRadius: '50%' }} src={`${item.avatar}`} />
+                        <p style={{ margin: 0, marginLeft: '10px', fontSize: '16px', fontWeight: 'bold' }}>{item.first_name}</p>
+                      </Col>
+                      <Col sm={4} style={{ textAlign: 'left', fontSize: '16px', fontWeight: 'bold', color: 'red' }}>
+                        {itemTime}:00 {itemAmPm}
+                      </Col>
+                      <Col style={2} style={{ textAlign: 'right', margin: 'auto' }}><CircleFill style={{ marginBottom: '5px' }} color='#BABACC' /></Col>
+
+                    </Col>
+                    <hr style={{ marginTop: 0, width: '80%', alignSelf: 'center' }}></hr>
+                  </>
+
                 )
               }
 
