@@ -78,7 +78,6 @@ function Lobby(props) {
   useEffect(() => {
     socket.current.emit('addMyId', { myId: context.user.id })
     setAccountType(context.user.account_type);
-    console.log('accountType' , account_type)
     if(context.token){
       getData();
     }
