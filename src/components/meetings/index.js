@@ -13,6 +13,8 @@ import superagent from 'superagent';
 
 
 import { AuthContext } from '../../context/auth';
+import { useHistory } from "react-router-dom";
+
 
 
 import './lobby.scss';
@@ -27,6 +29,7 @@ function Lobby(props) {
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
   const [myMeetings, setMyMeetings] = useState([])
+  const history = useHistory();
 
 
 
@@ -104,7 +107,8 @@ function Lobby(props) {
           <h1>Jobify Meetings</h1>
           <button onClick={() => {
             socket.current.emit("leaveMeeting")
-            props.setShowHandler(false)
+            history.push('/')
+
           }}>Close Meetings</button>
           <If condition={show && userToCall !== ''}>
             <Then>
