@@ -13,6 +13,8 @@ import superagent from 'superagent';
 
 
 import { AuthContext } from '../../context/auth';
+import { useHistory } from "react-router-dom";
+
 
 
 import './lobby.scss';
@@ -27,7 +29,7 @@ function Lobby(props) {
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
   const [myMeetings, setMyMeetings] = useState([])
-  const [account_type , setAccountType] =useState('');
+  const history = useHistory();
 
 
 
@@ -77,8 +79,7 @@ function Lobby(props) {
 
   useEffect(() => {
     socket.current.emit('addMyId', { myId: context.user.id })
-    setAccountType(context.user.account_type);
-    console.log('accountType' , account_type)
+    setInitalCall(context.user.account_type === 'p' ? false : true)
     if(context.token){
       getData();
     }
@@ -102,17 +103,19 @@ function Lobby(props) {
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
         <Col sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8' }}>
           <input type='checkbox' name='test' onClick={() => { setInitalCall(initalCall ? false : true) }} />
+          {initalCall.toString()}
           <h1>Jobify Meetings</h1>
           <button onClick={() => {
             socket.current.emit("leaveMeeting")
-            props.setShowHandler(false)
+            history.push('/')
+
           }}>Close Meetings</button>
           <If condition={show && userToCall !== ''}>
             <Then>
               <Profile />
             </Then>
             <Else>
-              <Meetings account_type={account_type} myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
+              <Meetings  myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
             </Else>
           </If>
         </Col>

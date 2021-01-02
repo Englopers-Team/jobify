@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
+
+import { AuthContext } from '../../../context/auth';
+
+import { CircleFill } from 'react-bootstrap-icons';
+
+
 
 let data = {
   '11/29/2020': { '12:00:00 AM': 'omar', ' 5:00:00 PM': 'ali' },
@@ -20,21 +26,24 @@ function Meetings(props) {
   const hour = timeHourNow[1].slice(1, timeHourNow[1].length).split(' ')[0].split(':')[0];
   const AmPm = timeHourNow[1].slice(1, timeHourNow[1].length).split(' ')[1];
 
+  const context = useContext(AuthContext);
+
   useEffect(() => {
-    let column = 'auth_id_company'
-    console.log('props.account_type', props.account_type)
-    if (props.account_type === 'c') {
-      column = 'auth_id_person';
+    let column = 'auth_id_person'
+    if (context.user.account_type === 'p') {
+      column = 'auth_id_company';
     }
     setColumnName(column)
+  }, [context.user.account_type])
+
+  useEffect(() => {
+
   }, [])
 
   return (
     <>
-      {/* {console.log('meetings', props.myMeetings)}
-      {console.log('userDeatails', props.userDeatails)} */}
-      {console.log(props.account_type)}
-      <Row >
+    
+      {/* <Row >
         {Object.keys(props.userDeatails).map((id, index) => {
           if (id === props.yourID) {
             return null;
@@ -46,9 +55,8 @@ function Meetings(props) {
             }}>Peer = {id} -- ID = {Object.values(props.userDeatails)[index]}</button>
           );
         })}
-      </Row>
+      </Row> */}
       <Row style={{ flexDirection: 'column' }}>
-        {console.log(props.myMeetings)}
         {
           props.myMeetings.map((item, index) => {
             if (item.date.length < 19) {
@@ -57,29 +65,45 @@ function Meetings(props) {
             let itemDate = item.date.split(',')[0].split('/');
             let itemTime = item.date.split(',')[1].split(' ')[0].split(':')[0];
             let itemAmPm = item.date.split(',')[1].split(' ')[1];
-            // console.log(itemDate, itemTime, itemAmPm)
-            // console.log(date, hour, AmPm)
             if ((itemDate[2] > date[2] || itemDate[2] === date[2] && itemDate[0] > date[0] || itemDate[2] === date[2] && itemDate[0] === date[0] && itemDate[1] >= date[1]) && (!(itemAmPm === 'AM' && AmPm === 'PM')) && (Number(itemTime) >= Number(hour) || Number(itemTime) === 12)) {
-              console.log('check', item[columnName], Object.values(props.userDeatails))
               if (Object.values(props.userDeatails).includes(item[columnName])) {
-
+                let id;
+                Object.values(props.userDeatails).forEach((item2, index2) => {
+                  if (item2 === item[columnName]) {
+                    Object.keys(props.userDeatails).forEach((item3, index3) => {
+                      if (index2 === index3) {
+                        id = item3
+                        console.log(id)
+                      }
+                    })
+                  }
+                })
                 return (
-                  <Col key={index}>{item.date} , {item.id} , ONLINE</Col>
+                  <>
+                    {console.log('this is id', id)}
+                    <Col key={index}>{itemTime}:00 , {item.id} <CircleFill color='green' />
+                    <img style={{width:'25px' , borderRadius: '50%'}} src={`${item.avatar}`}/>
+                    <p>{item.first_name}</p>
+                      <button key={id} onClick={() => {
+                        props.setUserToCall(id)
+                        props.setShow(true)
+                      }}>call {id} </button>
+                    </Col>
+                  </>
                 )
               } else {
                 return (
-                  <Col key={index}>{item.date} , {item.id} , OFFLINE</Col>
+                  <Col key={index}>{itemTime}:00 , {item.id} <CircleFill color='#BABACC' /></Col>
                 )
               }
             } else {
-              console.log('check', item[columnName], Object.values(props.userDeatails))
               if (Object.values(props.userDeatails).includes(item[columnName])) {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} , ONLINE</Col>
+                  <Col style={{ color: 'red' }} key={index}>{itemTime}:00 , {item.id} <CircleFill color='green' /></Col>
                 )
               } else {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} , OFFLINE</Col>
+                  <Col style={{ color: 'red' }} key={index}>{itemTime}:00 , {item.id} <CircleFill color='#BABACC' /></Col>
                 )
               }
 
