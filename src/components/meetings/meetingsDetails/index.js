@@ -1,7 +1,10 @@
-import React, { useState, useEffect , useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import { AuthContext } from '../../../context/auth';
+
+import { CircleFill } from 'react-bootstrap-icons';
+
 
 
 let data = {
@@ -39,6 +42,7 @@ function Meetings(props) {
 
   return (
     <>
+    
       <Row >
         {Object.keys(props.userDeatails).map((id, index) => {
           if (id === props.yourID) {
@@ -64,34 +68,40 @@ function Meetings(props) {
             if ((itemDate[2] > date[2] || itemDate[2] === date[2] && itemDate[0] > date[0] || itemDate[2] === date[2] && itemDate[0] === date[0] && itemDate[1] >= date[1]) && (!(itemAmPm === 'AM' && AmPm === 'PM')) && (Number(itemTime) >= Number(hour) || Number(itemTime) === 12)) {
               if (Object.values(props.userDeatails).includes(item[columnName])) {
                 let id;
-                Object.values(props.userDeatails).forEach(item => {
-                  if(item===item[columnName]){
-                    id = item
-                    console.log(id)
+                Object.values(props.userDeatails).forEach((item2, index2) => {
+                  if (item2 === item[columnName]) {
+                    Object.keys(props.userDeatails).forEach((item3, index3) => {
+                      if (index2 === index3) {
+                        id = item3
+                        console.log(id)
+                      }
+                    })
                   }
                 })
                 return (
                   <>
-                    <Col key={index}>{item.date} , {item.id} , ONLINE</Col>
-                    <button key={index} onClick={() => {
-                      props.setUserToCall(id)
-                      props.setShow(true)
-                    }}>Call</button>
+                    {console.log('this is id', id)}
+                    <Col key={index}><p>{item.date} , {item.id} <CircleFill color='green' /></p>
+                      <button key={id} onClick={() => {
+                        props.setUserToCall(id)
+                        props.setShow(true)
+                      }}>call {id} </button>
+                    </Col>
                   </>
                 )
               } else {
                 return (
-                  <Col key={index}>{item.date} , {item.id} , OFFLINE</Col>
+                  <Col key={index}>{item.date} , {item.id} <CircleFill color='#BABACC' /></Col>
                 )
               }
             } else {
               if (Object.values(props.userDeatails).includes(item[columnName])) {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} , ONLINE</Col>
+                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} <CircleFill color='green' /></Col>
                 )
               } else {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} , OFFLINE</Col>
+                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} <CircleFill color='#BABACC' /></Col>
                 )
               }
 
