@@ -27,6 +27,7 @@ function Lobby(props) {
   const [value, onChange] = useState(new Date());
   const [userDeatails, setUserDeatails] = useState({})
   const [myMeetings, setMyMeetings] = useState([])
+  const [account_type , setAccountType] =useState('');
 
 
 
@@ -51,7 +52,6 @@ function Lobby(props) {
 
 
 
-    console.log(context.user.id, yourID)
 
     setTimeout(() => {
       const footer = document.querySelector('.footer-container');
@@ -77,6 +77,8 @@ function Lobby(props) {
 
   useEffect(() => {
     socket.current.emit('addMyId', { myId: context.user.id })
+    setAccountType(context.user.account_type);
+    console.log('accountType' , account_type)
     if(context.token){
       getData();
     }
@@ -96,7 +98,6 @@ function Lobby(props) {
 
   return (
     <Container style={{ margin: '0', minWidth: '100%', zIndex: '9999', position: 'fixed', top: 0, background: 'rgb(35, 35, 51)' }}>
-      {console.log('userDeatails', userDeatails)}
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
         <Col sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8' }}>
@@ -111,7 +112,7 @@ function Lobby(props) {
               <Profile />
             </Then>
             <Else>
-              <Meetings myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
+              <Meetings account_type={account_type} myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
             </Else>
           </If>
         </Col>
