@@ -43,7 +43,7 @@ function Meetings(props) {
   return (
     <>
     
-      <Row >
+      {/* <Row >
         {Object.keys(props.userDeatails).map((id, index) => {
           if (id === props.yourID) {
             return null;
@@ -55,7 +55,7 @@ function Meetings(props) {
             }}>Peer = {id} -- ID = {Object.values(props.userDeatails)[index]}</button>
           );
         })}
-      </Row>
+      </Row> */}
       <Row style={{ flexDirection: 'column' }}>
         {
           props.myMeetings.map((item, index) => {
@@ -81,7 +81,9 @@ function Meetings(props) {
                 return (
                   <>
                     {console.log('this is id', id)}
-                    <Col key={index}><p>{item.date} , {item.id} <CircleFill color='green' /></p>
+                    <Col key={index}>{itemTime}:00 , {item.id} <CircleFill color='green' />
+                    <img style={{width:'25px' , borderRadius: '50%'}} src={`${item.avatar}`}/>
+                    <p>{item.first_name}</p>
                       <button key={id} onClick={() => {
                         props.setUserToCall(id)
                         props.setShow(true)
@@ -91,17 +93,17 @@ function Meetings(props) {
                 )
               } else {
                 return (
-                  <Col key={index}>{item.date} , {item.id} <CircleFill color='#BABACC' /></Col>
+                  <Col key={index}>{itemTime}:00 , {item.id} <CircleFill color='#BABACC' /></Col>
                 )
               }
             } else {
               if (Object.values(props.userDeatails).includes(item[columnName])) {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} <CircleFill color='green' /></Col>
+                  <Col style={{ color: 'red' }} key={index}>{itemTime}:00 , {item.id} <CircleFill color='green' /></Col>
                 )
               } else {
                 return (
-                  <Col style={{ color: 'red' }} key={index}>{item.date} , {item.id} <CircleFill color='#BABACC' /></Col>
+                  <Col style={{ color: 'red' }} key={index}>{itemTime}:00 , {item.id} <CircleFill color='#BABACC' /></Col>
                 )
               }
 
