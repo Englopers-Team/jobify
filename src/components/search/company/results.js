@@ -33,7 +33,7 @@ export default function CompanyResults(props) {
               <Container className='list-container' style={{ width: '90%' }} fluid>
                 <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px', textAlign: 'center', dispaly: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} sm={2}>
-                    Logo
+                    
                   </Col>
                   <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='col-title' sm={3}>
                     Company Name
