@@ -96,13 +96,13 @@ export default function CompanyDashboard() {
               Employer <span style={{ color: '#515151', fontSize: '45px', fontWeight: 'bold' }}>Dashboard</span>
             </h2>
           </Col>
-          <Col  onClick={() => {
-            history.push('/meetings')
-          }}>
-            <Row style={{ justifyContent: 'flex-end'  }}>
-              <Button variant='outline-dark' className='buttonTopic' style={{  padding: '6px' , cursor:'pointer' , marginRight : '30px' , marginTop:'3px' }}>
-                <CameraVideo  size='24' style={{ marginBottom: '1px' }} />
-                <span style={{ marginLeft : '4px',fontSize:'16px' , fontWeight:'bold'}}>Meetings</span>
+          <Col  >
+            <Row style={{ justifyContent: 'flex-end' }}>
+              <Button onClick={() => {
+                history.push('/meetings')
+              }} variant='outline-dark' className='buttonTopic' style={{ padding: '6px', cursor: 'pointer', marginRight: '30px', marginTop: '3px' }}>
+                <CameraVideo size='24' style={{ marginBottom: '1px' }} />
+                <span style={{ marginLeft: '4px', fontSize: '16px', fontWeight: 'bold' }}>Meetings</span>
               </Button>
             </Row>
           </Col>
