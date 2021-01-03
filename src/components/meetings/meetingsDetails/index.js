@@ -94,6 +94,7 @@ function Meetings(props) {
                     <>
                       <Col style={{ display: 'flex', alignItems: 'center', height: '50px', marginBottom: '30px', cursor: 'pointer' }} onClick={() => {
                         props.setUserToCall(id)
+                        props.setUserAuthIdToCall(item[columnName])
                         props.setShow(true)
                       }} key={index}>
                         <Col sm={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
