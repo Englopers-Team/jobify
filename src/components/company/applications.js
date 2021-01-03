@@ -74,8 +74,8 @@ export default function CompanyApplications(props) {
         <If condition={context.token && results[0]}>
           <Then>
             <Row>
-              <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center', height: screenSize > 570 ? '80px' : 'fit-content' }}>
+              <Container style={{ justifyContent: 'center', width: '100%', padding: 0 }} className='list-container' fluid>
+                <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center', height: screenSize > 570 ? '80px' : 'fit-content',margin:0 }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151', fontWeight: '660' }} sm={2} lg={1}></Col>
                   <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151', fontWeight: '660' }} sm={3} lg={2}>
                     <p>Name</p>
@@ -142,7 +142,7 @@ export default function CompanyApplications(props) {
                             </Col>
                             <Col style={{ textAlign: 'center', paddingRight: '10px' }} sm={1.5}>
                               <a href={item.cv} target='_blank'>
-                                <Button className='buttons' variant='outline-light' style={{ backgroundColor: '#504edf', fontSize: 15 }}>
+                                <Button className='buttons' variant='outline-light' style={{ backgroundColor: 'transparent',color:'black', fontSize: 16,textDecoration:'underline',fontWeight:'bold' }}>
                                   CV
                                 </Button>
                               </a>
