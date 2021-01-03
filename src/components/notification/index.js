@@ -2,8 +2,8 @@ import { useEffect, useState, useContext } from 'react';
 import { Alert } from 'react-bootstrap';
 import { SocketContext } from '../../context/socket';
 import { AuthContext } from '../../context/auth';
-import { If, Then } from 'react-if'
-import './styles.scss'
+import { If, Then } from 'react-if';
+import './styles.scss';
 
 export default function Notification() {
   const context = useContext(SocketContext);
@@ -17,21 +17,21 @@ export default function Notification() {
       context.socketNotif.emit('join', authContext.token);
       context.socketNotif.on('notification', (payload) => {
         if (!show) {
-          setShow(true)
-          setTitle(payload.title)
-          setBody(payload.description)
+          setShow(true);
+          setTitle(payload.title);
+          setBody(payload.description);
           let notifi;
           setTimeout(() => {
-            notifi = document.getElementById('notification')
-            notifi.classList.add('downtoup')
-          }, 300)
+            notifi = document.getElementById('notification');
+            notifi.classList.add('downtoup');
+          }, 300);
           setTimeout(() => {
-            notifi.classList.remove('downtoup')
-            setShow(false)
+            notifi.classList.remove('downtoup');
+            setShow(false);
           }, 3300);
         }
-      })
-      context.socketNotif.emit('checkNotif', { token: authContext.token })
+      });
+      context.socketNotif.emit('checkNotif', { token: authContext.token });
     }
 
     return () => {
@@ -45,11 +45,9 @@ export default function Notification() {
       <Then>
         <Alert id='notification' className='notif'>
           <Alert.Heading style={{ fontSize: '30px' }}>{title}</Alert.Heading>
-          <p >
-            {body}
-          </p>
+          <p>{body}</p>
         </Alert>
       </Then>
     </If>
-  )
+  );
 }
