@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './styles.scss';
 import superagent from 'superagent';
-import { Image, Container, FormControl } from 'react-bootstrap';
+import { Image, Container, FormControl, Modal } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,7 @@ export default function CompanyDashboard() {
   const [sammary, setSammary] = useState('');
   const [show, setShow] = useState('');
   const [dateMeeting, setDateMeeting] = useState('');
+  const [timeMeeting, setTimeMeeting] = useState('');
   // const [experience, setExperience] = useState(['logo', 'title', 'company', 'field', 'start', 'end', 'present', 'location', 'des']);
   // const [education, setEducation] = useState(['logo', 'school', 'degree', 'field', 'starting_date', 'ending_date', 'present', 'grade', 'description']);
   // const [courses, setCourses] = useState(['course_name', 'field', 'course_date', 'school']);
@@ -68,78 +69,74 @@ export default function CompanyDashboard() {
     setSammary(response.body[0].sammary);
   }
 
-  // const appList = async () => {
-  //   superagent
-  //     .get(`${API}/user/app`)
-  //     .set({ Authorization: `Basic ${context.token}` })
-
-  //     .then((data) => {
-  //       data.body !== null ? setApplications([[...data.body.API.slice(0, 2), ...data.body.DB.slice(0, 3)], data.body.DB.length + data.body.API.length]) : setApplications([[...data.body.DB, ...data.body.API], data.body.API.length + data.body.DB.length]);
-  //     });
-  // };
-
-  // const savedJobs = async () => {
-  //   superagent
-  //     .get(`${API}/user/saved`)
-  //     .set({ Authorization: `Basic ${context.token}` })
-
-  //     .then((data) => {
-  //       data.body[0] !== null ? setJobs([[...data.body.data_Api.slice(0, 2), ...data.body.data_DB.slice(0, 3)], data.body.data_DB.length + data.body.data_Api.length]) : setJobs([data.body, 0]);
-  //     });
-  // };
-
-  // const offersList = async () => {
-  //   superagent
-  //     .get(`${API}/user/offers`)
-  //     .set({ Authorization: `Basic ${context.token}` })
-
-  //     .then((data) => {
-  //       data.body !== null ? setOffers([data.body.slice(0, 4), data.body.length]) : setOffers([data.body, data.body.length]);
-  //     });
-  // };
 
   async function sendMeeting() {
     const API = 'https://jobify-app-v2.herokuapp.com'
     await superagent.post(`${API}/meetings`).set('authorization', `Basic ${context.token}`).send({
       auth_id_person: id,
-      date: "1/30/2021,1:00:00 AM"
+      date: `${dateMeeting},${timeMeeting}`
     });
 
+  }
+
+  function tConvert(time) {
+    time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) {
+      time = time.slice(1);
+      time[5] = +time[0] < 12 ? ':00 AM' : ':00 PM';
+      time[0] = +time[0] % 12 || 12;
+    }
+    return time.join('');
   }
 
   return (
     <>
       <If condition={show}>
-        <div style={{ position: 'fixed', left: '50%', top: '50%', transform: "translate(-50%, -50%)", width: '700px', height: '300px', backgroundColor: 'red', zIndex: '99' }}>
-          <Button onClick={() => {
-            setShow(false)
-          }}>
-            X
-        </Button>
-          <FormControl
-            style={{ backgroundColor: '#E1E3E8' }}
-            type='date'
-            name='dob'
-            onChange={(e) => {
-              let arr = e.target.value.split('-')
-              if(arr[1].length===2 && arr[1][0] == 0){
-                arr[1] = arr[1][1];
-              }
-              if(arr[2].length===2 && arr[2][0] == 0){
-                arr[2] = arr[2][1];
-              }
-              let newArr = [arr[1] , arr[2] , arr[0]]
-              let readyArr = newArr.join('/')
-              //1/30/2021
-              //2021-01-06
-              setDateMeeting(readyArr);
-            }}
-          />
-          <p>{dateMeeting}</p>
-          <Button onClick={() => {
-            sendMeeting()
-          }}>Submit</Button>
-        </div>
+        <Modal style={{ padding: '20px' }} show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+          <Modal.Header closeButton>
+            <Modal.Title style={{ color: '#504edf', fontWeight: 'bold' }} id='example-custom-modal-styling-title'>Setup a meetings</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Col style={{ display: 'flex', height: '80%', justifyContent: 'center', alignItems: 'center' }}>
+              <FormControl
+                style={{ width: '50%', backgroundColor: 'transparent', height: '40%', outline: 'none', fontSize: '18px', margin: '20px' }}
+                type='date'
+                name='dob'
+                onChange={(e) => {
+                  let arr = e.target.value.split('-')
+                  if (arr[1].length === 2 && arr[1][0] == 0) {
+                    arr[1] = arr[1][1];
+                  }
+                  if (arr[2].length === 2 && arr[2][0] == 0) {
+                    arr[2] = arr[2][1];
+                  }
+                  let newArr = [arr[1], arr[2], arr[0]]
+                  let readyArr = newArr.join('/')
+                  //1/30/2021
+                  //2021-01-06
+                  setDateMeeting(readyArr);
+                }}
+              />
+              <FormControl
+                style={{ width: '50%', backgroundColor: 'transparent', height: '40%', outline: 'none', fontSize: '18px', margin: '20px' }}
+                type='time'
+                name='dob'
+                onChange={(e) => {
+                  // 21:00
+                  let time = tConvert(e.target.value)
+                  setTimeMeeting(time);
+                }}
+              />
+            </Col>
+            <Button
+              style={{ height: '10%', textAlign: 'center', backgroundColor: '#232b4e', padding: '7px 20px', margin: '15px'  }}
+              onClick={() => {
+                sendMeeting()
+              }}>Submit</Button>
+          </Modal.Body>
+        </Modal>
+
       </If>
 
       <Container className='content' style={{ margin: '40px auto' }}>
