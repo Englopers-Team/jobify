@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../context/auth';
 import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import notification from '../../notification/index';
+import LocalNotification from '../../notification/localNotifications';
 
 export default function JobsResults(props) {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -18,9 +18,27 @@ export default function JobsResults(props) {
   const context = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [titleProps, setTitleProps] = useState('');
+  const [bodyProps, setBodyProps] = useState('');
 
+  const notifi = (show) => {
+    if (!show) {
+      setShow(true);
+
+      let notifi;
+      setTimeout(() => {
+        notifi = document.getElementById('notification2');
+        notifi.classList.add('downtoup');
+      }, 300);
+      setTimeout(() => {
+        notifi.classList.remove('downtoup');
+        setShow(false);
+      }, 3300);
+    }
+  };
   const Apply = (payload) => {
-    console.log(payload);
+    setTitleProps('Applied Successfully');
+    setBodyProps('The Job Has Been Applied');
     if (context.token) {
       const API = 'https://jobify-app-v2.herokuapp.com/user/apply';
       setLoader(true);
@@ -31,12 +49,14 @@ export default function JobsResults(props) {
         .then((data) => {
           console.log(data.body);
           setLoader(false);
-          setShow(false);
-          history.push('/applicant/applications');
+          setShow(true);
+          notifi(show);
         });
     } else history.push('/signup');
   };
   const save = (payload) => {
+    setTitleProps('Saved Successfully');
+    setBodyProps('The Job Has Been Saved');
     if (context.token) {
       const API = 'https://jobify-app-v2.herokuapp.com/user/save';
       setLoader(true);
@@ -46,8 +66,8 @@ export default function JobsResults(props) {
         .send(payload)
         .then((data) => {
           setLoader(false);
-          setShow(false);
-          console.log(notification.nf);
+          setShow(true);
+          notifi(show);
         });
     } else history.push('/signup');
   };
@@ -67,6 +87,8 @@ export default function JobsResults(props) {
   }, [screenSize, context.token]);
   return (
     <>
+      <LocalNotification title={titleProps} body={bodyProps} show={show} />
+
       <If condition={props.visable}>
         <Then>
           <If condition={results[0]}>

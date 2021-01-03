@@ -11,11 +11,7 @@ export default function Notification() {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const nf = (payload) => {
-    {
-      console.log('osamamama');
-    }
-  };
+
   useEffect(() => {
     if (authContext.token) {
       context.socketNotif.emit('join', authContext.token);
