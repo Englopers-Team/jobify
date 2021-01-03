@@ -7,6 +7,8 @@ import { AuthContext } from '../../context/auth';
 import { If, Then, Else } from 'react-if';
 import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Form, Input, Row, Col } from 'reactstrap';
 import defaultAvatar from './avatar.jpg';
+import { CameraVideo } from 'react-bootstrap-icons';
+
 export default function CompanyDashboard() {
   const [userName, setUserName] = useState('');
   const [title, setTitle] = useState('');
@@ -16,6 +18,7 @@ export default function CompanyDashboard() {
   const [applications, setApplications] = useState([[], '']);
   const [jobsData, setJobs] = useState([[], '']);
   const [offers, setOffers] = useState([[], '']);
+  const history = useHistory();
 
   const API = 'https://jobify-app-v2.herokuapp.com';
   const checkSize = () => {
@@ -89,6 +92,16 @@ export default function CompanyDashboard() {
             <h2 style={{ color: '#504edf', fontSize: '45px', fontWeight: 'bold' }}>
               Applicant <span style={{ color: '#515151', fontSize: '45px', fontWeight: 'bold' }}>Dashboard</span>
             </h2>
+          </Col>
+          <Col  >
+            <Row style={{ justifyContent: 'flex-end' }}>
+              <Button onClick={() => {
+                history.push('/meetings')
+              }} variant='outline-dark' className='buttonTopic' style={{ padding: '6px', cursor: 'pointer', marginRight: '30px', marginTop: '10px' }}>
+                <CameraVideo size='24' style={{ marginBottom: '1px' }} />
+                <span style={{ marginLeft: '4px', fontSize: '16px', fontWeight: 'bold' }}>Meetings</span>
+              </Button>
+            </Row>
           </Col>
         </Row>
         <Row>
