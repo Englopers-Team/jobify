@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './styles.scss';
 import superagent from 'superagent';
-import { Image, Container, Modal, Form,FormControl } from 'react-bootstrap';
+import { Image, Container, Modal, Form, FormControl } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import { Link } from 'react-router-dom';
@@ -98,7 +98,9 @@ export default function CompanyDashboard() {
     await superagent.post(`${API}/meetings`).set('authorization', `Basic ${context.token}`).send({
       auth_id_person: id,
       date: `${dateMeeting},${timeMeeting}`
-    });
+    }).then(()=>{
+      history.push('/meetings')
+    })
 
   }
 
@@ -153,7 +155,7 @@ export default function CompanyDashboard() {
               />
             </Col>
             <Button
-              style={{ height: '10%', textAlign: 'center', backgroundColor: '#232b4e', padding: '7px 20px', margin: '15px'  }}
+              style={{ height: '10%', textAlign: 'center', backgroundColor: '#232b4e', padding: '7px 20px', margin: '15px' }}
               onClick={() => {
                 sendMeeting()
               }}>Submit</Button>
@@ -192,7 +194,7 @@ export default function CompanyDashboard() {
               </Button>
             </Link>
           </Col> */}
-          <Modal show={show2} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+          <Modal show={show2} onHide={() => setShow2(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
             <Modal.Header closeButton>
               <Modal.Title id='example-custom-modal-styling-title'>Send Offer</Modal.Title>
             </Modal.Header>
@@ -285,7 +287,7 @@ export default function CompanyDashboard() {
                           window.open(cv, 'popUpWindow', 'height=800,width=600,left=10,top=10,,scrollbars=yes,menubar=no'); return false;
 
                         }}
-                        style={{ backgroundColor: '#504edf', width: '80px' }}
+                        style={{ backgroundColor: '#504edf', width: '75px', marginLeft: 0, marginRight: 0 }}
                       >
                         CV
                     </Button>
