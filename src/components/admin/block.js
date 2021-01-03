@@ -192,7 +192,7 @@ export default function Block() {
                 <Result />
               </Row>
             </Col>
-            <Col className='list-container' sm={5}>
+            <Col className='list-container' sm={5} style={{padding:0}}>
               <MDBContainer className="scrollbar scrollbar-primary" style={scrollContainerStyle}>
                 <List />
               </MDBContainer>

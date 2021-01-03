@@ -107,7 +107,7 @@ export default function Posts() {
       </Col>
       <Col sm={10}>
         <Container style={{ display: 'flex', flexDirection: 'row',marginTop:'30px' }}>
-          <Col sm={9} className='list-container' style={{ width: '100%'  , borderBottomRightRadius : '0' ,borderTopRightRadius : '0' }}>
+          <Col sm={9} className='list-container' style={{ width: '100%'  , borderBottomRightRadius : '0' ,borderTopRightRadius : '0',padding:'2px' }}>
             <MDBContainer className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}>
 
               <PostsList />
