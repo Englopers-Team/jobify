@@ -98,8 +98,8 @@ export default function CompanyDashboard() {
     await superagent.post(`${API}/meetings`).set('authorization', `Basic ${context.token}`).send({
       auth_id_person: id,
       date: `${dateMeeting},${timeMeeting}`
-    }).then(()=>{
-      history.push('/meetings')
+    }).then(() => {
+      setShow(false)
     })
 
   }
