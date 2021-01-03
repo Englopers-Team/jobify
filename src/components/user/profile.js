@@ -38,23 +38,20 @@ export default function CompanyDashboard() {
   const context = useContext(AuthContext);
   useEffect(() => {
     window.addEventListener('resize', checkSize);
-    if (context.token) {
-      getData();
-    }
+
+    getData();
 
     return () => {
       window.removeEventListener('resize', checkSize);
     };
-  }, [screenSize, context.token]);
+  }, [screenSize]);
 
   useEffect(() => {
-    if (context.token) {
-      appList();
-      getData();
-      savedJobs();
-      offersList();
-    }
-  }, [context.token]);
+    // appList();
+    getData();
+    // savedJobs();
+    // offersList();
+  }, []);
 
   async function getData() {
     const response = await superagent.get(`${API}/search/get-full-info/${id}`);
@@ -67,35 +64,35 @@ export default function CompanyDashboard() {
     setSammary(response.body[0].sammary);
   }
 
-  const appList = async () => {
-    superagent
-      .get(`${API}/user/app`)
-      .set({ Authorization: `Basic ${context.token}` })
+  // const appList = async () => {
+  //   superagent
+  //     .get(`${API}/user/app`)
+  //     .set({ Authorization: `Basic ${context.token}` })
 
-      .then((data) => {
-        data.body !== null ? setApplications([[...data.body.API.slice(0, 2), ...data.body.DB.slice(0, 3)], data.body.DB.length + data.body.API.length]) : setApplications([[...data.body.DB, ...data.body.API], data.body.API.length + data.body.DB.length]);
-      });
-  };
+  //     .then((data) => {
+  //       data.body !== null ? setApplications([[...data.body.API.slice(0, 2), ...data.body.DB.slice(0, 3)], data.body.DB.length + data.body.API.length]) : setApplications([[...data.body.DB, ...data.body.API], data.body.API.length + data.body.DB.length]);
+  //     });
+  // };
 
-  const savedJobs = async () => {
-    superagent
-      .get(`${API}/user/saved`)
-      .set({ Authorization: `Basic ${context.token}` })
+  // const savedJobs = async () => {
+  //   superagent
+  //     .get(`${API}/user/saved`)
+  //     .set({ Authorization: `Basic ${context.token}` })
 
-      .then((data) => {
-        data.body[0] !== null ? setJobs([[...data.body.data_Api.slice(0, 2), ...data.body.data_DB.slice(0, 3)], data.body.data_DB.length + data.body.data_Api.length]) : setJobs([data.body, 0]);
-      });
-  };
+  //     .then((data) => {
+  //       data.body[0] !== null ? setJobs([[...data.body.data_Api.slice(0, 2), ...data.body.data_DB.slice(0, 3)], data.body.data_DB.length + data.body.data_Api.length]) : setJobs([data.body, 0]);
+  //     });
+  // };
 
-  const offersList = async () => {
-    superagent
-      .get(`${API}/user/offers`)
-      .set({ Authorization: `Basic ${context.token}` })
+  // const offersList = async () => {
+  //   superagent
+  //     .get(`${API}/user/offers`)
+  //     .set({ Authorization: `Basic ${context.token}` })
 
-      .then((data) => {
-        data.body !== null ? setOffers([data.body.slice(0, 4), data.body.length]) : setOffers([data.body, data.body.length]);
-      });
-  };
+  //     .then((data) => {
+  //       data.body !== null ? setOffers([data.body.slice(0, 4), data.body.length]) : setOffers([data.body, data.body.length]);
+  //     });
+  // };
 
   return (
     <>
