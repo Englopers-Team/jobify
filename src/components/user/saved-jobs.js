@@ -60,8 +60,8 @@ export default function SavedJobs() {
         </Container>
         <If condition={context.token && data[0]}>
           <Then>
-            <Container className='list-container' style={{ marginTop: '20px',padding:0 }} fluid>
-              <Row sm={8} className='flexRow list-header' style={{ height: screenSize > 575 ? '80px' : '130px',margin:0 }}>
+            <Container className='list-container' style={{ marginTop: '20px', padding: 0 }} fluid>
+              <Row sm={8} className='flexRow list-header' style={{ height: screenSize > 575 ? '80px' : '130px', margin: 0 }}>
                 <Col style={{ color: '#515151', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title' sm={1}></Col>
                 <Col style={{ color: '#515151', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title' sm={2}>
                   Job Title
@@ -103,19 +103,28 @@ export default function SavedJobs() {
                         {item.phone ? item.phone : 'No Number'}
                       </Col>
                       <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center' }} className='button-col' sm={2}>
-                        <Button
-                          className='button'
-                          style={{ backgroundColor: '#504edf', textAlign: 'center' }}
-                          onClick={() => {
-                            <If condition={item.job_id}>
-                              <Then>
-                                {Apply({
+                        <If condition={item.job_id}>
+                          <Then>
+                            <Button
+                              className='button'
+                              style={{ backgroundColor: '#504edf', textAlign: 'center' }}
+                              onClick={() => {
+                                Apply({
                                   job_id: item.job_id,
                                   company_id: item.company_id,
-                                })}
-                              </Then>
-                              <Else>
-                                {Apply({
+                                })
+                              }}
+                              variant='praimary'
+                            >
+                              Apply
+                            </Button>
+                          </Then>
+                          <Else>
+                            <Button
+                              className='button'
+                              style={{ backgroundColor: '#504edf', textAlign: 'center' }}
+                              onClick={() => {
+                                Apply({
                                   title: item.title,
                                   location: item.location,
                                   type: item.type,
@@ -124,17 +133,17 @@ export default function SavedJobs() {
                                   email: item.email,
                                   job_id: 0,
                                   api: true,
-                                })}
-                              </Else>
-                            </If>;
-                          }}
-                          variant='praimary'
-                        >
-                          Apply
-                        </Button>
+                                })
+                              }}
+                              variant='praimary'
+                            >
+                              Apply
+                            </Button>
+                          </Else>
+                        </If>
                       </Col>
                     </Row>
-                  );
+                  )
                 })}
               </MDBContainer>
             </Container>
