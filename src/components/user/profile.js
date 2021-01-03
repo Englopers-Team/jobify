@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './styles.scss';
 import superagent from 'superagent';
-import { Image, Container } from 'react-bootstrap';
+import { Image, Container, FormControl } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import { Link } from 'react-router-dom';
 import { If, Then, Else } from 'react-if';
 import * as Icon from 'react-bootstrap-icons';
+// import { Container, Row, Col, Dropdown, FormControl, Image, FormCheck } from 'react-bootstrap';
 
 import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Form, Input, Row, Col } from 'reactstrap';
 import defaultAvatar from './avatar.jpg';
@@ -20,6 +21,8 @@ export default function CompanyDashboard() {
   const [jobsData, setJobs] = useState([[], '']);
   const [offers, setOffers] = useState([[], '']);
   const [sammary, setSammary] = useState('');
+  const [show, setShow] = useState('');
+  const [dateMeeting, setDateMeeting] = useState('');
   // const [experience, setExperience] = useState(['logo', 'title', 'company', 'field', 'start', 'end', 'present', 'location', 'des']);
   // const [education, setEducation] = useState(['logo', 'school', 'degree', 'field', 'starting_date', 'ending_date', 'present', 'grade', 'description']);
   // const [courses, setCourses] = useState(['course_name', 'field', 'course_date', 'school']);
@@ -27,6 +30,7 @@ export default function CompanyDashboard() {
   // const [education, setEducation] = useState([]);
   // const [courses, setCourses] = useState([]);
   const [data, setData] = useState([]);
+
 
   let { id } = useParams();
 
@@ -94,8 +98,50 @@ export default function CompanyDashboard() {
   //     });
   // };
 
+  async function sendMeeting() {
+    const API = 'https://jobify-app-v2.herokuapp.com'
+    await superagent.post(`${API}/meetings`).set('authorization', `Basic ${context.token}`).send({
+      auth_id_person: id,
+      date: "1/30/2021,1:00:00 AM"
+    });
+
+  }
+
   return (
     <>
+      <If condition={show}>
+        <div style={{ position: 'fixed', left: '50%', top: '50%', transform: "translate(-50%, -50%)", width: '700px', height: '300px', backgroundColor: 'red', zIndex: '99' }}>
+          <Button onClick={() => {
+            setShow(false)
+          }}>
+            X
+        </Button>
+          <FormControl
+            style={{ backgroundColor: '#E1E3E8' }}
+            type='date'
+            name='dob'
+            onChange={(e) => {
+              let arr = e.target.value.split('-')
+              if(arr[1].length===2 && arr[1][0] == 0){
+                arr[1] = arr[1][1];
+              }
+              if(arr[2].length===2 && arr[2][0] == 0){
+                arr[2] = arr[2][1];
+              }
+              let newArr = [arr[1] , arr[2] , arr[0]]
+              let readyArr = newArr.join('/')
+              //1/30/2021
+              //2021-01-06
+              setDateMeeting(readyArr);
+            }}
+          />
+          <p>{dateMeeting}</p>
+          <Button onClick={() => {
+            sendMeeting()
+          }}>Submit</Button>
+        </div>
+      </If>
+
       <Container className='content' style={{ margin: '40px auto' }}>
         <Row style={{ justifyContent: 'space-between' }}>
           <Col style={{ borderLeft: 'solid', height: '90%', borderRadius: '2px', borderLeftColor: '#504edf', borderLeftWidth: '5px', paddingLeft: '8px', marginBottom: 30 }}>
@@ -104,11 +150,11 @@ export default function CompanyDashboard() {
             </h2>
           </Col>
           <Col style={{ textAlign: 'right', alignSelf: 'center' }}>
-            <Link to='/reports/new'>
-              <Button variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginBottom: '50px', height: '40px', fontWeight: '500' }}>
-                <Icon.CalendarPlus style={{ paddingBottom: '2px' }} size={20} /> New Meeting
+            <Button variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginBottom: '50px', height: '40px', fontWeight: '500' }} onClick={() => {
+              setShow(true)
+            }}>
+              <Icon.CalendarPlus style={{ paddingBottom: '2px' }} size={20} /> New Meeting
               </Button>
-            </Link>
           </Col>
 
           {/* <Col style={{ textAlign: 'right', alignSelf: 'center' }}>
