@@ -1,25 +1,30 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './styles.scss';
 import superagent from 'superagent';
-import { Image, Container } from 'react-bootstrap';
+import { Image, Container, Modal, Form } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import { Link } from 'react-router-dom';
 import { If, Then, Else } from 'react-if';
 import * as Icon from 'react-bootstrap-icons';
+import { SocketContext } from '../../context/socket';
 
-import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Form, Input, Row, Col } from 'reactstrap';
+import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Input, Row, Col } from 'reactstrap';
 import defaultAvatar from './avatar.jpg';
 export default function CompanyDashboard() {
   const [userName, setUserName] = useState('');
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [logo, setLogo] = useState(defaultAvatar);
+  const [cv, setCV] = useState('');
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [applications, setApplications] = useState([[], '']);
   const [jobsData, setJobs] = useState([[], '']);
   const [offers, setOffers] = useState([[], '']);
   const [sammary, setSammary] = useState('');
+  let history = useHistory();
+  const chat = useContext(SocketContext);
+
   // const [experience, setExperience] = useState(['logo', 'title', 'company', 'field', 'start', 'end', 'present', 'location', 'des']);
   // const [education, setEducation] = useState(['logo', 'school', 'degree', 'field', 'starting_date', 'ending_date', 'present', 'grade', 'description']);
   // const [courses, setCourses] = useState(['course_name', 'field', 'course_date', 'school']);
@@ -27,6 +32,12 @@ export default function CompanyDashboard() {
   // const [education, setEducation] = useState([]);
   // const [courses, setCourses] = useState([]);
   const [data, setData] = useState([]);
+  const [show, setShow] = useState(false);
+  const [personID, setPersonID] = useState(1);
+  const [titleJ, setTitleJ] = useState('');
+  const [locationJ, setLocationJ] = useState('');
+  const [type, setType] = useState('Full-Time');
+  const [description, setDescription] = useState('');
 
   let { id } = useParams();
 
@@ -62,7 +73,21 @@ export default function CompanyDashboard() {
     setLogo(response.body[0].avatar);
     setLocation(response.body[0].country);
     setSammary(response.body[0].sammary);
+    setCV(response.body[0].cv);
+    setPersonID(response.body[0].id);
+
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    superagent
+      .post(`${API}/company/offers/${personID}`)
+      .set({ Authorization: `Basic ${context.token}` })
+      .send({ title: titleJ, location: locationJ, type, description })
+      .then((data) => {
+        history.push('/company/offers');
+      });
+  };
 
   // const appList = async () => {
   //   superagent
@@ -126,6 +151,44 @@ export default function CompanyDashboard() {
               </Button>
             </Link>
           </Col> */}
+          <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+            <Modal.Header closeButton>
+              <Modal.Title id='example-custom-modal-styling-title'>Send Offer</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form className='flexCol'>
+                <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId='exampleForm.jobtitle'>
+                  <Form.Control required onChange={(e) => setTitleJ(e.target.value)} className='input' type='text' placeholder='Job Title' />
+                </Form.Group>
+
+                <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId='exampleForm.location'>
+                  <Form.Control required onChange={(e) => setLocationJ(e.target.value)} className='input' type='text' placeholder='Location' />
+                </Form.Group>
+
+                <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId='exampleForm.type'>
+                  <Form.Control
+                    onChange={(e) => {
+                      setType(e.target.value);
+                    }}
+                    as='select'
+                    defaultValue='Full Time'
+                  >
+                    <option value='Full-Time'>Full Time</option>
+                    <option value='Part-Time'>Part Time</option>
+                    <option value='Remote'>Remote</option>
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group style={{ marginBottom: '15px', width: '60%' }} controlId='exampleForm.desc'>
+                  <Form.Control as='textarea' rows={3} required onChange={(e) => setDescription(e.target.value)} className='input' type='text' placeholder='Description' />
+                </Form.Group>
+
+                <Button onClick={(e) => handleSubmit(e)} variant='outline-dark' size='lg' className='button' block type='submit' style={{ marginBottom: '50px', height: '40px', fontSize: '24px', fontWeight: '500', paddingBottom: '40px', width: '30%' }}>
+                  Send
+                    </Button>
+              </Form>
+            </Modal.Body>
+          </Modal>
         </Row>
         <Row>
           <Col md='4'>
@@ -151,28 +214,54 @@ export default function CompanyDashboard() {
                 <hr />
                 <div className='button-container'>
                   <Row>
-                    <Col className='m-auto' lg='4' md='6' xs='6'>
-                      <h5>
-                        <small>Offers</small>
-                        <br />
-                        {offers[1]}
-                      </h5>
+                    <Col style={{ padding: 0 }} className='m-auto'>
+                      <Button
+                        className='button'
+                        onClick={() => {
+                          chat.socketMessg.emit('message', { body: 'Hello, I have an offer for you.', receiver: personID, token: context.token, type: 'p' });
+                          chat.socketMessg.emit('checkMsg', { token: context.token });
+                          const sideBtn = document.getElementById('chatButton');
+                          const chatBox = document.getElementById('chat');
+                          sideBtn.classList.remove('slideinBtn');
+                          sideBtn.classList.add('slideoutBtn');
+                          setTimeout(() => {
+                            sideBtn.classList.add('hide');
+                            sideBtn.classList.remove('slideoutBtn');
+                            chatBox.classList.remove('hideChat');
+                            chatBox.classList.add('slideinChat');
+                            chat.setUpdate(personID);
+                          }, 500);
+                        }}
+                        style={{ backgroundColor: '#504edf', width: '100px' }}
+                      >
+                        Contact
+                    </Button>
                     </Col>
-                    <Col className='mr-auto' lg=''>
-                      <h5>
-                        <small>Saved Jobs</small>
-                        <br />
-                        {jobsData[1]}
-                      </h5>
+                    <Col style={{ padding: 0 }} className='ml-auto mr-auto'>
+                      <Button
+                        className='button'
+                        onClick={() => {
+                          window.open(cv, 'popUpWindow', 'height=800,width=600,left=10,top=10,,scrollbars=yes,menubar=no'); return false;
+
+                        }}
+                        style={{ backgroundColor: '#504edf', width: '80px' }}
+                      >
+                        CV
+                    </Button>
                     </Col>
-                    <Col className='ml-auto mr-auto' lg='4' md='6' xs='6'>
-                      <h5>
-                        <small style={{ fontWeight: 550 }}>#of Apps</small>
-                        <br />
-                        {applications[1]}
-                      </h5>
+                    <Col style={{ padding: 0 }} className='ml-auto mr-auto'>
+                      <Button
+                        className='button'
+                        onClick={() => {
+                          setShow(true);
+                        }}
+                        style={{ backgroundColor: '#504edf', width: '100px' }}
+                      >
+                        Send Offer
+                    </Button>
                     </Col>
                   </Row>
+
                 </div>
               </CardFooter>
             </Card>
@@ -186,9 +275,9 @@ export default function CompanyDashboard() {
                 </Row>
               </CardHeader>
               <CardBody>
-                {data.map((course) => {
+                {data.map((course, index) => {
                   return (
-                    <Row className='list-body-exp' sm={12} style={{ justifyContent: screenSize > 1199 ? 'left' : 'center', paddingTop: 20, alignItems: 'flex-start !important' }}>
+                    <Row key={index} className='list-body-exp' sm={12} style={{ justifyContent: screenSize > 1199 ? 'left' : 'center', paddingTop: 20, alignItems: 'flex-start !important' }}>
                       <Col style={{ textAlign: screenSize > 575 ? 'right' : 'center', color: '#515151', fontWeight: 650 }} sm={3} lg={3}>
                         <Image style={{ width: '50px', height: '50px', objectFit: 'cover', border: 'black solid 1px' }} src='https://images.squarespace-cdn.com/content/v1/55d1e076e4b0be96a30dc726/1456851579258-9236R741NF444UVEUHZ3/ke17ZwdGBToddI8pDm48kDmvgM2_GYudIur22MWWiLdZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIvFa2r33EMaMk7hlBJBei4G1FTiqzsF6lpp3EXtW1YCk/computerworld_training_courses' roundedCircle />
                       </Col>
@@ -197,7 +286,7 @@ export default function CompanyDashboard() {
                           {course.course_name}
                         </h6>
                         <p className='description'>
-                          {course.org}, {course.course_date.slice(0, 4)} <br /> <span style={{ fontWeight: 500, fontSize: 15 }}>{course.c_field}</span>
+                          {course.org}, {course.course_date ? course.course_date.slice(0, 4) : course.course_date} <br /> <span style={{ fontWeight: 500, fontSize: 15 }}>{course.c_field}</span>
                         </p>
                       </Col>
                     </Row>
@@ -231,9 +320,9 @@ export default function CompanyDashboard() {
                 </Row>
               </CardHeader>
               <CardBody>
-                {data.map((exp) => {
+                {data.map((exp, index) => {
                   return (
-                    <Row className='list-body-exp' sm={12} style={{ justifyContent: screenSize > 1199 ? 'left' : 'center', paddingTop: 20, alignItems: 'flex-start !important' }}>
+                    <Row key={index} className='list-body-exp' sm={12} style={{ justifyContent: screenSize > 1199 ? 'left' : 'center', paddingTop: 20, alignItems: 'flex-start !important' }}>
                       <Col style={{ textAlign: screenSize > 575 ? 'right' : 'center', color: '#515151', fontWeight: 650 }} sm={2} lg={2}>
                         <Image style={{ width: '70px', height: '70px', objectFit: 'cover', border: 'black solid 1px' }} src={exp.ex_logo} roundedCircle />
                       </Col>
@@ -264,9 +353,9 @@ export default function CompanyDashboard() {
                 </Row>
               </CardHeader>
               <CardBody>
-                {data.map((edu) => {
+                {data.map((edu, index) => {
                   return (
-                    <Row className='list-body-exp' sm={12} style={{ justifyContent: screenSize > 1199 ? 'left' : 'center', paddingTop: 20, alignItems: 'flex-start !important' }}>
+                    <Row key={index} className='list-body-exp' sm={12} style={{ justifyContent: screenSize > 1199 ? 'left' : 'center', paddingTop: 20, alignItems: 'flex-start !important' }}>
                       <Col style={{ textAlign: screenSize > 575 ? 'right' : 'center', color: '#515151', fontWeight: 650 }} sm={2} lg={2}>
                         <Image style={{ width: '70px', height: '70px', objectFit: 'cover', border: 'black solid 1px' }} src={edu.edu_logo} roundedCircle />
                       </Col>

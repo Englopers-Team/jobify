@@ -57,17 +57,17 @@ export default function CompanyResults(props) {
           <Col style={{ color: '#717171', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>NO RESULTS</Col>
         </Row>
       </If>
-      <Container className='list-container' fluid>
+      <Container className='list-container' fluid style={{width:'80%'}}>
         <If condition={props.visable === 'true'}>
           <Then>
             <Row sm={8} className='flexRow list-header2'>
               <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title2' sm={2}>
                 Photo
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title2' sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title2' sm={3}>
                 Name
               </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
+              <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={3}>
                 Job Title
               </Col>
               <Col style={{ color: '#717171', fontWeight: 660, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={1}>
@@ -77,13 +77,13 @@ export default function CompanyResults(props) {
                 Phone
               </Col>
 
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={1}>
+              {/* <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={1}>
                 <If condition={loader}>
                   <Spinner animation='border' variant='primary' />
                 </If>
-              </Col>
-              <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={2}></Col>
-              <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+              </Col> */}
+              {/* <Col style={{ color: '#717171', fontWeight: 660, textAlign: 'center' }} sm={2}></Col> */}
+              {/* <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
                 <Modal.Header closeButton>
                   <Modal.Title id='example-custom-modal-styling-title'>Send Offer</Modal.Title>
                 </Modal.Header>
@@ -120,19 +120,21 @@ export default function CompanyResults(props) {
                     </Button>
                   </Form>
                 </Modal.Body>
-              </Modal>
+              </Modal> */}
             </Row>
 
             {results.map((item, index) => {
               return (
-                <Row key={index} sm={8} className='flexRow list-body'>
+                <Row style={{cursor:'pointer'}} key={index} sm={8} className='flexRow list-body empList' onClick={() => {
+                  history.push(`/applicant/profile/${item.auth_id}`)
+                }}>
                   <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={2}>
                     <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={3}>
                     {item.first_name} {item.last_name}
                   </Col>
-                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={2}>
+                  <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#9393A1' }} sm={3}>
                     {item.job_title}
                   </Col>
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={1}>
@@ -141,7 +143,7 @@ export default function CompanyResults(props) {
                   <Col style={{ textAlign: 'center', color: '#9393A1' }} sm={2}>
                     {item.phone}
                   </Col>
-                  <Col style={{ textAlign: 'center' }} sm={1}>
+                  {/* <Col style={{ textAlign: 'center' }} sm={1}>
                     <Button
                       className='button'
                       onClick={() => {
@@ -175,7 +177,7 @@ export default function CompanyResults(props) {
                     >
                       Send Offer
                     </Button>
-                  </Col>
+                  </Col> */}
                 </Row>
               );
             })}
