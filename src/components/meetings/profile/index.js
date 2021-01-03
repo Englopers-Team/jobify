@@ -4,10 +4,27 @@ import superagent from 'superagent';
 import { AuthContext } from '../../../context/auth';
 import { If, Else, Then } from 'react-if'
 import '../../../index.css'
+import { useHistory } from "react-router-dom";
 
 function Profile(props) {
+  const history = useHistory();
+
   const [userInfoSecondary, setUserInfoSecondary] = useState([])
   const [userInfoMain, setUserInfoMain] = useState([])
+  const [pdf, setPDF] = useState(false)
+  const [btn, setBtn] = useState('Applicant  Resume')
+
+  useEffect(() => {
+    if (pdf) {
+      const frame = document.getElementById('iframepdf')
+      frame.style.height = '95vh'
+      setBtn('Applicant Profile')
+    } else {
+      const frame = document.getElementById('iframepdf')
+      frame.style.height = '0'
+      setBtn('Applicant  Resume')
+    }
+  }, [pdf])
 
   const context = useContext(AuthContext);
 
@@ -28,7 +45,7 @@ function Profile(props) {
     getmainData()
   }, [context.token, props.authIdToCall])
   return (
-    <Container>
+    <Container style={{ height: '100%' }}>
       <Row style={{ justifyContent: 'center' }}>
         <img style={{ width: '128px', height: '128px', objectFit: 'cover', borderRadius: '50%' }} src={userInfoMain.avatar ? userInfoMain.avatar : userInfoMain.logo}></img>
       </Row>
@@ -46,7 +63,23 @@ function Profile(props) {
           <p style={{ fontSize: '16px', textAlign: 'right' }}><strong style={{ marginRight: '5px' }}>Age:</strong> {userInfoMain.age}</p>
 
         </Col>
+
       </Row>
+      <Row style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px', marginLeft: '20px', marginRight: '20px' }}>
+        <Col style={{ textAlign: 'center' }}>
+          <p style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'center' }}>Summery</p>
+          <p style={{ fontSize: '16px', textAlign: 'left' }}>{userInfoMain.sammary}</p>
+        </Col>
+      </Row>
+
+
+      <iframe style={{ height: '0%', position: 'absolute', bottom: '5vh', top: 0, border: 0, left: 0, width: '100%', overflow: 'scroll' }} id="iframepdf" src={userInfoMain.cv}></iframe>
+
+      <button style={{ background: '#504edf', fontSize: '18px', height: '5vh', fontWeight: 'bold', position: 'absolute', bottom: 0, border: 0, left: 0, width: '100%' }} onClick={() => {
+
+        setPDF(!pdf)
+        // window.open(userInfoMain.cv, 'popUpWindow', 'height=800,width=600,left=10,top=10,,scrollbars=yes,menubar=no'); return false;
+      }}>{btn}</button>
       {console.log('userInfoSecondary', userInfoSecondary)}
       {console.log('userInfoMain', userInfoMain)}
     </Container>
