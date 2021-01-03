@@ -35,7 +35,7 @@ import About from '../components/about';
 import AccessDenied from '../components/access-denied';
 import Redirect from '../components/redirecting';
 import Meetings from '../components/meetings';
-
+import ApplicantProfile from '../components/user/profile';
 
 // for testing osama
 import dash from '../components/user/dashboard';
@@ -49,7 +49,6 @@ export default function Routes() {
       <Route exact path='/' component={Home} />
 
       <Route exact path='/meetings' component={Meetings} />
-
 
       <Route exact path='/admin' component={AdminDashboard} />
       <Route exact path='/admin/users' component={Block} />
@@ -85,6 +84,7 @@ export default function Routes() {
       <Route exact path='/search/company' component={SearchCompany} />
       <Route exact path='/search/employees' component={SearchEmployees} />
 
+      <Route exact path='/applicant/profile/:id' component={ApplicantProfile} />
       <Route exact path='/applicant/edit-profile' component={ApplicantEdit} />
       <Route exact path='/applicant/applications' component={ApplicantApplications} />
       <Route exact path='/applicant/offers' component={ApplicantOffers} />

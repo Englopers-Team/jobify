@@ -8,10 +8,12 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import './styles.scss';
 import { Nav, Navbar, NavDropdown, Spinner } from 'react-bootstrap';
-import * as Icon from 'react-bootstrap-icons';
+import { CameraVideo } from 'react-bootstrap-icons';
 import { If, Then, Else } from 'react-if';
 import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, FormGroup, Form, Input, Row, Col } from 'reactstrap';
 import defaultAvatar from './avatar.jpg';
+import { useHistory } from "react-router-dom";
+
 export default function CompanyDashboard() {
   const [companyName, setCompanyName] = useState('');
   const [logo, setLogo] = useState(defaultAvatar);
@@ -20,6 +22,7 @@ export default function CompanyDashboard() {
   const [applications, setApplications] = useState([[], '']);
   const [jobsData, setJobs] = useState([[], '']);
   const [offers, setOffers] = useState([[], '']);
+  const history = useHistory();
 
   const API = 'https://jobify-app-v2.herokuapp.com';
   const checkSize = () => {
@@ -92,6 +95,16 @@ export default function CompanyDashboard() {
             <h2 style={{ color: '#504edf', fontSize: '45px', fontWeight: 'bold' }}>
               Employer <span style={{ color: '#515151', fontSize: '45px', fontWeight: 'bold' }}>Dashboard</span>
             </h2>
+          </Col>
+          <Col  >
+            <Row style={{ justifyContent: 'flex-end' }}>
+              <Button onClick={() => {
+                history.push('/meetings')
+              }} variant='outline-dark' className='buttonTopic' style={{ padding: '6px', cursor: 'pointer', marginRight: '30px', marginTop: '3px' }}>
+                <CameraVideo size='24' style={{ marginBottom: '1px' }} />
+                <span style={{ marginLeft: '4px', fontSize: '16px', fontWeight: 'bold' }}>Meetings</span>
+              </Button>
+            </Row>
           </Col>
         </Row>
         <Row>
