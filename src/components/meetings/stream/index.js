@@ -120,9 +120,10 @@ function Stream(props) {
         <Row style={{ fontSize: '32px' }}> Interviewer request you to the meeting </Row>
         <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Col>Press <b>GO</b> to start, <b>Jobify wish you luck</b></Col>
-          <Col><button id='goButton' onClick={acceptCall}>GO</button></Col>
         </Row>
-
+      <Row>
+      <Col style={{marginTop:'20px'}}><button id='goButton' onClick={acceptCall}>GO</button></Col>
+      </Row>
       </div>
     )
   }
@@ -148,7 +149,7 @@ function Stream(props) {
       </Row>
       <Row style={{ margin:0,display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0', width: '100%', height: '10vh', backgroundColor: '#232333', alignItems: 'center', right: '0' }}>
         <Container style={{ display: 'flex', flexDirection: 'row',margin:0,minWidth:'100%' }}>
-            <Col>
+            <Col style={{textAlign:'left'}}>
             <If condition={mute}>
               <Then>
                 <MicMute color='#BABACC' style={{ marginRight:'50px',cursor: 'pointer', alignItems: 'center' }} size='32' onClick={() => { setMute(mute ? false : true) }} />
