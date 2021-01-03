@@ -75,8 +75,8 @@ export default function MyJobs(props) {
           <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Jobs</Col>
         </Row>
         <Row>
-          <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-            <Row sm={8} className='flexRow list-header2' style={{ height: screenSize > 575 ? '80px' : 'fit-content' }}>
+          <Container style={{ justifyContent: 'center', width: '100%', padding: 0 }} className='list-container' fluid>
+            <Row className='flexRow list-header2' style={{ height: screenSize > 575 ? '80px' : 'fit-content',margin:0 }}>
               <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
                 Title
               </Col>

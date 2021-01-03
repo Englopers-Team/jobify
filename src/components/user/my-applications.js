@@ -74,8 +74,8 @@ export default function UserApplications() {
         </Row>
         <If condition={context.token && data[0]}>
           <Then>
-            <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-              <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px' }}>
+            <Container className='list-container' style={{ marginTop: '20px',padding:0 }} fluid>
+              <Row sm={8} className='flexRow list-header' style={{ height: screenSize > '575' ? '80px' : '130px',margin:0 }}>
                 <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={1}></Col>
                 <Col style={{ color: '#515151', fontWeight: 660, textAlign: screenSize > '575' ? 'center' : 'center' }} className='col-title' sm={2}>
                   Job Title
@@ -124,7 +124,7 @@ export default function UserApplications() {
                       <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', color: '#515151' }} sm={2}>
                         {item.type}
                       </Col>
-                      <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', fontWeight: 600, color: item.status === 'Accepted' ? '#69D95B' : item.status === 'Rejected' ? '#B72525' : '#515151' }} className='button-col' sm={2}>
+                      <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center', fontWeight: 700, color: item.status === 'Accepted' ? '#69D95B' : item.status === 'Rejected' ? '#B72525' : '#515151' }} className='button-col' sm={2}>
                         {item.status}
                       </Col>
                       <Col style={{ textAlign: screenSize > '575' ? 'center' : 'center' }} className='button-col' sm={2}>

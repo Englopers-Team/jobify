@@ -74,8 +74,8 @@ export default function CompanyApplications(props) {
         <If condition={context.token && results[0]}>
           <Then>
             <Row>
-              <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row className='flexRow list-header2' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+              <Container style={{ justifyContent: 'center', width: '100%', padding: 0 }} className='list-container' fluid>
+                <Row className='flexRow list-header2' style={{ margin: '0', justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={2} lg={1}></Col>
                   <Col style={{ textAlign: screenSize > 575 ? 'left' : 'center', color: '#515151', fontWeight: 660 }} sm={3} lg={2}>
                     <p>Name</p>
@@ -116,9 +116,9 @@ export default function CompanyApplications(props) {
                   </Modal.Body>
                 </Modal>
                 <MDBContainer className='scrollbar scrollbar-primary  mt-5 mx-auto' style={screenSize > 575 ? scrollContainerStyle : scrollContainerStyle2}>
-                  {results.map((item) => {
+                  {results.map((item, index) => {
                     return (
-                      <Row className='flexRow list-body' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
+                      <Row key={index} className='flexRow list-body' sm={10} style={{ justifyContent: screenSize > 1199 ? 'space-between' : 'center' }}>
                         <Col style={{ fontWeight: 650, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={2} lg={1}>
                           <Image src={item.avatar} roundedCircle style={{ width: 50, height: 50, objectFit: 'cover' }} />
                         </Col>

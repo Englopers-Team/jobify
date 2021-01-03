@@ -80,7 +80,7 @@ export default function PostDetails() {
               <Card.Title className='flexRow' >
                 <Col className='flexRow' style={{ justifyContent: 'flex-start', width: '100%' }}>
                   <Col sm={2} style={{ padding: '0' }} >
-                    <Image className='imgShadow' style={{ width: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
+                    <Image className='imgShadow' style={{ width: '40px', height: '40px', backgroundColor: 'transparent' }} src={comm.avatar} roundedCircle />
                   </Col>
                   <Col sm={10} style={{ justifyContent: 'flex-start' }} >
                     <h4 style={{ marginBottom: 0, fontSize: '14px', fontWeight: '600' }}>{comm.profile}</h4>
@@ -127,7 +127,7 @@ export default function PostDetails() {
 
                 <Col sm={12} className='flexRow' style={{ justifyContent: 'flex-start', padding: 0, marginTop: '30px' }}>
                   <Col style={{ padding: 0 }} sm={3} lg={2}>
-                    <Image className='imgShadow' style={{ width: '72px' }} src={avatar} roundedCircle />
+                    <Image className='imgShadow' style={{ width: '72px', height: '72px' }} src={avatar} roundedCircle />
                   </Col>
                   <Col style={{ padding: 0 }}>
                     <h4 style={{ marginBottom: 0, fontSize: '20px', fontWeight: '600' }}>{name}</h4>

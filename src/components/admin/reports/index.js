@@ -45,7 +45,7 @@ export default function Reports() {
               <Col style={{ fontWeight: 650, textAlign: 'center' }} sm={2}>
                 {item.id}
               </Col>
-              <Col style={{ textAlign: 'center', color: '#9393A1', maxHeight: '20px' }} sm={8}>
+              <Col style={{ textAlign: 'center', color: 'rgb(81, 81, 81)', maxHeight: '20px' }} sm={8}>
                 <p style={{ wordWrap: 'break-word' }}>
                   {item.description.slice(0, 45)}{item.description.length > 45 ? '...' : ''}
                 </p>
@@ -91,15 +91,15 @@ export default function Reports() {
           </Row>
         </Container>
 
-        <Container className='list-container' style={{ width: '80%' }}>
-          <Row sm={12} className='flexRow list-header' style={{ textAlign: 'center'  }}>
-            <Col style={{ color: '#717171', fontWeight: 550  , paddingLeft : '50px'}} className='col-title' sm={2}>
+        <Container className='list-container' style={{ width: '80%',padding:0 }}>
+          <Row sm={12} className='flexRow list-header' style={{ textAlign: 'center',margin:0,height:'50px'  }}>
+            <Col style={{ color: 'rgb(81, 81, 81)', fontWeight: 550  , paddingLeft : '50px'}} className='col-title' sm={2}>
               Report Number
         </Col>
-            <Col style={{ color: '#717171', fontWeight: 550 }} sm={8}>
+            <Col style={{ color: 'rgb(81, 81, 81)', fontWeight: 550 }} sm={8}>
               Description
         </Col>
-            <Col style={{ color: '#717171', fontWeight: 550  , paddingRight : '80px'}} sm={2}>
+            <Col style={{ color: 'rgb(81, 81, 81)', fontWeight: 550  , paddingRight : '80px'}} sm={2}>
               State
         </Col>
           </Row>

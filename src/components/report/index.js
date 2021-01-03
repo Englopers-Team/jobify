@@ -68,20 +68,20 @@ export default function Reports() {
       </Container>
       <If condition={context.token && data[0]}>
         <Then>
-          <Container style={{ justifyContent: 'center', width: '85%' }}>
-            <Row sm={8}>
+          <Container style={{ justifyContent: 'center', width: '85%',padding:0 }}>
+            <Row>
               <Col style={{ color: '#515151', fontSize: 40, fontWeight: 700, textAlign: 'center' }}>My Reports</Col>
             </Row>
-            <Row>
-              <Container style={{ justifyContent: 'center', width: '100%' }} className='list-container' fluid>
-                <Row sm={8} className='flexRow list-header2' style={{ height: screenSize > 575 ? 75 : 130 }}>
-                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} className='col-title2' sm={3}>
+            <Row style={{margin:'0 auto',width:'80%'}}>
+              <Container style={{ justifyContent: 'center', width: '100%',padding:0 }} className='list-container' fluid>
+                <Row className='flexRow list-header2' style={{ height: screenSize > 575 ? 75 : 130,margin:0 }}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title2' sm={3}>
                     Report Number
                   </Col>
                   <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={4}>
                     Description
                   </Col>
-                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                  <Col style={{ color: '#515151', fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={3}>
                     Status
                   </Col>
                   <Col style={{ textAlign: 'center' }} sm={2}></Col>
@@ -91,19 +91,19 @@ export default function Reports() {
                     <Modal.Title id='example-custom-modal-styling-title'>Report Details</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <p style={{ fontWeight: 700 }}>{singleData.description}</p>
-                    <p>{singleData.response}</p>
+                    <p dangerouslySetInnerHTML={{ __html: singleData.description }} style={{ fontWeight: 700 }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: singleData.response }}></p>
                     <Button className='button' onClick={() => setShow(false)} variant='outline-light' style={{ backgroundColor: '#504EDF' }}>
                       Ok
                     </Button>
                   </Modal.Body>
                 </Modal>
 
-                <MDBContainer className='scrollbar scrollbar-white  mt-5 mx-auto' style={scrollContainerStyle}>
+                <Row style={{margin:0}}>
                   {data.map((item, index) => {
                     return (
-                      <Row key={index} className='flexRow list-body' sm={8}>
-                        <Col style={{ fontWeight: 550, textAlign: screenSize > 575 ? 'left' : 'center' }} sm={3}>
+                      <Row key={index} className='flexRow list-body' style={{width:'100%',margin:0}}>
+                        <Col style={{ fontWeight: 550, textAlign: screenSize > 575 ? 'center' : 'center' }} sm={3}>
                           {item.id}
                         </Col>
                         <Col style={{ textAlign: screenSize > 575 ? 'center' : 'center', color: '#515151' }} sm={4}>
@@ -112,7 +112,7 @@ export default function Reports() {
                             {item.description.length > 45 ? '...' : ''}
                           </p>
                         </Col>
-                        <Col style={{ fontWeight: '600', textAlign: screenSize > 575 ? 'left' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
+                        <Col style={{ fontWeight: '600', textAlign: screenSize > 575 ? 'center' : 'center', color: item.response === null ? '#69D95B' : '#B72525', paddingLeft: 27 }} sm={3}>
                           {item.response === null ? 'Open' : 'Closed'}
                         </Col>
                         <Col style={{ textAlign: 'center' }} sm={2}>
@@ -131,7 +131,7 @@ export default function Reports() {
                       </Row>
                     );
                   })}
-                </MDBContainer>
+                </Row>
               </Container>
             </Row>
           </Container>

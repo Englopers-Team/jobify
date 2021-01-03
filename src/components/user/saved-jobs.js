@@ -60,8 +60,8 @@ export default function SavedJobs() {
         </Container>
         <If condition={context.token && data[0]}>
           <Then>
-            <Container className='list-container' style={{ marginTop: '20px' }} fluid>
-              <Row sm={8} className='flexRow list-header' style={{ height: screenSize > 575 ? '80px' : '130px' }}>
+            <Container className='list-container' style={{ marginTop: '20px',padding:0 }} fluid>
+              <Row sm={8} className='flexRow list-header' style={{ height: screenSize > 575 ? '80px' : '130px',margin:0 }}>
                 <Col style={{ color: '#515151', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title' sm={1}></Col>
                 <Col style={{ color: '#515151', fontWeight: 'bold', textAlign: screenSize > 575 ? 'center' : 'center' }} className='col-title' sm={2}>
                   Job Title

@@ -10,7 +10,7 @@ import Meetings from './meetingsDetails';
 import Profile from './profile';
 import Schedule from './schedule'
 import superagent from 'superagent';
-
+import JobifyMeetings from './jobify-meetings.png'
 
 import { AuthContext } from '../../context/auth';
 import { useHistory } from "react-router-dom";
@@ -57,24 +57,40 @@ function Lobby(props) {
 
 
 
+
     setTimeout(() => {
-      const footer = document.querySelector('.footer-container');
-      const headerr = document.querySelector('.navbar');
-      const chatBtn = document.querySelector('#chatButton');
-      const cont = document.querySelector('.page-container');
+
       if (!removed) {
-        footer.parentNode.removeChild(footer);
-        chatBtn.parentNode.removeChild(chatBtn);
-        headerr.parentNode.removeChild(headerr);
+        const footer = document.querySelector('.footer-container');
+        const headerr = document.querySelector('.navbar');
+        const chatBtn = document.querySelector('#chatButton');
+        const cont = document.querySelector('.page-container');
+
+        footer.classList.add('hideEle')
+        chatBtn.classList.add('hideEle')
+        headerr.classList.add('hideEle')
+        cont.classList.add('contHeight')
         setRemoved(true)
       }
-      cont.style.minHeight = '100vh'
 
 
     }, 500)
 
+    return () => {
+      const footer = document.querySelector('.footer-container');
+      const headerr = document.querySelector('.navbar');
+      const chatBtn = document.querySelector('#chatButton');
+      const cont = document.querySelector('.page-container');
+
+      footer.classList.remove('hideEle')
+      chatBtn.classList.remove('hideEle')
+      headerr.classList.remove('hideEle')
+      cont.classList.remove('contHeight')
+    }
 
   }, []);
+
+
 
 
   async function getData() {
@@ -108,7 +124,7 @@ function Lobby(props) {
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
         <Col class='flexCol' sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8', display: 'flex', flexDirection: 'column' }}>
-          <img alt='Jobify' src='./assets/jobify.png' style={{ alignSelf: 'center', width: '100%', maxWidth: '300px', textAlign: 'center' }} />
+          <img alt='Jobify' src={JobifyMeetings} style={{ alignSelf: 'center', width: '100%', maxWidth: '300px', textAlign: 'center' }} />
           <hr style={{ marginTop: 0 }}></hr>
           <If condition={show && userToCall !== ''}>
             <Then>
