@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './styles.scss';
 import superagent from 'superagent';
-import { Image, Container, Modal, Form } from 'react-bootstrap';
+import { Image, Container, Modal, Form,FormControl } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import { Link } from 'react-router-dom';
@@ -22,6 +22,9 @@ export default function CompanyDashboard() {
   const [jobsData, setJobs] = useState([[], '']);
   const [offers, setOffers] = useState([[], '']);
   const [sammary, setSammary] = useState('');
+  const [show, setShow] = useState('');
+  const [dateMeeting, setDateMeeting] = useState('');
+  const [timeMeeting, setTimeMeeting] = useState('');
   let history = useHistory();
   const chat = useContext(SocketContext);
 
@@ -32,12 +35,13 @@ export default function CompanyDashboard() {
   // const [education, setEducation] = useState([]);
   // const [courses, setCourses] = useState([]);
   const [data, setData] = useState([]);
-  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
   const [personID, setPersonID] = useState(1);
   const [titleJ, setTitleJ] = useState('');
   const [locationJ, setLocationJ] = useState('');
   const [type, setType] = useState('Full-Time');
   const [description, setDescription] = useState('');
+
 
   let { id } = useParams();
 
@@ -89,38 +93,75 @@ export default function CompanyDashboard() {
       });
   };
 
-  // const appList = async () => {
-  //   superagent
-  //     .get(`${API}/user/app`)
-  //     .set({ Authorization: `Basic ${context.token}` })
+  async function sendMeeting() {
+    const API = 'https://jobify-app-v2.herokuapp.com'
+    await superagent.post(`${API}/meetings`).set('authorization', `Basic ${context.token}`).send({
+      auth_id_person: id,
+      date: `${dateMeeting},${timeMeeting}`
+    });
 
-  //     .then((data) => {
-  //       data.body !== null ? setApplications([[...data.body.API.slice(0, 2), ...data.body.DB.slice(0, 3)], data.body.DB.length + data.body.API.length]) : setApplications([[...data.body.DB, ...data.body.API], data.body.API.length + data.body.DB.length]);
-  //     });
-  // };
+  }
 
-  // const savedJobs = async () => {
-  //   superagent
-  //     .get(`${API}/user/saved`)
-  //     .set({ Authorization: `Basic ${context.token}` })
+  function tConvert(time) {
+    time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-  //     .then((data) => {
-  //       data.body[0] !== null ? setJobs([[...data.body.data_Api.slice(0, 2), ...data.body.data_DB.slice(0, 3)], data.body.data_DB.length + data.body.data_Api.length]) : setJobs([data.body, 0]);
-  //     });
-  // };
-
-  // const offersList = async () => {
-  //   superagent
-  //     .get(`${API}/user/offers`)
-  //     .set({ Authorization: `Basic ${context.token}` })
-
-  //     .then((data) => {
-  //       data.body !== null ? setOffers([data.body.slice(0, 4), data.body.length]) : setOffers([data.body, data.body.length]);
-  //     });
-  // };
+    if (time.length > 1) {
+      time = time.slice(1);
+      time[5] = +time[0] < 12 ? ':00 AM' : ':00 PM';
+      time[0] = +time[0] % 12 || 12;
+    }
+    return time.join('');
+  }
 
   return (
     <>
+      <If condition={show}>
+        <Modal style={{ padding: '20px' }} show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+          <Modal.Header closeButton>
+            <Modal.Title style={{ color: '#504edf', fontWeight: 'bold' }} id='example-custom-modal-styling-title'>Setup a meetings</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Col style={{ display: 'flex', height: '80%', justifyContent: 'center', alignItems: 'center' }}>
+              <FormControl
+                style={{ width: '50%', backgroundColor: 'transparent', height: '40%', outline: 'none', fontSize: '18px', margin: '20px' }}
+                type='date'
+                name='dob'
+                onChange={(e) => {
+                  let arr = e.target.value.split('-')
+                  if (arr[1].length === 2 && arr[1][0] == 0) {
+                    arr[1] = arr[1][1];
+                  }
+                  if (arr[2].length === 2 && arr[2][0] == 0) {
+                    arr[2] = arr[2][1];
+                  }
+                  let newArr = [arr[1], arr[2], arr[0]]
+                  let readyArr = newArr.join('/')
+                  //1/30/2021
+                  //2021-01-06
+                  setDateMeeting(readyArr);
+                }}
+              />
+              <FormControl
+                style={{ width: '50%', backgroundColor: 'transparent', height: '40%', outline: 'none', fontSize: '18px', margin: '20px' }}
+                type='time'
+                name='dob'
+                onChange={(e) => {
+                  // 21:00
+                  let time = tConvert(e.target.value)
+                  setTimeMeeting(time);
+                }}
+              />
+            </Col>
+            <Button
+              style={{ height: '10%', textAlign: 'center', backgroundColor: '#232b4e', padding: '7px 20px', margin: '15px'  }}
+              onClick={() => {
+                sendMeeting()
+              }}>Submit</Button>
+          </Modal.Body>
+        </Modal>
+
+      </If>
+
       <Container className='content' style={{ margin: '40px auto' }}>
         <Row style={{ justifyContent: 'space-between' }}>
           <Col style={{ borderLeft: 'solid', height: '90%', borderRadius: '2px', borderLeftColor: '#504edf', borderLeftWidth: '5px', paddingLeft: '8px', marginBottom: 30 }}>
@@ -129,11 +170,11 @@ export default function CompanyDashboard() {
             </h2>
           </Col>
           <Col style={{ textAlign: 'right', alignSelf: 'center' }}>
-            <Link to='/reports/new'>
-              <Button variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginBottom: '50px', height: '40px', fontWeight: '500' }}>
-                <Icon.CalendarPlus style={{ paddingBottom: '2px' }} size={20} /> New Meeting
+            <Button variant='outline-dark' className='buttonTopic' size='lg' type='submit' style={{ marginBottom: '50px', height: '40px', fontWeight: '500' }} onClick={() => {
+              setShow(true)
+            }}>
+              <Icon.CalendarPlus style={{ paddingBottom: '2px' }} size={20} /> New Meeting
               </Button>
-            </Link>
           </Col>
 
           {/* <Col style={{ textAlign: 'right', alignSelf: 'center' }}>
@@ -151,7 +192,7 @@ export default function CompanyDashboard() {
               </Button>
             </Link>
           </Col> */}
-          <Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
+          <Modal show={show2} onHide={() => setShow(false)} dialogClassName='modal-50w' aria-labelledby='example-custom-modal-styling-title'>
             <Modal.Header closeButton>
               <Modal.Title id='example-custom-modal-styling-title'>Send Offer</Modal.Title>
             </Modal.Header>
@@ -253,7 +294,7 @@ export default function CompanyDashboard() {
                       <Button
                         className='button'
                         onClick={() => {
-                          setShow(true);
+                          setShow2(true);
                         }}
                         style={{ backgroundColor: '#504edf', width: '100px' }}
                       >
