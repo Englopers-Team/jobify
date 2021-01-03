@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import '../styles.scss';
 import superagent from 'superagent';
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
+
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Results from './results';
 import * as Icon from 'react-bootstrap-icons';
 import companySearch from './companySearch.svg'
+import { If, Then, Else } from 'react-if'
 const jobsApi = 'https://jobify-app-v2.herokuapp.com/search/company';
 
 export default function SearchCompany() {
@@ -51,10 +54,21 @@ export default function SearchCompany() {
             <Button variant='outline-dark' className='button' type='submit'>
               <Icon.Search size='20' />
             </Button>
+
           </Col>
+
         </Row>
         <Row>
-          <Results results={results} visable={visable} loader={loader} />
+          <If condition={loader}>
+            <Then>
+              <div style={{width:'100%',textAlign:'center',marginTop:100}}>
+                <Spinner style={{ textAlign: 'center' }} animation='border' variant='primary' />
+              </div>
+            </Then>
+            <Else>
+              <Results results={results} visable={visable} loader={loader} />
+            </Else>
+          </If>
         </Row>
       </Form>
 

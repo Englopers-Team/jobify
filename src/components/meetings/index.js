@@ -56,24 +56,40 @@ function Lobby(props) {
 
 
 
+
     setTimeout(() => {
-      const footer = document.querySelector('.footer-container');
-      const headerr = document.querySelector('.navbar');
-      const chatBtn = document.querySelector('#chatButton');
-      const cont = document.querySelector('.page-container');
+
       if (!removed) {
-        footer.parentNode.removeChild(footer);
-        chatBtn.parentNode.removeChild(chatBtn);
-        headerr.parentNode.removeChild(headerr);
+        const footer = document.querySelector('.footer-container');
+        const headerr = document.querySelector('.navbar');
+        const chatBtn = document.querySelector('#chatButton');
+        const cont = document.querySelector('.page-container');
+
+        footer.classList.add('hideEle')
+        chatBtn.classList.add('hideEle')
+        headerr.classList.add('hideEle')
+        cont.classList.add('contHeight')
         setRemoved(true)
       }
-      cont.style.minHeight = '100vh'
 
 
     }, 500)
 
+    return () => {
+      const footer = document.querySelector('.footer-container');
+      const headerr = document.querySelector('.navbar');
+      const chatBtn = document.querySelector('#chatButton');
+      const cont = document.querySelector('.page-container');
+
+      footer.classList.remove('hideEle')
+      chatBtn.classList.remove('hideEle')
+      headerr.classList.remove('hideEle')
+      cont.classList.remove('contHeight')
+    }
 
   }, []);
+
+
 
 
   async function getData() {
@@ -106,16 +122,16 @@ function Lobby(props) {
     <Container style={{ margin: '0', minWidth: '100%', zIndex: '9999', position: 'fixed', top: 0, background: 'rgb(35, 35, 51)' }}>
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
-        <Col class='flexCol' sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8',display:'flex',flexDirection:'column' }}>
-          <img alt='Jobify' src='./assets/jobify.png' style={{alignSelf:'center',width:'100%',maxWidth:'300px',textAlign:'center'}} />
-          <hr style={{marginTop:0}}></hr>
+        <Col class='flexCol' sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8', display: 'flex', flexDirection: 'column' }}>
+          <img alt='Jobify' src='./assets/jobify.png' style={{ alignSelf: 'center', width: '100%', maxWidth: '300px', textAlign: 'center' }} />
+          <hr style={{ marginTop: 0 }}></hr>
           <If condition={show && userToCall !== ''}>
             <Then>
               <Profile />
             </Then>
             <Else>
               <Meetings myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
-              <button style={{ background:'#504edf',fontSize:'18px',height:'5vh',fontWeight:'bold',position: 'absolute', bottom: 0,border:0,left:0, width: '100%' }} onClick={() => {
+              <button style={{ background: '#504edf', fontSize: '18px', height: '5vh', fontWeight: 'bold', position: 'absolute', bottom: 0, border: 0, left: 0, width: '100%' }} onClick={() => {
                 socket.current.emit("leaveMeeting")
                 history.push('/')
 

@@ -71,7 +71,7 @@ export default function JobsResults(props) {
             <Then>
               <Container className='list-container' fluid>
                 <Row sm={8} className='flexRow list-header list-container-sp' style={{ height: screenSize > '575' ? '80px' : '130px' }}>
-                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'left' }} className='col-title table-row-l-home' sm={4}>
+                  <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='col-title table-row-l-home' sm={4}>
                     Job Title
                   </Col>
                   <Col style={{ color: '#515151', fontWeight: 660, textAlign: 'center' }} className='table-row-l-home' sm={2}>
@@ -87,13 +87,15 @@ export default function JobsResults(props) {
                     <Col style={{ color: '#515151', fontWeight: 660 }} sm={2}>
                       <Spinner animation='border' variant='primary' />
                     </Col>
+                    <Col sm={1} ></Col>
+                    <Col sm={1} ></Col>
                   </If>
                 </Row>
 
                 {results.map((item, index) => {
                   return (
-                    <Row key={index} className='flexRow list-body' sm={8}>
-                      <Col style={{ textAlign: 'left', verticalAlign: 'center', color: '#515151' }} className='table-row-l-home' sm={4}>
+                    <Row key={index} className='flexRow list-body' sm={8} style={{paddingRight:0}}>
+                      <Col style={{ textAlign: 'center', verticalAlign: 'center', color: '#515151' }} className='table-row-l-home' sm={4}>
                         {item.title}
                       </Col>
                       <Col style={{ textAlign: 'center', color: '#515151' }} className='table-row-l-home' sm={2}>
