@@ -30,6 +30,7 @@ function Lobby(props) {
   const [userDeatails, setUserDeatails] = useState({})
   const [myMeetings, setMyMeetings] = useState([])
   const [removed, setRemoved] = useState(false)
+  const [authIdToCall, setUserAuthIdToCall] = useState('')
   const history = useHistory();
 
 
@@ -127,10 +128,10 @@ function Lobby(props) {
           <hr style={{ marginTop: 0 }}></hr>
           <If condition={show && userToCall !== ''}>
             <Then>
-              <Profile />
+              <Profile authIdToCall={authIdToCall} />
             </Then>
             <Else>
-              <Meetings myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
+              <Meetings setUserAuthIdToCall={setUserAuthIdToCall} myMeetings={myMeetings} users={users} userDeatails={userDeatails} yourID={yourID} setUserToCall={setUserToCall} setShow={setShow} value={value} />
               <button style={{ background: '#504edf', fontSize: '18px', height: '5vh', fontWeight: 'bold', position: 'absolute', bottom: 0, border: 0, left: 0, width: '100%' }} onClick={() => {
                 socket.current.emit("leaveMeeting")
                 history.push('/')
