@@ -10,7 +10,7 @@ import Meetings from './meetingsDetails';
 import Profile from './profile';
 import Schedule from './schedule'
 import superagent from 'superagent';
-
+import JobifyMeetings from './jobify-meetings.png'
 
 import { AuthContext } from '../../context/auth';
 import { useHistory } from "react-router-dom";
@@ -123,7 +123,7 @@ function Lobby(props) {
 
       <Row style={{ display: 'flex', flexDirection: 'row' }}>
         <Col class='flexCol' sm={3} style={{ width: '20%', height: '100vh', backgroundColor: '#e1e3e8', display: 'flex', flexDirection: 'column' }}>
-          <img alt='Jobify' src='./assets/jobify.png' style={{ alignSelf: 'center', width: '100%', maxWidth: '300px', textAlign: 'center' }} />
+          <img alt='Jobify' src={JobifyMeetings} style={{ alignSelf: 'center', width: '100%', maxWidth: '300px', textAlign: 'center' }} />
           <hr style={{ marginTop: 0 }}></hr>
           <If condition={show && userToCall !== ''}>
             <Then>
