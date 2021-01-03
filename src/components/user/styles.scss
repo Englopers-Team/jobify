@@ -1,7 +1,6 @@
 .image-container {
   width: 90%;
   margin: 60px auto;
-  background-color: blue;
 }
 .search-container {
   background-color: rgb(255, 255, 255);
@@ -178,8 +177,6 @@
     padding-bottom: 0px;
   }
   .card-header {
-    max-height: 4rem !important;
-
     border-radius: 15px 15px 0 0 !important;
     p {
       margin: 0 auto;
