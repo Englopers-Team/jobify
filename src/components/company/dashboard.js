@@ -100,10 +100,10 @@ export default function CompanyDashboard() {
             history.push('/meetings')
           }}>
             <Row style={{ justifyContent: 'flex-end'  }}>
-              <div style={{  padding: '3px' , cursor:'pointer' , marginRight : '30px' , marginTop:'10px'}}>
-                <CameraVideo color='#504edf' size='24' style={{ marginBottom: '5px' }} />
-                <span style={{ marginLeft : '4px',color: '#504edf' ,fontSize:'18px' , fontWeight:'bold'}}>Meetings</span>
-              </div>
+              <Button variant='outline-dark' className='buttonTopic' style={{  padding: '6px' , cursor:'pointer' , marginRight : '30px' , marginTop:'3px' }}>
+                <CameraVideo  size='24' style={{ marginBottom: '1px' }} />
+                <span style={{ marginLeft : '4px',fontSize:'16px' , fontWeight:'bold'}}>Meetings</span>
+              </Button>
             </Row>
           </Col>
         </Row>
