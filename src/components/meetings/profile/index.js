@@ -69,7 +69,7 @@ function Profile(props) {
           </Row>
           <Row style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px', marginLeft: '20px', marginRight: '20px' }}>
             <Col style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'center' }}>Summery</p>
+              <p style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'center' }}>Summary</p>
               <p style={{ fontSize: '16px', textAlign: 'left' }}>{userInfoMain.sammary}</p>
             </Col>
           </Row>
